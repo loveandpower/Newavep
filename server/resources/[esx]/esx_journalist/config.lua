@@ -1,6 +1,6 @@
 Config        = {}
 Config.Locale = 'fr'
-Config.debug  = true
+Config.debug  = false
 
 Config.platePrefix = "WEAZEL"
 
@@ -9,7 +9,7 @@ Config.storageMinGrade    = 2
 Config.copterMinGrade     = 3
 Config.manageMinGrade     = 4
 
-Config.gouvRate = 0.05
+Config.gouvRate = 0.00
 
 -- interim run
 Config.iItemTime     = 1500

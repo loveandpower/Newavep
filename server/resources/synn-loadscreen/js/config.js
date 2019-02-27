@@ -69,7 +69,7 @@ var config =
     */
     loadingMessages:
     [
-        "GTA V RP v.1.0-36.70.268",
+        "GTA V RP v.2.0.7",
         "Loading map .... &#x1f40c;",
         "Loading IA .... &#x1f40c;",
         "Loading IA car .... &#x1f40c; &#x1f528;",

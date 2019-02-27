@@ -1,5 +1,5 @@
+
 ESX = nil
- 
 local PlayersTransforming  = {}
 local PlayersSelling       = {}
 local PlayersHarvesting = {}
@@ -15,8 +15,9 @@ if Config.MaxInService ~= -1 then
 	TriggerEvent('esx_service:activateService', 'buche', Config.MaxInService)
 end
 
+
 TriggerEvent('esx_phone:registerNumber', 'buche', _U('buche_client'), true, true)
-TriggerEvent('esx_society:registerSociety', 'buche', 'buche', 'society_bucheron', 'society_bucheron', 'society_bucheron', {type = 'private'})
+TriggerEvent('esx_society:registerSociety', 'buche', 'buche', 'society_buche', 'society_buche', 'society_buche', {type = 'private'})
 
 
 local function Harvest(source, zone)
@@ -29,9 +30,20 @@ local function Harvest(source, zone)
 				TriggerClientEvent('esx:showNotification', source, _U('not_enough_place'))
 				return
 			else
-				SetTimeout(1800, function()
-					xPlayer.addInventoryItem('wood', 1)
-					Harvest(source, zone)
+				--Activate for add random item and create a new item if need
+				--local rand0 = math.random(0,100)
+				--if (rand0 >= 98) then
+				--	SetTimeout(1000, function()
+				--		xPlayer.addInventoryItem('test', 1)
+				--		xPlayer.removeInventoryItem('test', 1)
+				--		TriggerClientEvent('esx:showNotification', source, _U('test'))
+				--		Harvest(source, zone)
+				--		end)
+				--else
+					SetTimeout(1800, function()
+						xPlayer.addInventoryItem('wood', 1)
+						Harvest(source, zone)
+				
 				end)
 			end
 		end
@@ -45,7 +57,7 @@ AddEventHandler('esx_bucherons:startHarvest', function(zone)
   	
 	if PlayersHarvesting[_source] == false then
 		TriggerClientEvent('esx:showNotification', _source, '~r~C\'est pas bien de glitch ~w~')
-		PlayersHarvesting[_source]=false
+		PlayersHarvesting[_source]=true --chnage flase if not work this is test
 	else
 		PlayersHarvesting[_source]=true
 		TriggerClientEvent('esx:showNotification', _source, _U('wood_taken'))  
@@ -188,7 +200,7 @@ local function Sell(source, zone)
 						xPlayer.removeInventoryItem('cutted_wood', 1)
 						local societyAccount = nil
 
-						TriggerEvent('esx_addonaccount:getSharedAccount', 'society_bucheron', function(account)
+						TriggerEvent('esx_addonaccount:getSharedAccount', 'society_buche', function(account)
 							societyAccount = account
 						end)
 						if societyAccount ~= nil then
@@ -204,7 +216,7 @@ local function Sell(source, zone)
 						xPlayer.removeInventoryItem('vine', 1)
 						local societyAccount = nil
 
-						TriggerEvent('esx_addonaccount:getSharedAccount', 'society_bucheron', function(account)
+						TriggerEvent('esx_addonaccount:getSharedAccount', 'society_buche', function(account)
 							societyAccount = account
 						end)
 						if societyAccount ~= nil then
@@ -255,57 +267,36 @@ AddEventHandler('esx_bucherons:stopSell', function()
 end)
 
 
-
-RegisterServerEvent('esx_bucherons:getStockItem')
-AddEventHandler('esx_bucherons:getStockItem', function(itemName, count)
-	
-	local _source = source
-	local xPlayer = ESX.GetPlayerFromId(_source)
-	local sourceItem = xPlayer.getInventoryItem(itemName)
-
-	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_bucheron', function(inventory)
-
-		local inventoryItem = inventory.getItem(itemName)
-
-		if count > 0 and inventoryItem.count >= count then
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
-				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
-			else
-				inventory.removeItem(itemName, count)
-				xPlayer.addInventoryItem(itemName, count)
-				TriggerClientEvent('esx:showNotification', _source, _U('have_withdrawn', count, inventoryItem.label))
-			end
-		else
-			TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
-		end
-	end)
-
+ESX.RegisterServerCallback('esx_bucherons:getPlayerInventory', function(source, cb)
+	local xPlayer    = ESX.GetPlayerFromId(source)
+	local items      = xPlayer.inventory
+	cb({
+	  items      = items
+	})
 end)
-
 
 
 ESX.RegisterServerCallback('esx_bucherons:getStockItems', function(source, cb)
-
-	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_bucheron', function(inventory)
+	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_buche', function(inventory)
 		cb(inventory.items)
 	end)
-
 end)
-
 
 
 RegisterServerEvent('esx_bucherons:putStockItems')
 AddEventHandler('esx_bucherons:putStockItems', function(itemName, count)
+  
   local xPlayer = ESX.GetPlayerFromId(source)
   local sourceItem = xPlayer.getInventoryItem(itemName)
 
-  TriggerEvent('esx_addoninventory:getSharedInventory', 'society_bucheron', function(inventory)
+  TriggerEvent('esx_addoninventory:getSharedInventory', 'society_buche', function(inventory)
 
     local inventoryitem = inventory.getItem(itemName)
+  
     if sourceItem.count >= count and count > 0 then
        xPlayer.removeInventoryItem(itemName, count)
        inventory.addItem(itemName, count)
-       TriggerClientEvent('esx:showNotification', xPlayer.source, _U('you_added') .. count .. ''.. item.label)
+       --TriggerClientEvent('esx:showNotification', xPlayer.source, _U('you_added') .. count .. ''.. item.label)
     else
       TriggerClientEvent('esx:showNotification', xPlayer.source, _U('invalid_quantity'))
     end
@@ -314,16 +305,6 @@ end)
 
 
 
-ESX.RegisterServerCallback('esx_bucherons:getPlayerInventory', function(source, cb)
-
-	local xPlayer    = ESX.GetPlayerFromId(source)
-	local items      = xPlayer.inventory
-
-	cb({
-		items      = items
-	})
-
-end)
 
 --ESX.RegisterUsableItem('jus_feuilletab', function(source)
 --

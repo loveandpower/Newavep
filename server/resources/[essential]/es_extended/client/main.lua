@@ -54,6 +54,7 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 
 	else
 		TriggerEvent('es:setMoneyDisplay', 0.0)
+		  TriggerServerEvent("esx:updateConnexion")
 	end
 end)
 

@@ -20,7 +20,7 @@ Config.Zones = {
 		Pos   = {x = -53.116, y = 1903.248, z = 194.361},
 		Size  = {x = 3.5, y = 3.5, z = 2.0},
 		Color = {r = 136, g = 243, b = 216},
-		Name  = "Traitement du Vin",
+		Name  = "Traitement du raisin",
 		Type  = 1
 	},
 

@@ -1,5 +1,18 @@
 ESX               = nil
-local playerCars = {}
+
+local Keys = {
+	["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57,
+	["~"] = 243, ["1"] = 157, ["2"] = 158, ["3"] = 160, ["4"] = 164, ["5"] = 165, ["6"] = 159, ["7"] = 161, ["8"] = 162, ["9"] = 163, ["-"] = 84, ["="] = 83, ["BACKSPACE"] = 177,
+	["TAB"] = 37, ["Q"] = 44, ["W"] = 32, ["E"] = 38, ["R"] = 45, ["T"] = 245, ["Y"] = 246, ["U"] = 303, ["P"] = 199, ["["] = 39, ["]"] = 40, ["ENTER"] = 18,
+	["CAPS"] = 137, ["A"] = 34, ["S"] = 8, ["D"] = 9, ["F"] = 23, ["G"] = 47, ["H"] = 74, ["K"] = 311, ["L"] = 182,
+	["LEFTSHIFT"] = 21, ["Z"] = 20, ["X"] = 73, ["C"] = 26, ["V"] = 0, ["B"] = 29, ["N"] = 249, ["M"] = 244, [","] = 82, ["."] = 81,
+	["LEFTCTRL"] = 36, ["LEFTALT"] = 19, ["SPACE"] = 22, ["RIGHTCTRL"] = 70,
+	["HOME"] = 213, ["PAGEUP"] = 10, ["PAGEDOWN"] = 11, ["DELETE"] = 178,
+	["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
+	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
+}
+
+local isRunningWorkaround = false
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -8,413 +21,85 @@ Citizen.CreateThread(function()
 	end
 end)
 
---Menu Mes clés
-RegisterNetEvent('esx_menu:key')
-AddEventHandler('esx_menu:key', function()
-ESX.TriggerServerCallback('esx_vehiclelock:allkey', function(mykey)
-	local elements = {}
-		for i=1, #mykey, 1 do
-			if mykey[i].got == 'true' then 
-				if 	mykey[i].NB == 1 then									
-						table.insert(elements, {label = 'Clés : '.. ' [' .. mykey[i].plate .. ']', value = mykey[i].plate})
-					elseif mykey[i].NB == 2 then
-						table.insert(elements, {label = '[DOUBLE] Véhicule : '.. ' [' .. mykey[i].plate .. ']', value = nil})
-					end
-				end
+function StartWorkaroundTask()
+	if isRunningWorkaround then
+		return
+	end
+
+	local timer = 0
+	local playerPed = PlayerPedId()
+	isRunningWorkaround = true
+
+	while timer < 100 do
+		Citizen.Wait(0)
+		timer = timer + 1
+
+		local vehicle = GetVehiclePedIsTryingToEnter(playerPed)
+
+		if DoesEntityExist(vehicle) then
+			local lockStatus = GetVehicleDoorLockStatus(vehicle)
+
+			if lockStatus == 4 then
+				ClearPedTasks(playerPed)
 			end
+		end
+	end
 
-ESX.UI.Menu.Open(
-	'default', GetCurrentResourceName(), 'mykey',
-	{
-		title = 'Mes clés',
-		align = 'top-left',
-		elements = elements
-	  },
-        function(data2, menu2) --Submit Cb
- 
-        if data2.current.value ~= nil then
-        ESX.UI.Menu.CloseAll()
-  			ESX.UI.Menu.Open(
-				'default', GetCurrentResourceName(), 'mykey',
-				{
-				title = 'Voulez vous ?',
-				align = 'top-left',
-				elements = {
-						{label = 'Donner', value = 'donnerkey'}, -- Donné les clés
-						{label = 'Préter', value = 'preterkey'}, -- Donné les clés
-			  		},
-	  			},
-        		function(data3, menu3) --Submit Cb
- 					local player, distance = ESX.Game.GetClosestPlayer()
- 					local playerPed = GetPlayerPed(-1)
-					local coords    = GetEntityCoords(playerPed, true)
- 					local vehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 7.0, 0, 71)
- 					local vehicleProps = ESX.Game.GetVehicleProperties(vehicle)
+	isRunningWorkaround = false
+end
 
-       				 if data3.current.value == 'donnerkey' then
-       					 ESX.UI.Menu.CloseAll()
-       					if distance ~= -1 and distance <= 3.0 then
-       					  TriggerServerEvent('esx_vehiclelock:donnerkey', GetPlayerServerId(player), data2.current.value)
-       					  TriggerServerEvent('esx_vehiclelock:deletekey', data2.current.value)
-       					  print("avant changement owner")
-       					  TriggerServerEvent('esx_vehiclelock:changeowner', GetPlayerServerId(player), vehicleProps)
-       					  print("après changement owner")
-       					end
-      				 end
-      				 if data3.current.value == 'preterkey' then
-       					 ESX.UI.Menu.CloseAll()
-       					if distance ~= -1 and distance <= 3.0 then 
-       					  TriggerServerEvent('esx_vehiclelock:preterkey', GetPlayerServerId(player), data2.current.value)
-       					end
-      				 end
-       			 end,
-       			 function(data3, menu3) --Cancel Cb
-           		     menu3.close()
-       			 end,
-       			 function(data3, menu3) --Change Cb
-         
-        		 end
-   			 )
-        end
-        end,
-        
-        function(data2, men2) --Cancel Cb
-                men2.close()
-        end,
-        function(dat2, men2) --Change Cb
-        end
-      )
-  end)
-end)
+function ToggleVehicleLock()
+	local playerPed = PlayerPedId()
+	local coords = GetEntityCoords(playerPed)
+	local vehicle
 
---Menu Mes clés
---
-RegisterNetEvent('esx_menu:key')
-AddEventHandler('esx_menu:key', function()
-ESX.TriggerServerCallback('esx_vehiclelock:allkey', function(mykey)
-	local elements = {}
-		for i=1, #mykey, 1 do
-			if mykey[i].got == 'true' then 
-				if 	mykey[i].NB == 1 then									
-						table.insert(elements, {label = 'Clés : '.. ' [' .. mykey[i].plate .. ']', value = mykey[i].plate})
-					elseif mykey[i].NB == 2 then
-						table.insert(elements, {label = '[DOUBLE] Véhicule : '.. ' [' .. mykey[i].plate .. ']', value = nil})
-					end
-				end
-			end
+	Citizen.CreateThread(function()
+		StartWorkaroundTask()
+	end)
 
-ESX.UI.Menu.Open(
-	'default', GetCurrentResourceName(), 'mykey',
-	{
-		title = 'Mes clés',
-		align = 'top-left',
-		elements = elements
-	  },
-        function(data2, menu2) --Submit Cb
- 
-        if data2.current.value ~= nil then
-        ESX.UI.Menu.CloseAll()
-  			ESX.UI.Menu.Open(
-				'default', GetCurrentResourceName(), 'mykey',
-				{
-				title = 'Voulez vous ?',
-				align = 'top-left',
-				elements = {
-						{label = 'Préter', value = data2.current.value}, -- Donné les clés
-			  		},
-	  			},
-        		function(data3, menu3) --Submit Cb
- 					local player, distance = ESX.Game.GetClosestPlayer()
-
-       				 if data3.current.value ~= nil then
-       					 ESX.UI.Menu.CloseAll()
-       					if distance ~= -1 and distance <= 3.0 then
-       					  TriggerServerEvent('esx_vehiclelock:givekey', GetPlayerServerId(player), data2.current.value)
-       					end
-      				 end
-       			 end,
-       			 function(data3, menu3) --Cancel Cb
-           		     menu3.close()
-       			 end,
-       			 function(data3, menu3) --Change Cb
-         
-        		 end
-   			 )
-        end
-        end,
-        
-        function(data2, men2) --Cancel Cb
-                men2.close()
-        end,
-        function(dat2, men2) --Change Cb
-        end
-      )
-  end)
-end)
-
---
-AddEventHandler('esx_vehiclelock:hasEnteredMarker', function(zone)
-
-	CurrentAction     = 'Serrurier'
-	CurrentActionMsg  = 'Serrurier'
-	CurrentActionData = {zone = zone}
-
-end)
-
-AddEventHandler('esx_vehiclelock:hasExitedMarker', function(zone)
-
-	CurrentAction = nil
-	ESX.UI.Menu.CloseAll()
-
-end)
-
-
-function OpenCloseVehicle()
-	local playerPed = GetPlayerPed(-1)
-	local coords    = GetEntityCoords(playerPed, true)
-
-	local vehicle = nil
-
-	if IsPedInAnyVehicle(playerPed,  false) then
+	if IsPedInAnyVehicle(playerPed, false) then
 		vehicle = GetVehiclePedIsIn(playerPed, false)
 	else
-		vehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 7.0, 0, 71)
+		vehicle = GetClosestVehicle(coords, 8.0, 0, 70)
 	end
 
-	ESX.TriggerServerCallback('esx_vehiclelock:mykey', function(gotkey)
+	if not DoesEntityExist(vehicle) then
+		return
+	end
 
-		if gotkey then
-			local locked = GetVehicleDoorLockStatus(vehicle)
-			if locked == 1 or locked == 0 then -- if unlocked
-				SetVehicleDoorsLocked(vehicle, 2)
+	ESX.TriggerServerCallback('esx_vehiclelock:requestPlayerCars', function(isOwnedVehicle)
+
+		if isOwnedVehicle then
+			local lockStatus = GetVehicleDoorLockStatus(vehicle)
+
+			if lockStatus == 1 then -- unlocked
+				SetVehicleDoorsLocked(vehicle, 4)
 				PlayVehicleDoorCloseSound(vehicle, 1)
-				ESX.ShowNotification("Vous avez ~r~fermé~s~ le véhicule.")
-			elseif locked == 2 then -- if locked
+
+				TriggerEvent('chat:addMessage', { args = { _U('message_title'), _U('message_locked') } })
+			elseif lockStatus == 4 then -- locked
 				SetVehicleDoorsLocked(vehicle, 1)
 				PlayVehicleDoorOpenSound(vehicle, 0)
-				ESX.ShowNotification("Vous avez ~g~ouvert~s~ le véhicule.")
+
+				TriggerEvent('chat:addMessage', { args = { _U('message_title'), _U('message_unlocked') } })
 			end
-		else
-			ESX.ShowNotification("~r~Vous n'avez pas les clés de ce véhicule.")
 		end
-	end, GetVehicleNumberPlateText(vehicle))
+
+	end, ESX.Math.Trim(GetVehicleNumberPlateText(vehicle)))
 end
 
 Citizen.CreateThread(function()
 	while true do
-		Wait(0)
-		if IsControlJustReleased(0, 82) then -- Touche U
-			OpenCloseVehicle()
+		Citizen.Wait(10)
+
+		if IsControlJustReleased(0, Keys['U']) and IsInputDisabled(0) then
+			ToggleVehicleLock()
+			Citizen.Wait(300)
+	
+		-- D-pad down on controllers works, too!
+		elseif IsControlJustReleased(0, 173) and not IsInputDisabled(0) then
+			ToggleVehicleLock()
+			Citizen.Wait(300)
 		end
 	end
-end)
-
-------------------------------------------------------------------------
------------------------------Car Dealer --------------------------------
-
-RegisterNetEvent('esx_menu:keycardealer')
-AddEventHandler('esx_menu:keycardealer', function()
-ESX.TriggerServerCallback('esx_vehiclelock:allkey', function(mykey)
-	local elements = {}
-		for i=1, #mykey, 1 do
-			if mykey[i].got == 'true' then 
-				if 	mykey[i].NB == 3 then									
-						table.insert(elements, {label = '[PRO] Clés : '.. ' [' .. mykey[i].plate .. ']', value = mykey[i].plate})
-					end
-				end
-			end
-
-ESX.UI.Menu.Open(
-	'default', GetCurrentResourceName(), 'mykey',
-	{
-		title = 'Clé Pro',
-		align = 'top-left',
-		elements = elements
-	  },
-        function(data2, menu2) --Submit Cb
- 
-        if data2.current.value ~= nil then
-        ESX.UI.Menu.CloseAll()
-  			ESX.UI.Menu.Open(
-				'default', GetCurrentResourceName(), 'mykey',
-				{
-				title = 'Voulez vous ?',
-				align = 'top-left',
-				elements = {{label = 'Donner', value = data2.current.value}, -- Donné un double
-			  		},
-	  			},
-        		function(data3, menu3) --Submit Cb
- 					local player, distance = ESX.Game.GetClosestPlayer()
-
-       				 if data3.current.value ~= nil then
-       					 ESX.UI.Menu.CloseAll()
-       					if distance ~= -1 and distance <= 3.0 then
-       					  TriggerServerEvent('esx_vehiclelock:givekeycardealer', GetPlayerServerId(player), data2.current.value)
-       					  TriggerServerEvent('esx_vehiclelock:deletekeycardealer', GetPlayerServerId(player), data2.current.value)
-       					end
-      				 end
-       			 end,
-        
-       			 function(data3, menu3) --Cancel Cb
-           		     menu3.close()
-       			 end,
-       			 function(data3, menu3) --Change Cb
-         
-        		 end
-   			 )
-        end
-        end,
-        function(data2, men2) --Cancel Cb
-                men2.close()
-        end,
-        function(dat2, men2) --Change Cb
-        end
-      )
-  end)
-end)
-
-
-
-
-
---Menu Serrurier
---[[
-function OpenSerrurierMenu()
-	ESX.UI.Menu.Open(
-	'default', GetCurrentResourceName(), 'GetKey',
-	{
-		title = 'Que voulez vous ? ',
-		align = 'top-left',
-		elements = {
-			{label = ('Enregistrer une nouvelle clé'),              value = 'registerkey'},
-	}
-	  },
-        function(data, menu) --Submit Cb
-
-        if data.current.value == 'registerkey' then
-					ESX.TriggerServerCallback('esx_vehiclelock:getVehiclesnokey', function(Vehicles2)
-						local elements = {}
-
-						if Vehicles2 == nil then
-							table.insert(elements, {label = 'Aucun véhicule sans clés ', value = nil})
-						else
-							for i=1, #Vehicles2, 1 do
-								model = Vehicles2[i].model
-								modelname = GetDisplayNameFromVehicleModel(model)
-								Vehicles2[i].model = GetLabelText(modelname)
-							end
-
-							for i=1, #Vehicles2, 1 do
-								table.insert(elements, {label = Vehicles2[i].model .. ' [' .. Vehicles2[i].plate .. ']', value = Vehicles2[i].plate})					
-							end
-
-							ESX.UI.Menu.Open(
-							'default', GetCurrentResourceName(), 'backey',
-							{
-							title    = '300 $ Pour de nouvelle clés.',
-							align    = 'top-left',
-							elements = elements
-							},
-							function(data2, menu2)
-									menu2.close()	
-									TriggerServerEvent('esx_vehiclelock:registerkey', data2.current.value, 'no')
-							end,
-							function(data2, menu2)
-								menu2.close()
-							end
-							)
-						end
-					end)
-			end
-        end,   
-        function(data, menu) --Cancel Cb
-                menu.close()
-        end,
-        function(data, menu) --Change Cb
-        end
-      )
-end
-]]
-
---[[ Create Blips
-Citizen.CreateThread(function()
-		local blip = AddBlipForCoord(Config.Zones.place.Pos.x, Config.Zones.place.Pos.y, Config.Zones.place.Pos.z)
-		SetBlipSprite (blip, 134)
-		SetBlipDisplay(blip, 4)
-		SetBlipScale  (blip, 1.0)
-		SetBlipColour (blip, 3)
-		SetBlipAsShortRange(blip, true)
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString('Serrurier')
-		EndTextCommandSetBlipName(blip)
-end)
-
--- Display markers
-Citizen.CreateThread(function()
-	while true do
-
-		Wait(0)
-
-			local coords = GetEntityCoords(GetPlayerPed(-1))
-
-			for k,v in pairs(Config.Zones) do
-				if(v.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < Config.DrawDistance) then
-					DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, false, false, false)
-				end
-			end
-	end
-end)
-
--- Enter / Exit marker events
-Citizen.CreateThread(function()
-	while true do
-
-		Wait(0)
-			local coords      = GetEntityCoords(GetPlayerPed(-1))
-			local isInMarker  = false
-			local currentZone = nil
-
-			for k,v in pairs(Config.Zones) do
-				if(GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < v.Size.x) then
-					isInMarker  = true
-					currentZone = k
-				end
-			end
-
-			if (isInMarker and not HasAlreadyEnteredMarker) or (isInMarker and LastZone ~= currentZone) then
-				HasAlreadyEnteredMarker = true
-				LastZone                = currentZone
-				TriggerEvent('esx_vehiclelock:hasEnteredMarker', currentZone)
-			end
-
-			if not isInMarker and HasAlreadyEnteredMarker then
-				HasAlreadyEnteredMarker = false
-				TriggerEvent('esx_vehiclelock:hasExitedMarker', LastZone)
-			end
-
-		end
-end)
-]]
--- Key Controls
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if CurrentAction ~= nil then
-
-      SetTextComponentFormat('STRING')
-      AddTextComponentString('Press ~INPUT_CONTEXT~ to Open')
-      DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-
-      if IsControlJustReleased(0, 38) then
-
-        if CurrentAction == 'Serrurier' then
-          OpenSerrurierMenu(CurrentActionData.zone)
-        end
-
-        CurrentAction = nil
-
-      end
-
-    end
-  end
 end)

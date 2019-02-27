@@ -24,7 +24,7 @@ local CurrentAction             = nil
 local CurrentActionMsg          = ''
 local CurrentActionData         = {}
 local JobBlips                = {}
-local publicBlip = false
+local publicBlip = true
 ESX                             = nil
 GUI.Time                        = 0
 
@@ -71,6 +71,7 @@ function OpenCloakroomMenu()
 			if data.current.value == 'citizen_wear' then
 				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
 					TriggerEvent('skinchanger:loadSkin', skin)
+					deleteBlips()
 				end)
 			end
 
@@ -78,8 +79,10 @@ function OpenCloakroomMenu()
 				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
 					if skin.sex == 0 then
 						TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
+						blips()
 					else
 						TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
+						blips()
 					end
 				end)
 			end
@@ -297,62 +300,6 @@ function OpenMobiletabacActionsMenu()
 	)
 end
 
---[[
-function OpenGetStocksMenu()
-
-	ESX.TriggerServerCallback('esx_tabacjob:getStockItems', function(items)
-		local elements = {}
-
-		for i=1, #items, 1 do
-			if (items[i].count ~= 0) then
-				table.insert(elements, {label = 'x' .. items[i].count .. ' ' .. items[i].label, value = items[i].name})
-			end
-		end
-
-		ESX.UI.Menu.Open(
-			'default', GetCurrentResourceName(), 'stocks_menu',
-			{
-				title    = 'tabac Stock',
-				align    = 'top-left',
-				elements = elements
-			},
-			function(data, menu)
-
-				local itemName = data.current.value
-
-				ESX.UI.Menu.Open(
-					'dialog', GetCurrentResourceName(), 'stocks_menu_get_item_count',
-					{
-						title = _U('quantity')
-					},
-					function(data2, menu2)
-		
-						local count = tonumber(data2.value)
-
-						if count == nil or count <= 0 then
-							ESX.ShowNotification(_U('quantity_invalid'))
-						else
-							menu2.close()
-							menu.close()
-							OpenGetStocksMenu()
-
-							TriggerServerEvent('esx_tabacjob:getStockItem', itemName, count)
-						end
-
-					end,
-					function(data2, menu2)
-						menu2.close()
-					end
-				)
-
-			end,
-			function(data, menu)
-				menu.close()
-			end
-		)
-	end)
-end
-]]--
 
 function OpenGetStocksMenu()
 	ESX.TriggerServerCallback('esx_tabacjob:getStockItems', function(items)
@@ -580,9 +527,9 @@ end
 
 -- Create Blips
 function blips()
-	if publicBlip == false then
-		--local blip = AddBlipForCoord(Config.Zones.tabacActions.Pos.x, Config.Zones.tabacActions.Pos.y, Config.Zones.tabacActions.Pos.z)
-		local blip = AddBlipForCoord(2444.408, 4987.925, 46)
+	if publicBlip == true then
+		local blip = AddBlipForCoord(Config.Zones.tabacActions.Pos.x, Config.Zones.tabacActions.Pos.y, Config.Zones.tabacActions.Pos.z)
+		--local blip = AddBlipForCoord(2444.408, 4987.925, 46)
 		SetBlipSprite (blip, 475)
 		SetBlipDisplay(blip, 4)
 		SetBlipScale  (blip, 1.0)
@@ -596,7 +543,6 @@ function blips()
 	end
 	
     if PlayerData.job ~= nil and PlayerData.job.name == 'tabac' then
-
 		for k,v in pairs(Config.Zones)do
 			if v.Type == 27 then
 				local blip2 = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)

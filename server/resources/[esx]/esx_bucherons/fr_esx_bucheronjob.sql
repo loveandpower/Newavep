@@ -1,12 +1,12 @@
 INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
-	('society_bucheron','buche',1)
+	('society_buche','buche',1)
 ;
 
 INSERT INTO `addon_inventory` (`name`, `label`, `shared`) VALUES
-	('society_bucheron','buche', 1)
+	('society_buche','buche', 1)
 ;
 INSERT INTO `datastore` (`name`, `label`, `shared`) VALUES
-	('society_bucheron', 'buche', 1)
+	('society_buche', 'buche', 1)
 ;
 
 INSERT INTO `jobs`(`name`, `label`, `whitelisted`) VALUES

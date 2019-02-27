@@ -87,20 +87,24 @@ local function Transform(source, zone)
 				local rand = math.random(0,100)
 				if (rand >= 98) then
 					SetTimeout(1800, function()
-						xPlayer.removeInventoryItem('raisin', 1)
+						xPlayer.removeInventoryItem('jus_raisin', 1)
 						xPlayer.addInventoryItem('grand_cru', 1)
 						TriggerClientEvent('esx:showNotification', source, _U('grand_cru'))
 						Transform(source, zone)
 					end)
 				else
 					SetTimeout(1800, function()
-						xPlayer.removeInventoryItem('raisin', 1)
+						xPlayer.removeInventoryItem('jus_raisin', 1)
 						xPlayer.addInventoryItem('vine', 1)
-				
+				-------------------grand_cru
 						Transform(source, zone)
 					end)
 				end
 			end
+
+
+
+			
 		elseif zone == "TraitementJus" then
 			local itemQuantity = xPlayer.getInventoryItem('raisin').count
 			if itemQuantity <= 0 then

@@ -78,7 +78,7 @@ local function Transform(source, zone)
 					SetTimeout(1800, function()
 						xPlayer.removeInventoryItem('feuilletab', 1)
 						xPlayer.addInventoryItem('tabacsec', 1)
-						TriggerClientEvent('esx:showNotification', source, _U('tabacsec'))
+						--TriggerClientEvent('esx:showNotification', source, _U('tabacsec'))
 						Transform(source, zone)
 					end)
 				else

@@ -487,7 +487,7 @@ AddEventHandler('esx_vigneronjob:hasEnteredMarker', function(zone)
 		
 	if zone == 'TraitementVin' and PlayerData.job ~= nil and PlayerData.job.name == 'vigne'  then
 		CurrentAction     = 'vine_traitement'
-		CurrentActionMsg  = _U('press_collect')
+		CurrentActionMsg  = _U('press_traitement')
 		CurrentActionData = {zone= zone}
 	end		
 		

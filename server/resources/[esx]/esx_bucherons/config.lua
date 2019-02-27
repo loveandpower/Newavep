@@ -12,7 +12,7 @@ Config.Zones = {
 		Pos   = {x = -534.323669433594, y = 5373.794921875, z = 69.503059387207},
 		Size  = {x = 3.5, y = 3.5, z = 2.0},
 		Color = {r = 136, g = 243, b = 216},
-		Name  = "Récolte de Feuilles",
+		Name  = "Récolte du Bois",
 		Type  = 27
 	},
 
@@ -22,7 +22,7 @@ Config.Zones = {
 		Pos   = {x = -552.214660644531, y = 5326.90966796875, z = 72.5996017456055},
 		Size  = {x = 3.5, y = 3.5, z = 2.0},
 		Color = {r = 136, g = 243, b = 216},
-		Name  = "Traitement du Tabac",
+		Name  = "Traitement du Bois",
 		Type  = 27
 	},
 

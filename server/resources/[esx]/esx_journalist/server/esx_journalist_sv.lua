@@ -19,6 +19,8 @@ ESX.RegisterServerCallback('esx_journalist:getStockItems', function(source, cb)
     cb(inventory.items)
   end)
 end)
+
+
 RegisterServerEvent('esx_journalist:getStockItem')
 AddEventHandler('esx_journalist:getStockItem', function(itemName, count)
   printDebug('getStockItem')
@@ -34,6 +36,7 @@ AddEventHandler('esx_journalist:getStockItem', function(itemName, count)
     TriggerClientEvent('esx:showNotification', xPlayer.source, _U('you_removed') .. count .. ' ' .. item.label)
   end)
 end)
+
 -- put Storage 
 ESX.RegisterServerCallback('esx_journalist:getPlayerInventory', function(source, cb)
   printDebug('getPlayerInventory')
@@ -43,6 +46,7 @@ ESX.RegisterServerCallback('esx_journalist:getPlayerInventory', function(source,
     items      = items
   })
 end)
+
 RegisterServerEvent('esx_journalist:putStockItems')
 AddEventHandler('esx_journalist:putStockItems', function(itemName, count)
   printDebug('putStockItems')
@@ -149,7 +153,7 @@ function sell(source, grade)
       playersWork[source] = false
     else TriggerClientEvent('esx:showNotification', source, _U('sell_fail')) end
   end)
-  
+
 end
 
 RegisterServerEvent('esx_journalist:start')
@@ -171,9 +175,12 @@ AddEventHandler('esx_journalist:start', function(action, grade)
     TriggerClientEvent('esx:showNotification', _source, _U('dont_cheat'))
   end
 end)
+
+
 RegisterServerEvent('esx_journalist:stop')
 AddEventHandler('esx_journalist:stop', function()
   printDebug('stop')
   local _source = source
   if playersWork[_source] then playersWorkExit[_source] = true end
 end)
+

@@ -143,13 +143,16 @@ function OpenCloakroom()
 		if data.current.value == 'wear_citizen' then
 			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
 				TriggerEvent('skinchanger:loadSkin', skin)
+				TriggerServerEvent("player:serviceOff", "taxi")
 			end)
 		elseif data.current.value == 'wear_work' then
 			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
 				if skin.sex == 0 then
 					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
+					TriggerServerEvent("player:serviceOn", "taxi")
 				else
 					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
+					TriggerServerEvent("player:serviceOn", "taxi")
 				end
 			end)
 		end

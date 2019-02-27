@@ -22,11 +22,20 @@ local publicBlip = false
 ESX                             = nil
 GUI.Time                        = 0
 
+
+
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 		Citizen.Wait(0)
 	end
+
+	while ESX.GetPlayerData().job == nil do
+		Citizen.Wait(10)
+	end
+
+	PlayerData = ESX.GetPlayerData()
+
 end)
 
 function TeleportFadeEffect(entity, coords)
@@ -65,6 +74,7 @@ function OpenCloakroomMenu()
 			if data.current.value == 'citizen_wear' then
 				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
 					TriggerEvent('skinchanger:loadSkin', skin)
+					deleteBlips()
 				end)
 			end
 
@@ -76,6 +86,7 @@ function OpenCloakroomMenu()
 						TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
 					end
 				end)
+				blips()
 			end
 
 			CurrentAction     = 'buche_actions_menu'
@@ -199,6 +210,7 @@ function OpenVehicleSpawnerMenu()
 	
 		local elements = {
 			{label = 'Véhicule de Travail',  value = 'mule'},
+			--add for new car
 		}
 		
 		ESX.UI.Menu.Open(
@@ -274,7 +286,7 @@ function OpenMobilebucheActionMenu()
 									TaskStartScenarioInPlace(playerPed, 'CODE_HUMAN_MEDIC_TIME_OF_DEATH', 0, true)
 									Citizen.Wait(5000)
 									ClearPedTasks(playerPed)
-									TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(closestPlayer), 'society_bucheron', 'buche', amount)
+									TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(closestPlayer), 'society_buche', 'buche', amount)
 								end)
 							end
 						end
@@ -294,61 +306,47 @@ end
 function OpenGetStocksMenu()
 
 	ESX.TriggerServerCallback('esx_bucherons:getStockItems', function(items)
-
-		print(json.encode(items))
-
+		
 		local elements = {}
 
 		for i=1, #items, 1 do
-			if (items[i].count ~= 0) then
-				table.insert(elements, {label = 'x' .. items[i].count .. ' ' .. items[i].label, value = items[i].name})
-			end
+			table.insert(elements, {
+				label = 'x' .. items[i].count .. ' ' .. items[i].label,
+				value = items[i].name
+			})
 		end
 
-		ESX.UI.Menu.Open(
-			'default', GetCurrentResourceName(), 'stocks_menu',
-			{
-				title    = 'Bucherons Stock',
-				align    = 'top-left',
-				elements = elements
-			},
-			function(data, menu)
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'stocks_menu',
+		{
+			title    = 'Buche Stock',
+			align    = 'top-left',
+			elements = elements
+		}, function(data, menu)
+			local itemName = data.current.value
 
-				local itemName = data.current.value
+			ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'stocks_menu_get_item_count', {
+				title = _U('quantity')
+			}, function(data2, menu2)
 
-				ESX.UI.Menu.Open(
-					'dialog', GetCurrentResourceName(), 'stocks_menu_get_item_count',
-					{
-						title = _U('quantity')
-					},
-					function(data2, menu2)
-		
-						local count = tonumber(data2.value)
+				local count = tonumber(data2.value)
 
-						if count == nil or count <= 0 then
-							ESX.ShowNotification(_U('quantity_invalid'))
-						else
-							menu2.close()
-							menu.close()
-							OpenGetStocksMenu()
+				if count == nil then
+					ESX.ShowNotification(_U('quantity_invalid'))
+				else
+					menu2.close()
+					menu.close()
 
-							TriggerServerEvent('esx_bucherons:getStockItem', itemName, count)
-							-----------------
-							Citizen.Wait(500)
-							OpenGetStocksMenu()
-						end
+					TriggerServerEvent('esx_bucherons:getStockItem', itemName, count)
+					Citizen.Wait(1000)
+					OpenGetStocksMenu()
+				end
 
-					end,
-					function(data2, menu2)
-						menu2.close()
-					end
-				)
-
-			end,
-			function(data, menu)
-				menu.close()
-			end
-		)
+			end, function(data2, menu2)
+				menu2.close()
+			end)
+		end, function(data, menu)
+			menu.close()
+		end)
 	end)
 end
 
@@ -532,8 +530,8 @@ end
 -- Create Blips
 function blips()
 	if publicBlip == false then
-		--local blip = AddBlipForCoord(Config.Zones.bucheAction.Pos.x, Config.Zones.bucheAction.Pos.y, Config.Zones.bucheAction.Pos.z)
-		local blip = AddBlipForCoord(-553.617370605469, 5348.8427734375, 73.7446212768555)
+		local blip = AddBlipForCoord(Config.Zones.bucheAction.Pos.x, Config.Zones.bucheAction.Pos.y, Config.Zones.bucheAction.Pos.z)
+		--local blip = AddBlipForCoord(-553.617370605469, 5348.8427734375, 73.7446212768555)
 		SetBlipSprite (blip, 237)
 		SetBlipDisplay(blip, 4)
 		SetBlipScale  (blip, 1.5)

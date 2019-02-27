@@ -7,7 +7,8 @@ dependencies {
   "esx_datastore",
   "esx_society",
   "esx_billing",
-  "esx_phone",
+  --"esx_phone",
+    "gcphone",
 }
 
 client_scripts {

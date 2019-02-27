@@ -27,7 +27,7 @@ end
 
 -- debug msg
 function printDebug(msg)
-  if debug then print('[esx_journalist] ' .. msg) end
+ -- if debug then print('[esx_journalist] ' .. msg) end
 end
 
 -- init
@@ -40,15 +40,15 @@ Citizen.CreateThread(function()
   -- load player
   local playerData = ESX.GetPlayerData()
   while playerData == nil do
-    Citizen.Wait(1)
+    Citizen.Wait(10)
     playerData = ESX.GetPlayerData()
   end
   while playerData.job == nil do
-    Citizen.Wait(1)
+    Citizen.Wait(10)
     playerData = ESX.GetPlayerData()
   end
   while playerData.job.name == nil do
-    Citizen.Wait(1)
+    Citizen.Wait(10)
     playerData = ESX.GetPlayerData()
   end
   -- load zone
@@ -70,7 +70,7 @@ Citizen.CreateThread(function()
   end
   -- init end
   isLoading = false 
-  printDebug('Loaded in ' .. tostring(GetGameTimer() - startLoad) .. 'ms')
+ -- printDebug('Loaded in ' .. tostring(GetGameTimer() - startLoad) .. 'ms')
 end)
 RegisterNetEvent('esx_phone:loaded')
 AddEventHandler('esx_phone:loaded', function(phoneNumber, contacts)
@@ -84,7 +84,7 @@ end)
 
 -- job/grade change detection
 AddEventHandler('esx_journalist:gradeChange', function(grade)
-  printDebug('gradeChange: ' .. grade)
+--  printDebug('gradeChange: ' .. grade)
   -- disable all zone except cloakroom
   for i=1, #zoneList, 1 do
     if zoneList[i].name ~= 'cloakRoom' then
@@ -104,8 +104,9 @@ AddEventHandler('esx_journalist:gradeChange', function(grade)
   isRunning = false
   currentRun = {}
 end)
+
 AddEventHandler('esx_journalist:jobChange', function(currentJob)
-  printDebug('jobChange: ' .. currentJob)
+  --printDebug('jobChange: ' .. currentJob)
   if currentJob == 'journalist' then
     -- enable cloakroom
     for i=1, #zoneList, 1 do
@@ -125,6 +126,8 @@ AddEventHandler('esx_journalist:jobChange', function(currentJob)
     currentRun = {}
   end
 end)
+
+
 Citizen.CreateThread(function()
   while isLoading do Citizen.Wait(1000) end
   local playerData = ESX.GetPlayerData()
@@ -171,6 +174,8 @@ function drawBlip(gps, blipData)
   end
   return blip
 end
+
+
 Citizen.CreateThread(function()
   while isLoading do Citizen.Wait(10) end
   while true do
@@ -210,6 +215,8 @@ function showMarker(zone)
     false, false, 2, false, false, false, false
   )
 end
+
+
 Citizen.CreateThread(function()
   while isLoading do Citizen.Wait(10) end
   local playerData = nil
@@ -291,6 +298,8 @@ AddEventHandler('esx_journalist:hasEnteredMarker', function(zone)
     end
   end
 end)
+
+
 AddEventHandler('esx_journalist:hasExitedMarker', function(zone)
   printDebug('hasExitedMarker: ' .. zone.name)
   if zone.name == 'printer' or 
@@ -303,6 +312,8 @@ AddEventHandler('esx_journalist:hasExitedMarker', function(zone)
   currentActionMsg = ''
   ESX.UI.Menu.CloseAll()
 end)
+
+
 Citizen.CreateThread(function()
   while isLoading do Citizen.Wait(10) end
   while true do
@@ -345,6 +356,7 @@ AddEventHandler('esx_journalist:copterSpawn', function()
     TriggerEvent("advancedFuel:setEssence", 100 , GetVehicleNumberPlateText(vehicle), GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)))
   end)
 end)
+
 AddEventHandler('esx_journalist:deleteVehicle', function()
   printDebug('deleteVehicle')
   local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
@@ -352,6 +364,7 @@ AddEventHandler('esx_journalist:deleteVehicle', function()
   if string.find (plate, Config.platePrefix) then DeleteVehicle(vehicle)
   else ESX.ShowNotification(_U('bad_vehicle')) end
 end)
+
 Citizen.CreateThread(function()
   while isLoading do Citizen.Wait(10) end
   while true do
@@ -411,6 +424,7 @@ function takeService(work, value)
       zoneList[i].enable = isWorking
     end
   end
+
   if isWorking then
     if value == 'citizen_wear' then 
       ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
@@ -578,7 +592,7 @@ function openPutStocksMenu()
 end
 
 function openGetWeaponMenu()
-  printDebug('openPutWeaponMenu')
+--  printDebug('openPutWeaponMenu')
   ESX.TriggerServerCallback('esx_journalist:getArmoryWeapons', function(weapons)
     local elements = {}
     for i=1, #weapons, 1 do
@@ -603,10 +617,11 @@ function openGetWeaponMenu()
       menu.close()
     end)
   end)
-
 end
+
+
 function openPutWeaponMenu()
-  printDebug('openPutWeaponMenu')
+--  printDebug('openPutWeaponMenu')
   local elements   = {}
   local playerPed  = PlayerPedId()
   local weaponList = ESX.GetWeaponList()
@@ -632,8 +647,10 @@ function openPutWeaponMenu()
     menu.close()
   end)
 end
+
+
 function openWeazelStorageMenu()
-  printDebug('openWeazelStorageMenu')
+ -- printDebug('openWeazelStorageMenu')
   local elements = {}    
   table.insert(elements, {label = _U('deposit_stock'),   value = 'put_stock'})
   table.insert(elements, {label = _U('withdraw_stock'),  value = 'get_stock'})
@@ -660,9 +677,11 @@ function openWeazelStorageMenu()
     end
   )
 end
+
+
 -- menu weazel
 function openCloakroomMenu()
-  printDebug('openCloakroomMenu')
+--  printDebug('openCloakroomMenu')
   local elements = {}    
   if isWorking then table.insert(elements, {label = _U('end_service'), value = 'citizen_wear'}) end
   table.insert(elements, {label = _U('wear1'), value = 'wear1'})
@@ -697,8 +716,10 @@ function openCloakroomMenu()
     end
   )
 end
+
+
 function openWeazelActionsMenu()
-  printDebug('openWeazelActionsMenu')
+ -- printDebug('openWeazelActionsMenu')
   local playerData = ESX.GetPlayerData()
   local elements = {}
   if playerData.job.grade >= Config.journalistMinGrade then  
@@ -755,7 +776,7 @@ end
 
 -- menu Vehicle
 function vehicleMenu()
-  printDebug('vehicleMenu')
+  --printDebug('vehicleMenu')
   local playerData = ESX.GetPlayerData()
   local elements = {{label = Config.vehicles.bike.label, value = Config.vehicles.bike}}
   if playerData.job.grade >= Config.journalistMinGrade then
@@ -798,7 +819,7 @@ function vehicleMenu()
 end
 -- menu mobile
 function openWeazelBilling()
-  printDebug('openWeazelBilling')
+  --printDebug('openWeazelBilling')
   ESX.UI.Menu.Open(
     'dialog', GetCurrentResourceName(), 'billing',
     {
@@ -826,7 +847,7 @@ function openWeazelBilling()
   )
 end
 function openWeazelTools()
-  printDebug('openWeazelTools')
+  --printDebug('openWeazelTools')
   ESX.UI.Menu.Open(
     'default', GetCurrentResourceName(), 'journaliste_gears',
     {
@@ -876,8 +897,10 @@ function openWeazelTools()
     end
   )
 end
+
+
 function openWeazelMobileTools()
-  printDebug('openWeazelTools')
+  --printDebug('openWeazelTools')
   ESX.UI.Menu.Open(
     'default', GetCurrentResourceName(), 'journaliste_gears',
     {
@@ -905,8 +928,9 @@ function openWeazelMobileTools()
     end
   )
 end
+
 function openMobileweazelMenu()
-  printDebug('openMobileweazelMenu')
+  --printDebug('openMobileweazelMenu')
   ESX.UI.Menu.Open(
     'default', GetCurrentResourceName(), 'mobile_weazel_actions',
     {
@@ -950,6 +974,7 @@ function randomizeList(list)
   end
   return newlist
 end
+
 function genRunList()
   local playerData = ESX.GetPlayerData()
   local coordsList = {}
@@ -976,6 +1001,7 @@ function genRunList()
   currentRun = coordsList
   printDebug('genRunList: ' .. #currentRun)
 end
+
 RegisterNetEvent('esx_journalist:nextBoxes')
 AddEventHandler('esx_journalist:nextBoxes', function()
   local tmpList = {}
@@ -1003,6 +1029,7 @@ AddEventHandler('esx_journalist:nextBoxes', function()
   ESX.ShowNotification(_U('gps_info'))
   printDebug('nextBoxes: ' .. #currentRun)
 end)
+
 function startNativeRun()
   printDebug('startNativeRun: ' .. #currentRun)
   local playerData = ESX.GetPlayerData()
@@ -1017,6 +1044,7 @@ function startNativeRun()
   end
   ESX.ShowNotification(_U('gps_info'))
 end
+
 function stopNativeJob()
   printDebug('stopNativeJob: ' .. #currentRun)
   local playerData = ESX.GetPlayerData()
@@ -1031,6 +1059,7 @@ function stopNativeJob()
   end
   ESX.ShowNotification(_U('cancel_mission'))
 end
+
 Citizen.CreateThread(function()
   while isLoading do Citizen.Wait(10) end
   while true do

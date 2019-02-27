@@ -515,6 +515,29 @@ ESX.RegisterServerCallback('esx:getOtherPlayerData', function(source, cb, target
 	})
 end)
 
+
+RegisterServerEvent('esx:updateConnexion')
+AddEventHandler('esx:updateConnexion', function()
+  local xPlayer        = ESX.GetPlayerFromId(source)
+  local ostime = os.date('%c', os.time())
+  print("Lastconnexion - updated "..ostime.." on "..xPlayer.identifier)
+
+  MySQL.Async.execute(
+        'UPDATE users SET lastconnexion = NOW() WHERE identifier = @identifier',
+        {
+          ['@identifier'] = xPlayer.identifier,
+        },
+
+
+        function()
+
+        end
+
+
+    )
+end)
+
+
 TriggerEvent("es:addGroup", "jobmaster", "user", function(group) end)
 
 ESX.StartDBSync()

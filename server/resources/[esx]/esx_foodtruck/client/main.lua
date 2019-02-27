@@ -9,12 +9,27 @@ local OnJob                     = false
 local Cooking 					= false
 local FoodInPlace				= nil
 
+
+
+TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 		Citizen.Wait(0)
 	end
+
+
+	while ESX.GetPlayerData().job == nil do
+		Citizen.Wait(10)
+	end
+
+	PlayerData = ESX.GetPlayerData()
 end)
+
+
+TriggerEvent('esx_phone:registerNumber', 'foodtruck', _U('tabac_client'), true, true)
+TriggerEvent('esx_society:registerSociety', 'foodtruck', 'foodtruck', 'society_foodtruck', 'society_foodtruck', 'society_foodtruck', {type = 'private'})
 
 function OpenCookingMenu(grill)
 
@@ -159,11 +174,16 @@ function OpenFoodTruckActionsMenu()
 	local elements = {
 		{label = _U('vehicle_list'), 	value = 'vehicle_list'},
 		{label = _U('job_clothes'), 	value = 'cloakroom'},
-		{label = _U('civil'), 			value = 'cloakroom2'}
+		{label = _U('civil'), 			value = 'cloakroom2'},
+		{label = _U('deposit_stock'), value = 'put_stock'}
 	}
 
-	if PlayerData.job ~= nil and PlayerData.job.grade_name == 'boss' then
-  		table.insert(elements, {label = _U('boss_actions'), value = 'boss_actions'})
+	if Config.EnablePlayerManagement and PlayerData.job ~= nil and (PlayerData.job.grade_name ~= 'recrue' and PlayerData.job.grade_name ~= 'novice')then -- Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name == 'boss'
+		table.insert(elements, {label = _U('take_stock'), value = 'get_stock'})
+	end
+  
+	if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name == 'boss' then -- Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name == 'boss'
+		table.insert(elements, {label = _U('boss_actions'), value = 'boss_actions'})
 	end
 
 	ESX.UI.Menu.CloseAll()
@@ -219,7 +239,13 @@ function OpenFoodTruckActionsMenu()
     				TriggerEvent('skinchanger:loadSkin', skin)    
 				end)
 			end
+			if data.current.value == 'put_stock' then
+				OpenPutStocksMenu()
+			end
 
+			if data.current.value == 'get_stock' then
+				OpenGetStocksMenu()
+			end
 			if data.current.value == 'boss_actions' then
 
                 TriggerEvent('esx_society:openBossMenu', 'foodtruck', function(data, menu)
@@ -242,6 +268,118 @@ RegisterNetEvent('esx_foodtruck:refreshMarket')
 AddEventHandler('esx_foodtruck:refreshMarket', function()
 	OpenFoodTruckMarketMenu()
 end)
+
+-----------------------
+function OpenGetStocksMenu()
+ESX.TriggerServerCallback('esx_foodtruck:getStockItems', function(items)
+		local elements = {}
+
+		for i=1, #items, 1 do
+			table.insert(elements, {
+				label = 'x' .. items[i].count .. ' ' .. items[i].label,
+				value = items[i].name
+			})
+		end
+
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'stocks_menu',
+		{
+			title    = 'foodtruck Stock',
+			align    = 'top-left',
+			elements = elements
+		}, function(data, menu)
+			local itemName = data.current.value
+
+			ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'stocks_menu_get_item_count', {
+				title = _U('quantity')
+			}, function(data2, menu2)
+
+				local count = tonumber(data2.value)
+
+				if count == nil then
+					ESX.ShowNotification(_U('quantity_invalid'))
+				else
+					menu2.close()
+					menu.close()
+
+					-- todo: refresh on callback
+					TriggerServerEvent('esx_foodtruck:getStockItem', itemName, count)
+					Citizen.Wait(1000)
+					OpenGetStocksMenu()
+				end
+
+			end, function(data2, menu2)
+				menu2.close()
+			end)
+		end, function(data, menu)
+			menu.close()
+		end)
+	end)
+end
+-----------------------
+
+function OpenPutStocksMenu()
+
+	ESX.TriggerServerCallback('esx_foodtruck:getPlayerInventory', function(inventory)
+
+		local elements = {}
+
+		for i=1, #inventory.items, 1 do
+
+			local item = inventory.items[i]
+
+			if item.count > 0 then
+				table.insert(elements, {label = item.label .. ' x' .. item.count, type = 'item_standard', value = item.name})
+			end
+
+		end
+
+		ESX.UI.Menu.Open(
+			'default', GetCurrentResourceName(), 'stocks_menu',
+			{
+				title    = _U('inventory'),
+				elements = elements
+			},
+			function(data, menu)
+				local itemName = data.current.value
+
+				ESX.UI.Menu.Open(
+					'dialog', GetCurrentResourceName(), 'stocks_menu_put_item_count',
+					{
+						title = _U('quantity')
+					},
+					function(data2, menu2)
+
+						local count = tonumber(data2.value)
+
+						if count == nil or count <= 0 then
+							ESX.ShowNotification(_U('quantity_invalid'))
+						else
+							menu2.close()
+							menu.close()
+							OpenPutStocksMenu()
+
+							TriggerServerEvent('esx_foodtruck:putStockItems', itemName, count)
+							----------------
+							Citizen.Wait(500)
+							OpenPutStocksMenu()
+						end
+
+					end,
+					function(data2, menu2)
+						menu2.close()
+					end
+				)
+
+			end,
+			function(data, menu)
+				menu.close()
+			end
+		)
+
+	end)
+
+end
+-----------------------
 
 function OpenFoodTruckMarketMenu()
 	if PlayerData.job ~= nil and PlayerData.job.grade_name == 'boss' then
@@ -641,7 +779,7 @@ Citizen.CreateThread(function()
                     end
                 elseif CurrentAction == 'foodtruck_client_burger' or CurrentAction == 'foodtruck_client_tacos' or CurrentAction == 'foodtruck_client_makiriime' then
                     --TriggerServerEvent('esx_foodtruck:removeFood', CurrentActionData.item)
-                    TriggerServerEvent('esx_foodtruck:addItem', CurrentActionData.item, 1)
+                    TriggerServerEvent('esx_foodtruck:addItem', CurrentActionData.item, 5)
                     ESX.Game.DeleteObject(FoodInPlace)
                     FoodInPlace = nil
                 end

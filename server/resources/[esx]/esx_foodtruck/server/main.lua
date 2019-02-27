@@ -1,17 +1,20 @@
 ESX                = nil
-PlayersHarvesting  = {}
-MarketPrices		= {}
-
+local PlayersHarvesting  = {}
+local MarketPrices		= {}
+local PlayerData        = {}
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-TriggerEvent('esx_phone:registerNumber', 'foodtruck', 'Client FoodTruck', false, false)
+TriggerEvent('esx_phone:registerNumber', 'foodtruck', 'Client FoodTruck', true, true)
+TriggerEvent('esx_society:registerSociety', 'foodtruck', 'foodtruck', 'society_foodtruck', 'society_foodtruck', 'society_foodtruck', {type = 'private'})
 
 if Config.MaxInService ~= -1 then
 	TriggerEvent('esx_service:activateService', 'foodtruck', Config.MaxInService)
 end
 
+
 AddEventHandler('onMySQLReady', function ()
-	MySQL.Async.fetchAll("SELECT * FROM `shops` WHERE `name` = 'Market'",
+--MySQL.Async.fetchAll("SELECT * FROM 'shops' WHERE 'store' = 'Market'",
+MySQL.Async.fetchAll("SELECT * FROM `shops` WHERE `store` = 'Market'",
 		{},
 		function(result)
 			MySQL.Async.fetchAll("SELECT * FROM `items`",
@@ -31,22 +34,10 @@ AddEventHandler('onMySQLReady', function ()
 	)
 end)
 
-ESX.RegisterServerCallback('esx_foodtruck:getStock', function(source, cb)
-	local _source = source	
-	local xPlayer = ESX.GetPlayerFromId(_source)
-
-	local fridge = {}
-
-	for k,v in pairs(Config.Fridge) do
-		for i=1, #xPlayer.inventory, 1 do
-			if xPlayer.inventory[i].name == k then
-					table.insert(fridge, xPlayer.inventory[i])
-				break
-			end
-		end
-	end
-
-	cb(fridge, MarketPrices)
+ESX.RegisterServerCallback('esx_foodtruck:getStockItems', function(source, cb)
+	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_foodtruck', function(inventory)
+		cb(inventory.items)
+	end)
 end)
 
 RegisterServerEvent('esx_foodtruck:buyItem')
@@ -97,3 +88,43 @@ AddEventHandler('esx_foodtruck:addItem', function(item, count)
 	xPlayer.addInventoryItem(item, count)
 end)
 
+
+
+RegisterServerEvent('esx_foodtruck:putStockItems')
+AddEventHandler('esx_foodtruck:putStockItems', function(itemName, count)
+
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_foodtruck', function(inventory)
+
+		local item = inventory.getItem(itemName)
+
+		if item.count >= 0 then
+			xPlayer.removeInventoryItem(itemName, count)
+			inventory.addItem(itemName, count)
+		else
+			TriggerClientEvent('esx:showNotification', xPlayer.source, _U('quantity_invalid'))
+		end
+
+		TriggerClientEvent('esx:showNotification', xPlayer.source, _U('added') .. count .. ' ' .. item.label)
+
+	end)
+end)
+
+ESX.RegisterServerCallback('esx_foodtruck:getPlayerInventory', function(source, cb)
+
+  local xPlayer    = ESX.GetPlayerFromId(source)
+  local items      = xPlayer.inventory
+  cb({
+    items      = items
+  })
+end) 
+
+
+ESX.RegisterServerCallback('esx_foodtruck:getStockItems', function(source, cb)
+
+	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_foodtruck', function(inventory)
+		cb(inventory.items)
+	end)
+
+end)

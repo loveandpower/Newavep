@@ -22,7 +22,8 @@ Locales['fr'] = {
   ['billing'] = 'facturation',
   ['gears'] = 'matériel',
   ['purchased'] = 'Achat effectué.',
-
+  ['take_stock'] = 'Prendre Stock',
+  ['deposit_stock'] = 'Déposer Stock',
   -- Boss Menu
   ['boss_actions'] = 'actions patron',
 

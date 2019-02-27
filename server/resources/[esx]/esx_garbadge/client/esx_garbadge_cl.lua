@@ -333,22 +333,26 @@ Citizen.CreateThread(function()
         
         elseif currentAction == 'delete_vehicle' then
           
-            if inVehicle then
-              local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
-              local hash = GetEntityModel(vehicle)
-              local plate = string.gsub(GetVehicleNumberPlateText(vehicle), " ", "")
-                if string.find (plate, Config.platePrefix) then
-                  if hash == GetHashKey(Config.vehicles.truck.hash) or hash == GetHashKey(Config.vehicles.bossCar.hash) then
-                    if GetVehicleEngineHealth(vehicle) <= 500 or GetVehicleBodyHealth(vehicle) <= 500 then
-                      ESX.ShowNotification(_U('vehicle_broken'))
-                    else
-                       DeleteVehicle(vehicle)
-                    end
-                  end
-                else
-                  ESX.ShowNotification(_U('bad_vehicle'))
-                end
-            end
+           
+    local playerPed = GetPlayerPed(-1)
+    local coords    = GetEntityCoords(playerPed)
+    
+    if IsPedInAnyVehicle(playerPed,  false) then
+
+      local vehicle, distance = ESX.Game.GetClosestVehicle({
+        x = coords.x,
+        y = coords.y,
+        z = coords.z
+      })
+
+      if distance ~= -1 and distance <= 1.0 then
+
+        CurrentAction     = 'delete_vehicle'
+        CurrentActionMsg  = _U('store_veh')
+        CurrentActionData = {vehicle = vehicle}
+
+      end
+    end
         end
         currentAction = nil
       end
@@ -473,10 +477,10 @@ function openPriksStorageMenu()
   local elements = {}    
   table.insert(elements, {label = _U('deposit_stock'),   value = 'put_stock'})
   table.insert(elements, {label = _U('withdraw_stock'),  value = 'get_stock'})
-  if playerData.job.grade >= Config.armoryMinGrade then 
-    table.insert(elements, {label = _U('deposit_weapon'),   value = 'put_weapon'})
-    table.insert(elements, {label = _U('withdraw_weapon'),  value = 'get_weapon'})
-  end
+  --if playerData.job.grade >= Config.armoryMinGrade then 
+  --  table.insert(elements, {label = _U('deposit_weapon'),   value = 'put_weapon'})
+  --  table.insert(elements, {label = _U('withdraw_weapon'),  value = 'get_weapon'})
+  --end
   ESX.UI.Menu.Open(
     'default', GetCurrentResourceName(), 'Pricks_storage',
     {
@@ -488,10 +492,10 @@ function openPriksStorageMenu()
         openPutStocksMenu()
       elseif data.current.value == 'get_stock' then
         openGetStocksMenu()
-      elseif data.current.value == 'put_weapon' then
-        openPutWeaponMenu()
-      elseif data.current.value == 'get_weapon' then
-        openGetWeaponMenu()
+      --elseif data.current.value == 'put_weapon' then
+      --  openPutWeaponMenu()
+      --elseif data.current.value == 'get_weapon' then
+       -- openGetWeaponMenu()
       end
     end,
     function(data, menu)
@@ -688,7 +692,7 @@ function vehicleMenu()
     end
 )
 end
-
+ 
 
 -- menu facturation
 function openPricksBilling()

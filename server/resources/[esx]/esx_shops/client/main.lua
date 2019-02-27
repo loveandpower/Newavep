@@ -42,7 +42,7 @@ function OpenShopMenu(zone)
 		end
 
 		table.insert(elements, {
-			label      = ('%s - <span style="color:green;">%s</span>'):format(item.label, _U('shop_item', ESX.Math.GroupDigits(item.price))),
+			label      = item.label .. ' - <span style="color: green;">$' .. item.price .. '</span>',
 			label_real = item.label,
 			item       = item.item,
 			price      = item.price,
@@ -57,14 +57,13 @@ function OpenShopMenu(zone)
 
 	ESX.UI.Menu.CloseAll()
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop', {
-		css = '247'
+		css		 = 'superete',
 		title    = _U('shop'),
 		align    = 'bottom-right',
 		elements = elements
 	}, function(data, menu)
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_confirm', {
-			css = '247'
-			title    = _U('shop_confirm', data.current.value, data.current.label_real, ESX.Math.GroupDigits(data.current.price * data.current.value)),
+			title    = _U('shop_confirm', data.current.value, data.current.label_real, data.current.price * data.current.value),
 			align    = 'bottom-right',
 			elements = {
 				{label = _U('no'),  value = 'no'},
@@ -81,7 +80,6 @@ function OpenShopMenu(zone)
 		end)
 	end, function(data, menu)
 		menu.close()
-
 		CurrentAction     = 'shop_menu'
 		CurrentActionMsg  = _U('press_menu')
 		CurrentActionData = {zone = zone}
@@ -119,8 +117,8 @@ end)
 -- Display markers
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(0)
-		local coords = GetEntityCoords(PlayerPedId())
+		Citizen.Wait(10)
+		local coords = GetEntityCoords(GetPlayerPed(-1))
 
 		for k,v in pairs(Config.Zones) do
 			for i = 1, #v.Pos, 1 do
@@ -135,8 +133,8 @@ end)
 -- Enter / Exit marker events
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(0)
-		local coords      = GetEntityCoords(PlayerPedId())
+		Citizen.Wait(10)
+		local coords      = GetEntityCoords(GetPlayerPed(-1))
 		local isInMarker  = false
 		local currentZone = nil
 
@@ -164,7 +162,7 @@ end)
 -- Key Controls
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+		Citizen.Wait(10)
 
 		if CurrentAction ~= nil then
 			ESX.ShowHelpNotification(CurrentActionMsg)

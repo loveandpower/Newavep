@@ -33,7 +33,7 @@ Config.Zones = {
 --	},
 	
 	SellFarm = {
-		Pos   = {x = -564.479, y = 302.669, z = 83.172},
+		Pos   = {x = 1219.0184326172, y = -3233.1174316406, z = 5.5287489891052}, 
 		Size  = {x = 3.5, y = 3.5, z = 2.0},
 		Color = {r = 136, g = 243, b = 216},
 		Name  = "Vente des produits",

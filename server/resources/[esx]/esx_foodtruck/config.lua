@@ -1,8 +1,9 @@
 Config                        = {}
 Config.DrawDistance           = 100.0
 Config.Locale                 = 'fr'
+Config.EnablePlayerManagement     = true
 
-local seconde = 1000
+local seconde = 100--1000
 local minute = 60 * seconde
 
 Config.Fridge = {
@@ -22,10 +23,11 @@ Config.Recipes = {
 			vegetables 			= { "Légumes"	, 1 }
 		},
 		Price = 100,
-		CookingTime = 30 * seconde,
+		CookingTime = 5 * seconde,
 		Item = 'tacos',
 		Name = 'Tacos'
 	},
+
 	burger = {
 		Ingredients = {
 			bread 				= { "Pain"		, 1 },
