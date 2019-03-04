@@ -25,16 +25,16 @@ _VERSION = 3.1
 
 globalConf = {
 	["SERVER"] = {
-		versionChecker = true,			-- Set to false for disable the version checker
+		versionChecker = false,			-- Set to false for disable the version checker
 		enableGiveKey = true			-- Enable or disable the /givekey chatCommand
 	},
 
 	["CLIENT"] = {
-		percentage = 50,				-- Percentage chance of finding keys
+		percentage = 90,				-- Percentage chance of finding keys
 		notification = 1,				-- 0 = Disable | 1 = LockSystem notification | 2 = chatMessage notification
 		key = Keys['U'],				-- e.g : Keys["H"] will be change the U key to the H key for lock/unlock a vehicle
 		disableCar_NPC = false,			-- Set to true for disable NPC's car
-		lockTimer = 3,					-- Timer between two changes (open/close - in seconds)
+		lockTimer = 1,					-- Timer between two changes (open/close - in seconds)
 	}
 }
 
@@ -43,7 +43,7 @@ globalConf = {
 -- Don't forget commas, otherwise you will get an error when running the script
 randomMsg =
 {
-	"You found the keys in the glove compartment",
-	"The keys were already there. You took them",
-	"You found the keys on the dashboard",
+	"Vous avez trouver les clefs dans la boite a gants...",
+	"Les clefs sont sur le contacte ... vous les prenez...",
+	"Les Clef sont sour le siége...",
 }

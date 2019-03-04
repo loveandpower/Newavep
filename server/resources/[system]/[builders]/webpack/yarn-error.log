@@ -1,0 +1,41 @@
+Arguments: 
+  C:\Users\Kinder\Desktop\Serveur-Gta-V-RP-V2.0.10\server\FXServer.exe C:\Users\Kinder\Desktop\Serveur-Gta-V-RP-V2.0.10\server\resources\[system]\[builders]\yarn\yarn_cli.js install
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\Kinder\AppData\Local\Microsoft\WindowsApps;C:\Users\Kinder\AppData\Local\GitHubDesktop\bin
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  8.12.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/async/-/async-2.6.2.tgz: ENOENT: no such file or directory, open 'C:\Users\Kinder\AppData\Local\Yarn\Cache\v4\npm-async-2.6.2-18330ea7e6e313887f5d2f2a904bac6fe4dd5381\node_modules\async\.yarn-tarball.tgz'
+
+npm manifest: 
+  {
+    "name": "webpack-builder",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "async": "^2.6.1",
+      "webpack": "^4.12.0",
+      "worker-farm": "^1.6.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -537,7 +537,7 @@ function blips()
 		SetBlipAsShortRange(blip, true)
 
 		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString("Entreprise Boulangerie")
+		AddTextComponentString("Entreprise Tabac")
 		EndTextCommandSetBlipName(blip)
 		publicBlip = true
 	end

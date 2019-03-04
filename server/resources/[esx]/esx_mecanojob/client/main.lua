@@ -240,7 +240,7 @@ end
 
 function OpenMecanoHarvestMenu()
 
-	if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name ~= 'recrue' then
+	--if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name ~= 'recrue' then
 
 		local elements = {
 			{label = _U('gas_can'), value = 'gaz_bottle'},
@@ -274,13 +274,13 @@ function OpenMecanoHarvestMenu()
 			CurrentActionData = {}
 		end)
 
-	else
-		ESX.ShowNotification(_U('not_experienced_enough'))
-	end
+--	else
+--		ESX.ShowNotification(_U('not_experienced_enough'))
+--	end
 end
 
 function OpenMecanoCraftMenu()
-	if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name ~= 'recrue' then
+--	if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name ~= 'recrue' then
 
 		local elements = {
 			{label = _U('blowtorch'),  value = 'blow_pipe'},
@@ -314,9 +314,9 @@ function OpenMecanoCraftMenu()
 			CurrentActionData = {}
 		end)
 
-	else
-		ESX.ShowNotification(_U('not_experienced_enough'))
-	end
+--	else
+--		ESX.ShowNotification(_U('not_experienced_enough'))
+--	end
 end
 
 function OpenMobileMecanoActionsMenu()

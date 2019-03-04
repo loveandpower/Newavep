@@ -1,0 +1,2 @@
+-- Begin of log for 01-19-19 --
+== EssentialMode started, version 5.2.0 ==

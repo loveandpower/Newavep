@@ -14,7 +14,7 @@ end
 
 AddEventHandler('onMySQLReady', function ()
 --MySQL.Async.fetchAll("SELECT * FROM 'shops' WHERE 'store' = 'Market'",
-MySQL.Async.fetchAll("SELECT * FROM `shops` WHERE `store` = 'Market'",
+MySQL.Async.fetchAll("SELECT * FROM `shops2` WHERE `store` = 'Market'",
 		{},
 		function(result)
 			MySQL.Async.fetchAll("SELECT * FROM `items`",

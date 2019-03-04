@@ -270,24 +270,23 @@ end)
 
 RegisterServerEvent('esx_fermier:putStockItems')
 AddEventHandler('esx_fermier:putStockItems', function(itemName, count)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local sourceItem = xPlayer.getInventoryItem(itemName)
 
-  local xPlayer = ESX.GetPlayerFromId(source)
-  local sourceItem = xPlayer.getInventoryItem(itemName)
+	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_mineur', function(inventory)
 
-  TriggerEvent('esx_addoninventory:getSharedInventory', 'society_ferme', function(inventory)
+		local inventoryItem = inventory.getItem(itemName)
+		-- does the player have enough of the item?
+		if sourceItem.count >= count and count > 0 then
+			xPlayer.removeInventoryItem(itemName, count)
+			inventory.addItem(itemName, count)
+			TriggerClientEvent('esx:showNotification', xPlayer.source, _U('have_deposited', count, inventoryItem.label))
+		else
+			TriggerClientEvent('esx:showNotification', xPlayer.source, _U('quantity_invalid'))
+		end
 
-    local inventoryitem = inventory.getItem(itemName)
-   -- local playerItemCount = xPlayer.getInventoryItem(itemName).count
-
-    if sourceItem.count >= count and count > 0 then
-      xPlayer.removeInventoryItem(itemName, count)
-      inventory.addItem(itemName, count)
-         -- TriggerClientEvent('esx:showNotification', xPlayer.source, _U('you_added') .. count .. ' )
-    else
-      TriggerClientEvent('esx:showNotification', xPlayer.source, _U('invalid_quantity'))
-    end
-  end)
-end)
+	end)
+end
 
 --ESX.RegisterServerCallback('esx_fermier:getPlayerInventory', function(source, cb)
 --

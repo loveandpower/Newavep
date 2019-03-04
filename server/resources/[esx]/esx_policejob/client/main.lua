@@ -55,8 +55,6 @@ function setUniform(job, playerPed)
 		if skin.sex == 0 then
 			if Config.Uniforms[job].male ~= nil then
 				TriggerEvent('skinchanger:loadClothes', skin, Config.Uniforms[job].male)
-				---
-				TriggerServerEvent("player:serviceOn", "police")
 			else
 				ESX.ShowNotification(_U('no_outfit'))
 			end
@@ -67,8 +65,6 @@ function setUniform(job, playerPed)
 		else
 			if Config.Uniforms[job].female ~= nil then
 				TriggerEvent('skinchanger:loadClothes', skin, Config.Uniforms[job].female)
-				---
-				TriggerServerEvent("player:service", "police")
 			else
 				ESX.ShowNotification(_U('no_outfit'))
 			end
@@ -133,14 +129,12 @@ function OpenCloakroomMenu()
 					TriggerEvent('skinchanger:loadDefaultModel', isMale, function()
 						ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
 							TriggerEvent('skinchanger:loadSkin', skin)
-							TriggerServerEvent("player:serviceOff", "police")
 							TriggerEvent('esx:restoreLoadout')
 						end)
 					end)
 
 				end)
 			else
-				TriggerServerEvent("player:serviceOff", "police")
 				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
 					TriggerEvent('skinchanger:loadSkin', skin)
 				end)
@@ -1910,7 +1904,7 @@ Citizen.CreateThread(function()
 						local distance = GetDistanceBetweenCoords(coords, v.BossActions[i], true)
 
 						if distance < Config.DrawDistance then
-							DrawMarker(22, v.BossActions[i] + 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, true, false, false, false)
+							DrawMarker(22, v.BossActions[i], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, true, false, false, false)
 							letSleep = false
 						end
 
