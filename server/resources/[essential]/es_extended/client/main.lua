@@ -54,7 +54,6 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 
 	else
 		TriggerEvent('es:setMoneyDisplay', 0.0)
-		  TriggerServerEvent("esx:updateConnexion")
 	end
 end)
 
@@ -255,7 +254,6 @@ RegisterNetEvent('esx:loadIPL')
 AddEventHandler('esx:loadIPL', function(name)
 	Citizen.CreateThread(function()
 		LoadMpDlcMaps()
-		EnableMpDlcMaps(true)
 		RequestIpl(name)
 	end)
 end)
@@ -483,7 +481,7 @@ Citizen.CreateThread(function()
 
 		Citizen.Wait(0)
 
-		if IsControlJustReleased(0, Keys['F2']) and GetLastInputMethod(2) and not isDead and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') then
+		if IsControlJustReleased(0, Keys['F2']) and IsInputDisabled(0) and not isDead and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') then
 			ESX.ShowInventory()
 		end
 

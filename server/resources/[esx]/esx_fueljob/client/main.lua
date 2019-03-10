@@ -553,7 +553,7 @@ function blips()
 	
   if PlayerData.job ~= nil and PlayerData.job.name == 'fueler' then
 
-		for k,v in pairs(Config.Zones)do
+		for k,v in pairs(Config.Zones) do
 			if v.Type == 1 then
 				local blip2 = AddBlipForCoord(x = 1714.2895507813, y = -1595.4077148438, z = 113.814682000684)
 

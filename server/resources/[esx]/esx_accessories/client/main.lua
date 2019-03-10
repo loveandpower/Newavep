@@ -42,7 +42,7 @@ function OpenAccessoryMenu()
 			--------------------------------------------
 			-------------------------------------------
 			------------------------------------------
-		}
+	--	}
 	}, function(data, menu)
 		menu.close()
 		SetUnsetAccessory(data.current.value)

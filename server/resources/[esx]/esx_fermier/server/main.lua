@@ -286,7 +286,7 @@ AddEventHandler('esx_fermier:putStockItems', function(itemName, count)
 		end
 
 	end)
-end
+end)
 
 --ESX.RegisterServerCallback('esx_fermier:getPlayerInventory', function(source, cb)
 --
