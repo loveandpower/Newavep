@@ -2053,15 +2053,15 @@ Citizen.CreateThread(function()
 			end
 		end -- CurrentAction end
 		
-		if IsControlJustReleased(0, Keys['F6']) and not isDead and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'police_actions') then
-			if Config.MaxInService == -1 then
-				OpenPoliceActionsMenu()
-			elseif playerInService then
-				OpenPoliceActionsMenu()
-			else
-				ESX.ShowNotification(_U('service_not'))
-			end
-		end
+		--if IsControlJustReleased(0, Keys['F6']) and not isDead and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'police_actions') then
+		--	if Config.MaxInService == -1 then
+		--		OpenPoliceActionsMenu()
+		--	elseif playerInService then
+		--		OpenPoliceActionsMenu()
+		--	else
+		--		ESX.ShowNotification(_U('service_not'))
+		--	end
+		--end
 		
 		if IsControlJustReleased(0, Keys['E']) and CurrentTask.Busy then
 			ESX.ShowNotification(_U('impound_canceled'))
@@ -2180,3 +2180,9 @@ function ImpoundVehicle(vehicle)
 	ESX.ShowNotification(_U('impound_successful'))
 	CurrentTask.Busy = false
 end
+
+
+RegisterNetEvent('NB:openMenuPolice')
+AddEventHandler('NB:openMenuPolice', function ()
+	OpenPoliceActionsMenu()
+end)

@@ -1032,9 +1032,9 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		if IsControlJustReleased(0, Keys['F6']) and not isDead and ESX.PlayerData.job and ESX.PlayerData.job.name == 'mechanic' then
-			OpenMobileMechanicActionsMenu()
-		end
+		--if IsControlJustReleased(0, Keys['F6']) and not isDead and ESX.PlayerData.job and ESX.PlayerData.job.name == 'mechanic' then
+		--	OpenMobileMechanicActionsMenu()
+		--end
 
 		if IsControlJustReleased(0, Keys['DELETE']) and not isDead and ESX.PlayerData.job and ESX.PlayerData.job.name == 'mechanic' then
 			if NPCOnJob then
@@ -1064,4 +1064,11 @@ end)
 
 AddEventHandler('playerSpawned', function(spawn)
 	isDead = false
+end)
+
+
+------
+RegisterNetEvent('NB:openMenuMecano')
+AddEventHandler('NB:openMenuMecano', function ()
+	OpenMobileMechanicActionsMenu()
 end)

@@ -68,3 +68,9 @@ end)
 AddEventHandler('playerSpawned', function(spawn)
 	isDead = false
 end)
+
+------------new add
+RegisterNetEvent('NB:openMenuFactures')
+AddEventHandler('NB:openMenuFactures', function()
+	ShowBillsMenu()
+end)

@@ -397,24 +397,24 @@ AddEventHandler('esx:deleteVehicle', function()
 end)
 
 -- Pause menu disable HUD display
-if Config.EnableHud then
-	Citizen.CreateThread(function()
-		while true do
-			Citizen.Wait(300)
-
-			if IsPauseMenuActive() and not IsPaused then
-				IsPaused = true
-				TriggerEvent('es:setMoneyDisplay', 0.0)
-				ESX.UI.HUD.SetDisplay(0.0)
-			elseif not IsPauseMenuActive() and IsPaused then
-				IsPaused = false
-				TriggerEvent('es:setMoneyDisplay', 1.0)
-				ESX.UI.HUD.SetDisplay(1.0)
-			end
-		end
-	end)
-end
-
+--if Config.EnableHud then
+--	Citizen.CreateThread(function()
+--		while true do
+--			Citizen.Wait(300)
+--
+--			if IsPauseMenuActive() and not IsPaused then
+--				IsPaused = true
+--				TriggerEvent('es:setMoneyDisplay', 0.0)
+--				ESX.UI.HUD.SetDisplay(0.0)
+--			elseif not IsPauseMenuActive() and IsPaused then
+--				IsPaused = false
+--				TriggerEvent('es:setMoneyDisplay', 1.0)
+--				ESX.UI.HUD.SetDisplay(1.0)
+--			end
+--		end
+--	end)
+--end
+---disable for test
 -- Save loadout
 Citizen.CreateThread(function()
 	while true do
@@ -476,17 +476,19 @@ Citizen.CreateThread(function()
 end)
 
 -- Menu interactions
-Citizen.CreateThread(function()
-	while true do
+--Citizen.CreateThread(function()
+--	while true do
+--
+--		Citizen.Wait(0)
+--
+--		if IsControlJustReleased(0, Keys['F2']) and IsInputDisabled(0) and not isDead and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') then
+--			ESX.ShowInventory()
+--		end
+--
+--	end
+--end)
+--disable for test 
 
-		Citizen.Wait(0)
-
-		if IsControlJustReleased(0, Keys['F2']) and IsInputDisabled(0) and not isDead and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') then
-			ESX.ShowInventory()
-		end
-
-	end
-end)
 
 -- Dot above head
 if Config.ShowDotAbovePlayer then
@@ -590,3 +592,14 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+
+----add for test
+--gestion menu
+
+RegisterNetEvent('NB:openMenuInventaire')
+AddEventHandler('NB:openMenuInventaire', function()
+	ESX.ShowInventory()
+end)
+
+--===> TriggerEvent('NB:openMenuInventaire')
