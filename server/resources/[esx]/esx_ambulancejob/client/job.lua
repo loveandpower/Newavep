@@ -942,4 +942,3 @@ RegisterNetEvent('NB:openMenuAmbulance')
 AddEventHandler('NB:openMenuAmbulance', function()
 	OpenMobileAmbulanceActionsMenu()
 end)
-*

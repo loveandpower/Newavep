@@ -30,9 +30,9 @@ Config.Zones = {
 }
 
 Config.WeedFarm = {
-	x = 1609.12,
-	y = 6663.59,
-	z = 20.96,
+	x = 272.55755615234,
+	y = -2004.1561279297,
+	z = 19.317665100098,
 }
 
 Config.WeedTreatment = {
@@ -64,7 +64,7 @@ Config.OpiumResell = {
 	y = 2570.22,
 	z = 24.68,
 }
-
+--new 1093.6 ,-3196.6, - 38.99841
 Config.CokeFarm = {
 	x = 2448.92,
 	y = -1836.80,

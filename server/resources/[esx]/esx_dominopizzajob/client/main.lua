@@ -1077,7 +1077,7 @@ AddEventHandler('esx_phone:loaded', function(phoneNumber, contacts)
   }
   TriggerEvent('esx_phone:addSpecialContact', specialContact.name, specialContact.number, specialContact.base64Icon)
 end)
-
+ 
 -- Create blips
 Citizen.CreateThread(function()
 

@@ -82,6 +82,7 @@ function OpenPersonnelMenu()
 		ESX.UI.Menu.Open(
 			'default', GetCurrentResourceName(), 'menu_perso',
 			{
+				css 	 = 'meconcernant',
 				title    = 'Menu Personnel',
 				align    = 'top-left',
 				elements = elements
@@ -147,7 +148,7 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'S\'octroyer de l\'argent',						value = 'menuperso_modo_give_money'})
 					table.insert(elements, {label = 'S\'octroyer de l\'argent (banque)',						value = 'menuperso_modo_give_moneybank'})
 					table.insert(elements, {label = 'S\'octroyer de l\'argent sale',						value = 'menuperso_modo_give_moneydirty'})
-					--table.insert(elements, {label = 'Afficher/Cacher coordonnées',		value = 'menuperso_modo_showcoord'})
+					table.insert(elements, {label = 'Afficher/Cacher coordonnées',		value = 'menuperso_modo_showcoord'})
 					table.insert(elements, {label = 'Afficher/Cacher noms des joueurs',	value = 'menuperso_modo_showname'})
 					table.insert(elements, {label = 'TP sur le marqueur',							value = 'menuperso_modo_tp_marcker'})
 					table.insert(elements, {label = 'Soigner la personne',					value = 'menuperso_modo_heal_player'})
@@ -214,9 +215,9 @@ function OpenPersonnelMenu()
 								admin_give_dirty()
 							end
 
-							--if data2.current.value == 'menuperso_modo_showcoord' then
-							--	modo_showcoord()
-							--end
+							if data2.current.value == 'menuperso_modo_showcoord' then
+								modo_showcoord()
+							end
 
 							if data2.current.value == 'menuperso_modo_showname' then
 								modo_showname()
@@ -261,6 +262,7 @@ function OpenPersonnelMenu()
 						
 						'default', GetCurrentResourceName(), 'menuperso_moi',
 						{
+							css 	 = 'Inventaire',
 							title    = 'Me concernant',
 							align    = 'top-left',
 							elements = elements
@@ -292,6 +294,7 @@ function OpenPersonnelMenu()
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_actions',
 						{
+							css      = 'anim',
 							title    = 'Actions',
 							align    = 'top-left',
 							elements = {
@@ -321,6 +324,7 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Salute',
 									{
+										css      = 'anim',									
 										title    = 'Animations de salutations',
 										align    = 'top-left',
 										elements = {
@@ -359,6 +363,7 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Humor',
 									{
+										css      = 'anim',
 										title    = 'Animations d\'humeurs',
 										align    = 'top-left',
 										elements = {
@@ -422,6 +427,7 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Travail',
 									{
+										css      = 'anim',
 										title    = 'Animations de travail',
 										align    = 'top-left',
 										elements = {
@@ -465,6 +471,7 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Festives',
 									{
+										css      = 'anim',
 										title    = 'Animations festives',
 										align    = 'top-left',
 										elements = {
@@ -503,6 +510,7 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Others',
 									{
+										css      = 'anim',
 										title    = 'Animations diverses',
 										align    = 'top-left',
 										elements = {
@@ -615,6 +623,7 @@ function OpenPersonnelMenu()
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_gpsrapide',
 						{
+							css      = 'gps',
 							title    = 'GPS Rapide',
 							align    = 'top-left',
 							elements = {
@@ -653,6 +662,14 @@ function OpenPersonnelMenu()
 								local source = GetPlayerServerId();
 								ESX.ShowNotification("Destination ajouté au GPS !")
 							end
+
+							if data2.current.value == 'menuperso_gpsrapide_concessionnaire' then
+								x, y, z = Config.mecano.x, Config.mecano.y, Config.mecano.z
+								SetNewWaypoint(x, y, z)
+								local source = GetPlayerServerId();
+								ESX.ShowNotification("Destination ajouté au GPS !")
+							end
+							
 
 							--add new....
 							--if data2.current.value == 'menuperso_gpsrapide_concessionnaire' then
@@ -1385,26 +1402,26 @@ end)
 -- FIN GIVE DE L'ARGENT SALE
 
 -- Afficher Coord
---function modo_showcoord()
---	if showcoord then
---		showcoord = false
---	else
---		showcoord = true
---	end
---end
+function modo_showcoord()
+	if showcoord then
+		showcoord = false
+	else
+		showcoord = true
+	end
+end
 
---Citizen.CreateThread(function()
---    while true do
---        Citizen.Wait(0)
---		
---		if showcoord then
---			local playerPos = GetEntityCoords(GetPlayerPed(-1))
---			local playerHeading = GetEntityHeading(GetPlayerPed(-1))
---			Text("~r~X~s~: " ..playerPos.x.." ~b~Y~s~: " ..playerPos.y.." ~g~Z~s~: " ..playerPos.z.." ~y~Angle~s~: " ..playerHeading.."")
---		end
---		
---	end
---end)
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+		
+		if showcoord then
+			local playerPos = GetEntityCoords(GetPlayerPed(-1))
+			local playerHeading = GetEntityHeading(GetPlayerPed(-1))
+			Text("~r~X~s~: " ..playerPos.x.." ~b~Y~s~: " ..playerPos.y.." ~g~Z~s~: " ..playerPos.z.." ~y~Angle~s~: " ..playerHeading.."")
+		end
+		
+	end
+end)
 -- FIN Afficher Coord
 
 -- Afficher Nom

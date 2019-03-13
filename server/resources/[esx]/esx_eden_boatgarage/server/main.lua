@@ -53,7 +53,7 @@ AddEventHandler('eden_boatgarage:modifystate', function(plate, state)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local vehicules = getPlayerVehicles(xPlayer.getIdentifier())
-	local state = 1
+	local state = false
 	print('UPDATING STATE')
 	print(plate)
 	for _,v in pairs(vehicules) do

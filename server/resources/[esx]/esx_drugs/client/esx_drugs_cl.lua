@@ -27,6 +27,13 @@ local CurrentAction             = nil
 local CurrentActionMsg          = ''
 local CurrentActionData         = {}
 
+
+local LastPad = nil
+local LastAction = nil
+local LastPadData = nil
+
+ESX = nil
+
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)

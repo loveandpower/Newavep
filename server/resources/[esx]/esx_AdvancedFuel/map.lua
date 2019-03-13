@@ -1,5 +1,5 @@
 local blipNameFuel = settings[lang].fuelStation
---local blipNameFuelBoat = settings[lang].boatFuelStation
+local blipNameFuelBoat = settings[lang].boatFuelStation
 local blipNameFuelAvions = settings[lang].avionFuelStation
 local blipNameFuelHeli = settings[lang].heliFuelStation
 --Police
@@ -37,9 +37,9 @@ local blips = {
 	{name=blipNameFuel, id=361, x=-319.81, y=-1471.17, z=30.55},
 
     --------- BOATS ---------
-    --{name=blipNameFuelBoat, id=427, x=-802.513, y=-1504.675,z=1.305},
-    --{name=blipNameFuelBoat, id=427,x=7.313,y=-2777.435,z=3.451},
-    --{name=blipNameFuelBoat,id=427,x=1326.863,y=4218.219,z=33.55},
+    {name=blipNameFuelBoat, id=427, x=-802.513, y=-1504.675,z=1.305},
+    {name=blipNameFuelBoat, id=427,x=7.313,y=-2777.435,z=3.451},
+    {name=blipNameFuelBoat,id=427,x=1326.863,y=4218.219,z=33.55},
 
     --------- AVIONS ---------
     {name = blipNameFuelAvions, id=251,x=2133.268,y=4783.649,z=40.97},
@@ -328,16 +328,16 @@ electric_stations = {
 }
 
 
---boat_stations = {
---    {x=-801.0068,y=-1507.842,z=1.03,s=26},
---    {x=-803.487,y=-1501.317,z=1.03,s=26},
---
---    {x=5.985,y=-2784.819,z=1.919,s=27},
---    {x=5.985,y=-2770.929,z=1.919,s=27},
---
---    {x=1337.098,y=4218.219,z=31.05,s=28},
---    {x=1322.839,y=4221.219,z=31.05,s=28},
---}
+boat_stations = {
+    {x=-801.0068,y=-1507.842,z=1.03,s=26},
+    {x=-803.487,y=-1501.317,z=1.03,s=26},
+
+    {x=5.985,y=-2784.819,z=1.919,s=27},
+    {x=5.985,y=-2770.929,z=1.919,s=27},
+
+    {x=1337.098,y=4218.219,z=31.05,s=28},
+    {x=1322.839,y=4221.219,z=31.05,s=28},
+}
 
 
 avion_stations = {
@@ -353,18 +353,22 @@ heli_stations = {
 }
 --Police
 police_stations = {
-	{x=1864.0,y=3711.0,z=34.0,s=25},
-	{x=-454.0,y=6041.0,z=32.0,s=25},
-	{x=536.0,y=-28.0,z=71.0,s=25},
-	{x=374.0,y=-1624.0,z=29.5,s=25},
-	{x=861.0,y=-1342.0,z=26.5,s=25},
-	{x=485.0,y=-1024.0,z=28.5,s=25},
-	{x=-638.0,y=-97.0,z=38.5,s=25},
-	{x=-1075.0,y=-860.0,z=5.5,s=25},
-	{x=2439.0,y=-407.0,z=93.5,s=25},
-	{x=184.0,y=-1657.0,z=30.5,s=25},
-	{x=1243.0,y=-1485.0,z=35.5,s=25},
-	{x=-353.0,y=6123.0,z=32.0,s=25},
+	--{x=1864.0,y=3711.0,z=34.0,s=25},
+	--{x=-454.0,y=6041.0,z=32.0,s=25},
+	--{x=536.0,y=-28.0,z=71.0,s=25},
+	--{x=374.0,y=-1624.0,z=29.5,s=25},
+	--{x=861.0,y=-1342.0,z=26.5,s=25},
+	--{x=485.0,y=-1024.0,z=28.5,s=25},
+	--{x=-638.0,y=-97.0,z=38.5,s=25},
+	--{x=-1075.0,y=-860.0,z=5.5,s=25},
+    {x = 483.32260131836, y = -1018.5121459961, z = 27.867553710938,s=26}, 
+    {x = 452.74169921875, y = -1024.7890625, z = 29.521209716797,s=26},
+
+
+	--{x=2439.0,y=-407.0,z=93.5,s=25},
+	--{x=184.0,y=-1657.0,z=30.5,s=25},
+	--{x=1243.0,y=-1485.0,z=35.5,s=25},
+	--{x=-353.0,y=6123.0,z=32.0,s=25},
 }
 --End
 
@@ -398,9 +402,9 @@ stationsText[25] = {x=-94.239,y=6419.58,z=32.615}
 
 
 --- Boats stations
---stationsText[26] = {x=-802.513, y=-1504.675,z=2}
---stationsText[27] = {x=7.313,y=-2777.435,z=3.451} 
---stationsText[28] = {x=1326.863,y=4218.219,z=33.55}
+stationsText[26] = {x=-802.513, y=-1504.675,z=2}
+stationsText[27] = {x=7.313,y=-2777.435,z=3.451} 
+stationsText[28] = {x=1326.863,y=4218.219,z=33.55}
 
 
 --- Avions stations
@@ -478,20 +482,20 @@ Citizen.CreateThread(function()
 		--End
 
 
-     --   for _, item in pairs(boat_stations) do
-     --       local near, dist = isNearBoatStationMarker(item)
-     --       if(near) then
-     --           DrawMarker(1, item.x, item.y, item.z-1.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 1.0,     0, 0, 255, 75      , 0, 0, 1, 0, 0, 0, 0)
-     --           if(dist<10) then
-     --           	local x = stationsText[item.s].x
-     --           	local y = stationsText[item.s].y
-     --           	local z = stationsText[item.s].z
-     --           	local streetA, streetB = Citizen.InvokeNative( 0x2EB41072B4C1E4C0, x, y, z, Citizen.PointerValueInt(), Citizen.PointerValueInt() )
-     --           	DrawText3D(x,y,z, "~g~ "..settings[lang].boatFuelStation.." "..GetStreetNameFromHashKey(streetA).." "..GetStreetNameFromHashKey(streetB))
-     --           	DrawText3D(x,y,z-0.2, "~b~"..settings[lang].price.." : "..StationsPrice[item.s].."$/L")
-     --           end
-     --       end
-     --   end
+        for _, item in pairs(boat_stations) do
+            local near, dist = isNearBoatStationMarker(item)
+            if(near) then
+                DrawMarker(1, item.x, item.y, item.z-1.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 1.0,     0, 0, 255, 75      , 0, 0, 1, 0, 0, 0, 0)
+                if(dist<10) then
+                	local x = stationsText[item.s].x
+                	local y = stationsText[item.s].y
+                	local z = stationsText[item.s].z
+                	local streetA, streetB = Citizen.InvokeNative( 0x2EB41072B4C1E4C0, x, y, z, Citizen.PointerValueInt(), Citizen.PointerValueInt() )
+                	DrawText3D(x,y,z, "~g~ "..settings[lang].boatFuelStation.." "..GetStreetNameFromHashKey(streetA).." "..GetStreetNameFromHashKey(streetB))
+                	DrawText3D(x,y,z-0.2, "~b~"..settings[lang].price.." : "..StationsPrice[item.s].."$/L")
+                end
+            end
+        end
 
 
         for _, item in pairs(avion_stations) do

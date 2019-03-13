@@ -10,6 +10,7 @@ blacklistedModels = { -- Vehicles which doesn't need fuel
 
 --Police
 police_model = {
+	"pbus",
 	"narp1",
 	"narp2",
 	"narp3",

@@ -139,7 +139,7 @@ Config.AuthorizedWeapons = {
 		{ weapon = 'WEAPON_STUNGUN', price = 500 },
 		{ weapon = 'WEAPON_FLASHLIGHT', price = 0 }
 	}
-}
+} 
 
 Config.AuthorizedVehicles = {
 	Shared = {

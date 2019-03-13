@@ -24,10 +24,10 @@ Config.poleemploi = {
 	y = -974.677734375,
 	z = 31.220008850098,
 }
-Config.comico = {
-	x = 430.91763305664,
-	y = -980.24694824218,
-	z = 31.710563659668,
+Config.comico = {  
+	x = 425.1,
+	y = -979.5,
+	z = 30.7,
 }
 Config.hopital = {
 	x = 1150.1,
@@ -38,6 +38,12 @@ Config.concessionnaire = {
 	x = -44.385055541992,
 	y = -1109.7479248047,
 	z = 26.437595367432,
+}
+
+Config.mecano = {
+	 x = -342.291,
+	 y = -133.370,
+	 z = 38.009,
 }
 -- Ouvrir le menu perso
 Config.menuperso = {

@@ -1,21 +1,21 @@
 Config = {}
 
-Config.DrawDistance = 100.0
+Config.DrawDistance = 5.0
 
 Config.Pads = {
 
 	{
-		Text = 'Press ~INPUT_CONTEXT~ to teleport ~y~to point~s~.',
-		Marker = vector3(-118.91304931641, -976.67138671875, 30.445791244507),
-		MarkerSettings = {r = 255, g = 55, b = 55, a = 100, type = 1, x = 1.5, y = 1.5, z = 0.5},
-		TeleportPoint = { coords = vector3(-120.60270690918, -974.42877197266, 292.73452758789), h = 0.87 }
+		Text = 'Appuyer Sur ~INPUT_CONTEXT~ pour entrer dans la ~y~Maison~s~.',
+		Marker = vector3(365.16790771484, -2064.6472167969, 21.744445800781),
+		MarkerSettings = {r = 255, g = 55, b = 55, a = 100, type = 0, x = 1.5, y = 1.5, z = 0.5},
+		TeleportPoint = { coords = vector3(1065.8067626953, -3183.2443847656, -39.163398742676), h = 0.87 }
 	},
 
 	{
-		Text = 'Press ~INPUT_CONTEXT~ to leave the ~y~house~s~.',
-		Marker = vector3(1400.4, 1129.6, 113.3),
+		Text = 'Appuyer Sur ~INPUT_CONTEXT~ pour sortir de la ~y~Maison~s~.',
+		Marker = vector3(1065.8067626953, -3183.2443847656, -39.163398742676),
 		MarkerSettings = {r = 255, g = 55, b = 55, a = 100, type = 1, x = 1.5, y = 1.5, z = 0.5},
-		TeleportPoint = { coords = vector3(1400.2, 1123.5, 114.8), h = 180.0 }
+		TeleportPoint = { coords = vector3(365.16790771484, -2064.6472167969, 21.744445800781), h = 180.0 }
 	}
 
 }

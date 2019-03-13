@@ -284,7 +284,7 @@ RegisterNetEvent('esx_basicneeds:onDrink')
 AddEventHandler('esx_basicneeds:onDrink', function(prop_name)
 	
    if not IsAnimated then
-    local prop_name = prop_name or 'prop_cs_burger_01'
+    local prop_name = prop_name or 'prop_amb_beer_bottle'
     IsAnimated = true
     local playerPed = GetPlayerPed(-1)
     
@@ -459,12 +459,14 @@ end
 RegisterNetEvent('esx_basicneeds:onDrink')
 AddEventHandler('esx_basicneeds:onDrink', function()
   
-  local playerPed = GetPlayerPed(-1)
-  
-  TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_DRINKING", 0, 1)
-  Citizen.Wait(1000)
-  ClearPedTasksImmediately(playerPed)
 
+  if IsPedInAnyVehicle(PlayerPedId(), false) then
+    local playerPed = GetPlayerPed(-1)
+  
+    --TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_DRINKING", 0, 1)
+    --Citizen.Wait(1000)
+    --ClearPedTasksImmediately(playerPed)
+  end
 end)
 
 --###########################################################################################################

@@ -20,10 +20,10 @@ Config.AuthorizedVehicles = {
 Config.Blips = {
     
     Blip = {
-      Pos     = { x = -571.254, y = -408.130, z = 34.0 },
-      Sprite  = 52,
+      Pos     = {x = -162.62075805664, y = 281.31216430664, z = 93.76383972168}, 
+      Sprite  = 354,--52
       Display = 4,
-      Scale   = 1.0,
+      Scale   = 2.0,
       Colour  = 1,
     },
 

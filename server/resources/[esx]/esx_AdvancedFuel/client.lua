@@ -478,9 +478,9 @@ function renderBoxes()
 
 		if(hud_form == 1) then
 			if(showBar) then
-				DrawRect(hud_x, hud_y, 0.0149999999999998, 0.15, 255, 255, 255, 200)
-				DrawRect(hud_x, hud_y, 0.0119999999999998, 0.142, 80, 80, 80, 255)
-				DrawRect(hud_x, hud_y, 0.0119999999999998, essence, 225, 146, 45, 255)
+				--DrawRect(hud_x, hud_y, 0.0149999999999998, 0.15, 255, 255, 255, 200)
+				--DrawRect(hud_x, hud_y, 0.0139999999999999, 0.142, 80, 80, 80, 255)
+				--DrawRect(hud_x, hud_y, 0.0129999999999998, essence, 225, 146, 45, 255)
 			end
 
 			if(showText) then
@@ -490,9 +490,15 @@ function renderBoxes()
 			end
 		else
 			if(showBar) then
-				DrawRect(hud_x, hud_y, 0.15, 0.0149999999999998, 255, 255, 255, 200)
-				DrawRect(hud_x, hud_y, 0.142, 0.0119999999999998, 80, 80, 80, 255)
-				DrawRect(hud_x, hud_y, essence, 0.0119999999999998, 225, 146, 45, 255)
+				--DrawRect(hud_x, hud_y, 0.15, 0.0149999999999998, 255, 255, 255, 200)  --blanc
+				DrawRect(hud_x, hud_y, 0.14, 0.0109999999999998, 80, 80, 80, 175)  --gris
+				--DrawRect(hud_x, hud_y, essence, 0.0098999999999998, 225, 94, 0, 255) --rouge
+				DrawRect(hud_x, hud_y, essence, 0.0098999999999998, 225, 27, 0, 255) --orange				
+				--DrawRect(hud_x, hud_y, 0.15, 0.0149999999999998, 255, 255, 255, 200)
+				--DrawRect(hud_x, hud_y, 0.142, 0.0119999999999998, 80, 80, 80, 255)
+				--DrawRect(hud_x, hud_y, essence, 0.0119999999999998, 225, 146, 45, 255)			
+
+
 			end
 
 			if(showText) then

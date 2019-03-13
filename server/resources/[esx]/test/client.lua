@@ -10,7 +10,8 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Wait(12000)
-		--if IsControlJustPressed(1, 38) then -- E
+		if IsControlJustPressed(1, 38) then -- E
 			    	ESX.Scaleform.ShowFreemodeMessage('~o~TEst3000', '~y~test 2000', 13)
-	--end
-end
+	    end
+	end
+end)
