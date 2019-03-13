@@ -7,6 +7,6 @@ Windows +>
 - run autorestart.bat
 
 Linux +>
- follow tuto on fivem.net
+- follow tuto on fivem.net
 
 #no support !
