@@ -254,7 +254,7 @@ function OpenPersonnelMenu()
 	
 					local elements = {}
 					
-					table.insert(elements, {label = 'Téléphone',   		value = 'menuperso_moi_telephone'})
+					--table.insert(elements, {label = 'Téléphone',   		value = 'menuperso_moi_telephone'})
 					table.insert(elements, {label = 'Inventaire',  		value = 'menuperso_moi_inventaire'})
 					table.insert(elements, {label = 'Mes factures',		value = 'menuperso_moi_factures'})
 						

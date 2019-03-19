@@ -1,7 +1,7 @@
 Config              = {}
 Config.MarkerType   = 1
 Config.DrawDistance = 100.0
-Config.ZoneSize     = {x = 2.5, y = 2.5, z = 3.0}
+Config.ZoneSize     = {x = 2.5, y = 2.5, z = 2.0}
 Config.MarkerColor  = {r = 100, g = 204, b = 100}
 
 Config.RequiredCopsCoke  = 0
@@ -17,7 +17,7 @@ Config.Locale = 'fr'
 
 Config.Zones = {
 	CokeField =			{x = 2448.92,	y = -1836.80,	z = 51.95,	name = _U('coke_field'),		sprite = 501,	color = 40},
-	CokeProcessing =	{x = -458.13,	y = -2278.61,	z = 7.51,	name = _U('coke_processing'),	sprite = 478,	color = 40},
+	CokeProcessing =	{x = 1093.2960205078, y = -3197.0888671875, z = -39.999361608887,	name = _U('coke_processing'),	sprite = 478,	color = 40},
 	CokeDealer =		{x = -1756.19,	y = 427.31,		z =126.68,	name = _U('coke_dealer'),		sprite = 500,	color = 75},
 	MethField =			{x = 1525.29,	y = 1710.02,	z = 109.00,	name = _U('meth_field'),		sprite = 499,	color = 26},
 	MethProcessing =	{x = -1001.41,	y = 4848.00,	z = 274.00,	name = _U('meth_processing'),	sprite = 499,	color = 26},

@@ -7,7 +7,7 @@ Config.MinimumDistance            = 3000 -- Minimum NPC job destination distance
 
 Config.MaxInService               = -1
 Config.EnablePlayerManagement     = true
-Config.EnableSocietyOwnedVehicles = false
+Config.EnableSocietyOwnedVehicles = true
 
 Config.Locale                     = 'fr'
 
@@ -23,21 +23,21 @@ Config.AuthorizedVehicles = {
 Config.Zones = {
 
 	VehicleSpawner = {
-		Pos   = {x = 915.039, y = -162.187, z = 74.5},
+		Pos     = {x = 896.98376464844, y = -144.05816650391, z = 76.805603027344}, 
 		Size  = {x = 1.0, y = 1.0, z = 1.0},
 		Color = {r = 204, g = 204, b = 0},
 		Type  = 36, Rotate = true
 	},
 
 	VehicleSpawnPoint = {
-		Pos     = {x = 911.108, y = -177.867, z = 74.283},
+		Pos   = {x = 904.05401611328, y = -140.86193847656, z = 76.539947509766}, 
 		Size    = {x = 1.5, y = 1.5, z = 1.0},
 		Type    = -1, Rotate = false,
 		Heading = 225.0
 	},
 
 	VehicleDeleter = {
-		Pos   = {x = 908.317, y = -183.070, z = 73.201},
+		Pos   = {x = 902.75659179688, y = -142.9342956543, z = 75.616897583008},
 		Size  = {x = 3.0, y = 3.0, z = 0.25},
 		Color = {r = 255, g = 0, b = 0},
 		Type  = 1, Rotate = false

@@ -17,7 +17,7 @@ Config.EarlyRespawnTimer          = 2 * minute  -- Time til respawn is available
 Config.BleedoutTimer              = 10 * minute -- Time til the player bleeds out
 
 Config.EnablePlayerManagement     = true
-Config.EnableSocietyOwnedVehicles = false
+--Config.EnableSocietyOwnedVehicles = false
 
 Config.RemoveWeaponsAfterRPDeath  = true
 Config.RemoveCashAfterRPDeath     = true
@@ -25,7 +25,7 @@ Config.RemoveItemsAfterRPDeath    = true
 
 -- Let the player pay for respawning early, only if he can afford it.
 Config.EarlyRespawnFine           = true
-Config.EarlyRespawnFineAmount     = 2500
+Config.EarlyRespawnFineAmount     = 100
 
 Config.RespawnPoint = { coords = vector3(341.07, -1397.31, 32.51), heading = 48.5 }
 

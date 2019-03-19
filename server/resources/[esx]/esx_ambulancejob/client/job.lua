@@ -16,7 +16,6 @@ function OpenAmbulanceActionsMenu()
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'ambulance_actions',
 	{
-		css =  'Ambulance',
 		title		= _U('ambulance'),
 		align		= 'top-left',
 		elements	= elements
@@ -37,19 +36,16 @@ function OpenMobileAmbulanceActionsMenu()
 
 	ESX.UI.Menu.CloseAll()
 
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'mobile_ambulance_actions',
-	{
-		css =  'Ambulance',
-		title		= _U('ambulance'),
-		align		= 'top-left',
-		elements	= {
+	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'mobile_ambulance_actions', {
+		title    = _U('ambulance'),
+		align    = 'top-left',
+		elements = {
 			{label = _U('ems_menu'), value = 'citizen_interaction'}
 		}
 	}, function(data, menu)
 		if data.current.value == 'citizen_interaction' then
 			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'citizen_interaction',
 			{
-				css =  'Ambulance',
 				title		= _U('ems_menu_title'),
 				align		= 'top-left',
 				elements	= {
@@ -181,24 +177,20 @@ function OpenMobileAmbulanceActionsMenu()
 end
 
 function FastTravel(coords, heading)
-	TeleportFadeEffect(PlayerPedId(), coords, heading)
-end
+	local playerPed = PlayerPedId()
 
-function TeleportFadeEffect(entity, coords, heading)
-	Citizen.CreateThread(function()
-		DoScreenFadeOut(800)
+	DoScreenFadeOut(800)
 
-		while not IsScreenFadedOut() do
-			Citizen.Wait(0)
+	while not IsScreenFadedOut() do
+		Citizen.Wait(500)
+	end
+
+	ESX.Game.Teleport(playerPed, coords, function()
+		DoScreenFadeIn(800)
+
+		if heading then
+			SetEntityHeading(playerPed, heading)
 		end
-
-		ESX.Game.Teleport(entity, coords, function()
-			DoScreenFadeIn(800)
-
-			if heading then
-				SetEntityHeading(entity, heading)
-			end
-		end)
 	end)
 end
 
@@ -207,7 +199,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		local playerCoords = GetEntityCoords(PlayerPedId())
-		local canSleep, isInMarker, hasExited = true, false, false
+		local letSleep, isInMarker, hasExited = true, false, false
 		local currentHospital, currentPart, currentPartNum
 
 		for hospitalNum,hospital in pairs(Config.Hospitals) do
@@ -218,7 +210,7 @@ Citizen.CreateThread(function()
 
 				if distance < Config.DrawDistance then
 					DrawMarker(Config.Marker.type, v, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Marker.x, Config.Marker.y, Config.Marker.z, Config.Marker.r, Config.Marker.g, Config.Marker.b, Config.Marker.a, false, false, 2, Config.Marker.rotate, nil, nil, false)
-					canSleep = false
+					letSleep = false
 				end
 
 				if distance < Config.Marker.x then
@@ -232,7 +224,7 @@ Citizen.CreateThread(function()
 
 				if distance < Config.DrawDistance then
 					DrawMarker(Config.Marker.type, v, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Marker.x, Config.Marker.y, Config.Marker.z, Config.Marker.r, Config.Marker.g, Config.Marker.b, Config.Marker.a, false, false, 2, Config.Marker.rotate, nil, nil, false)
-					canSleep = false
+					letSleep = false
 				end
 
 				if distance < Config.Marker.x then
@@ -246,7 +238,7 @@ Citizen.CreateThread(function()
 
 				if distance < Config.DrawDistance then
 					DrawMarker(v.Marker.type, v.Spawner, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Marker.x, v.Marker.y, v.Marker.z, v.Marker.r, v.Marker.g, v.Marker.b, v.Marker.a, false, false, 2, v.Marker.rotate, nil, nil, false)
-					canSleep = false
+					letSleep = false
 				end
 
 				if distance < v.Marker.x then
@@ -260,7 +252,7 @@ Citizen.CreateThread(function()
 
 				if distance < Config.DrawDistance then
 					DrawMarker(v.Marker.type, v.Spawner, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Marker.x, v.Marker.y, v.Marker.z, v.Marker.r, v.Marker.g, v.Marker.b, v.Marker.a, false, false, 2, v.Marker.rotate, nil, nil, false)
-					canSleep = false
+					letSleep = false
 				end
 
 				if distance < v.Marker.x then
@@ -274,7 +266,7 @@ Citizen.CreateThread(function()
 
 				if distance < Config.DrawDistance then
 					DrawMarker(v.Marker.type, v.From, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Marker.x, v.Marker.y, v.Marker.z, v.Marker.r, v.Marker.g, v.Marker.b, v.Marker.a, false, false, 2, v.Marker.rotate, nil, nil, false)
-					canSleep = false
+					letSleep = false
 				end
 
 
@@ -289,7 +281,7 @@ Citizen.CreateThread(function()
 
 				if distance < Config.DrawDistance then
 					DrawMarker(v.Marker.type, v.From, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Marker.x, v.Marker.y, v.Marker.z, v.Marker.r, v.Marker.g, v.Marker.b, v.Marker.a, false, false, 2, v.Marker.rotate, nil, nil, false)
-					canSleep = false
+					letSleep = false
 				end
 
 				if distance < v.Marker.x then
@@ -317,6 +309,10 @@ Citizen.CreateThread(function()
 			if not hasExited and not isInMarker and HasAlreadyEnteredMarker then
 				HasAlreadyEnteredMarker = false
 				TriggerEvent('esx_ambulancejob:hasExitedMarker', LastHospital, LastPart, LastPartNum)
+			end
+
+			if letSleep then
+				Citizen.Wait(500)
 			end
 
 		end
@@ -386,9 +382,9 @@ Citizen.CreateThread(function()
 			end
 
 		elseif ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'ambulance' and not IsDead then
-			--if IsControlJustReleased(0, Keys['F6']) then
-			--	OpenMobileAmbulanceActionsMenu()
-			--end
+			if IsControlJustReleased(0, Keys['F6']) then
+				OpenMobileAmbulanceActionsMenu()
+			end
 		else
 			Citizen.Wait(500)
 		end
@@ -423,7 +419,6 @@ end)
 function OpenCloakroomMenu()
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'cloakroom',
 	{
-		css =  'Ambulance',
 		title		= _U('cloakroom'),
 		align		= 'top-left',
 		elements = {
@@ -434,16 +429,13 @@ function OpenCloakroomMenu()
 		if data.current.value == 'citizen_wear' then
 			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
 				TriggerEvent('skinchanger:loadSkin', skin)
-				TriggerServerEvent("player:serviceOff", "ambulance")
 			end)
 		elseif data.current.value == 'ambulance_wear' then
 			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
 				if skin.sex == 0 then
 					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
-					TriggerServerEvent("player:serviceOn", "ambulance")
 				else
 					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
-					TriggerServerEvent("player:serviceOn", "ambulance")
 				end
 			end)
 		end
@@ -463,7 +455,6 @@ function OpenVehicleSpawnerMenu(hospital, partNum)
 	}
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle', {
-		css =  'Ambulance',
 		title    = _U('garage_title'),
 		align    = 'top-left',
 		elements = elements
@@ -515,7 +506,6 @@ function OpenVehicleSpawnerMenu(hospital, partNum)
 					end
 
 					ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_garage', {
-						css =  'Ambulance',
 						title    = _U('garage_title'),
 						align    = 'top-left',
 						elements = garage
@@ -646,7 +636,6 @@ function OpenHelicopterSpawnerMenu(hospital, partNum)
 	}
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'helicopter_spawner', {
-		css =  'Ambulance',
 		title    = _U('helicopter_title'),
 		align    = 'top-left',
 		elements = elements
@@ -699,7 +688,6 @@ function OpenHelicopterSpawnerMenu(hospital, partNum)
 					end
 
 					ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'helicopter_garage', {
-						css =  'Ambulance',
 						title    = _U('helicopter_garage_title'),
 						align    = 'top-left',
 						elements = garage
@@ -744,7 +732,6 @@ function OpenShopMenu(elements, restoreCoords, shopCoords)
 	isInShopMenu = true
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_shop', {
-		css =  'Ambulance',
 		title    = _U('vehicleshop_title'),
 		align    = 'top-left',
 		elements = elements
@@ -752,7 +739,6 @@ function OpenShopMenu(elements, restoreCoords, shopCoords)
 
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_shop_confirm',
 		{
-			css =  'Ambulance',
 			title    = _U('vehicleshop_confirm', data.current.name, data.current.price),
 			align    = 'top-left',
 			elements = {
@@ -883,7 +869,6 @@ function OpenPharmacyMenu()
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'pharmacy',
 	{
-		css =  'Ambulance',
 		title    = _U('pharmacy_menu_title'),
 		align    = 'top-left',
 		elements = {
@@ -921,7 +906,7 @@ function WarpPedInClosestVehicle(ped)
 end
 
 RegisterNetEvent('esx_ambulancejob:heal')
-AddEventHandler('esx_ambulancejob:heal', function(healType)
+AddEventHandler('esx_ambulancejob:heal', function(healType, quiet)
 	local playerPed = PlayerPedId()
 	local maxHealth = GetEntityMaxHealth(playerPed)
 
@@ -933,12 +918,7 @@ AddEventHandler('esx_ambulancejob:heal', function(healType)
 		SetEntityHealth(playerPed, maxHealth)
 	end
 
-	ESX.ShowNotification(_U('healed'))
-end)
-
-
-----
-RegisterNetEvent('NB:openMenuAmbulance')
-AddEventHandler('NB:openMenuAmbulance', function()
-	OpenMobileAmbulanceActionsMenu()
+	if not quiet then
+		ESX.ShowNotification(_U('healed'))
+	end
 end)

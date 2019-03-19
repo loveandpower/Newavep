@@ -377,17 +377,17 @@ Citizen.CreateThread(function()
 			local vitesse = math.ceil(kmh)
 
 			if(vitesse > 0 and vitesse <20) then
-				stade = 0.00001
-			elseif(vitesse >= 20 and vitesse <50) then
 				stade = 0.00002
-			elseif(vitesse >= 50 and vitesse < 70) then
-				stade = 0.00003
-			elseif(vitesse >= 70 and vitesse <90) then
+			elseif(vitesse >= 20 and vitesse <50) then
 				stade = 0.00004
-			elseif(vitesse >=90 and vitesse <130) then
-				stade = 0.00005
-			elseif(vitesse >= 130) then
+			elseif(vitesse >= 50 and vitesse < 70) then
 				stade = 0.00006
+			elseif(vitesse >= 70 and vitesse <90) then
+				stade = 0.00008
+			elseif(vitesse >=90 and vitesse <130) then
+				stade = 0.00015
+			elseif(vitesse >= 130) then
+				stade = 0.00030
 			elseif(vitesse == 0 and IsVehicleEngineOn(veh)) then
 				stade = 0.0000001
 			end

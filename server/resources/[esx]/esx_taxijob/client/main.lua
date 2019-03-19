@@ -38,6 +38,8 @@ Citizen.CreateThread(function()
 	end
 
 	ESX.PlayerData = ESX.GetPlayerData()
+	ClearAreaOfPeds(915.039, -162.187, 74.5, 10000,1)
+
 end)
 
 function DrawSub(msg, time)

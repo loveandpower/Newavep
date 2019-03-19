@@ -32,11 +32,8 @@ function AddTextEntry(key, value)
 end
 
 Citizen.CreateThread(function()
-	while true do
-        Citizen.Wait(0)
-        SetWeaponDrops()
-    end
-  AddTextEntry('FE_THDR_GTAO', 'Gta Rp Vinewood')
+
+  AddTextEntry('FE_THDR_GTAO', '~g~New~y~Wave-Rp ~m~| ~b~ Fivem ID : ~r~ ' .. GetPlayerServerId(PlayerId()))
 end)
  
 

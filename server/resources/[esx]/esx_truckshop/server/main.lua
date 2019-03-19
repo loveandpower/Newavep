@@ -15,7 +15,7 @@ Citizen.CreateThread(function()
 end)
 
 function RemoveOwnedVehicle(plate)
-	MySQL.Async.execute('DELETE FROM owned_vehicles WHERE plate = @plate', {
+	MySQL.Async.execute('DELETE FROM owned_vehicles2 WHERE plate = @plate', {
 		['@plate'] = plate
 	})
 end
@@ -47,7 +47,7 @@ AddEventHandler('esx_truckshop:setVehicleOwned', function (vehicleProps)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 
-	MySQL.Async.execute('INSERT INTO owned_vehicles (owner, plate, vehicle, Type) VALUES (@owner, @plate, @vehicle, @Type)',
+	MySQL.Async.execute('INSERT INTO owned_vehicles2 (owner, plate, vehicle, Type) VALUES (@owner, @plate, @vehicle, @Type)',
 	{
 		['@owner']   = xPlayer.identifier,
 		['@plate']   = vehicleProps.plate,
@@ -103,7 +103,7 @@ ESX.RegisterServerCallback('esx_truckshop:resellVehicle', function (source, cb, 
 
 	local xPlayer = ESX.GetPlayerFromId(source)
 	
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND @plate = plate', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles2 WHERE owner = @owner AND @plate = plate', {
 		['@owner'] = xPlayer.identifier,
 		['@plate'] = plate
 	}, function (result)
@@ -130,7 +130,7 @@ ESX.RegisterServerCallback('esx_truckshop:resellVehicle', function (source, cb, 
 end)
 
 ESX.RegisterServerCallback('esx_truckshop:isPlateTaken', function (source, cb, plate)
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE plate = @plate', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles2 WHERE plate = @plate', {
 		['@plate'] = plate
 	}, function (result)
 		cb(result[1] ~= nil)
@@ -140,7 +140,7 @@ end)
 ESX.RegisterServerCallback('esx_truckshop:retrieveJobVehicles', function (source, cb, type)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND type = @type AND job = @job', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles2 WHERE owner = @owner AND type = @type AND job = @job', {
 		['@owner'] = xPlayer.identifier,
 		['@type'] = type,
 		['@job'] = xPlayer.job.name
@@ -153,7 +153,7 @@ RegisterServerEvent('esx_truckshop:setJobVehicleState')
 AddEventHandler('esx_truckshop:setJobVehicleState', function(plate, state)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = @stored WHERE plate = @plate AND job = @job', {
+	MySQL.Async.execute('UPDATE owned_vehicles2 SET `stored` = @stored WHERE plate = @plate AND job = @job', {
 		['@stored'] = state,
 		['@plate'] = plate,
 		['@job'] = xPlayer.job.name
