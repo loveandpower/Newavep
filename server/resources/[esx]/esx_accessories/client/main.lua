@@ -28,21 +28,14 @@ end)
 function OpenAccessoryMenu()
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'set_unset_accessory',
 	{
-
-		css = 'Accesoires',
 		title = _U('set_unset'),
 		align = 'top-left',
 		elements = {
 			{label = _U('helmet'), value = 'Helmet'},
 			{label = _U('ears'), value = 'Ears'},
 			{label = _U('mask'), value = 'Mask'},
-			{label = _U('glasses'), value = 'Glasses'},
-			{label = _U('idcard'), value = 'IDCard'},
+			{label = _U('glasses'), value = 'Glasses'}
 		}
-			--------------------------------------------
-			-------------------------------------------
-			------------------------------------------
-	--	}
 	}, function(data, menu)
 		menu.close()
 		SetUnsetAccessory(data.current.value)
@@ -94,7 +87,6 @@ function OpenShopMenu(accessory)
 
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_confirm',
 		{
-			css = 'Accesoires',
 			title = _U('valid_purchase'),
 			align = 'top-left',
 			elements = {
@@ -132,11 +124,7 @@ function OpenShopMenu(accessory)
 					ClearPedProp(player, 0)
 				elseif accessory == "Glasses" then
 					SetPedPropIndex(player, 1, -1, 0, 0)
----------------------------------------------------------
-				elseif accessory == "IDCard" then
-					openMenu()
---------------------------------------------------------
-			 end
+				end
 			end
 			CurrentAction     = 'shop_menu'
 			CurrentActionMsg  = _U('press_access')
@@ -259,55 +247,10 @@ Citizen.CreateThread(function()
 		end
 
 		if Config.EnableControls then
-			if IsControlJustReleased(0, Keys['K']) and IsImputDisabled(0) and not isDead then
+			if IsControlJustReleased(0, Keys['K']) and IsInputDisabled(0) and not isDead then
 				OpenAccessoryMenu()
 			end
 		end
 
 	end
 end)
-
-function openMenu()
-  ESX.UI.Menu.Open(
-	'default', GetCurrentResourceName(), 'id_card_menu',
-	{
-		title    = 'ID menu',
-		elements = {
-			{label = 'Check your ID', value = 'checkID'},
-			{label = 'Show your ID', value = 'showID'},
-			{label = 'Check your driver license', value = 'checkDriver'},
-			{label = 'Show your driver license', value = 'showDriver'},
-			{label = 'Check your firearms license', value = 'checkFirearms'},
-			{label = 'Show your firearms license', value = 'showFirearms'},
-		}
-	},
-	function(data, menu)
-		local val = data.current.value
-		
-		if val == 'checkID' then
-			TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(PlayerId()))
-		elseif val == 'checkDriver' then
-			TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(PlayerId()), 'driver')
-		elseif val == 'checkFirearms' then
-			TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(PlayerId()), 'weapon')
-		else
-			local player, distance = ESX.Game.GetClosestPlayer()
-			
-			if distance ~= -1 and distance <= 3.0 then
-				if val == 'showID' then
-				TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(player))
-				elseif val == 'showDriver' then
-			TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(player), 'driver')
-				elseif val == 'showFirearms' then
-			TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(player), 'weapon')
-				end
-			else
-			  ESX.ShowNotification('No players nearby')
-			end
-		end
-	end,
-	function(data, menu)
-		menu.close()
-	end
-)
-end

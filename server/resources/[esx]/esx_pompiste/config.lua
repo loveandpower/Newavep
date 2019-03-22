@@ -2,7 +2,7 @@ Config                            = {}
 Config.DrawDistance               = 100.0
 Config.MaxInService               = -1
 Config.EnablePlayerManagement     = true
-Config.EnableSocietyOwnedVehicles = true
+Config.EnableSocietyOwnedVehicles = false
 Config.Locale                     = 'fr'
 
 Config.Zones = {
@@ -59,13 +59,20 @@ Config.Zones = {
     },
 
     VehicleSpawnPoint = {
-        Pos   = {x = 1366.1568603516, y = -2073.55859375, z = 50.998558044434}, 
+        Pos   = {x = 1358.6267089844, y = -2080.0537109375, z = 51.998519897461}, 
         Size  = {x = 1.5, y = 1.5, z = 1.0},
         Color = {r = 136, g = 243, b = 216},
         Name  = "Spawn point",
         Type  = -1
     },
 
+    VehicleSpawnPoint2 = {
+        Pos   = {x = 1399.71484375, y = -2055.3491210938, z = 51.998519897461}, 
+        Size  = {x = 1.5, y = 1.5, z = 1.0},
+        Color = {r = 136, g = 243, b = 216},
+        Name  = "Spawn point",
+        Type  = -1
+    },
     VehicleDeleter = {
         Pos   = {x = 1356.4643554688, y = -2093.5283203125, z = 51.998561859131}, 
         Size  = {x = 3.0, y = 3.0, z = 0.},

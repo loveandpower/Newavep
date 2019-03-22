@@ -13,7 +13,7 @@ if Config.MaxInService ~= -1 then
 	TriggerEvent('esx_service:activateService', 'pompiste', Config.MaxInService)
 end
 
-TriggerEvent('esx_phone:registerNumber', 'pompiste', _U('mineur_client'), true, true)
+TriggerEvent('esx_phone:registerNumber', 'pompiste', _U('pompiste_client'), true, true)
 TriggerEvent('esx_society:registerSociety', 'pompiste', 'pompiste', 'society_pompiste', 'society_pompiste', 'society_pompiste', {type = 'private'})
 
 

@@ -161,6 +161,18 @@ Citizen.CreateThread(function()
 			HelpPromt('Appuyez sur ~INPUT_CONTEXT~ pour remplir la pompe')
 			if(IsControlJustPressed(1, 38)) then
 				TriggerServerEvent("pompiste:checkessence", stationNumber)
+
+						local money = math.random(15,45)
+						--xPlayer.removeInventoryItem('vine', 1)
+						local societyAccount = nil
+
+						TriggerEvent('esx_addonaccount:getSharedAccount', 'society_pompiste', function(account)
+							societyAccount = account
+						end)
+						if societyAccount ~= nil then
+							societyAccount.addMoney(money)
+							TriggerClientEvent('esx:showNotification', xPlayer.source, _U('comp_earned') .. money)
+						end
 			end
 		end
 

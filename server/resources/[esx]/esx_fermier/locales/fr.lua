@@ -30,7 +30,7 @@ Locales['fr'] = {
 	['open_menu'] = ' ',
   
 	-- A modifier selon l'entreprise
-	['tabac_client'] = 'client ferme',
+	['fermier_client'] = 'client ferme',
 	['transforming_in_progress'] = 'Transformation du blé en cours',
 	['feuilletab_taken'] = 'Vous être en train de ramasser du blé',
 	['press_traitement'] = 'appuyez sur ~INPUT_CONTEXT~ pour transformer votre blé',

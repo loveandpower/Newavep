@@ -8,7 +8,7 @@ if Config.MaxInService ~= -1 then
   TriggerEvent('esx_service:activateService', 'thelostmc', Config.MaxInService)
 end
 
-TriggerEvent('esx_phone:registerNumber', 'thelostmc', _U('alert_thelostmc'), true, true)
+--TriggerEvent('esx_phone:registerNumber', 'thelostmc', _U('alert_thelostmc'), true, true)
 TriggerEvent('esx_society:registerSociety', 'thelostmc', 'TheLostMC', 'society_thelostmc', 'society_thelostmc', 'society_thelostmc', {type = 'public'})
 
 RegisterServerEvent('esx_thelostmc:giveWeapon')

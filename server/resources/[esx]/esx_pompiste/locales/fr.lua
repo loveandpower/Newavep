@@ -32,7 +32,7 @@ Locales['fr'] = {
   ['have_withdrawn'] = 'vous avez retiré x',
   
   -- A modifier selon l'entreprise
-  ['tabac_client'] = 'client Pompiste',
+  ['pompiste_client'] = 'client Pompiste',
   ['transforming_in_progress'] = 'Transformation du petrole en cours',
   ['feuilletab_taken'] = 'Vous être en train de ramasser du petrole',
   ['press_traitement'] = 'appuyez sur ~INPUT_CONTEXT~ pour Transformer votre petrole',

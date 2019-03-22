@@ -99,16 +99,25 @@ RegisterServerEvent("pompiste:checkessence")
 AddEventHandler("pompiste:checkessence", function(index)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
-	local amount = 50
-	SetTimeout(10000, function()
+	local amount = 100
+	local money  = math.random(100,200)
+	SetTimeout(500, function()
 		if tonumber(PompeEssence[index].montant) + tonumber(amount) <= 1000 then
 			local Quantity = xPlayer.getInventoryItem('essence').count
 			if Quantity ~= nil and Quantity > 0 then
-				xPlayer.removeInventoryItem('essence', 1)
+				xPlayer.removeInventoryItem('essence', 5)
 				PompeEssence[index].montant = PompeEssence[index].montant + tonumber(amount)
 				TriggerClientEvent("showErrorNotif", _source, "Vous avez remplit ".. amount .."L dans la pompe.")
 				MySQL.Async.execute("UPDATE essence SET montant = montant + @a WHERE `id` = @id", {['@id'] = index, ['@a'] = tonumber(amount)})
 				TriggerClientEvent("essence:sendEssence", -1, PompeEssence)
+
+						TriggerEvent('esx_addonaccount:getSharedAccount', 'society_pomiste', function(account)
+							societyAccount = account
+						end)
+						if societyAccount ~= nil then
+							societyAccount.addMoney(money)
+							TriggerClientEvent('esx:showNotification', xPlayer.source, _U('comp_earned') .. money)
+						end
 			else
 				TriggerClientEvent("showErrorNotif", _source, "Pas assez d'Essence sur vous.")
 			end
