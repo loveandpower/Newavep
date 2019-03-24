@@ -7,7 +7,7 @@ if Config.MaxInService ~= -1 then
   TriggerEvent('esx_service:activateService', 'state', Config.MaxInService)
 end
 
--- TriggerEvent('esx_phone:registerNumber', 'state', _U('alert_state'), true, true)
+ TriggerEvent('esx_phone:registerNumber', 'state', _U('alert_state'), true, true)
 TriggerEvent('esx_society:registerSociety', 'state', 'State', 'society_state', 'society_state', 'society_state', {type = 'public'})
 
 RegisterServerEvent('esx_statejob:giveWeapon')

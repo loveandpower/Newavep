@@ -134,9 +134,11 @@ function OpenmineurActionsMenu()
 			end
 
 			if data.current.value == 'boss_actions' then
+				ESX.UI.Menu.CloseAll()
+
 				TriggerEvent('esx_society:openBossMenu', 'mineur', function(data, menu)
 					menu.close()
-				end)
+				end, {wash = true})
 			end
 
 		end,

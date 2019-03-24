@@ -393,8 +393,8 @@ end)
 
 
 -- Reset weekly run every monday at 00:00
-function weeklyTask(d, h, m)
-  printDebug('weeklyTask')
+function washmoney(d, h, m)
+  printDebug('washmoney')
   if d == 2 then
     local request = "SELECT harvest, sell, malus FROM weekly_run WHERE company = '" .. Config.jobName .. "'"
     local response = MySQL.Sync.fetchAll(request) -- [{"harvest":0,"malus":0,"sell":0,"start_date":0},]
@@ -408,4 +408,4 @@ function weeklyTask(d, h, m)
     response = MySQL.Sync.fetchAll(request) 
   end
 end
-TriggerEvent('cron:runAt', 0, 0, weeklyTask)
+TriggerEvent('cron:runAt', 0, 0, washmoney)

@@ -21,4 +21,4 @@ INSERT INTO `job_grades` (`job_name`, `grade`, `name`, `label`, `salary`, `skin_
 ('state', 0, 'vicepresident', 'Vice-Président', 10000, '{}', '{}'),
 ('state', 3, 'president', 'Président', 18000, '{}', '{}'),
 ('state', 2, 'gouvernment', 'Gouvernement', 33000, '{}', '{}'),
-('state', 1, 'boss', 'L\'état', 0, '{}', '{}');
+('state', 1, 'boss', 'L\'état', 0, '{}', '{}'); 

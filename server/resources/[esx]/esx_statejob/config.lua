@@ -8,7 +8,7 @@ Config.EnableArmoryManagement     = false
 Config.EnableESXIdentity          = true -- only turn this on if you are using esx_identity
 Config.EnableNonFreemodePeds      = false -- turn this on if you want custom peds
 Config.EnableSocietyOwnedVehicles = false
-Config.EnableLicenses             = false
+Config.EnableLicenses             = true
 Config.MaxInService               = -1
 Config.Locale                     = 'fr'
 
@@ -53,8 +53,8 @@ Config.StateStations = {
 
     Vehicles = {
       {
-        Spawner    = { x = -413.148, y = 1168.581, z = 324.854 },
-        SpawnPoint = { x = -408.540, y = 1182.300, z = 324.568 },
+        Spawner    = {x = 137.40283203125, y = -709.57629394531, z = 33.129749298096},
+        SpawnPoint = {x = 146.49813842773, y = -712.72576904297, z = 33.131587982178},
         Heading    = 90.0,
       }
     },
@@ -68,7 +68,7 @@ Config.StateStations = {
     },
 
     VehicleDeleters = {
-      { x = -421.068, y = 1197.910, z = 324.641 },
+     {x = 146.49813842773, y = -712.72576904297, z = 33.131587982178},
     },
 
     BossActions = {
@@ -134,4 +134,32 @@ Config.PublicZones = {
     Teleport  = { x =15.142413139343, y = -1105.2983398438, z = 28.797008514404},
   },  
   
-}
+  EnterBuilding3 = {  --garage
+    Pos       = {x = 138.02635192871, y = -718.73223876953, z = 33.123155822754}, 
+    Size      = { x = 1.5, y = 1.5, z = 0.2 },
+    Color     = { r = 64, g = 0, b = 74 },
+    Marker    = 1,
+    Blip      = false,
+    Name      = "Le Maclerait Libéré",
+    Type      = "teleport",
+    Hint      = "Appuyez sur ~INPUT_PICKUP~ pour entrer dans le garage",
+    Teleport  = {x = 138.71649169922, y = -762.87432861328, z = 45.742029418945},
+  },
+
+  ExitBuilding3 = {
+    Pos       = {x = 139.37020874023, y = -763.0966796875, z = 45.742010345459}, 
+    Size      = { x = 1.5, y = 1.5, z = 0.2 },
+    Color     = { r = 64, g = 0, b = 74 },
+    Marker    = 1,
+    Blip      = false,
+    Name      = "Le Maclerait Libéré",
+    Type      = "teleport",
+    Hint      = "Appuyez sur ~INPUT_PICKUP~ pour aller à l'entrée de l'immeuble.",
+    Teleport  = {x = 138.02635192871, y = -718.73223876953, z = 33.133155822754}, 
+  },  
+  
+
+
+
+
+} 
