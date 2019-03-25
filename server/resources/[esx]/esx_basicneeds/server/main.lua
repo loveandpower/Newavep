@@ -615,3 +615,14 @@ ESX.RegisterUsableItem('xanax', function(source)
 	TriggerClientEvent('esx_status:remove', _source, 'drug', 1000000)
 	TriggerClientEvent('esx_basicneeds:resetStatus2', source)
 end)
+
+
+--#################################################
+--#################################################
+----Maladie
+--#################################################
+--#################################################
+
+
+---TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+
