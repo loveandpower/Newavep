@@ -316,7 +316,7 @@ Citizen.CreateThread(function()
 				end
 				
 				if isInZone then
-					TriggerEvent('esx_drugs:freezePlayer', true)
+				--	TriggerEvent('esx_drugs:freezePlayer', true)
 				end
 				
 				CurrentAction = nil

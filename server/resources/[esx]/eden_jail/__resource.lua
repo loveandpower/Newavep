@@ -12,6 +12,6 @@ client_scripts {
 	'@es_extended/locale.lua',
 	'config.lua',
 	'locales/fr.lua',
-	'locales/en.lua',
+	--'locales/en.lua',
 	'client/esx_jaillisting_cl.lua'
 }

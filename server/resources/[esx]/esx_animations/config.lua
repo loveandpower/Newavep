@@ -157,5 +157,151 @@ Config.Animations = {
 			{label = "Strip Tease 2", type = "anim", data = {lib = "mini@strip_club@private_dance@part2", anim = "priv_dance_p2"}},
 			{label = "Stip Tease au sol", type = "anim", data = {lib = "mini@strip_club@private_dance@part3", anim = "priv_dance_p3"}},
 		}
-	}
+	},
+
+	{
+		name = 'test',
+		label = 'Test',
+		items = {
+			{label = "1.01", type = "anim", data = {lib = "abigail_mcs_1_concat-0", anim = "csb_abigail_dual-0"}},
+			{label = "1.02", type = "anim", data = {lib = "abigail_mcs_1_concat-0", anim = "exportcamera-0"}},
+			{label = "1.03", type = "anim", data = {lib = "abigail_mcs_1_concat-0", anim = "player_zero_dual-0"}},
+
+            {label = "1.04", type = "anim", data = {lib = "abigail_mcs_1_concat-1", anim = "csb_abigail_dual-1"}},
+            {label = "1.05", type = "anim", data = {lib = "abigail_mcs_1_concat-1", anim = "exportcamera-1"}},
+            {label = "1.06", type = "anim", data = {lib = "abigail_mcs_1_concat-1", anim = "player_zero_dual-1"}},
+
+            {label = "1.07", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.08", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "exportcamera-10"}},
+            {label = "1.09", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "player_zero_dual-10"}},
+
+            {label = "1.10", type = "anim", data = {lib = "abigail_mcs_1_concat-11", anim = "csb_abigail_dual-11"}},
+            {label = "1.11", type = "anim", data = {lib = "abigail_mcs_1_concat-11", anim = "exportcamera-11"}},
+            {label = "1.12 vasy bare-toi !", type = "anim", data = {lib = "abigail_mcs_1_concat-11", anim = "player_zero_dual-11"}},
+
+            {label = "1.13", type = "anim", data = {lib = "abigail_mcs_1_concat-2", anim = "csb_abigail_dual-2"}},
+            {label = "1.14 blabla sur une table", type = "anim", data = {lib = "abigail_mcs_1_concat-2", anim = "player_zero_dual-2"}},
+                     
+            {label = "1.15 blabla table", type = "anim", data = {lib = "abigail_mcs_1_concat-3", anim = "csb_abigail_dual-3"}},
+            {label = "1.16 mini dance table", type = "anim", data = {lib = "abigail_mcs_1_concat-3", anim = "player_zero_dual-3"}},
+            
+            {label = "1.17 s'appuyer sur la table", type = "anim", data = {lib = "abigail_mcs_1_concat-4", anim = "player_zero_dual-4"}},
+            {label = "1.18 s'appuyer sur la table 2", type = "anim", data = {lib = "abigail_mcs_1_concat-5", anim = "csb_abigail_dual-5"}},
+            {label = "1.19 s'appuyer sur la table 3", type = "anim", data = {lib = "abigail_mcs_1_concat-5", anim = "player_zero_dual-5"}},
+
+            {label = "1.20 s'appuyer sur la table 4", type = "anim", data = {lib = "abigail_mcs_1_concat-6", anim = "csb_abigail_dual-6"}},
+            {label = "1.21 s'appuyer sur la table 4", type = "anim", data = {lib = "abigail_mcs_1_concat-6", anim = "player_zero_dual-6"}},
+
+            {label = "1.22 s'appuyer sur la table 5", type = "anim", data = {lib = "abigail_mcs_1_concat-7", anim = "csb_abigail_dual-7"}},
+            {label = "1.23 s'appuyer sur la table 6", type = "anim", data = {lib = "abigail_mcs_1_concat-7", anim = "player_zero_dual-7"}},
+
+            {label = "1.24 s'appuyer sur la table 7", type = "anim", data = {lib = "abigail_mcs_1_concat-8", anim = "csb_abigail_dual-8"}},
+            {label = "1.25 s'appuyer sur la table 4", type = "anim", data = {lib = "abigail_mcs_1_concat-8", anim = "player_zero_dual-8"}},
+
+            {label = "1.26 Discusion sur un rebort", type = "anim", data = {lib = "abigail_mcs_1_concat-9", anim = "csb_abigail_dual-9"}},
+            {label = "1.27  Discusion posé sur coin", type = "anim", data = {lib = "abigail_mcs_1_concat-9", anim = "player_zero_dual-9"}},
+--Continue ....=>
+            {label = "1.36", type = "anim", data = {lib = "abigail_mcs_2-0", anim = "csb_abigail_dual-10"}},
+            {label = "1.37", type = "anim", data = {lib = "abigail_mcs_2-0", anim = "csb_abigail_dual-10"}},
+            {label = "1.38", type = "anim", data = {lib = "abigail_mcs_2-0", anim = "csb_abigail_dual-10"}},
+--[[
+            {label = "1.39", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.40", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.41", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.42", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.43", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+
+            {label = "1.44", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.45", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.46", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.47", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.48", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.49", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.50", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.51", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.52", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.53", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.54", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.55", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+
+            {label = "1.56", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.57", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.58", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.59", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.60", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.61", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.62", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.63", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.64", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.65", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.66", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.67", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.68", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.69", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.70", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.71", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.72", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.73", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.74", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.75", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.76", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.77", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.78", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+
+            {label = "1.79", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.80", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.81", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.82", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.83", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.84", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.85", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.86", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.87", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.88", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.89", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.90", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.91", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.92", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.93", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.94", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.95", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.96", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.97", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.98", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "1.99", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.00", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+
+            {label = "2.01", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.02", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.03", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.04", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.05", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.06", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.07", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.08", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.09", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.10", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.11", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+            {label = "2.12", type = "anim", data = {lib = "abigail_mcs_1_concat-10", anim = "csb_abigail_dual-10"}},
+]]
+		}
+
+	},
+
+    -- example
+  --[[
+    {
+		name = 'test',
+		label = 'Test',
+		items = {
+			{label = "1.01", type = "anim", data = {lib = "abigail_mcs_1_concat-0", anim = "csb_abigail_dual-0"}},
+			{label = "1.02", type = "anim", data = {lib = "abigail_mcs_1_concat-0", anim = "exportcamera-0"}},
+			{label = "1.03", type = "anim", data = {lib = "abigail_mcs_1_concat-0", anim = "player_zero_dual-0"}},
+
+            {label = "1.03", type = "anim", data = {lib = "abigail_mcs_1_concat-0", anim = "player_zero_dual-0"}},
+
+            
+		}
+ 	},
+     ]]
 }

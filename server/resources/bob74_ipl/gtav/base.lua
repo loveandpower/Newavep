@@ -94,5 +94,4 @@ Citizen.CreateThread(function()
     -- Cassidy Creek (need streamed content): -425.677, 4433.404, 27.3253
     RequestIpl("canyonriver01")
     RequestIpl("canyonriver01_lod")
-
 end)
