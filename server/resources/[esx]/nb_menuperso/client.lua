@@ -82,7 +82,7 @@ function OpenPersonnelMenu()
 		ESX.UI.Menu.Open(
 			'default', GetCurrentResourceName(), 'menu_perso',
 			{
-				css 	 = 'meconcernant',
+				--css 	 = 'meconcernant',
 				title    = 'Menu Personnel',
 				align    = 'top-left',
 				elements = elements
@@ -255,8 +255,9 @@ function OpenPersonnelMenu()
 					local elements = {}
 					
 					--table.insert(elements, {label = 'Téléphone',   		value = 'menuperso_moi_telephone'})
-					table.insert(elements, {label = 'Inventaire',  		value = 'menuperso_moi_inventaire'})
-					table.insert(elements, {label = 'Mes factures',		value = 'menuperso_moi_factures'})
+					table.insert(elements, {label = 'Inventaire',  			value = 'menuperso_moi_inventaire'})
+					table.insert(elements, {label = 'Mes factures',			value = 'menuperso_moi_factures'})
+					table.insert(elements, {label = 'Carte d\'identité',	value = 'menuperso_moi_idcard'})
 						
 					ESX.UI.Menu.Open(
 						
@@ -281,6 +282,9 @@ function OpenPersonnelMenu()
 								openFacture()
 							end
 
+							if data2.current.value == 'menuperso_moi_idcard' then
+								OpenShowGiveID()
+							end
 							
 						end,
 						function(data2, menu2)
@@ -1541,7 +1545,7 @@ end)
 -- FIN SPEC JOUEUR
 
 ---------------------------------------------------------------------------Me concernant
-
+--[[
 function openTelephone()
 	TriggerEvent('NB:closeAllSubMenu')
 	TriggerEvent('NB:closeAllMenu')
@@ -1549,7 +1553,7 @@ function openTelephone()
 	
 	TriggerEvent('NB:openMenuTelephone')
 end
-
+]]
 function openInventaire()
 	TriggerEvent('NB:closeAllSubMenu')
 	TriggerEvent('NB:closeAllMenu')
@@ -1650,6 +1654,168 @@ end
 --function save_skin()
 --	TriggerEvent('esx_skin:requestSaveSkin', source)
 --end
+
+--------------------------------------------------------------------------------------------------------
+--identity card
+--------------------------------------------------------------------------------------------------------
+function OpenGivingID()
+  local pP = GetPlayerPed(-1)
+
+  Citizen.CreateThread(function()
+
+    local pP = GetPlayerPed(-1)
+    TaskPlayAnim(pP, "mp_common", "givetake1_a", 3.5, -8, -1, 2, 0, 0, 0, 0, 0)
+    Citizen.CreateThread(function()
+      Citizen.Wait(10000)
+      TriggerServerEvent('esx_personmeny:give_id')
+      ClearPedTasksImmediately(pP)
+      end)
+    end)
+end
+
+-- No one Near Animation
+function OpenNoOneNear()
+  local pP = GetPlayerPed(-1)
+
+  Citizen.CreateThread(function()
+
+    local pP = GetPlayerPed(-1)
+    TaskPlayAnim(pP, "anim@mp_player_intcelebrationmale@face_palm", "face_palm", 3.5, -8, -1, 2, 0, 0, 0, 0, 0)
+    Citizen.CreateThread(function()
+      Citizen.Wait(10000)
+      TriggerServerEvent('esx_personmeny:idnoonenear')
+      ClearPedTasksImmediately(pP)
+      end)
+    end)
+end
+
+function OpenAttansCan()
+  local pP = GetPlayerPed(-1)
+
+  Citizen.CreateThread(function()
+
+    local pP = GetPlayerPed(-1)
+    TaskPlayAnim(pP, "gestures@m@standing@casual", "gesture_damn", 3.5, -8, -1, 2, 0, 0, 0, 0, 0)
+    TaskStartScenarioInPlace(pP, "gestures@m@standing@casual", 0, true)
+    FreezeEntityPosition(playerPed, true)
+    Citizen.CreateThread(function()
+      Citizen.Wait(2000)
+      FreezeEntityPosition(playerPed, false)
+      ClearPedTasksImmediately(pP)
+      end)
+    end)
+end
+
+
+function OpenShowGiveID()
+
+ESX.UI.Menu.Open(
+	'default', GetCurrentResourceName(), 'id_card_menu',
+	{
+		title    = 'Menu Carte Identité',
+		elements = {
+			{label = 'Regarder sa Carte D\'identité', value = 'check-Id'},
+			{label = 'Montrer sa Carte D\'identité', value = 'show-Id'}
+		}
+	},
+	function(data2, menu2)
+		if data2.current.value == 'check-Id' then
+			TriggerServerEvent('jsfour-legitimation:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(PlayerId()))
+		elseif data2.current.value == 'show-Id' then
+			local player, distance = ESX.Game.GetClosestPlayer()
+
+			if distance ~= -1 and distance <= 3.0 then
+				TriggerServerEvent('jsfour-legitimation:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(player))
+				OpenTrashCan()
+			else
+				OpenAttansCan()
+				ESX.ShowNotification('il n\'y a personne')
+			end
+		end
+	end,
+	function(data2, menu2)
+		menu2.close()
+		--OpenCivilianActionsMenu()
+	end
+)
+
+end
+
+
+function OpenCivilianActionsMenu()
+
+  ESX.UI.Menu.CloseAll()
+
+  ESX.UI.Menu.Open(
+  'default', GetCurrentResourceName(), 'civilian_actions',
+  {
+    title    = 'citizen_interactions',
+    align    = 'top-left',
+    elements = {
+     -- {label = _U('vehicle_menu'), value = 'vehiclemenu'},
+      {label = 'id_card', value = 'card-id'},
+      --{label = _U('pee'), value = 'pee'},
+      --{label = _U('poop'), value = 'poop'},
+      --{label = _U('blindfold'), value = 'blindfold'},
+    }
+  },
+    
+    function(data, menu)
+
+      if data.current.value == 'card-id' then
+      	OpenShowGiveID()
+      end
+
+  --[[    if data.current.value == 'blindfold' then
+        local player, distance = ESX.Game.GetClosestPlayer()
+
+      if distance ~= -1 and distance <= 3.0 then
+           ESX.TriggerServerCallback('jsfour-blindfold:itemCheck', function( hasItem )
+              TriggerServerEvent('jsfour-blindfold', GetPlayerServerId(player), hasItem)
+           end)
+      else
+           ESX.ShowAdvancedNotification('Individåtgärder', '~b~Ögonbindel', 'nobody_near', 'CHAR_DEFAULT', 8)
+          end
+      end
+
+      if data.current.value == 'vehiclemenu' then
+        local playerPed = GetPlayerPed(-1)
+        if IsPedSittingInAnyVehicle(playerPed) then
+            local playerVeh = GetVehiclePedIsIn(playerPed, false)
+            local drivingPed = GetPedInVehicleSeat(playerVeh, -1)
+            if drivingPed == playerPed then
+                OpenVehicleMenu()
+            end
+        end
+      end
+
+      if data.current.value == 'pee' then
+          TriggerEvent('pee')
+      elseif data.current.value == 'poop' then
+          TriggerEvent('poop')
+       end
+]]
+      if data.current.value == 'check' then
+            TriggerServerEvent('jsfour-legitimation:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(PlayerId()))
+      elseif data.current.value == 'show' then
+           local player, distance = ESX.Game.GetClosestPlayer()
+
+      if distance ~= -1 and distance <= 3.0 then
+        TriggerServerEvent('jsfour-legitimation:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(player))
+      else
+        ESX.ShowAdvancedNotification('Individåtgärder', '', 'nobody_near', 'CHAR_DEFAULT', 8)
+      end
+    end
+    end,
+    function(data, menu)
+      menu.close()
+    end
+  )
+end
+--------------------------------------------------------------------------------------------------------
+--try identity card
+--------------------------------------------------------------------------------------------------------
+
 
 ---------------------------------------------------------------------------------------------------------
 --NB : gestion des menu

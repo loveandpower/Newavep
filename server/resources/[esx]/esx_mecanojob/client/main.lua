@@ -1054,9 +1054,9 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		if IsControlJustReleased(0, Keys['F6']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
-			OpenMobileMecanoActionsMenu()
-		end
+		--if IsControlJustReleased(0, Keys['F6']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
+		--	OpenMobileMecanoActionsMenu()
+		--end
 
 		if IsControlJustReleased(0, Keys['DELETE']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
 
@@ -1092,4 +1092,15 @@ end)
 
 AddEventHandler('playerSpawned', function(spawn)
 	IsDead = false
+end)
+
+
+
+---------------------------------------------------------------------------------------------------------
+--NB : gestion des menu
+---------------------------------------------------------------------------------------------------------
+
+RegisterNetEvent('NB:openMenuMecano')
+AddEventHandler('NB:openMenuMecano', function()
+	OpenMobileMecanoActionsMenu()
 end)

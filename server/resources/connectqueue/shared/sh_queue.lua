@@ -8,7 +8,7 @@ if not IsDuplicityVersion() then
             end
         end
     end)
-    return
+    return 
 end
 
 local Queue = {}

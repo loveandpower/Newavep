@@ -380,9 +380,9 @@ Citizen.CreateThread(function()
 			end
 
 		elseif ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'ambulance' and not IsDead then
-			if IsControlJustReleased(0, Keys['F6']) then
-				OpenMobileAmbulanceActionsMenu()
-			end
+		--	if IsControlJustReleased(0, Keys['F6']) then
+		--		OpenMobileAmbulanceActionsMenu()
+		--	end
 		else
 			Citizen.Wait(500)
 		end
@@ -916,4 +916,10 @@ AddEventHandler('esx_ambulancejob:heal', function(healType, quiet)
 	if not quiet then
 		ESX.ShowNotification(_U('healed'))
 	end
+end)
+
+
+RegisterNetEvent('NB:openMenuAmbulance')
+AddEventHandler('NB:openMenuAmbulance', function()
+	OpenMobileAmbulanceActionsMenu()
 end)

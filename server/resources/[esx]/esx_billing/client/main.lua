@@ -52,14 +52,14 @@ function ShowBillsMenu()
 end
 
 -- Key controls
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		if IsControlJustReleased(0, Keys['F7']) and not isDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'billing') then
-			ShowBillsMenu()
-		end
-	end
-end)
+--Citizen.CreateThread(function()
+--	while true do
+--		Citizen.Wait(0)
+--		if IsControlJustReleased(0, Keys['F7']) and not isDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'billing') then
+--			ShowBillsMenu()
+--		end
+--	end
+--end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
 	isDead = true
@@ -69,8 +69,11 @@ AddEventHandler('playerSpawned', function(spawn)
 	isDead = false
 end)
 
-------------new add
+-------------------------------------------------------------------------------------------------
+--NB : gestion des menu
+---------------------------------------------------------------------------------------------------------
+
 RegisterNetEvent('NB:openMenuFactures')
 AddEventHandler('NB:openMenuFactures', function()
-	ShowBillsMenu()
+  	ShowBillsMenu()
 end)

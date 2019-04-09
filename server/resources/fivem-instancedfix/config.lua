@@ -4,5 +4,5 @@ Config.MaxPlayers = GetConvarInt('sv_maxclients', 32) -- might need to be set to
 Config.MaxWarnings = 5 -- how many times will the player be given warnings?
 
 Config.KickPlayer = true -- kick the player? if set to false it will instead draw a text warning about being instanced.
-Config.KickMessage = "Vous avez été explusé car vous étes dans une instance ..."
-Config.WarningMessage = "~r~Vous étes dans une instance merci de vous deconecter/reconecté ...."
+Config.KickMessage = "You've been kicked due to the known instanced bug."
+Config.WarningMessage = "~r~You seem to be instanced. Please re-join!"
