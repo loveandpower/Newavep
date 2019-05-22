@@ -729,7 +729,7 @@ function OpenBossActionsMenu ()
       if data.current.value == 'boss_actions' then
         TriggerEvent('esx_society:openBossMenu', 'boatdealer', function(data, menu)
           menu.close()
-        end)
+        end, {wash = true})
       end
     end,
     function (data, menu)

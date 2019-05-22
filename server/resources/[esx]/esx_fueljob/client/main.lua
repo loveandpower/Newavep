@@ -136,7 +136,7 @@ function OpenFuelerActionsMenu()
 			if data.current.value == 'boss_actions' then
 				TriggerEvent('esx_society:openBossMenu', 'fueler', function(data, menu)
 					menu.close()
-				end)
+				end, {wash = true})
 			end
 
 		end,

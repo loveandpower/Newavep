@@ -395,7 +395,7 @@ end)
 -- Reset weekly run every monday at 00:00
 function washmoney(d, h, m)
   printDebug('washmoney')
-  if d == 2 then
+  if m == 1 then
     local request = "SELECT harvest, sell, malus FROM weekly_run WHERE company = '" .. Config.jobName .. "'"
     local response = MySQL.Sync.fetchAll(request) -- [{"harvest":0,"malus":0,"sell":0,"start_date":0},]
     if response[1].harvest ~= 0 then

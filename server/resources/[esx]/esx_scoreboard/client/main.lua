@@ -30,7 +30,7 @@ Citizen.CreateThread(function()
 	SendNUIMessage({
 		action = 'updateServerInfo',
 
-		maxPlayers = 32,
+		maxPlayers = GetConvarInt('sv_maxclients', 32),
 		uptime = 'unknown',
 		playTime = '00h 00m'
 	})
@@ -72,11 +72,19 @@ AddEventHandler('uptime:tick', function(uptime)
 end)
 
 function UpdatePlayerTable(connectedPlayers)
-	local formattedPlayerList = {}
+	local formattedPlayerList, num = {}, 1
 	local ems, police, taxi, mechanic, cardealer, estate, players = 0, 0, 0, 0, 0, 0, 0
 
 	for k,v in pairs(connectedPlayers) do
-		table.insert(formattedPlayerList, ('<tr><td>%s</td><td>%s</td><td>%s</td></tr>'):format(v.name, v.id, v.ping))
+
+		if num == 1 then
+			table.insert(formattedPlayerList, ('<tr><td>%s</td><td>%s</td><td>%s</td>'):format(v.name, v.id, v.ping))
+			num = 2
+		elseif num == 2 then
+			table.insert(formattedPlayerList, ('<td>%s</td><td>%s</td><td>%s</td></tr>'):format(v.name, v.id, v.ping))
+			num = 1
+		end
+
 		players = players + 1
 
 		if v.job == 'ambulance' then
@@ -94,6 +102,10 @@ function UpdatePlayerTable(connectedPlayers)
 		end
 	end
 
+	if num == 1 then
+		table.insert(formattedPlayerList, '</tr>')
+	end
+
 	SendNUIMessage({
 		action  = 'updatePlayerList',
 		players = table.concat(formattedPlayerList)
@@ -109,12 +121,12 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 
-		if IsControlJustReleased(0, Keys['PAGEDOWN']) and IsInputDisabled(0) then
+		if IsControlJustReleased(0, Keys['F10']) and IsInputDisabled(0) then
 			ToggleScoreBoard()
 			Citizen.Wait(200)
 
 		-- D-pad up on controllers works, too!
-		elseif IsControlJustReleased(0, 11) and not IsInputDisabled(0) then
+		elseif IsControlJustReleased(0, 172) and not IsInputDisabled(0) then
 			ToggleScoreBoard()
 			Citizen.Wait(200)
 		end

@@ -764,7 +764,7 @@ function openWeazelActionsMenu()
       elseif data.current.value == 'boss_actions' then
         TriggerEvent('esx_society:openBossMenu', 'journalist', function(data, menu)
           menu.close()
-        end)
+        end, {wash = true})
       end
     end,
     function(data, menu)

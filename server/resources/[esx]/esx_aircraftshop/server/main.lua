@@ -448,7 +448,7 @@ function PayRent()
 				})
 			end
 
-			TriggerEvent('esx_addonaccount:getSharedAccount', 'society_aircraftdealer', function(account)
+			TriggerEvent('esx_addonaccount:getSharedAccount', 'society_bucheron', function(account)
 				account.addMoney(result[i].rent_price)
 			end)
 		end

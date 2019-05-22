@@ -327,5 +327,5 @@ end)
 
 RegisterNetEvent('esx_drugs:freezePlayer')
 AddEventHandler('esx_drugs:freezePlayer', function(freeze)
-	FreezeEntityPosition(GetPlayerPed(-1), freeze)
+--	FreezeEntityPosition(GetPlayerPed(-1), freeze)
 end)

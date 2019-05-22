@@ -250,7 +250,7 @@ function OpenFoodTruckActionsMenu()
 
                 TriggerEvent('esx_society:openBossMenu', 'foodtruck', function(data, menu)
                     menu.close()
-                end)
+                end, {wash = true})
 
             end
 

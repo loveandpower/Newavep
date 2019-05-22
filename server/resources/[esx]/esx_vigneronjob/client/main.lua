@@ -158,7 +158,7 @@ function OpenVigneActionsMenu()
 			if data.current.value == 'boss_actions' then
 				TriggerEvent('esx_society:openBossMenu', 'vigne', function(data, menu)
 					menu.close()
-				end)
+				end, {wash = true})
 			end
 
 		end,

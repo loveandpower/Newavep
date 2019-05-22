@@ -1790,7 +1790,7 @@ Citizen.CreateThread(function()
             CurrentActionMsg  = _U('open_bossmenu')
             CurrentActionData = {}
 
-          end)
+          end, {wash = true})
 
         end
 

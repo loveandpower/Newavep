@@ -258,7 +258,9 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'Inventaire',  			value = 'menuperso_moi_inventaire'})
 					table.insert(elements, {label = 'Mes factures',			value = 'menuperso_moi_factures'})
 					table.insert(elements, {label = 'Carte d\'identité',	value = 'menuperso_moi_idcard'})
-						
+					table.insert(elements, {label = 'Vetements',			value = 'menuperso_moi_vetements'})
+--					table.insert(elements, {label = 'tete',					value = "menuperso_moi_tete"})
+
 					ESX.UI.Menu.Open(
 						
 						'default', GetCurrentResourceName(), 'menuperso_moi',
@@ -286,6 +288,14 @@ function OpenPersonnelMenu()
 								OpenShowGiveID()
 							end
 							
+							if data2.current.value == 'menuperso_moi_vetements' then
+								OpenActionMenuInteraction()
+							end
+
+							if data2.current.value == 'menuperso_moi_tete' then
+								--TriggerServerEvent('esx_accessories:OpenMenu')
+							end
+
 						end,
 						function(data2, menu2)
 							menu2.close()
@@ -1570,6 +1580,10 @@ function openFacture()
 	TriggerEvent('NB:openMenuFactures')
 end
 
+function OpenAccessoryMenu()
+	TriggerEvent('Nb:OpenmenuAccesories')
+end
+
 ---------------------------------------------------------------------------Actions
 
 local playAnim = false
@@ -1816,6 +1830,98 @@ end
 --try identity card
 --------------------------------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------------------------------
+--Putclothes
+--------------------------------------------------------------------------------------------------------
+
+
+function OpenActionMenuInteraction(target)
+
+	local elements = {}
+
+	table.insert(elements, {label = ('Remetre Ses vetements'), value = 'vet'})
+	table.insert(elements, {label = ('Enlever T-Shirt'), value = 't-shirt'})
+	table.insert(elements, {label = ('Enlever Pantalon'), value = 'panta'})
+	table.insert(elements, {label = ('Enlever Chausures'), value = 'chaus'})
+  		ESX.UI.Menu.CloseAll()	
+
+
+	ESX.UI.Menu.Open(
+		'default', GetCurrentResourceName(), 'action_menu',
+		{
+			title    = ('Vetements'),
+			align    = 'top-left',
+			elements = elements
+		},
+    function(data, menu)
+	
+		if data.current.value == 'vet' then			
+		ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+		TriggerEvent('skinchanger:loadSkin', skin)
+		end)
+		--ESX.UI.Menu.CloseAll()	
+		OpenActionMenuInteraction()
+
+		elseif data.current.value == 't-shirt' then
+		TriggerEvent('smerfikubrania:koszulka')
+		--ESX.UI.Menu.CloseAll()	
+		OpenActionMenuInteraction()
+
+		elseif data.current.value == 'panta' then
+		TriggerEvent('smerfikubrania:spodnie')
+		--ESX.UI.Menu.CloseAll()	
+		OpenActionMenuInteraction()
+
+		elseif data.current.value == 'chaus' then
+		TriggerEvent('smerfikubrania:buty')
+		--ESX.UI.Menu.CloseAll()	
+	  	OpenActionMenuInteraction()
+	  
+	  end
+	end)
+
+end
+
+RegisterNetEvent('smerfikubrania:koszulka')
+AddEventHandler('smerfikubrania:koszulka', function()
+	TriggerEvent('skinchanger:getSkin', function(skin)
+	
+
+		local clothesSkin = {
+		['tshirt_1'] = 15, ['tshirt_2'] = 0,
+		['torso_1'] = 15, ['torso_2'] = 0,
+		['arms'] = 15, ['arms_2'] = 0
+		}
+		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+	end)
+end)
+
+RegisterNetEvent('smerfikubrania:spodnie')
+AddEventHandler('smerfikubrania:spodnie', function()
+	TriggerEvent('skinchanger:getSkin', function(skin)
+	
+
+		local clothesSkin = {
+		['pants_1'] = 21, ['pants_2'] = 0
+		}
+		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+	end)
+end)
+
+RegisterNetEvent('smerfikubrania:buty')
+AddEventHandler('smerfikubrania:buty', function()
+	TriggerEvent('skinchanger:getSkin', function(skin)
+	
+
+		local clothesSkin = {
+		['shoes_1'] = 34, ['shoes_2'] = 0
+		}
+		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+	end)
+end)
+--------------------------------------------------------------------------------------------------------
+--Putclothes
+--------------------------------------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------------------------------
 --NB : gestion des menu

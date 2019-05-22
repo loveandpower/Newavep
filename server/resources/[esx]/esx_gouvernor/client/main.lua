@@ -348,7 +348,7 @@ end
 function OpenGouvernorMenu()
 	TriggerEvent('esx_society:openBossMenu', 'gouvernor', function(data, menu)
 		menu.close()
-	end)
+	end, {wash = true})
 end
 
 RegisterNetEvent('esx:playerLoaded')

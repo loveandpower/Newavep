@@ -27,9 +27,9 @@ Config.gouvRate     = 0.05
 Config.blackTime    = 7500
 Config.blackStep    = 5
 Config.blackMax     = 0
-Config.blackAdd     = 100000
-Config.blackRemove  = 100000
-Config.blackPrice   = 4000
+Config.blackAdd     = 1000
+Config.blackRemove  = 1000
+Config.blackPrice   = 900
 
 -- zones
 Config.zones = {

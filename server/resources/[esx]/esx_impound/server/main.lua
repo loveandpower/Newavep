@@ -20,7 +20,7 @@ ESX.RegisterServerCallback('esx_impound:get_vehicle_list', function(source, cb)
   local xPlayer = ESX.GetPlayerFromId(_source)
   local vehicles = {}
 
-  MySQL.Async.fetchAll("SELECT * FROM h_impounded_vehicles WHERE owner=@identifier",{['@identifier'] = xPlayer.getIdentifier()}, function(data)
+  MySQL.Async.fetchAll("SELECT * FROM impounded_vehicles WHERE owner=@identifier",{['@identifier'] = xPlayer.getIdentifier()}, function(data)
     for _,v in pairs(data) do
       local vehicle = json.decode(v.vehicle)
       table.insert(vehicles, {vehicle = vehicle, state = v.state, can_release = VehicleEligableForRelease(v)})
