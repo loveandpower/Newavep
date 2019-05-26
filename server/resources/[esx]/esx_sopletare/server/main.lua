@@ -1,4 +1,13 @@
+
+
 ESX = nil
+
+Citizen.CreateThread(function()
+    while ESX == nil do
+        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+        Citizen.Wait(0)
+    end
+end)
 
 TriggerEvent("esx:getSharedObject", function(response)
     ESX = response
@@ -7,34 +16,34 @@ end)
 RegisterServerEvent('esx_sopletare:getItem')
 AddEventHandler('esx_sopletare:getItem', function()
 
-    local luck = math.random(1, 6)
+    local luck = math.random(1, 2)
 
     if luck == 1 then
 
         local items = { -- add whatever items you want here
-            'fishing_lure',
             'bandage',
             'medikit',
             'meth',
             'coke',
             'weed',
             'bread',
-            'lotteryticket',
             'fish',
             'cerflex',
             'lingot',
-            'or'
+            'or',
+            'cigarett'
         }
 
         local player = ESX.GetPlayerFromId(source)
         local randomItems = items[math.random(#items)]
         local quantity = math.random(#items)
         local itemfound = ESX.GetItemLabel(randomItems)
-
+              
         player.addInventoryItem(randomItems, quantity)
-        sendNotification(source, 'Du hittade ' .. quantity .. ' st ' .. itemfound, 'success', 2500)
+        TriggerClientEvent('esx:showAdvancedNotification', source, 'Poubelle', 'Items Trouvées', 'Vous avez trouver x'..quantity.. ' ' ..randomItems, 'CHAR_AMMUNATION', 3)
+        --  sendNotification(source, 'Vous avez trouver' .. quantity .. ' X ' .. itemfound, 'success', 2500)
 
-    elseif luck == 4 then
+    elseif luck == 2 then
 
         local weapons = { -- add whatever weapons you want here
             'WEAPON_KNIFE',
@@ -47,8 +56,9 @@ AddEventHandler('esx_sopletare:getItem', function()
         local weaponfound = ESX.GetWeaponLabel(randomWeapons)
 
         player.addWeapon(randomWeapons, quantity)
-        sendNotification(source, 'Du hittade en ' .. weaponfound, 'success', 2500)
+        TriggerClientEvent('esx:showAdvancedNotification', source, 'Poubelle', 'Items Trouvées', 'Vous avez trouver x'..quantity.. ' ' ..randomWeapons, 'CHAR_AMMUNATION', 3)
+        --sendNotification(source, 'Vous avez trouver x 1' .. weaponfound, 'success', 2500)
     else
-        sendNotification(source, 'Du hittade ingenting, skaffa dig ett jobb kanske?', 'error', 2000)
+        sendNotification(source, 'la poubelle est vide', 'error', 2000)
     end
 end)

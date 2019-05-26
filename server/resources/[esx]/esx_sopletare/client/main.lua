@@ -49,12 +49,12 @@ Citizen.CreateThread(function()
                 sleep  = 5
                 entity = x
                 bin    = GetEntityCoords(entity)
-                drawText3D(bin.x, bin.y, bin.z + 1.5, 'Tryck [~g~E~s~] för att söka ~b~soptunnan~s~')  
+                drawText3D(bin.x, bin.y, bin.z + 1.5, 'Appueyr sur [~g~E~s~] pour chercher dans ~b~la poubelle~s~')  
                 if IsControlJustReleased(0, 38) then
                     if not cachedBins[entity] then
                         openBin(entity)
                     else
-                        sendNotification('Du har redan letat här!', 'error', 2000)
+                        sendNotification('La poubelle est vide !', 'error', 2000)
                     end
                 end
                 break

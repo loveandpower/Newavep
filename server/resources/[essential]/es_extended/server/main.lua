@@ -35,9 +35,9 @@ AddEventHandler('es:playerLoaded', function(source, _player)
 								money = accounts[j].money,
 								label = Config.AccountLabels[accounts[j].name]
 							})
+							break
 						end
 
-						break
 					end
 				end
 

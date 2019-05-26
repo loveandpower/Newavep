@@ -12,7 +12,15 @@ function OpenShopMenu()
     { 
       label = _U('defibrillateur') .. ' [ ' .. Config.Price['defibrillateur'] .. '$ ]',
       value = { name = 'defibrillateur', price = Config.Price['defibrillateur'] }
-    }
+    },
+    {
+      label = _U('xanax') .. ' [ ' .. Config.Price['xanax'] .. '$]',
+      value = { name = 'xanax', price = Config.Price['xanax'] }
+    },
+    {
+      label = _U('pils') .. ' [ ' .. Config.Price['pils'] .. '$]',
+      value = { name = 'pils', price = Config.Price['pils'] }
+    },
   }
 
   ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop', {

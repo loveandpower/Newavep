@@ -384,38 +384,40 @@ RegisterNetEvent("ft_libs:OnClientReady")
 AddEventHandler('ft_libs:OnClientReady', function()
 	for k,v in pairs (Config.Garages) do
 		this_Garage = v
-		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage", {
-			marker = {
-				weight = v.Marker.w,
-				height = v.Marker.h,
-				red = v.Marker.r,
-				green = v.Marker.g,
-				blue = v.Marker.b,
-			},
-			trigger = {
-				weight = v.Marker.w,
-				active = {
-					callback = function()
-						exports.ft_libs:HelpPromt(v.HelpPrompt)
-						if IsControlJustPressed(1, 38) and GetLastInputMethod(2) and (GetGameTimer() - GUI.Time) > 150 then
-							v.Functionmenu(v, "personal")
-							GUI.Time = GetGameTimer()
-						end
-					end,
-				},
-				exit = {
-					callback = exitmarker
-				},
-			},
-			blip = {
-				text = v.Name,
-				colorId = Config.Blip.color,
-				imageId = Config.Blip.sprite,
-			},
-			locations = {
-				v.Pos				
-			},
-		})
+	
+	--	exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage", {
+	--		marker = {
+	--			weight = v.Marker.w,
+	--			height = v.Marker.h,
+	---			red = v.Marker.r,
+	--			green = v.Marker.g,
+	--			blue = v.Marker.b,
+	--		},
+	--		trigger = {
+	--			weight = v.Marker.w,
+	--			active = {
+	--				callback = function()
+	--					exports.ft_libs:HelpPromt(v.HelpPrompt)
+	--					if IsControlJustPressed(1, 38) and GetLastInputMethod(2) and (GetGameTimer() - GUI.Time) > 150 then
+	--						v.Functionmenu(v, "personal")
+	--						GUI.Time = GetGameTimer()
+	--					end
+	--				end,
+	--			},
+	--			exit = {
+	--				callback = exitmarker
+	--			},
+	--		},
+	--		blip = {
+	--			text = v.Name,
+	--			colorId = Config.Blip.color,
+	--			imageId = Config.Blip.sprite,
+	--		},
+	--		locations = {
+	--			v.Pos				
+	--		},
+	--	})
+	
 		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_spawnpoint", {
 			marker = {
 				weight = v.SpawnPoint.Marker.w,
@@ -438,6 +440,11 @@ AddEventHandler('ft_libs:OnClientReady', function()
 				exit = {
 					callback = exitmarker
 				},
+			},
+			blip = {
+				text = v.Name,
+				colorId = Config.Blip.color,
+				imageId = Config.Blip.sprite,
 			},
 			locations = {
 				{

@@ -2,6 +2,9 @@ Locales['fr'] = {
 
     ['firstaidkit']         = 'Kit de premier secours',
     ['defibrillateur']      = 'Défibrillateur',
+    ['xanax']               = 'Xanax',
+    ['pils']                = 'Pilules',
+
 
     ['yes']                 = 'Oui',
     ['no']                  = 'Non',

@@ -21,9 +21,10 @@ Config.Shops = {
 
 Config.Price = {
 
-    ['firstaidkit']    = 750.0,
-    ['defibrillateur'] = 1000.0,
-    ['xanax'] = 100.0
+    ['firstaidkit']    = 750,
+    ['defibrillateur'] = 1000,
+    ['xanax'] = 100,
+    ['pils'] = 25 ,
 
 
 }

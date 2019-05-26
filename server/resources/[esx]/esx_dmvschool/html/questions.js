@@ -36,15 +36,6 @@ var tableauQuestion = [
 	},
 
 	{
-		question: "What blood alcohol level is classified as driving while intoxicated?",
-		propositionA: "0.05%",
-		propositionB: "0.18%",
-		propositionC: "0.08%",
-		propositionD: "0.06%",
-		reponse: "C"
-	},
-
-	{
 		question: "A quel moment vous pouvez passer aux feux ?",
 		propositionA: "Quand il est vert",
 		propositionB: "Quand il n'y a personne sur l'intersection",

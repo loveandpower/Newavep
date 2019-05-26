@@ -1,50 +1,39 @@
-DiscordWebhookSystemInfos = 'https://discordapp.com/api/webhooks/538044009361440768/azJlW1uFjoqbsJMu4hdvlEe93Fmf2GEuMGO6zdbAYhVYJMY47TqbBTEw8VGMMhYMNmOv'
-DiscordWebhookKillinglogs = 'https://discordapp.com/api/webhooks/538044009361440768/azJlW1uFjoqbsJMu4hdvlEe93Fmf2GEuMGO6zdbAYhVYJMY47TqbBTEw8VGMMhYMNmOv'
-DiscordWebhookChat = 'https://discordapp.com/api/webhooks/538044009361440768/azJlW1uFjoqbsJMu4hdvlEe93Fmf2GEuMGO6zdbAYhVYJMY47TqbBTEw8VGMMhYMNmOv'
-
-SystemAvatar = 'https://wiki.fivem.net/w/images/d/db/FiveM-Wiki.png'
-
-UserAvatar = 'https://i.imgur.com/KIcqSYs.png'
-
-SystemName = 'Fivem-Server-Watching'
-
-
---[[ Special Commands formatting
-		 *YOUR_TEXT*			--> Make Text Italics in Discord
-		**YOUR_TEXT**			--> Make Text Bold in Discord
-	   ***YOUR_TEXT***			--> Make Text Italics & Bold in Discord
-		__YOUR_TEXT__			--> Underline Text in Discord
-	   __*YOUR_TEXT*__			--> Underline Text and make it Italics in Discord
-	  __**YOUR_TEXT**__			--> Underline Text and make it Bold in Discord
-	 __***YOUR_TEXT***__		--> Underline Text and make it Italics & Bold in Discord
-		~~YOUR_TEXT~~			--> Strikethrough Text in Discord
-]]
--- Use 'USERNAME_NEEDED_HERE' without the quotes if you need a Users Name in a special command
--- Use 'USERID_NEEDED_HERE' without the quotes if you need a Users ID in a special command
+Config                        = {}
+Config.Locale 				  = 'fr'
+Config.green 				  = 56108
+Config.grey 				  = 8421504
+Config.red 					  = 16711680
+Config.orange 				  = 16744192
+Config.blue 				  = 2061822
+Config.purple 				  = 11750815
+Config.webhook                = "https://discordapp.com/api/webhooks/576490199131881530/Mz8GbBiDKz7nYFgsCCABC4Fo6cTQuGOD3XxVvQd8li17RTIJfAmVkyS8ECLSZ-Qc9L7a"
 
 
--- These special commands will be printed differently in discord, depending on what you set it to
-SpecialCommands = {
-				   {'/ooc', '**[OOC]:**'},
-				   {'/911', '**[911]: (CALLER ID: [ USERNAME_NEEDED_HERE | USERID_NEEDED_HERE ])**'},
-				  }
+settings = {
+	LogKills = true, -- Log when a player kill an other player.
+	LogEnterPoliceVehicle = true, -- Log when an player enter in a police vehicle.
+	LogEnterBlackListedVehicle = true, -- Log when a player enter in a blacklisted vehicle.
+	LogPedJacking = true, -- Log when a player is jacking a car
+	LogChatServer = true, -- Log when a player is talking in the chat , /command works too.
+	LogLoginServer = true, -- Log when a player is connecting/disconnecting to the server.
+	LogItemTransfer = true, -- Log when a player is giving an item.
+	LogWeaponTransfer = true, -- Log when a player is giving a weapon.
+	LogMoneyTransfer = true, -- Log when a player is giving money
+	LogMoneyBankTransfert = true, -- Log when a player is giving money from bankaccount
 
-						
--- These blacklisted commands will not be printed in discord
-BlacklistedCommands = {
-					   '/AnyCommand',
-					   '/AnyCommand2',
-					  }
+}
 
--- These Commands will use their own webhook
-OwnWebhookCommands = {
-					  {'/AnotherCommand', 'https://discordapp.com/api/webhooks/538044009361440768/azJlW1uFjoqbsJMu4hdvlEe93Fmf2GEuMGO6zdbAYhVYJMY47TqbBTEw8VGMMhYMNmOv'},
-					  {'/AnotherCommand2', 'https://discordapp.com/api/webhooks/538044009361440768/azJlW1uFjoqbsJMu4hdvlEe93Fmf2GEuMGO6zdbAYhVYJMY47TqbBTEw8VGMMhYMNmOv'},
-					 }
 
--- These Commands will be sent as TTS messages
-TTSCommands = {
-			   '/Whatever',
-			   '/Whatever2',
-			  }
 
+blacklistedModels = {
+	"APC",
+	"BARRACKS",
+	"BARRACKS2",
+	"RHINO",
+	"CRUSADER",
+	"CARGOBOB",
+	"SAVAGE",
+	"TITAN",
+	"LAZER",
+	"LAZER",
+}

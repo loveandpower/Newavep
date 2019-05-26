@@ -8,32 +8,28 @@ end)
 TriggerEvent('es:addGroupCommand', 'heal', 'admin', function(source, args, user)
 	-- heal another player - don't heal source
 	if args[1] then
-		local target = tonumber(args[1])
-		
+		local playerId = tonumber(args[1])
+
 		-- is the argument a number?
-		if target ~= nil then
-			
+		if playerId then
 			-- is the number a valid player?
-			if GetPlayerName(target) then
-				print('esx_basicneeds: ' .. GetPlayerName(source) .. ' is healing a player!')
-				TriggerClientEvent('esx_basicneeds:healPlayer', target)
-				TriggerClientEvent('chatMessage', target, "HEAL", {223, 66, 244}, "You have been healed!")
+			if GetPlayerName(playerId) then
+				print(('esx_basicneeds: %s healed %s'):format(GetPlayerIdentifier(source, 0), GetPlayerIdentifier(playerId, 0)))
+				TriggerClientEvent('esx_basicneeds:healPlayer', playerId)
+				TriggerClientEvent('chat:addMessage', source, { args = { '^5HEAL', 'You have been healed.' } })
 			else
-				TriggerClientEvent('chatMessage', source, "HEAL", {255, 0, 0}, "Player not found!")
+				TriggerClientEvent('chat:addMessage', source, { args = { '^1SYSTEM', 'Player not online.' } })
 			end
 		else
-			TriggerClientEvent('chatMessage', source, "HEAL", {255, 0, 0}, "Incorrect syntax! You must provide a valid player ID")
+			TriggerClientEvent('chat:addMessage', source, { args = { '^1SYSTEM', 'Invalid player id.' } })
 		end
 	else
-		-- heal source
-		print('esx_basicneeds: ' .. GetPlayerName(source) .. ' is healing!')
+		print(('esx_basicneeds: %s healed self'):format(GetPlayerIdentifier(source, 0)))
 		TriggerClientEvent('esx_basicneeds:healPlayer', source)
 	end
 end, function(source, args, user)
-	TriggerClientEvent('chatMessage', source, "HEAL", {255, 0, 0}, "Insufficient Permissions.")
-end, {help = "Heal a player, or yourself - restores thirst, hunger and health."})
-
-
+	TriggerClientEvent('chat:addMessage', source, { args = { '^1SYSTEM', 'Insufficient Permissions.' } })
+end, {help = 'Heal a player, or yourself - restores thirst, hunger and health.', params = {{name = 'playerId', help = '(optional) player id'}}})
 
 --#################################################
 --#################################################
@@ -48,6 +44,8 @@ ESX.RegisterUsableItem('bread', function(source)
 
 	TriggerClientEvent('esx_status:add', source, 'hunger', 200000)
 	TriggerClientEvent('esx_basicneeds:onEat', source)
+	--try sick
+	--TriggerClientEvent('esx_basicneeds:onSick', source)
 	TriggerClientEvent('esx:showNotification', source, _U('used_bread'))
 end)
 
@@ -58,6 +56,7 @@ ESX.RegisterUsableItem('water', function(source)
 
 	TriggerClientEvent('esx_status:add', source, 'thirst', 200000)
 	TriggerClientEvent('esx_basicneeds:onDrink', source)
+	--TriggerClientEvent('esx_basicneeds:CancelSick', source)
 	TriggerClientEvent('esx:showNotification', source, _U('used_water'))
 end)
 
@@ -74,16 +73,6 @@ end)
 --#################################################
 --#################################################
 ---Food
-ESX.RegisterUsableItem('fish', function(source)
-	local xPlayer = ESX.GetPlayerFromId(source)
-
-	xPlayer.removeInventoryItem('fish', 1)
-
-	TriggerClientEvent('esx_status:add', source, 'hunger', 200000)
-	TriggerClientEvent('esx_basicneeds:onEat', source)
-	TriggerClientEvent('esx:showNotification', source, _U('used_fish'))
-end)
-
 ESX.RegisterUsableItem('fish', function(source)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
@@ -606,6 +595,12 @@ ESX.RegisterUsableItem('coke', function(source)
 	TriggerClientEvent('esx_basicneeds:onCoke', source)
 end)
 
+--#################################################
+--#################################################
+----Maladie
+--#################################################
+--#################################################
+
 ESX.RegisterUsableItem('xanax', function(source)
         
         local _source = source
@@ -616,12 +611,34 @@ ESX.RegisterUsableItem('xanax', function(source)
 	TriggerClientEvent('esx_basicneeds:resetStatus2', source)
 end)
 
+ESX.RegisterUsableItem('pils', function(source)
+        
+        local _source = source
+	local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.removeInventoryItem('pils', 1)
+
+	--TriggerClientEvent('esx_status:remove', _source, 'drug', 1000000)
+	TriggerClientEvent('esx_basicneeds:CancelSick', source)
+end)
 
 --#################################################
 --#################################################
-----Maladie
+----Cigarette
 --#################################################
 --#################################################
+
+
+ESX.RegisterUsableItem('cigarett', function(source)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local lighter = xPlayer.getInventoryItem('cigarett')
+	
+		if lighter.count > 0 then
+			xPlayer.removeInventoryItem('cigarett', 1)
+			TriggerClientEvent('esx_cigarett:startSmoke', source)
+		--else
+		--	TriggerClientEvent('esx:showNotification', source, ('Du har ingen ~r~tändare'))
+		end
+end)
 
 
 ---TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)

@@ -7,7 +7,7 @@ MySQL.ready(function()
 end)
 
 function ParkBoats()
-	MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = 1 WHERE `stored` = false AND type = @type', {
+	MySQL.Async.execute('UPDATE owned_vehicles_boat SET `stored` = true WHERE `stored` = false AND type = @type', {
 		['@type'] = 'boat'
 	}, function (rowsChanged)
 		if rowsChanged > 0 then
@@ -24,28 +24,28 @@ ESX.RegisterServerCallback('esx_boat:buyBoat', function(source, cb, vehicleProps
 	if price == 0 then
 		print(('esx_boat: %s attempted to exploit the shop! (invalid vehicle model)'):format(xPlayer.identifier))
 		cb(false)
-	end
-
-	if xPlayer.getMoney() >= price then
-		xPlayer.removeMoney(price)
-
-		MySQL.Async.execute('INSERT INTO owned_vehicles (owner, plate, vehicle, type) VALUES (@owner, @plate, @vehicle, @type)', {
-			['@owner']   = xPlayer.identifier,
-			['@plate']   = vehicleProps.plate,
-			['@vehicle'] = json.encode(vehicleProps),
-			['@type']    = 'boat'
-		}, function(rowsChanged)
-			cb(true)
-			ParkBoats()
-		end)
 	else
-		cb(false)
+		if xPlayer.getMoney() >= price then
+			xPlayer.removeMoney(price)
+
+			MySQL.Async.execute('INSERT INTO owned_vehicles_boat (owner, plate, vehicle, type) VALUES (@owner, @plate, @vehicle, @type)', {
+				['@owner']   = xPlayer.identifier,
+				['@plate']   = vehicleProps.plate,
+				['@vehicle'] = json.encode(vehicleProps),
+				['@type']    = 'boat'
+			}, function(rowsChanged)
+				cb(true)
+				ParkBoats()
+			end)
+		else
+			cb(false)
+		end
 	end
 end)
 
 RegisterServerEvent('esx_boat:takeOutVehicle')
 AddEventHandler('esx_boat:takeOutVehicle', function(plate)
-	MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = @stored WHERE owner = @owner AND plate = @plate', {
+	MySQL.Async.execute('UPDATE owned_vehicles_boat SET `stored` = @stored WHERE owner = @owner AND plate = @plate', {
 		['@stored'] = false,
 		['@owner']  = GetPlayerIdentifiers(source)[1],
 		['@plate']  = plate
@@ -57,7 +57,7 @@ AddEventHandler('esx_boat:takeOutVehicle', function(plate)
 end)
 
 ESX.RegisterServerCallback('esx_boat:storeVehicle', function (source, cb, plate)
-	MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = @stored WHERE owner = @owner AND plate = @plate', {
+	MySQL.Async.execute('UPDATE owned_vehicles_boat SET `stored` = @stored WHERE owner = @owner AND plate = @plate', {
 		['@stored'] = true,
 		['@owner']  = GetPlayerIdentifiers(source)[1],
 		['@plate']  = plate
@@ -71,7 +71,7 @@ ESX.RegisterServerCallback('esx_boat:storeVehicle', function (source, cb, plate)
 end)
 
 ESX.RegisterServerCallback('esx_boat:getGarage', function(source, cb)
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND type = @type AND `stored` = @stored', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles_boat WHERE owner = @owner AND type = @type AND `stored` = @stored', {
 		['@owner']  = GetPlayerIdentifiers(source)[1],
 		['@type']   = 'boat',
 		['@stored'] = true

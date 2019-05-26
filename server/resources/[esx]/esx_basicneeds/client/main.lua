@@ -13,6 +13,11 @@ Citizen.CreateThread(function()
 	end
 end)
 
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer)
+  PlayerData = xPlayer
+end)
+
 --###########################################################################################################
 --###########################################################################################################
 --###########################################################################################################
@@ -43,11 +48,84 @@ AddEventHandler('esx_basicneeds:healPlayer', function()
 	TriggerEvent('esx_status:set', 'thirst', 1000000)
 	TriggerEvent('esx_status:set', 'drunk', 0)
 	TriggerEvent('esx_status:set', 'drug', 0)
+ -- TriggerEvent('esx_status:set', 'sick', 0)
 
 	-- restore hp
 	local sourcePed = GetPlayerPed(-1)
 	SetEntityHealth(sourcePed, GetEntityMaxHealth(sourcePed))
 end)
+
+--- Sick
+
+RegisterNetEvent('esx_basicneeds:onSick')
+AddEventHandler('esx_basicneeds:onSick', function()
+  
+  local rand = math.random(25,32)
+  local playerPed = GetPlayerPed(-1)
+  local mugshot, mugshotStr = ESX.Game.GetPedMugshot(GetPlayerPed(-1))
+---
+  local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+
+
+ --if closestPlayer == -1 or closestDistance > 5.0 then
+
+    if rand >= 25 and rand <= 32 then
+      if rand >= 25 and rand <= 28 then
+            Citizen.Wait(30)
+            ClearPedTasksImmediately(playerPed)
+            SetTimecycleModifier("spectator5")
+            SetPedMotionBlur(playerPed, true)
+            SetPedMovementClipset(playerPed, "move_m@hipster@b", true)
+            SetPedIsDrunk(playerPed, true)
+           --Efects
+           local player = PlayerId()
+            SetRunSprintMultiplierForPlayer(player, 1.1)
+            ESX.ShowAdvancedNotification('Medecins', '911', 'Vous étes malade contacter un Medecins', mugshotStr, 1)
+            UnregisterPedheadshot(mugshot)
+            Wait(300000)
+      end
+
+      if rand >= 29 and rand <= 32 then
+          Citizen.Wait(30)
+          ClearPedTasksImmediately(playerPed)
+          SetTimecycleModifier("spectator5")
+          SetPedMotionBlur(playerPed, true)
+          SetPedMovementClipset(playerPed, "move_m@hipster@a", true)
+          SetPedIsDrunk(playerPed, true)
+        --Efects
+          local player = PlayerId()
+          SetRunSprintMultiplierForPlayer(player, 0.3)
+          ESX.ShowAdvancedNotification('Medecins', '911', 'Vous étes malade contacter un Medecins', mugshotStr, 1)
+          UnregisterPedheadshot(mugshot)
+          Wait(300000)
+      end
+
+    end
+--end
+
+end)
+
+RegisterNetEvent('esx_basicneeds:CancelSick')
+AddEventHandler('esx_basicneeds:CancelSick', function()
+  --local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+    
+    local playerPed = GetPlayerPed(-1)
+
+    DoScreenFadeOut(800)
+    Wait(1000)
+
+    ClearTimecycleModifier()
+    ResetScenarioTypesEnabled()
+    ResetPedMovementClipset(playerPed, 0)
+    SetPedIsDrunk(playerPed, false)
+    SetPedMotionBlur(playerPed, false)
+    SetRunSprintMultiplierForPlayer(player, 1.0)
+    DoScreenFadeIn(800)
+
+end)
+
+
+
 
 --Death
 AddEventHandler('esx:onPlayerDeath', function()
@@ -251,7 +329,8 @@ end)
 
 RegisterNetEvent('esx_basicneeds:onEat')
 AddEventHandler('esx_basicneeds:onEat', function(prop_name)
-	
+
+  	
   if not IsAnimated then
 		local prop_name = prop_name or 'prop_cs_burger_01'
 		IsAnimated = true
@@ -326,6 +405,27 @@ AddEventHandler('esx_basicneeds:onDrink', function(prop_name)
 	--end
 end)
 
+
+--###########################################################################################################
+--###########################################################################################################
+--###########################################################################################################
+--###########################################################################################################
+--Event for animation smoke
+
+RegisterNetEvent('esx_cigarett:startSmoke')
+AddEventHandler('esx_cigarett:startSmoke', function(source)
+  SmokeAnimation()
+end)
+
+
+
+function SmokeAnimation()
+  local playerPed = GetPlayerPed(-1)
+  
+  Citizen.CreateThread(function()
+        TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_SMOKING", 0, true)               
+  end)
+end
 
 --###########################################################################################################
 --###########################################################################################################

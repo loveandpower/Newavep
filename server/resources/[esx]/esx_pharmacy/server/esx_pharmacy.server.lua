@@ -31,7 +31,8 @@ AddEventHandler('esx_pharmacy:buyItem', function(itemName, price)
       account.addMoney(price)
     end)
 
-    TriggerClientEvent('esx:showNotification', _source, _U('bought') .. ItemLabels[itemName])
+    --TriggerClientEvent('esx:showNotification', _source, _U('bought') .. ItemLabels[itemName])
+      TriggerClientEvent('esx:showNotification', source, 'Vous Avez Achetter un ... ' .. itemName)
   else
     TriggerClientEvent('esx:showNotification', _source, _U('not_enough_money'))
   end

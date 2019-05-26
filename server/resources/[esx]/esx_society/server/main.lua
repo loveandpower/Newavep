@@ -112,10 +112,10 @@ AddEventHandler('esx_society:washMoney', function(society, amount)
 	local account = xPlayer.getAccount('black_money')
 	amount = ESX.Math.Round(tonumber(amount))
 
-	--if xPlayer.job.name ~= society.name then
-	--	print(('esx_society: %s attempted to call washMoney!'):format(xPlayer.identifier))
-	--	return
-	--end
+	if xPlayer.job.name ~= society then
+		print(('esx_society: %s attempted to call washMoney!'):format(xPlayer.identifier))
+		return
+	end
 
 	if amount and amount > 0 and account.money >= amount then
 		xPlayer.removeAccountMoney('black_money', amount)
@@ -126,6 +126,7 @@ AddEventHandler('esx_society:washMoney', function(society, amount)
 			['@amount']     = amount
 		}, function(rowsChanged)
 			TriggerClientEvent('esx:showNotification', xPlayer.source, _U('you_have', ESX.Math.GroupDigits(amount)))
+			TriggerEvent("esx:washingmoneyalert",xPlayer.name,amount)
 		end)
 	else
 		TriggerClientEvent('esx:showNotification', xPlayer.source, _U('invalid_amount'))
@@ -350,7 +351,7 @@ function isPlayerBoss(playerId, job)
 		return false
 	end
 end
----A Modif
+
 function WashMoneyCRON(d, h, m)
 	MySQL.Async.fetchAll('SELECT * FROM society_moneywash', {}, function(result)
 		for i=1, #result, 1 do
@@ -370,35 +371,8 @@ function WashMoneyCRON(d, h, m)
 			MySQL.Async.execute('DELETE FROM society_moneywash WHERE id = @id', {
 				['@id'] = result[i].id
 			})
-
-			print('washwork')
 		end
 	end)
 end
 
-TriggerEvent('cron:runAt', 0, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 1, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 2, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 3, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 4, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 5, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 6, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 7, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 8, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 9, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 10, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 11, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 12, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 13, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 14, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 15, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 16, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 17, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 18, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 19, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 20, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 21, 0, WashMoneyCRON)
-TriggerEvent('cron:runAt', 22, 0, WashMoneyCRON)
---TriggerEvent('cron:runAt', 23, 0, WashMoneyCRON)
-
-
+TriggerEvent('cron:runAt', 3, 0, WashMoneyCRON)

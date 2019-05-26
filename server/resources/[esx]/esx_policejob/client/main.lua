@@ -27,7 +27,7 @@ local CurrentTask = {}
 local playerInService = false
 local spawnedVehicles, isInShopMenu = {}, false
 
-ESX                           = nil
+ESX = nil
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -121,7 +121,11 @@ function OpenCloakroomMenu()
 		cleanPlayer(playerPed)
 
 		if data.current.value == 'citizen_wear' then
-			
+				exports.ft_libs:EnableArea("esx_eden_garage_area_police_mecanodeletepoint")		
+				exports.ft_libs:EnableArea("esx_eden_garage_area_police_mecanospawnpoint")	  		
+				exports.ft_libs:EnableArea("esx_eden_garage_area_Bennys_mecanodeletepoint")		
+				exports.ft_libs:EnableArea("esx_eden_garage_area_Bennys_mecanospawnpoint")	
+		
 			if Config.EnableNonFreemodePeds then
 				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
 					local isMale = skin.sex == 0
@@ -219,6 +223,12 @@ function OpenCloakroomMenu()
 			data.current.value == 'gilet_wear'
 		then
 			setUniform(data.current.value, playerPed)
+
+			exports.ft_libs:DisableArea("esx_eden_garage_area_police_mecanodeletepoint")		
+exports.ft_libs:DisableArea("esx_eden_garage_area_police_mecanospawnpoint")	  		
+exports.ft_libs:DisableArea("esx_eden_garage_area_Bennys_mecanodeletepoint")		
+exports.ft_libs:DisableArea("esx_eden_garage_area_Bennys_mecanospawnpoint")
+
 		end
 
 		if data.current.value == 'freemode_ped' then
@@ -641,7 +651,6 @@ end
 
 function drawLoadingText(text, red, green, blue, alpha)
 	SetTextFont(4)
-	SetTextProportional(0)
 	SetTextScale(0.0, 0.5)
 	SetTextColour(red, green, blue, alpha)
 	SetTextDropShadow(0, 0, 0, 0, 255)
@@ -2044,7 +2053,7 @@ Citizen.CreateThread(function()
 						CurrentAction     = 'menu_boss_actions'
 						CurrentActionMsg  = _U('open_bossmenu')
 						CurrentActionData = {}
-					end, { wash = true }) -- disable washing money
+					end, { wash = false }) -- disable washing money
 				elseif CurrentAction == 'remove_entity' then
 					DeleteEntity(CurrentActionData.entity)
 				end
@@ -2053,15 +2062,15 @@ Citizen.CreateThread(function()
 			end
 		end -- CurrentAction end
 		
-		--if IsControlJustReleased(0, Keys['F6']) and not isDead and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'police_actions') then
-		--	if Config.MaxInService == -1 then
-		--		OpenPoliceActionsMenu()
-		--	elseif playerInService then
-		--		OpenPoliceActionsMenu()
-		--	else
-		--		ESX.ShowNotification(_U('service_not'))
-		--	end
-		--end
+		if IsControlJustReleased(0, Keys['F6']) and not isDead and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'police_actions') then
+			if Config.MaxInService == -1 then
+				OpenPoliceActionsMenu()
+			elseif playerInService then
+				OpenPoliceActionsMenu()
+			else
+				ESX.ShowNotification(_U('service_not'))
+			end
+		end
 		
 		if IsControlJustReleased(0, Keys['E']) and CurrentTask.Busy then
 			ESX.ShowNotification(_U('impound_canceled'))
@@ -2180,9 +2189,3 @@ function ImpoundVehicle(vehicle)
 	ESX.ShowNotification(_U('impound_successful'))
 	CurrentTask.Busy = false
 end
-
-
-RegisterNetEvent('NB:openMenuPolice')
-AddEventHandler('NB:openMenuPolice', function ()
-	OpenPoliceActionsMenu()
-end)
