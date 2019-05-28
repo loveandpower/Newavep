@@ -1,8 +1,8 @@
 
 REM change-me
-set pathdir=/d C:\...\server
+set pathdir=/d C:\Users\Kinder\Desktop\Serveur-Gta-V-RP-V2.0.20\server
 REM change-me
-set startpath="Server" C:\...\server\run.cmd +exec serveur.cfg
+set startpath="Server" C:\Users\Kinder\Desktop\Serveur-Gta-V-RP-V2.0.20\server\run.cmd +exec serveur.cfg
 
 :loop
 

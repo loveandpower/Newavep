@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2019-03-11 00:56:45
+Date: 2019-04-27 09:51:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `addon_account` (
   `label` varchar(255) NOT NULL,
   `shared` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of addon_account
@@ -60,6 +60,7 @@ INSERT INTO `addon_account` VALUES ('86', 'society_buche', 'buche', '1');
 INSERT INTO `addon_account` VALUES ('87', 'society_pecheur', 'Pécheur', '1');
 INSERT INTO `addon_account` VALUES ('88', 'society_bahama', 'bahama', '1');
 INSERT INTO `addon_account` VALUES ('89', 'society_pizza', 'Domino\'s Pizza', '1');
+INSERT INTO `addon_account` VALUES ('90', 'society_mafia', 'Mafia', '1');
 
 -- ----------------------------
 -- Table structure for `addon_account_data`
@@ -71,7 +72,7 @@ CREATE TABLE `addon_account_data` (
   `money` double NOT NULL,
   `owner` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=580 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=581 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of addon_account_data
@@ -82,32 +83,43 @@ INSERT INTO `addon_account_data` VALUES ('3', 'society_realestateagent', '50000'
 INSERT INTO `addon_account_data` VALUES ('10', 'society_dock', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('11', 'society_foodtruck', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('12', 'society_gouv', '50000', null);
-INSERT INTO `addon_account_data` VALUES ('13', 'society_ambulance', '50000', null);
+INSERT INTO `addon_account_data` VALUES ('13', 'society_ambulance', '51750', null);
 INSERT INTO `addon_account_data` VALUES ('14', 'society_cardealer', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('15', 'society_taxi', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('16', 'society_vigne', '50000', null);
+INSERT INTO `addon_account_data` VALUES ('18', 'property_black_money', '50000', 'steam:1100001081ca641');
 INSERT INTO `addon_account_data` VALUES ('20', 'society_unicorn', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('21', 'society_aircraftdealer', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('22', 'society_gouvernor', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('23', 'society_karting', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('519', 'society_thelostmc', '50000', null);
-INSERT INTO `addon_account_data` VALUES ('527', 'society_bucheron', '50000', '');
+INSERT INTO `addon_account_data` VALUES ('527', 'society_bucheron', '0', '');
 INSERT INTO `addon_account_data` VALUES ('545', 'society_tabac', '50900', null);
 INSERT INTO `addon_account_data` VALUES ('546', 'society_mineur', '149868', null);
-INSERT INTO `addon_account_data` VALUES ('547', 'society_brinks', '50000', null);
+INSERT INTO `addon_account_data` VALUES ('547', 'society_brinks', '2374344', null);
 INSERT INTO `addon_account_data` VALUES ('548', 'society_weazel', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('549', 'society_fueler', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('552', 'society_boatdealer', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('553', 'society_buche', '50000', null);
-INSERT INTO `addon_account_data` VALUES ('554', 'society_state', '50000', null);
+INSERT INTO `addon_account_data` VALUES ('554', 'society_state', '50997', null);
 INSERT INTO `addon_account_data` VALUES ('555', 'society_Litlle_Pricks', '50000', null);
 INSERT INTO `addon_account_data` VALUES ('556', 'society_taxe_Litlle_Pricks', '5', null);
 INSERT INTO `addon_account_data` VALUES ('557', 'society_mechanic', '50010', null);
 INSERT INTO `addon_account_data` VALUES ('558', 'society_ferme', '50000', null);
-INSERT INTO `addon_account_data` VALUES ('563', 'society_pompiste', '0', null);
+INSERT INTO `addon_account_data` VALUES ('563', 'society_pompiste', '160000', null);
 INSERT INTO `addon_account_data` VALUES ('564', 'society_pecheur', '50000', null);
+INSERT INTO `addon_account_data` VALUES ('569', 'caution', '0', 'steam:1100001081ca641');
+INSERT INTO `addon_account_data` VALUES ('570', 'caution', '0', 'steam:11000011c2a2452');
+INSERT INTO `addon_account_data` VALUES ('571', 'caution', '0', 'steam:110000131ed4e6e');
+INSERT INTO `addon_account_data` VALUES ('572', 'caution', '0', 'steam:11000011b6e7ebf');
+INSERT INTO `addon_account_data` VALUES ('573', 'caution', '0', 'steam:110000113554092');
+INSERT INTO `addon_account_data` VALUES ('574', 'caution', '0', 'steam:11000013637a0fc');
+INSERT INTO `addon_account_data` VALUES ('575', 'caution', '0', 'steam:1100001348f3450');
+INSERT INTO `addon_account_data` VALUES ('576', 'caution', '0', 'steam:1100001097c1dc7');
+INSERT INTO `addon_account_data` VALUES ('577', 'caution', '0', 'steam:11000011451b0d5');
 INSERT INTO `addon_account_data` VALUES ('578', 'society_bahama', '0', null);
 INSERT INTO `addon_account_data` VALUES ('579', 'society_pizza', '0', null);
+INSERT INTO `addon_account_data` VALUES ('580', 'society_mafia', '105200', null);
 
 -- ----------------------------
 -- Table structure for `addon_inventory`
@@ -119,7 +131,7 @@ CREATE TABLE `addon_inventory` (
   `label` varchar(255) NOT NULL,
   `shared` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of addon_inventory
@@ -156,6 +168,7 @@ INSERT INTO `addon_inventory` VALUES ('78', 'society_bahama', 'bahama', '1');
 INSERT INTO `addon_inventory` VALUES ('79', 'society_bahama_fridge', 'bahama (frigo)', '1');
 INSERT INTO `addon_inventory` VALUES ('80', 'society_pizza', 'Domino\'s Pizza', '1');
 INSERT INTO `addon_inventory` VALUES ('81', 'society_pizza_fridge', 'Domino\'s Pizza (frigo)', '1');
+INSERT INTO `addon_inventory` VALUES ('82', 'society_mafia', 'Mafia', '1');
 
 -- ----------------------------
 -- Table structure for `addon_inventory_items`
@@ -168,7 +181,7 @@ CREATE TABLE `addon_inventory_items` (
   `count` int(11) NOT NULL,
   `owner` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of addon_inventory_items
@@ -178,6 +191,9 @@ INSERT INTO `addon_inventory_items` VALUES ('82', 'society_foodtruck', 'blowpipe
 INSERT INTO `addon_inventory_items` VALUES ('83', 'society_mineur', 'water', '1', null);
 INSERT INTO `addon_inventory_items` VALUES ('84', 'society_pizza', 'blowpipe', '0', null);
 INSERT INTO `addon_inventory_items` VALUES ('85', 'society_tabac', 'blowpipe', '1', null);
+INSERT INTO `addon_inventory_items` VALUES ('86', 'society_pompiste', 'chocolate', '1', null);
+INSERT INTO `addon_inventory_items` VALUES ('87', 'society_pompiste', 'essence', '95', null);
+INSERT INTO `addon_inventory_items` VALUES ('88', 'society_mafia', 'weed', '1', null);
 
 -- ----------------------------
 -- Table structure for `aircrafts`
@@ -268,6 +284,7 @@ CREATE TABLE `billing` (
 -- ----------------------------
 -- Records of billing
 -- ----------------------------
+INSERT INTO `billing` VALUES ('8', 'steam:1100001081ca641', 'steam:110000112230801', 'player', 'steam:110000112230801', 'Dépannage véhicule', '3000');
 
 -- ----------------------------
 -- Table structure for `boatdealer_boats`
@@ -275,7 +292,7 @@ CREATE TABLE `billing` (
 DROP TABLE IF EXISTS `boatdealer_boats`;
 CREATE TABLE `boatdealer_boats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vehicle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `vehicle` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -294,7 +311,7 @@ CREATE TABLE `boats` (
   `price` int(11) NOT NULL,
   `category` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`model`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of boats
@@ -324,7 +341,7 @@ CREATE TABLE `boat_categories` (
   `name` varchar(60) NOT NULL,
   `label` varchar(60) NOT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 
 -- ----------------------------
 -- Records of boat_categories
@@ -341,7 +358,7 @@ CREATE TABLE `cardealer_vehicles` (
   `vehicle` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of cardealer_vehicles
@@ -365,6 +382,16 @@ CREATE TABLE `characters` (
 -- ----------------------------
 -- Records of characters
 -- ----------------------------
+INSERT INTO `characters` VALUES ('steam:1100001081ca641', 'Jhone', 'Darfy', '25/5/80', 'm', '165');
+INSERT INTO `characters` VALUES ('steam:11000011c2a2452', 'Rick', 'Dabs', '12/15/1999', 'M', '58');
+INSERT INTO `characters` VALUES ('steam:110000131ed4e6e', 'Mike', 'Horn', '16/07/86', 'm', '85');
+INSERT INTO `characters` VALUES ('steam:110000113554092', 'Ibrahim', 'Bakyl', '29/11/1995', 'M', '75');
+INSERT INTO `characters` VALUES ('steam:11000013637a0fc', 'Yacine', 'Belaoui', '16/12/1990', 'M', '60');
+INSERT INTO `characters` VALUES ('steam:110000131ed4e6e', 'Mike', 'Horn', '22/01/98', 'm', '99');
+INSERT INTO `characters` VALUES ('steam:11000013637a0fc', 'yacine ', 'belaoui', '16/12/1990', 'm', '60');
+INSERT INTO `characters` VALUES ('steam:110000131ed4e6e', 'Mike', 'Horn', '22/01/98', 'm', '99');
+INSERT INTO `characters` VALUES ('steam:110000131ed4e6e', 'Jack', 'Ass', '01/02/0304', 'M', '99');
+INSERT INTO `characters` VALUES ('steam:1100001081ca641', 'Test', 'Test', '25/5/1895', 'M', '96');
 
 -- ----------------------------
 -- Table structure for `coordinates`
@@ -401,7 +428,7 @@ CREATE TABLE `datastore` (
   `label` varchar(255) NOT NULL,
   `shared` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of datastore
@@ -438,6 +465,8 @@ INSERT INTO `datastore` VALUES ('48', 'society_foodtruck', 'foodtruck', '1');
 INSERT INTO `datastore` VALUES ('49', 'society_pecheur', 'Pécheur', '1');
 INSERT INTO `datastore` VALUES ('50', 'society_bahama', 'bahama', '1');
 INSERT INTO `datastore` VALUES ('51', 'society_pizza', 'Domino\'s Pizza', '1');
+INSERT INTO `datastore` VALUES ('52', 'society_pompiste', 'pompiste', '1');
+INSERT INTO `datastore` VALUES ('53', 'society_mafia', 'Mafia', '1');
 
 -- ----------------------------
 -- Table structure for `datastore_data`
@@ -451,7 +480,7 @@ CREATE TABLE `datastore_data` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_datastore_owner_name` (`owner`,`name`),
   KEY `index_datastore_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of datastore_data
@@ -467,7 +496,7 @@ INSERT INTO `datastore_data` VALUES ('8', 'society_peche', null, '{}');
 INSERT INTO `datastore_data` VALUES ('9', 'society_Ambulance', null, '{}');
 INSERT INTO `datastore_data` VALUES ('10', 'society_thelostmc', null, '{}');
 INSERT INTO `datastore_data` VALUES ('11', 'society_boulanger', null, '{}');
-INSERT INTO `datastore_data` VALUES ('12', 'society_taxi', null, '{}');
+INSERT INTO `datastore_data` VALUES ('12', 'society_taxi', null, '{\"garage\":[{\"modSmokeEnabled\":1,\"modTrimB\":-1,\"modSuspension\":-1,\"modDoorSpeaker\":-1,\"modGrille\":-1,\"plateIndex\":3,\"modArchCover\":-1,\"modAirFilter\":-1,\"modRearBumper\":-1,\"modDashboard\":-1,\"neonEnabled\":[false,false,false,false],\"extras\":[],\"health\":912,\"modArmor\":-1,\"modHorns\":-1,\"modLivery\":0,\"modPlateHolder\":-1,\"modSteeringWheel\":-1,\"color1\":1,\"modXenon\":false,\"modBackWheels\":-1,\"neonColor\":[255,0,255],\"modHood\":-1,\"plate\":\"FIW 236\",\"modSpoilers\":-1,\"modEngineBlock\":-1,\"modExhaust\":-1,\"modTransmission\":-1,\"modAerials\":-1,\"modFrame\":-1,\"pearlescentColor\":4,\"modRightFender\":-1,\"modAPlate\":-1,\"modTurbo\":false,\"modTrimA\":-1,\"wheelColor\":156,\"modShifterLeavers\":-1,\"tyreSmokeColor\":[255,255,255],\"windowTint\":-1,\"modFender\":-1,\"modStruts\":-1,\"modWindows\":-1,\"modSeats\":-1,\"wheels\":0,\"modSpeakers\":-1,\"modTank\":-1,\"modBrakes\":-1,\"modFrontBumper\":-1,\"modSideSkirt\":-1,\"model\":1283517198,\"color2\":118,\"modRoof\":-1,\"modEngine\":-1,\"dirtLevel\":9.9358472824097,\"modDial\":-1,\"modHydrolic\":-1,\"modVanityPlate\":-1,\"modOrnaments\":-1,\"modFrontWheels\":-1,\"modTrunk\":-1},{\"modAPlate\":-1,\"modTrimB\":-1,\"modSuspension\":-1,\"modBackWheels\":-1,\"modGrille\":-1,\"plateIndex\":0,\"modArchCover\":-1,\"modEngineBlock\":-1,\"modAirFilter\":-1,\"modTrimA\":-1,\"neonEnabled\":[false,false,false,false],\"extras\":[],\"health\":811,\"modArmor\":-1,\"modHorns\":-1,\"modLivery\":-1,\"modPlateHolder\":-1,\"modSteeringWheel\":-1,\"color1\":88,\"modXenon\":false,\"modDoorSpeaker\":-1,\"neonColor\":[255,0,255],\"modHood\":-1,\"plate\":\"COB 222\",\"modSpoilers\":-1,\"modDashboard\":-1,\"modExhaust\":-1,\"modTransmission\":-1,\"modAerials\":-1,\"modFrame\":-1,\"pearlescentColor\":5,\"modTurbo\":false,\"modFrontWheels\":-1,\"modRightFender\":-1,\"model\":-956048545,\"wheelColor\":156,\"modShifterLeavers\":-1,\"tyreSmokeColor\":[255,255,255],\"modTrunk\":-1,\"modSeats\":-1,\"modStruts\":-1,\"modWindows\":-1,\"modTank\":-1,\"modFender\":-1,\"modSpeakers\":-1,\"modBrakes\":-1,\"wheels\":0,\"modFrontBumper\":-1,\"modSmokeEnabled\":1,\"modRearBumper\":-1,\"color2\":77,\"modRoof\":-1,\"modEngine\":-1,\"dirtLevel\":12.740125656128,\"modDial\":-1,\"modHydrolic\":-1,\"modVanityPlate\":-1,\"modOrnaments\":-1,\"windowTint\":-1,\"modSideSkirt\":-1}]}');
 INSERT INTO `datastore_data` VALUES ('13', 'society_tabac', null, '{}');
 INSERT INTO `datastore_data` VALUES ('14', 'society_mineur', null, '{\"garage\":[{\"modAerials\":-1,\"modStruts\":-1,\"health\":933,\"modDial\":-1,\"model\":-1705304628,\"modGrille\":-1,\"windowTint\":-1,\"modPlateHolder\":-1,\"modHydrolic\":-1,\"modSteeringWheel\":-1,\"color2\":86,\"plateIndex\":3,\"modExhaust\":-1,\"modSideSkirt\":-1,\"modSmokeEnabled\":1,\"modRightFender\":-1,\"modTransmission\":-1,\"color1\":121,\"modFrontWheels\":-1,\"modTrimB\":-1,\"modArchCover\":-1,\"modAPlate\":-1,\"modArmor\":-1,\"modVanityPlate\":-1,\"modOrnaments\":-1,\"modSpeakers\":-1,\"wheels\":0,\"modHood\":-1,\"wheelColor\":156,\"modFender\":-1,\"modEngineBlock\":-1,\"modTrimA\":-1,\"modSeats\":-1,\"modSuspension\":-1,\"modDoorSpeaker\":-1,\"modTurbo\":false,\"modHorns\":-1,\"modBackWheels\":-1,\"pearlescentColor\":3,\"plate\":\"KBN 678\",\"modSpoilers\":-1,\"modXenon\":false,\"modLivery\":-1,\"modBrakes\":-1,\"dirtLevel\":12.931418418884,\"neonColor\":[255,0,255],\"modFrontBumper\":-1,\"neonEnabled\":[false,false,false,false],\"modAirFilter\":-1,\"modDashboard\":-1,\"modShifterLeavers\":-1,\"tyreSmokeColor\":[255,255,255],\"modRearBumper\":-1,\"modTrunk\":-1,\"modFrame\":-1,\"modTank\":-1,\"modRoof\":-1,\"modWindows\":-1,\"modEngine\":-1}]}');
 INSERT INTO `datastore_data` VALUES ('15', 'society_weazel', null, '{}');
@@ -484,6 +513,8 @@ INSERT INTO `datastore_data` VALUES ('31', 'society_foodtruck', null, '{}');
 INSERT INTO `datastore_data` VALUES ('32', 'society_pecheur', null, '{}');
 INSERT INTO `datastore_data` VALUES ('89', 'society_bahama', null, '{}');
 INSERT INTO `datastore_data` VALUES ('90', 'society_pizza', null, '{}');
+INSERT INTO `datastore_data` VALUES ('91', 'society_pompiste', null, '{\"garage\":[]}');
+INSERT INTO `datastore_data` VALUES ('92', 'society_mafia', null, '{\"weapons\":[{\"name\":\"WEAPON_KNIFE\",\"count\":1},{\"name\":\"WEAPON_ASSAULTRIFLE\",\"count\":2},{\"name\":\"WEAPON_COMBATPISTOL\",\"count\":2},{\"name\":\"WEAPON_PUMPSHOTGUN\",\"count\":2},{\"name\":\"WEAPON_STUNGUN\",\"count\":1},{\"name\":\"GADGET_PARACHUTE\",\"count\":1}]}');
 
 -- ----------------------------
 -- Table structure for `dock`
@@ -552,6 +583,51 @@ CREATE TABLE `ephone_users_group` (
 -- ----------------------------
 -- Records of ephone_users_group
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `essence`
+-- ----------------------------
+DROP TABLE IF EXISTS `essence`;
+CREATE TABLE `essence` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `montant` varchar(100) NOT NULL DEFAULT '1000',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of essence
+-- ----------------------------
+INSERT INTO `essence` VALUES ('1', '0');
+INSERT INTO `essence` VALUES ('2', '981');
+INSERT INTO `essence` VALUES ('3', '0');
+INSERT INTO `essence` VALUES ('4', '0');
+INSERT INTO `essence` VALUES ('5', '0');
+INSERT INTO `essence` VALUES ('6', '0');
+INSERT INTO `essence` VALUES ('7', '0');
+INSERT INTO `essence` VALUES ('8', '0');
+INSERT INTO `essence` VALUES ('9', '0');
+INSERT INTO `essence` VALUES ('10', '0');
+INSERT INTO `essence` VALUES ('11', '0');
+INSERT INTO `essence` VALUES ('12', '956');
+INSERT INTO `essence` VALUES ('13', '0');
+INSERT INTO `essence` VALUES ('14', '0');
+INSERT INTO `essence` VALUES ('15', '0');
+INSERT INTO `essence` VALUES ('16', '0');
+INSERT INTO `essence` VALUES ('17', '0');
+INSERT INTO `essence` VALUES ('18', '0');
+INSERT INTO `essence` VALUES ('19', '0');
+INSERT INTO `essence` VALUES ('20', '0');
+INSERT INTO `essence` VALUES ('21', '0');
+INSERT INTO `essence` VALUES ('22', '0');
+INSERT INTO `essence` VALUES ('23', '0');
+INSERT INTO `essence` VALUES ('24', '0');
+INSERT INTO `essence` VALUES ('25', '0');
+INSERT INTO `essence` VALUES ('26', '0');
+INSERT INTO `essence` VALUES ('27', '0');
+INSERT INTO `essence` VALUES ('28', '0');
+INSERT INTO `essence` VALUES ('29', '0');
+INSERT INTO `essence` VALUES ('30', '0');
+INSERT INTO `essence` VALUES ('31', '0');
 
 -- ----------------------------
 -- Table structure for `fine_types`
@@ -631,7 +707,7 @@ CREATE TABLE `fine_types_thelostmc` (
   `amount` int(11) DEFAULT NULL,
   `category` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of fine_types_thelostmc
@@ -650,14 +726,14 @@ INSERT INTO `fine_types_thelostmc` VALUES ('7', 'Raket', '350000', '3');
 DROP TABLE IF EXISTS `impounded_vehicles`;
 CREATE TABLE `impounded_vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `plate` varchar(12) DEFAULT NULL,
-  `vehicle` text,
-  `owner` varchar(250) DEFAULT NULL,
+  `plate` varchar(12) COLLATE utf8mb4_bin DEFAULT NULL,
+  `vehicle` text COLLATE utf8mb4_bin,
+  `owner` varchar(250) COLLATE utf8mb4_bin DEFAULT NULL,
   `impounded_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `owner` (`owner`),
   KEY `plate` (`plate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Records of impounded_vehicles
@@ -676,7 +752,7 @@ CREATE TABLE `items` (
   `can_remove` int(11) NOT NULL DEFAULT '1',
   `can_steal` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of items
@@ -708,7 +784,6 @@ INSERT INTO `items` VALUES ('29', 'carotool', 'outils carosserie', '20', '0', '1
 INSERT INTO `items` VALUES ('30', 'blowpipe', 'Chalumeaux', '20', '0', '1', '0');
 INSERT INTO `items` VALUES ('31', 'fixkit', 'Kit réparation', '20', '0', '1', '0');
 INSERT INTO `items` VALUES ('32', 'carokit', 'Kit carosserie', '20', '0', '1', '0');
-INSERT INTO `items` VALUES ('33', 'gps', 'GPS', '5', '0', '1', '0');
 INSERT INTO `items` VALUES ('34', 'cola', 'Cola', '25', '0', '1', '0');
 INSERT INTO `items` VALUES ('35', 'vegetables', 'Légume', '100', '0', '1', '0');
 INSERT INTO `items` VALUES ('36', 'meat', 'Viande', '100', '0', '1', '0');
@@ -795,7 +870,7 @@ INSERT INTO `items` VALUES ('173', 'journal', 'Journal', '50', '0', '1', '0');
 INSERT INTO `items` VALUES ('174', 'journaux', 'Paquet de Journaux', '100', '0', '1', '0');
 INSERT INTO `items` VALUES ('175', 'firstaidkit', 'Kit de survi', '5', '0', '1', '1');
 INSERT INTO `items` VALUES ('176', 'defibrillateur', 'Defibrillateur', '5', '0', '1', '1');
-INSERT INTO `items` VALUES ('177', 'petrol', 'Petrole', '500', '0', '1', '0');
+INSERT INTO `items` VALUES ('177', 'petrole', 'Petrole', '500', '0', '1', '0');
 INSERT INTO `items` VALUES ('178', 'petrol_raffin', 'Petrole Raffine', '500', '0', '1', '0');
 INSERT INTO `items` VALUES ('179', 'essence', 'Essence', '500', '0', '1', '0');
 INSERT INTO `items` VALUES ('180', 'argent_sale', 'Argent Sale', '-1', '0', '1', '0');
@@ -812,8 +887,8 @@ INSERT INTO `items` VALUES ('190', 'alarm1', 'alarm1', '10', '0', '1', '0');
 INSERT INTO `items` VALUES ('191', 'alarm2', 'alarm2', '10', '0', '1', '0');
 INSERT INTO `items` VALUES ('192', 'alarm3', 'alarm3', '10', '0', '1', '0');
 INSERT INTO `items` VALUES ('193', 'coyotte', 'coyotte', '1', '0', '1', '0');
-INSERT INTO `items` VALUES ('194', 'canabis', 'Canabis', '40', '0', '1', '0');
-INSERT INTO `items` VALUES ('195', 'marijuana', 'Marijuana', '14', '0', '1', '0');
+INSERT INTO `items` VALUES ('194', 'cannabis', 'Cannabis', '100', '0', '1', '0');
+INSERT INTO `items` VALUES ('195', 'marijuana', 'Marijuana', '100', '0', '1', '0');
 INSERT INTO `items` VALUES ('196', 'colis', 'colis', '100', '0', '1', '0');
 INSERT INTO `items` VALUES ('197', 'drill', 'drill', '2', '0', '1', '0');
 INSERT INTO `items` VALUES ('198', 'trash', 'Sac Poubelles', '100', '0', '1', '0');
@@ -862,6 +937,17 @@ INSERT INTO `items` VALUES ('240', 'yaourt', 'yaourt', '-1', '0', '1', '0');
 INSERT INTO `items` VALUES ('241', 'chocolachaud', 'chocolachaud', '-1', '0', '1', '0');
 INSERT INTO `items` VALUES ('242', 'café', 'café', '-1', '0', '1', '0');
 INSERT INTO `items` VALUES ('243', 'thé', 'thé', '-1', '0', '1', '0');
+INSERT INTO `items` VALUES ('244', 'virus', 'virus', '-1', '0', '1', '0');
+INSERT INTO `items` VALUES ('245', 'anti', 'anti', '-1', '0', '1', '0');
+INSERT INTO `items` VALUES ('246', 'fish', 'Poissons', '-1', '0', '1', '0');
+INSERT INTO `items` VALUES ('247', 'fishbait', 'Fish Bait', '-1', '0', '1', '0');
+INSERT INTO `items` VALUES ('248', 'fishingrod', 'Fishing Rod', '-1', '0', '1', '0');
+INSERT INTO `items` VALUES ('249', 'shark', 'Shark', '-1', '0', '1', '0');
+INSERT INTO `items` VALUES ('250', 'turtle', 'Sea Turtle', '-1', '0', '1', '0');
+INSERT INTO `items` VALUES ('251', 'turtlebait', 'Turtle Bait', '-1', '0', '1', '0');
+INSERT INTO `items` VALUES ('252', 'bottle', 'bottle', '100', '0', '1', '0');
+INSERT INTO `items` VALUES ('253', 'canabis', 'canabis', '100', '0', '1', '0');
+INSERT INTO `items` VALUES ('254', 'seed_weed', 'seed_weed', '100', '0', '1', '0');
 
 -- ----------------------------
 -- Table structure for `item_weight`
@@ -883,14 +969,10 @@ CREATE TABLE `item_weight` (
 -- ----------------------------
 DROP TABLE IF EXISTS `jail`;
 CREATE TABLE `jail` (
-  `identifier` varchar(100) NOT NULL,
-  `isjailed` tinyint(1) DEFAULT NULL,
-  `J_Time` datetime NOT NULL,
-  `J_Cell` varchar(20) NOT NULL,
-  `Jailer` varchar(100) NOT NULL,
-  `Jailer_ID` varchar(100) NOT NULL,
+  `identifier` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `jail_time` int(10) NOT NULL,
   PRIMARY KEY (`identifier`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Records of jail
@@ -906,7 +988,7 @@ CREATE TABLE `jobs` (
   `label` varchar(255) DEFAULT NULL,
   `whitelisted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of jobs
@@ -939,6 +1021,8 @@ INSERT INTO `jobs` VALUES ('72', 'ferme', 'ferme', '0');
 INSERT INTO `jobs` VALUES ('74', 'pecheur', 'Pécheur', '0');
 INSERT INTO `jobs` VALUES ('75', 'bahama', 'bahama', '0');
 INSERT INTO `jobs` VALUES ('76', 'pizza', 'Domino\'s Pizza', '1');
+INSERT INTO `jobs` VALUES ('77', 'pompiste', 'Pompiste', '0');
+INSERT INTO `jobs` VALUES ('78', 'mafia', 'Bratva Nostra', '1');
 
 -- ----------------------------
 -- Table structure for `job_grades`
@@ -954,7 +1038,7 @@ CREATE TABLE `job_grades` (
   `skin_male` longtext NOT NULL,
   `skin_female` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1133 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1143 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of job_grades
@@ -1037,10 +1121,10 @@ INSERT INTO `job_grades` VALUES ('1051', 'boatdealer', '0', 'recruit', 'Recrue',
 INSERT INTO `job_grades` VALUES ('1052', 'boatdealer', '1', 'novice', 'Novice', '25', '{}', '{}');
 INSERT INTO `job_grades` VALUES ('1053', 'boatdealer', '2', 'experienced', 'Experimente', '40', '{}', '{}');
 INSERT INTO `job_grades` VALUES ('1054', 'boatdealer', '3', 'boss', 'Patron', '0', '{}', '{}');
-INSERT INTO `job_grades` VALUES ('1067', 'state', '0', 'vicepresident', 'Vice-Président', '10000', '{}', '{}');
-INSERT INTO `job_grades` VALUES ('1068', 'state', '3', 'president', 'Président', '18000', '{}', '{}');
-INSERT INTO `job_grades` VALUES ('1069', 'state', '2', 'gouvernment', 'Gouvernement', '33000', '{}', '{}');
-INSERT INTO `job_grades` VALUES ('1070', 'state', '1', 'boss', 'L\'état', '0', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1067', 'state', '0', 'vicepresident', 'Vice-Président', '1', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1068', 'state', '3', 'president', 'Président', '1', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1069', 'state', '2', 'gouvernment', 'Gouvernement', '1', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1070', 'state', '1', 'boss', 'L\'état', '1', '{}', '{}');
 INSERT INTO `job_grades` VALUES ('1079', 'cardealer', '0', 'recruit', 'Recrue', '10', '{}', '{}');
 INSERT INTO `job_grades` VALUES ('1080', 'cardealer', '1', 'novice', 'Novice', '25', '{}', '{}');
 INSERT INTO `job_grades` VALUES ('1081', 'cardealer', '2', 'experienced', 'Experimente', '40', '{}', '{}');
@@ -1075,6 +1159,16 @@ INSERT INTO `job_grades` VALUES ('1129', 'bahama', '4', 'boss', 'Gérant', '600'
 INSERT INTO `job_grades` VALUES ('1130', 'pizza', '0', 'barman', 'Cuisinier', '300', '{}', '{}');
 INSERT INTO `job_grades` VALUES ('1131', 'pizza', '2', 'viceboss', 'Livreur', '500', '{}', '{}');
 INSERT INTO `job_grades` VALUES ('1132', 'pizza', '3', 'boss', 'Patron', '600', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1133', 'pompiste', '0', 'recrue', 'Etudiant', '50', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1134', 'pompiste', '1', 'experimente', 'Employé', '80', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1135', 'pompiste', '2', 'chef', 'Associé', '100', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1136', 'pompiste', '3', 'boss', 'Patron', '150', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1137', 'mafia', '0', 'soldato', 'Recrue', '10', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1138', 'mafia', '2', 'mafioso', 'Mafioso', '10', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1139', 'mafia', '3', 'capo', 'Capo', '10', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1140', 'mafia', '4', 'assassin', 'Assassin', '10', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1141', 'mafia', '5', 'consigliere', 'Consigliere', '10', '{}', '{}');
+INSERT INTO `job_grades` VALUES ('1142', 'mafia', '6', 'boss', 'Le Parrain', '10', '{}', '{}');
 
 -- ----------------------------
 -- Table structure for `licenses`
@@ -1098,7 +1192,24 @@ INSERT INTO `licenses` VALUES ('5', 'weapon', 'Weapon Level : One');
 INSERT INTO `licenses` VALUES ('6', 'weapon2', 'Weapon Level : Two');
 INSERT INTO `licenses` VALUES ('7', 'weapon3', 'Weapon Level : Three');
 INSERT INTO `licenses` VALUES ('8', 'boating', 'Boating License');
-INSERT INTO `licenses` VALUES ('20', 'weapon', 'Permis de port d\'arme');
+INSERT INTO `licenses` VALUES ('9', 'weapon', 'Permis de port d\'arme');
+INSERT INTO `licenses` VALUES ('10', 'boat', 'Boat License');
+INSERT INTO `licenses` VALUES ('11', 'weed_processing', 'Weeb License');
+
+-- ----------------------------
+-- Table structure for `main`
+-- ----------------------------
+DROP TABLE IF EXISTS `main`;
+CREATE TABLE `main` (
+  `id` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `name` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
+  `args` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Records of main
+-- ----------------------------
+INSERT INTO `main` VALUES ('steam:1100001081ca641', 'Bl@ckw@ve.fr', '100');
 
 -- ----------------------------
 -- Table structure for `multi_race`
@@ -1113,10 +1224,12 @@ CREATE TABLE `multi_race` (
   `ended` tinyint(1) NOT NULL,
   `created_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of multi_race
+-- ----------------------------
+INSERT INTO `multi_race` VALUES ('2', 'steam:1100001081ca641', '6', '2', '1', '1', '2018-11-09 16:18:00');
 
 -- ----------------------------
 -- Table structure for `open_car`
@@ -1130,7 +1243,7 @@ CREATE TABLE `open_car` (
   `got` varchar(50) DEFAULT NULL,
   `NB` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of open_car
@@ -1146,7 +1259,7 @@ CREATE TABLE `owned_aircrafts` (
   `owner` varchar(60) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'State of the aircraft',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of owned_aircrafts
@@ -1162,11 +1275,12 @@ CREATE TABLE `owned_boats` (
   `vehicle` longtext,
   `state` varchar(7) DEFAULT NULL,
   PRIMARY KEY (`plate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of owned_boats
 -- ----------------------------
+INSERT INTO `owned_boats` VALUES ('steam:1100001081ca641', 'IKA 443', '{\"modRearBumper\":-1,\"modSmokeEnabled\":1,\"modSuspension\":-1,\"modBackWheels\":-1,\"extras\":[],\"modHydrolic\":-1,\"modFender\":-1,\"modFrontWheels\":-1,\"modSideSkirt\":-1,\"modSpoilers\":-1,\"pearlescentColor\":0,\"modGrille\":-1,\"tyreSmokeColor\":[255,255,255],\"modHorns\":-1,\"modHood\":-1,\"modAerials\":-1,\"modPlateHolder\":-1,\"modBrakes\":-1,\"neonEnabled\":[false,false,false,false],\"modTank\":-1,\"modEngineBlock\":-1,\"modLivery\":-1,\"modDashboard\":-1,\"modDial\":-1,\"modEngine\":-1,\"wheelColor\":156,\"color1\":88,\"modSteeringWheel\":-1,\"plateIndex\":4,\"modExhaust\":-1,\"health\":964,\"modTrimB\":-1,\"modTurbo\":false,\"modFrontBumper\":-1,\"color2\":88,\"modRightFender\":-1,\"modArchCover\":-1,\"modSeats\":-1,\"modArmor\":-1,\"neonColor\":[255,0,255],\"modSpeakers\":-1,\"modVanityPlate\":-1,\"model\":1033245328,\"modDoorSpeaker\":-1,\"modStruts\":-1,\"modAPlate\":-1,\"modTrimA\":-1,\"dirtLevel\":0.0,\"modOrnaments\":-1,\"modTransmission\":-1,\"modRoof\":-1,\"modWindows\":-1,\"modXenon\":false,\"plate\":\"IKA 443\",\"modShifterLeavers\":-1,\"windowTint\":-1,\"wheels\":0,\"modFrame\":-1,\"modTrunk\":-1,\"modAirFilter\":-1}', '1');
 
 -- ----------------------------
 -- Table structure for `owned_properties`
@@ -1190,22 +1304,46 @@ CREATE TABLE `owned_properties` (
 -- ----------------------------
 DROP TABLE IF EXISTS `owned_vehicles`;
 CREATE TABLE `owned_vehicles` (
+  `id` int(11) NOT NULL,
   `owner` varchar(22) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Etat de la voiture',
   `plate` varchar(12) NOT NULL,
   `vehicle` longtext,
   `type` varchar(20) NOT NULL DEFAULT 'car',
-  `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `job` varchar(20) CHARACTER SET utf8mb4 DEFAULT NULL,
   `stored` tinyint(1) NOT NULL DEFAULT '0',
   `fourrieremecano` tinyint(1) NOT NULL DEFAULT '0',
   `vehiclename` varchar(50) NOT NULL DEFAULT 'voiture',
   PRIMARY KEY (`plate`),
   KEY `vehsowned` (`owner`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of owned_vehicles
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `owned_vehicles2`
+-- ----------------------------
+DROP TABLE IF EXISTS `owned_vehicles2`;
+CREATE TABLE `owned_vehicles2` (
+  `owner` varchar(22) NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Etat de la voiture',
+  `plate` varchar(12) NOT NULL,
+  `vehicle` longtext,
+  `type` varchar(20) NOT NULL DEFAULT 'car',
+  `job` varchar(20) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `stored` tinyint(1) NOT NULL DEFAULT '0',
+  `fourrieremecano` tinyint(1) NOT NULL DEFAULT '0',
+  `vehiclename` varchar(50) NOT NULL DEFAULT 'voiture',
+  PRIMARY KEY (`plate`),
+  KEY `vehsowned` (`owner`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of owned_vehicles2
+-- ----------------------------
+
 -- ----------------------------
 -- Table structure for `pawnshop_vehicles`
 -- ----------------------------
@@ -1217,7 +1355,7 @@ CREATE TABLE `pawnshop_vehicles` (
   `vehicle` longtext,
   `price` int(15) NOT NULL,
   PRIMARY KEY (`plate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of pawnshop_vehicles
@@ -1251,11 +1389,12 @@ CREATE TABLE `phone_calls` (
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `accepts` int(11) NOT NULL COMMENT 'Appels accepter ou pas',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of phone_calls
 -- ----------------------------
+INSERT INTO `phone_calls` VALUES ('122', '54642', '59864', '1', '2019-03-30 22:29:14', '0');
 
 -- ----------------------------
 -- Table structure for `phone_messages`
@@ -1270,7 +1409,7 @@ CREATE TABLE `phone_messages` (
   `isRead` int(11) NOT NULL DEFAULT '0',
   `owner` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of phone_messages
@@ -1282,15 +1421,16 @@ CREATE TABLE `phone_messages` (
 DROP TABLE IF EXISTS `phone_users_contacts`;
 CREATE TABLE `phone_users_contacts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifier` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `number` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `display` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '-1',
+  `identifier` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `number` varchar(10) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `display` varchar(64) CHARACTER SET utf8mb4 NOT NULL DEFAULT '-1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of phone_users_contacts
 -- ----------------------------
+INSERT INTO `phone_users_contacts` VALUES ('9', 'steam:1100001081ca641', '59864', 'Rick');
 
 -- ----------------------------
 -- Table structure for `properties`
@@ -1422,7 +1562,7 @@ CREATE TABLE `record_multi` (
   `ended` tinyint(1) NOT NULL,
   `record_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of record_multi
@@ -1461,7 +1601,7 @@ CREATE TABLE `rented_boats` (
   `rent_price` int(11) NOT NULL,
   `owner` varchar(30) NOT NULL,
   PRIMARY KEY (`plate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of rented_boats
@@ -1498,7 +1638,7 @@ CREATE TABLE `rented_vehicles` (
   `rent_price` int(11) NOT NULL,
   `owner` varchar(22) NOT NULL,
   PRIMARY KEY (`plate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of rented_vehicles
@@ -1515,7 +1655,7 @@ CREATE TABLE `shops` (
   `price` int(11) NOT NULL,
   `name` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of shops
@@ -1534,7 +1674,6 @@ INSERT INTO `shops` VALUES ('11', 'TwentyFourSeven', 'cola', '10', null);
 INSERT INTO `shops` VALUES ('12', 'TwentyFourSeven', 'icetea', '12', null);
 INSERT INTO `shops` VALUES ('13', 'TwentyFourSeven', 'soda', '15', null);
 INSERT INTO `shops` VALUES ('14', 'TwentyFourSeven', 'jusfruit', '16', null);
-INSERT INTO `shops` VALUES ('15', 'TwentyFourSeven', 'gps', '50', null);
 INSERT INTO `shops` VALUES ('16', 'TwentyFourSeven', 'lighter', '1', null);
 INSERT INTO `shops` VALUES ('17', 'TwentyFourSeven', 'plongee1', '61', null);
 INSERT INTO `shops` VALUES ('18', 'TwentyFourSeven', 'plongee2', '80', null);
@@ -1555,7 +1694,6 @@ INSERT INTO `shops` VALUES ('32', 'RobsLiquor', 'cola', '10', null);
 INSERT INTO `shops` VALUES ('33', 'RobsLiquor', 'icetea', '12', null);
 INSERT INTO `shops` VALUES ('34', 'RobsLiquor', 'soda', '15', null);
 INSERT INTO `shops` VALUES ('35', 'RobsLiquor', 'jusfruit', '16', null);
-INSERT INTO `shops` VALUES ('36', 'RobsLiquor', 'gps', '50', null);
 INSERT INTO `shops` VALUES ('37', 'RobsLiquor', 'lighter', '1', null);
 INSERT INTO `shops` VALUES ('38', 'RobsLiquor', 'plongee1', '61', null);
 INSERT INTO `shops` VALUES ('39', 'RobsLiquor', 'plongee2', '80', null);
@@ -1576,7 +1714,6 @@ INSERT INTO `shops` VALUES ('53', 'LTDgasoline', 'cola', '10', null);
 INSERT INTO `shops` VALUES ('54', 'LTDgasoline', 'icetea', '12', null);
 INSERT INTO `shops` VALUES ('55', 'LTDgasoline', 'soda', '15', null);
 INSERT INTO `shops` VALUES ('56', 'LTDgasoline', 'jusfruit', '16', null);
-INSERT INTO `shops` VALUES ('57', 'LTDgasoline', 'gps', '50', null);
 INSERT INTO `shops` VALUES ('58', 'LTDgasoline', 'lighter', '1', null);
 INSERT INTO `shops` VALUES ('59', 'LTDgasoline', 'plongee1', '61', null);
 INSERT INTO `shops` VALUES ('60', 'LTDgasoline', 'plongee2', '80', null);
@@ -1595,7 +1732,7 @@ CREATE TABLE `shops2` (
   `price` int(11) NOT NULL,
   `name` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of shops2
@@ -1617,11 +1754,12 @@ CREATE TABLE `society_moneywash` (
   `society` varchar(60) NOT NULL,
   `amount` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of society_moneywash
 -- ----------------------------
+
 -- ----------------------------
 -- Table structure for `solo_race`
 -- ----------------------------
@@ -1634,7 +1772,7 @@ CREATE TABLE `solo_race` (
   `vehicle` int(11) NOT NULL,
   `record_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of solo_race
@@ -1654,7 +1792,7 @@ CREATE TABLE `trucks` (
   `price` int(11) NOT NULL,
   `category` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`model`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of trucks
@@ -1683,6 +1821,7 @@ INSERT INTO `trucks` VALUES ('Pounder', 'pounder', '55000', 'box');
 INSERT INTO `trucks` VALUES ('Rental Bus', 'rentalbus', '35000', 'trans');
 INSERT INTO `trucks` VALUES ('Rubble', 'rubble', '30000', 'other');
 INSERT INTO `trucks` VALUES ('Scrap Truck', 'scrap', '10000', 'other');
+INSERT INTO `trucks` VALUES ('Taxi', 'taxi', '15000', 'other');
 INSERT INTO `trucks` VALUES ('Tipper 1', 'tiptruck', '30000', 'other');
 INSERT INTO `trucks` VALUES ('Tipper 2', 'tiptruck2', '30000', 'other');
 INSERT INTO `trucks` VALUES ('Tour Bus', 'tourbus', '35000', 'trans');
@@ -1696,7 +1835,7 @@ CREATE TABLE `truck_categories` (
   `name` varchar(60) NOT NULL,
   `label` varchar(60) NOT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of truck_categories
@@ -1720,7 +1859,7 @@ CREATE TABLE `truck_inventory` (
   `owned` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `item` (`item`,`plate`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of truck_inventory
@@ -1752,17 +1891,26 @@ CREATE TABLE `users` (
   `height` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '',
   `last_property` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `phone_number` int(11) DEFAULT NULL,
-  `DmvTest` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT 'Required',
+  `DmvTest` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT 'Required',
   `tattoos` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '{}',
   `is_dead` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `vote` varchar(254) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `isFirstConnection` int(11) DEFAULT '1',
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+  `isFirstConnection` int(11) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
+INSERT INTO `users` VALUES ('steam:1100001081ca641', 'license:fcd32157de1fdd7dc4c122113baca4b95ec80013', '45710', 'Bl@ckw@ve.fr', 0x7B2261726D735F32223A302C2262726163656C6574735F32223A302C2268656C6D65745F31223A322C2268656C6D65745F32223A302C2265796562726F77735F32223A382C22686169725F636F6C6F725F31223A392C226579655F636F6C6F72223A302C2262656172645F32223A31302C226D6F6C65735F31223A302C226D6F6C65735F32223A302C2273686F65735F31223A392C22636861696E5F32223A302C22626F6479625F32223A302C22636F6D706C6578696F6E5F31223A302C22656172735F31223A2D312C2265796562726F77735F34223A302C22646563616C735F32223A302C2262656172645F34223A332C226D61736B5F31223A302C2262656172645F31223A31302C226167655F31223A312C226C6970737469636B5F33223A302C226D616B6575705F34223A302C2270616E74735F31223A35352C2262656172645F33223A332C22636861696E5F31223A302C2263686573745F32223A302C2273756E5F31223A302C227473686972745F31223A31352C22736578223A302C2263686573745F33223A302C226C6970737469636B5F31223A302C22646563616C735F31223A302C2265796562726F77735F33223A332C22676C61737365735F32223A302C2270616E74735F32223A332C22626167735F32223A302C22626F6479625F31223A302C22736B696E223A312C22686169725F31223A352C22746F72736F5F31223A37382C2261726D73223A302C22686169725F32223A342C22626C7573685F32223A302C22626C656D69736865735F32223A302C226270726F6F665F31223A302C226C6970737469636B5F32223A302C2273756E5F32223A302C22626C7573685F33223A302C226D616B6575705F33223A302C22626C7573685F31223A302C22676C61737365735F31223A322C2266616365223A34342C226167655F32223A312C22626C656D69736865735F31223A302C2265796562726F77735F31223A322C22746F72736F5F32223A31352C226C6970737469636B5F34223A302C22776174636865735F32223A302C22656172735F32223A302C2263686573745F31223A302C22636F6D706C6578696F6E5F32223A302C227473686972745F32223A302C226D61736B5F32223A302C226D616B6575705F31223A302C2273686F65735F32223A342C226D616B6575705F32223A302C22776174636865735F31223A2D312C22626167735F31223A302C226270726F6F665F32223A302C22686169725F636F6C6F725F32223A302C2262726163656C6574735F31223A2D317D, 'mafia', '6', 0x5B7B226E616D65223A22574541504F4E5F4B4E494645222C226C6162656C223A22436F7574656175222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F4E49474854535449434B222C226C6162656C223A224D61747261717565222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F48414D4D4552222C226C6162656C223A224D617274656175222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F424154222C226C6162656C223A224261747465222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F474F4C46434C5542222C226C6162656C223A22436C756220646520676F6C66222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F43524F57424152222C226C6162656C223A2250696564206465206269636865222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F504953544F4C222C226C6162656C223A22506973746F6C6574222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4150504953544F4C222C226C6162656C223A22506973746F6C6574206175746F6D617469717565222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F504953544F4C3530222C226C6162656C223A22506973746F6C65742063616C69627265203530222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F5245564F4C564552222C226C6162656C223A225265766F6C766572222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F534E53504953544F4C222C226C6162656C223A22506973746F6C657420736E73222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4845415659504953544F4C222C226C6162656C223A22506973746F6C6574206C6F757264222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F56494E54414745504953544F4C222C226C6162656C223A22506973746F6C65742076696E74616765222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4D4943524F534D47222C226C6162656C223A224D6963726F20736D67222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F534D47222C226C6162656C223A22536D67222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F41535341554C54534D47222C226C6162656C223A22536D67206427617373617574222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4D494E49534D47222C226C6162656C223A224D696E6920736D67222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4D414348494E45504953544F4C222C226C6162656C223A22506973746F6C6574206D69747261696C6C657572222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F434F4D424154504457222C226C6162656C223A2241726D652064652064C3A966656E736520706572736F6E6E656C6C65222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F5341574E4F464653484F5447554E222C226C6162656C223A224361726162696E6520C3A02063616E6F6E20736369C3A9222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F41535341554C5453484F5447554E222C226C6162656C223A224361726162696E65206427617373617574222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F42554C4C50555053484F5447554E222C226C6162656C223A224361726162696E652062756C6C707570222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F484541565953484F5447554E222C226C6162656C223A22467573696C20C3A020706F6D7065206C6F757264222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F43415242494E455249464C45222C226C6162656C223A224361726162696E65206427617373617574222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F414456414E4345445249464C45222C226C6162656C223A22467573696C206176616E63C3A9222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F5350454349414C43415242494E45222C226C6162656C223A224361726162696E65207370C3A96369616C65222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F42554C4C5055505249464C45222C226C6162656C223A22467573696C2062756C6C707570222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F434F4D504143545249464C45222C226C6162656C223A22467573696C20636F6D70616374222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4D47222C226C6162656C223A224D69747261696C6C65757365222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F434F4D4241544D47222C226C6162656C223A224D69747261696C6C6575736520646520636F6D626174222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F475553454E42455247222C226C6162656C223A2242616C61796575736520677573656E62657267222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F534E495045525249464C45222C226C6162656C223A22467573696C20646520736E69706572222C22636F6D706F6E656E7473223A5B2273636F7065225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4845415659534E49504552222C226C6162656C223A22467573696C20646520736E69706572206C6F757264222C22636F6D706F6E656E7473223A5B2273636F70655F616476616E636564225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4D41524B534D414E5249464C45222C226C6162656C223A22467573696C206D61726B736D616E222C22636F6D706F6E656E7473223A5B22636C69705F64656661756C74222C2273636F7065225D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4752454E4144454C41554E43484552222C226C6162656C223A224C616E63652D6772656E616465222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32307D2C7B226E616D65223A22574541504F4E5F525047222C226C6162656C223A224C616E63652D726F636B6574222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32307D2C7B226E616D65223A22574541504F4E5F4D494E4947554E222C226C6162656C223A224D696E6967756E222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4752454E414445222C226C6162656C223A224772656E616465222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32357D2C7B226E616D65223A22574541504F4E5F535449434B59424F4D42222C226C6162656C223A22426F6D626520636F6C6C616E7465222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32357D2C7B226E616D65223A22574541504F4E5F534D4F4B454752454E414445222C226C6162656C223A224772656E6164652066756D6967C3A86E65222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32357D2C7B226E616D65223A22574541504F4E5F425A474153222C226C6162656C223A224772656E61646520C3A02067617A20627A222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32357D2C7B226E616D65223A22574541504F4E5F4D4F4C4F544F56222C226C6162656C223A22436F636B7461696C206D6F6C6F746F76222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32357D2C7B226E616D65223A22574541504F4E5F46495245455854494E47554953484552222C226C6162656C223A22457874696E6374657572222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A323030307D2C7B226E616D65223A22574541504F4E5F504554524F4C43414E222C226C6162656C223A224A6572726963616E206427657373656E6365222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A343530307D2C7B226E616D65223A22574541504F4E5F42414C4C222C226C6162656C223A2242616C6C65222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A317D2C7B226E616D65223A22574541504F4E5F424F54544C45222C226C6162656C223A22426F757465696C6C65222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F444147474552222C226C6162656C223A22506F69676E617264222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F46495245574F524B222C226C6162656C223A224665752064276172746966696365222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32307D2C7B226E616D65223A22574541504F4E5F4D55534B4554222C226C6162656C223A224D6F757371756574222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F484F4D494E474C41554E43484552222C226C6162656C223A224C616E63652074C3AA74652D63686572636865757365222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A31307D2C7B226E616D65223A22574541504F4E5F50524F584D494E45222C226C6162656C223A224D696E652064652070726F78696D6974C3A9222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A357D2C7B226E616D65223A22574541504F4E5F534E4F5742414C4C222C226C6162656C223A22426F756C65206465206E65696765222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A31307D2C7B226E616D65223A22574541504F4E5F464C41524547554E222C226C6162656C223A224C616E636520667573C3A9652064652064C3A9747265737365222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32307D2C7B226E616D65223A22574541504F4E5F4D41524B534D414E504953544F4C222C226C6162656C223A22506973746F6C6574206D61726B736D616E222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4B4E55434B4C45222C226C6162656C223A22506F696E6720616DC3A972696361696E222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F48415443484554222C226C6162656C223A224861636865747465222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F5241494C47554E222C226C6162656C223A2243616E6F6E20C3A96CC3A963747269717565222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32307D2C7B226E616D65223A22574541504F4E5F4D414348455445222C226C6162656C223A224D61636865747465222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F535749544348424C414445222C226C6162656C223A22436F757465617520C3A0206372616E206427617272C3AA74222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F444253484F5447554E222C226C6162656C223A22467573696C20C3A020706F6D706520646F75626C652063616E6F6E222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F4155544F53484F5447554E222C226C6162656C223A22467573696C20C3A020706F6D7065206175746F6D617469717565222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A313030307D2C7B226E616D65223A22574541504F4E5F424154544C45415845222C226C6162656C223A22486163686520646520636F6D626174222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F434F4D504143544C41554E43484552222C226C6162656C223A224C616E6365757220636F6D70616374222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32307D2C7B226E616D65223A22574541504F4E5F50495045424F4D42222C226C6162656C223A22426F6D6265207475796175222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A31307D2C7B226E616D65223A22574541504F4E5F504F4F4C435545222C226C6162656C223A2251756575652064652062696C6C617264222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F5752454E4348222C226C6162656C223A22436CC3A9222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F464C4153484C49474854222C226C6162656C223A224C616D706520746F72636865222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A307D2C7B226E616D65223A22574541504F4E5F464C415245222C226C6162656C223A22467573C3A9652044C3A9747265737365222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32357D2C7B226E616D65223A22574541504F4E5F444F55424C45414354494F4E222C226C6162656C223A22446F75626C652D416374696F6E205265766F6C766572222C22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A313030307D5D, '{\"x\":-79.0,\"y\":-1119.1,\"z\":25.8}', '2160', '0', 'superadmin', '100000', 0x5B7B2276616C223A3438383130302C226E616D65223A2268756E676572222C2270657263656E74223A34382E38317D2C7B2276616C223A3634313037352C226E616D65223A22746869727374222C2270657263656E74223A36342E313037357D2C7B2276616C223A302C226E616D65223A226472756E6B222C2270657263656E74223A302E307D2C7B2276616C223A302C226E616D65223A2264727567222C2270657263656E74223A302E307D2C7B2276616C223A302C226E616D65223A226472756E6B222C2270657263656E74223A302E307D5D, 'Test', 'Test', '25/5/1895', 'M', '96', null, '54642', 'Passed', '[{\"collection\":\"mpbeach_overlays\",\"texture\":5}]', '0', 'Aucun candidat', '0');
+INSERT INTO `users` VALUES ('steam:11000011c2a2452', 'license:5afe23862b0ef7243c3e15d1a825adfc53027771', '50', 'Rick Jabs', 0x7B226D6F6C65735F31223A302C226579655F636F6C6F72223A302C2261726D735F32223A302C2266616365223A302C22636861696E5F31223A302C227473686972745F32223A302C2263686573745F31223A302C226C6970737469636B5F34223A302C2262726163656C6574735F31223A2D312C226D616B6575705F34223A302C22626C7573685F31223A302C226D61736B5F32223A302C22776174636865735F31223A2D312C2273756E5F31223A302C22626C656D69736865735F32223A302C2263686573745F32223A302C22626C7573685F32223A302C2262656172645F33223A302C22686169725F636F6C6F725F31223A32322C22636F6D706C6578696F6E5F32223A302C22686169725F31223A362C2273756E5F32223A302C22746F72736F5F31223A31332C22676C61737365735F31223A352C226C6970737469636B5F32223A302C2265796562726F77735F32223A302C2261726D73223A31312C22656172735F32223A302C22626167735F32223A302C226167655F32223A302C22626C656D69736865735F31223A302C226C6970737469636B5F33223A302C2262656172645F31223A31302C2268656C6D65745F31223A2D312C226167655F31223A302C22746F72736F5F32223A352C22686169725F636F6C6F725F32223A32392C226D616B6575705F31223A302C226270726F6F665F31223A302C22626C7573685F33223A302C2273686F65735F31223A392C227473686972745F31223A31352C22676C61737365735F32223A332C2262726163656C6574735F32223A302C226D6F6C65735F32223A302C22776174636865735F32223A302C22636861696E5F32223A302C2265796562726F77735F34223A302C22736578223A302C226270726F6F665F32223A302C22646563616C735F31223A302C2273686F65735F32223A332C2263686573745F33223A302C22636F6D706C6578696F6E5F31223A302C2270616E74735F32223A302C226D616B6575705F33223A302C22656172735F31223A2D312C2268656C6D65745F32223A302C226C6970737469636B5F31223A302C226D61736B5F31223A302C22646563616C735F32223A302C2262656172645F32223A31302C22626F6479625F31223A302C22626F6479625F32223A302C22686169725F32223A302C22736B696E223A352C2265796562726F77735F31223A302C2270616E74735F31223A342C22626167735F31223A302C226D616B6575705F32223A302C2265796562726F77735F33223A302C2262656172645F34223A307D, 'police', '0', 0x5B7B226C6162656C223A224D61747261717565222C22616D6D6F223A302C226E616D65223A22574541504F4E5F4E49474854535449434B222C22636F6D706F6E656E7473223A5B5D7D5D, '{\"y\":-525.5,\"z\":31.2,\"x\":-1265.5}', '10250', '3', 'user', '0', 0x5B7B2276616C223A3838333630302C226E616D65223A2268756E676572222C2270657263656E74223A38382E33367D2C7B2276616C223A3931323730302C226E616D65223A22746869727374222C2270657263656E74223A39312E32377D2C7B2276616C223A302C226E616D65223A226472756E6B222C2270657263656E74223A302E307D2C7B2276616C223A302C226E616D65223A2264727567222C2270657263656E74223A302E307D2C7B2276616C223A302C226E616D65223A226472756E6B222C2270657263656E74223A302E307D5D, 'Rick', 'Dabs', '12/15/1999', 'M', '58', null, '58491', 'Required', '{}', null, null, '1');
+INSERT INTO `users` VALUES ('steam:11000011b6e7ebf', 'license:2413f49b8038eae6664180f40ec5944d61aefa26', '100000', 'Nalmir', 0x7B22746F72736F5F32223A302C22636861696E5F31223A302C2270616E74735F31223A302C2263686573745F33223A302C22626F6479625F31223A302C22646563616C735F32223A302C22626F6479625F32223A302C22676C61737365735F31223A302C22776174636865735F32223A302C22626C656D69736865735F31223A302C22656172735F31223A2D312C22736B696E223A322C2262656172645F34223A302C226579655F636F6C6F72223A302C22686169725F32223A312C2262656172645F31223A302C2265796562726F77735F34223A302C2262726163656C6574735F31223A2D312C2263686573745F32223A302C2268656C6D65745F32223A302C2273756E5F31223A302C22636F6D706C6578696F6E5F31223A302C22736578223A302C226D616B6575705F34223A302C226167655F31223A302C226C6970737469636B5F31223A302C22646563616C735F31223A302C2265796562726F77735F32223A302C22776174636865735F31223A2D312C226D616B6575705F33223A302C2262726163656C6574735F32223A302C22626C7573685F31223A302C2265796562726F77735F33223A302C2273756E5F32223A302C2261726D735F32223A302C227473686972745F31223A302C22686169725F31223A322C2270616E74735F32223A302C22686169725F636F6C6F725F32223A312C22676C61737365735F32223A302C226D61736B5F31223A302C22626C656D69736865735F32223A302C22626C7573685F33223A302C226167655F32223A302C226C6970737469636B5F32223A302C22626C7573685F32223A302C226D616B6575705F31223A302C226270726F6F665F31223A302C226C6970737469636B5F34223A302C22626167735F31223A302C2273686F65735F32223A302C2265796562726F77735F31223A302C2261726D73223A302C2266616365223A302C2273686F65735F31223A302C226D616B6575705F32223A302C226270726F6F665F32223A302C2268656C6D65745F31223A2D312C22626167735F32223A302C2262656172645F32223A302C226D6F6C65735F31223A302C2263686573745F31223A302C227473686972745F32223A302C22746F72736F5F31223A302C226D6F6C65735F32223A302C22686169725F636F6C6F725F31223A312C226D61736B5F32223A302C226C6970737469636B5F33223A302C22656172735F32223A302C2262656172645F33223A302C22636861696E5F32223A302C22636F6D706C6578696F6E5F32223A307D, 'mechanic', '0', 0x5B5D, '{\"z\":-7.3,\"x\":-434.4,\"y\":-2244.7}', '7872', '0', 'admin', '0', 0x5B7B2276616C223A3136393530302C2270657263656E74223A31362E39352C226E616D65223A2268756E676572227D2C7B2276616C223A3235323132352C2270657263656E74223A32352E323132352C226E616D65223A22746869727374227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A2264727567227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D5D, '', '', '', '', '', null, '54456', 'Required', '{}', '1', null, '1');
+INSERT INTO `users` VALUES ('steam:110000113554092', 'license:e874b920cc16d7c7be2dd1d536ed573b5b286c1d', '65000', 'haithem213', 0x7B22746F72736F5F32223A352C22636861696E5F31223A302C2270616E74735F31223A352C2266616365223A302C22626F6479625F31223A302C226C6970737469636B5F32223A302C22626F6479625F32223A302C22676C61737365735F31223A302C22776174636865735F32223A302C22626C656D69736865735F31223A302C22656172735F31223A31372C22736B696E223A342C2262656172645F34223A302C22626C656D69736865735F32223A302C22686169725F32223A302C2262656172645F31223A372C2265796562726F77735F34223A302C2262726163656C6574735F31223A2D312C227473686972745F32223A302C2268656C6D65745F32223A302C2273756E5F31223A302C22636861696E5F32223A302C22736578223A302C226D616B6575705F34223A302C226167655F31223A302C226C6970737469636B5F31223A302C22646563616C735F31223A302C2265796562726F77735F32223A302C22776174636865735F31223A2D312C2273686F65735F32223A302C2262726163656C6574735F32223A302C22626C7573685F31223A302C2265796562726F77735F33223A302C2273756E5F32223A302C2261726D735F32223A302C227473686972745F31223A312C22686169725F31223A372C2270616E74735F32223A352C226270726F6F665F31223A302C22676C61737365735F32223A302C226D61736B5F31223A302C2263686573745F33223A302C22626C7573685F33223A302C226D616B6575705F32223A302C2262656172645F33223A302C226D616B6575705F33223A302C226D616B6575705F31223A302C2268656C6D65745F31223A2D312C226C6970737469636B5F34223A302C22626167735F31223A302C226579655F636F6C6F72223A372C226270726F6F665F32223A302C2273686F65735F31223A382C2265796562726F77735F31223A302C226D6F6C65735F31223A302C2263686573745F31223A302C22646563616C735F32223A302C22686169725F636F6C6F725F32223A302C22626167735F32223A302C2261726D73223A302C22626C7573685F32223A302C22636F6D706C6578696F6E5F31223A302C226C6970737469636B5F33223A302C22746F72736F5F31223A332C226D6F6C65735F32223A302C22686169725F636F6C6F725F31223A332C226D61736B5F32223A302C2263686573745F32223A302C226167655F32223A302C2262656172645F32223A31302C22656172735F32223A302C22636F6D706C6578696F6E5F32223A307D, 'eboueur', '3', 0x5B7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224D61747261717565222C226E616D65223A22574541504F4E5F4E49474854535449434B222C22616D6D6F223A307D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224261747465222C226E616D65223A22574541504F4E5F424154222C22616D6D6F223A307D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226C6162656C223A22506973746F6C6574222C226E616D65223A22574541504F4E5F504953544F4C222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226C6162656C223A224D6963726F20736D67222C226E616D65223A22574541504F4E5F4D4943524F534D47222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A22467573696C20C3A020706F6D7065222C226E616D65223A22574541504F4E5F50554D5053484F5447554E222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226C6162656C223A22467573696C206427617373617574222C226E616D65223A22574541504F4E5F41535341554C545249464C45222C22616D6D6F223A38347D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226C6162656C223A224361726162696E65207370C3A96369616C65222C226E616D65223A22574541504F4E5F5350454349414C43415242494E45222C22616D6D6F223A38347D2C7B22636F6D706F6E656E7473223A5B2273636F7065225D2C226C6162656C223A22467573696C20646520736E69706572222C226E616D65223A22574541504F4E5F534E495045525249464C45222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224772656E616465222C226E616D65223A22574541504F4E5F4752454E414445222C22616D6D6F223A32317D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224772656E6164652066756D6967C3A86E65222C226E616D65223A22574541504F4E5F534D4F4B454752454E414445222C22616D6D6F223A32357D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224772656E61646520C3A02067617A20627A222C226E616D65223A22574541504F4E5F425A474153222C22616D6D6F223A32357D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A22457874696E6374657572222C226E616D65223A22574541504F4E5F46495245455854494E47554953484552222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A2242616C6C65222C226E616D65223A22574541504F4E5F42414C4C222C22616D6D6F223A317D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224665752064276172746966696365222C226E616D65223A22574541504F4E5F46495245574F524B222C22616D6D6F223A31347D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A2254617A6572222C226E616D65223A22574541504F4E5F5354554E47554E222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224D61636865747465222C226E616D65223A22574541504F4E5F4D414348455445222C22616D6D6F223A307D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224C616D706520746F72636865222C226E616D65223A22574541504F4E5F464C4153484C49474854222C22616D6D6F223A307D5D, '{\"z\":30.5,\"x\":-316.9,\"y\":6079.3}', '10450', '0', 'user', '0', 0x5B7B2276616C223A3438383330302C2270657263656E74223A34382E38332C226E616D65223A2268756E676572227D2C7B2276616C223A3439313232352C2270657263656E74223A34392E313232352C226E616D65223A22746869727374227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A2264727567227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D5D, 'Ibrahim', 'Bakyl', '29/11/1995', 'M', '75', null, '89450', 'Required', '{}', '1', null, '1');
+INSERT INTO `users` VALUES ('steam:11000013637a0fc', 'license:881021dfd226ef5cde9f2b059383f7b74b6f412e', '0', 'Yacine Belaoui', 0x7B2262656172645F33223A312C2265796562726F77735F33223A302C22676C61737365735F31223A302C226D6F6C65735F31223A302C2273686F65735F32223A302C2261726D73223A332C22746F72736F5F32223A362C22656172735F32223A302C226167655F31223A302C226167655F32223A302C22736578223A302C22636F6D706C6578696F6E5F32223A302C22636F6D706C6578696F6E5F31223A302C226D616B6575705F31223A302C22686169725F636F6C6F725F32223A312C2270616E74735F31223A332C22686169725F31223A312C22776174636865735F32223A302C22626F6479625F32223A302C2262656172645F31223A302C22626C656D69736865735F31223A302C226D61736B5F31223A302C2273686F65735F31223A302C22636861696E5F31223A302C22746F72736F5F31223A32362C2265796562726F77735F31223A302C22676C61737365735F32223A302C22736B696E223A302C22626167735F31223A302C226579655F636F6C6F72223A302C2263686573745F32223A302C2265796562726F77735F32223A302C226D616B6575705F34223A302C226C6970737469636B5F31223A302C2265796562726F77735F34223A302C226270726F6F665F32223A302C22626C7573685F33223A302C22646563616C735F32223A302C2262726163656C6574735F31223A2D312C227473686972745F32223A302C22646563616C735F31223A362C22656172735F31223A2D312C226D616B6575705F32223A302C226D61736B5F32223A302C22626C7573685F31223A302C2261726D735F32223A302C22626F6479625F31223A302C2266616365223A342C226D6F6C65735F32223A302C2262656172645F34223A302C226C6970737469636B5F33223A302C226D616B6575705F33223A302C22686169725F32223A302C2270616E74735F32223A342C22626C7573685F32223A302C2273756E5F32223A302C227473686972745F31223A31352C2263686573745F31223A302C226C6970737469636B5F34223A302C22686169725F636F6C6F725F31223A382C2273756E5F31223A302C2262726163656C6574735F32223A302C226C6970737469636B5F32223A302C226270726F6F665F31223A312C2263686573745F33223A302C22626167735F32223A302C22626C656D69736865735F32223A302C2262656172645F32223A322C2268656C6D65745F31223A2D312C22636861696E5F32223A302C22776174636865735F31223A2D312C2268656C6D65745F32223A307D, 'unemployed', '0', 0x5B7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22465553494C222C22616D6D6F223A3230307D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A224B4E494645222C22616D6D6F223A317D5D, '{\"z\":32.2,\"x\":-331.4,\"y\":6059.7}', '7650', '3', 'admin', '0', 0x5B7B2276616C223A3530303030302C2270657263656E74223A35302E302C226E616D65223A2268756E676572227D2C7B2276616C223A3530303030302C2270657263656E74223A35302E302C226E616D65223A22746869727374227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A2264727567227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D5D, 'yacine ', 'belaoui', '16/12/1990', 'm', '60', null, '94520', 'Required', '{}', '0', null, '1');
+INSERT INTO `users` VALUES ('steam:1100001348f3450', 'license:5da09311e5b240ca3268de99299323b65fa792c6', '45000', 'Gibril Salah', 0x7B2273756E5F32223A302C2265796562726F77735F33223A302C22676C61737365735F31223A302C226D6F6C65735F31223A302C2273686F65735F32223A302C2261726D73223A302C22686169725F636F6C6F725F31223A32392C22656172735F32223A302C226167655F31223A302C226167655F32223A302C22736578223A302C22636F6D706C6578696F6E5F32223A302C22636F6D706C6578696F6E5F31223A302C226D616B6575705F31223A302C22686169725F636F6C6F725F32223A32392C22626167735F32223A302C226D616B6575705F33223A302C22776174636865735F32223A302C22626F6479625F32223A302C2262656172645F31223A302C22626C656D69736865735F31223A302C226D61736B5F31223A302C2273686F65735F31223A302C22636861696E5F31223A302C22746F72736F5F31223A302C2265796562726F77735F31223A302C22676C61737365735F32223A302C22736B696E223A302C22626167735F31223A302C226579655F636F6C6F72223A302C22686169725F32223A302C2265796562726F77735F32223A302C226D616B6575705F34223A302C226C6970737469636B5F31223A302C2265796562726F77735F34223A302C226270726F6F665F32223A302C22626C7573685F33223A302C2263686573745F33223A302C2262726163656C6574735F31223A2D312C227473686972745F32223A302C22626C7573685F32223A302C22656172735F31223A2D312C226D616B6575705F32223A302C22776174636865735F31223A2D312C22626C7573685F31223A302C2262656172645F32223A302C22626F6479625F31223A302C226270726F6F665F31223A302C22646563616C735F32223A302C2262656172645F34223A302C226C6970737469636B5F33223A302C2273756E5F31223A302C2263686573745F32223A302C226D61736B5F32223A302C2262656172645F33223A302C22746F72736F5F32223A302C226D6F6C65735F32223A302C2268656C6D65745F31223A2D312C226C6970737469636B5F34223A302C22636861696E5F32223A302C2263686573745F31223A302C22686169725F31223A35302C226C6970737469636B5F32223A302C2268656C6D65745F32223A302C2270616E74735F31223A302C227473686972745F31223A302C2270616E74735F32223A302C2261726D735F32223A302C2266616365223A322C2262726163656C6574735F32223A302C22646563616C735F31223A302C22626C656D69736865735F32223A307D, 'tabac', '0', 0x5B7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224D61747261717565222C226E616D65223A22574541504F4E5F4E49474854535449434B222C22616D6D6F223A307D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224261747465222C226E616D65223A22574541504F4E5F424154222C22616D6D6F223A307D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226C6162656C223A22506973746F6C6574222C226E616D65223A22574541504F4E5F504953544F4C222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226C6162656C223A224D6963726F20736D67222C226E616D65223A22574541504F4E5F4D4943524F534D47222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A22467573696C20C3A020706F6D7065222C226E616D65223A22574541504F4E5F50554D5053484F5447554E222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226C6162656C223A22467573696C206427617373617574222C226E616D65223A22574541504F4E5F41535341554C545249464C45222C22616D6D6F223A33367D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226C6162656C223A224361726162696E65207370C3A96369616C65222C226E616D65223A22574541504F4E5F5350454349414C43415242494E45222C22616D6D6F223A33367D2C7B22636F6D706F6E656E7473223A5B2273636F7065225D2C226C6162656C223A22467573696C20646520736E69706572222C226E616D65223A22574541504F4E5F534E495045525249464C45222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224772656E616465222C226E616D65223A22574541504F4E5F4752454E414445222C22616D6D6F223A32357D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224772656E6164652066756D6967C3A86E65222C226E616D65223A22574541504F4E5F534D4F4B454752454E414445222C22616D6D6F223A32357D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224772656E61646520C3A02067617A20627A222C226E616D65223A22574541504F4E5F425A474153222C22616D6D6F223A32357D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A22457874696E6374657572222C226E616D65223A22574541504F4E5F46495245455854494E47554953484552222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A2242616C6C65222C226E616D65223A22574541504F4E5F42414C4C222C22616D6D6F223A317D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224665752064276172746966696365222C226E616D65223A22574541504F4E5F46495245574F524B222C22616D6D6F223A31367D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A2254617A6572222C226E616D65223A22574541504F4E5F5354554E47554E222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224D61636865747465222C226E616D65223A22574541504F4E5F4D414348455445222C22616D6D6F223A307D2C7B22636F6D706F6E656E7473223A5B5D2C226C6162656C223A224C616D706520746F72636865222C226E616D65223A22574541504F4E5F464C4153484C49474854222C22616D6D6F223A307D5D, '{\"z\":38.2,\"x\":-327.0,\"y\":6074.4}', '10450', '0', 'user', '0', 0x5B7B2276616C223A3438373130302C2270657263656E74223A34382E37312C226E616D65223A2268756E676572227D2C7B2276616C223A3439303332352C2270657263656E74223A34392E303332352C226E616D65223A22746869727374227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A2264727567227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D5D, '', '', '', '', '', null, '75891', 'Required', '{}', '0', null, '1');
+INSERT INTO `users` VALUES ('steam:110000131ed4e6e', 'license:7f5345d70fd344f20c2c1796c1dad6a46d0970ab', '99770', 'Mr.Pyrones', null, 'unicorn', '0', 0x5B7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F4E49474854535449434B222C226C6162656C223A224D61747261717565222C22616D6D6F223A307D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F424154222C226C6162656C223A224261747465222C22616D6D6F223A307D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226E616D65223A22574541504F4E5F504953544F4C222C226C6162656C223A22506973746F6C6574222C22616D6D6F223A34317D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226E616D65223A22574541504F4E5F4D4943524F534D47222C226C6162656C223A224D6963726F20736D67222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F50554D5053484F5447554E222C226C6162656C223A22467573696C20C3A020706F6D7065222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226E616D65223A22574541504F4E5F41535341554C545249464C45222C226C6162656C223A22467573696C206427617373617574222C22616D6D6F223A38347D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C226E616D65223A22574541504F4E5F5350454349414C43415242494E45222C226C6162656C223A224361726162696E65207370C3A96369616C65222C22616D6D6F223A38347D2C7B22636F6D706F6E656E7473223A5B2273636F7065225D2C226E616D65223A22574541504F4E5F534E495045525249464C45222C226C6162656C223A22467573696C20646520736E69706572222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F4752454E414445222C226C6162656C223A224772656E616465222C22616D6D6F223A32337D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F534D4F4B454752454E414445222C226C6162656C223A224772656E6164652066756D6967C3A86E65222C22616D6D6F223A32357D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F425A474153222C226C6162656C223A224772656E61646520C3A02067617A20627A222C22616D6D6F223A32357D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F46495245455854494E47554953484552222C226C6162656C223A22457874696E6374657572222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F42414C4C222C226C6162656C223A2242616C6C65222C22616D6D6F223A317D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F46495245574F524B222C226C6162656C223A224665752064276172746966696365222C22616D6D6F223A397D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F5354554E47554E222C226C6162656C223A2254617A6572222C22616D6D6F223A34327D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F4D414348455445222C226C6162656C223A224D61636865747465222C22616D6D6F223A307D2C7B22636F6D706F6E656E7473223A5B5D2C226E616D65223A22574541504F4E5F464C4153484C49474854222C226C6162656C223A224C616D706520746F72636865222C22616D6D6F223A307D5D, '{\"z\":31.1,\"x\":-305.7,\"y\":6072.8}', '10150', '0', 'user', '0', 0x5B7B2276616C223A3438353130302C2270657263656E74223A34382E35312C226E616D65223A2268756E676572227D2C7B2276616C223A3438383832352C2270657263656E74223A34382E383832352C226E616D65223A22746869727374227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A2264727567227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D5D, 'Jack', 'Ass', '01/02/0304', 'M', '99', null, '15201', 'Required', '{}', '0', null, '1');
+INSERT INTO `users` VALUES ('steam:1100001097c1dc7', 'license:7fa64789210b55ec11ba15bb3d58c77eb15464bb', '1371069', 'Marek Magdalena', 0x7B2273756E5F32223A302C2265796562726F77735F33223A302C22676C61737365735F31223A302C226D6F6C65735F31223A302C2273686F65735F32223A302C2261726D73223A302C22686169725F636F6C6F725F31223A302C22656172735F32223A302C226167655F31223A302C226167655F32223A302C22736578223A302C22636F6D706C6578696F6E5F32223A302C226D6F6C65735F32223A302C226D616B6575705F31223A302C22686169725F636F6C6F725F32223A302C22626167735F32223A302C226D616B6575705F33223A302C22776174636865735F32223A302C22626F6479625F32223A302C2262656172645F31223A302C22626C656D69736865735F31223A302C226D61736B5F31223A302C2273686F65735F31223A302C22636861696E5F31223A302C22746F72736F5F31223A302C2265796562726F77735F31223A302C22676C61737365735F32223A302C22736B696E223A302C22626167735F31223A302C226579655F636F6C6F72223A302C2263686573745F32223A302C2265796562726F77735F32223A302C2262726163656C6574735F32223A302C226C6970737469636B5F31223A302C2265796562726F77735F34223A302C226270726F6F665F32223A302C22626C7573685F33223A302C2263686573745F33223A302C2262726163656C6574735F31223A2D312C227473686972745F32223A302C22626C7573685F32223A302C227473686972745F31223A302C226D616B6575705F32223A302C226D61736B5F32223A302C22626C7573685F31223A302C2261726D735F32223A302C22626F6479625F31223A302C226C6970737469636B5F33223A302C226270726F6F665F31223A302C2262656172645F34223A302C22636861696E5F32223A302C2263686573745F31223A302C22656172735F31223A2D312C22646563616C735F31223A302C2262656172645F32223A302C2262656172645F33223A302C22686169725F32223A302C22636F6D706C6578696F6E5F31223A302C22746F72736F5F32223A302C226C6970737469636B5F34223A302C2273756E5F31223A302C22646563616C735F32223A302C226C6970737469636B5F32223A302C2268656C6D65745F32223A302C22686169725F31223A302C2270616E74735F31223A302C22626C656D69736865735F32223A302C22776174636865735F31223A2D312C2268656C6D65745F31223A2D312C2266616365223A302C226D616B6575705F34223A302C2270616E74735F32223A307D, 'unemployed', '0', 0x5B7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A34322C226C6162656C223A22506973746F6C6574222C226E616D65223A22574541504F4E5F504953544F4C227D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A34322C226C6162656C223A224D6963726F20736D67222C226E616D65223A22574541504F4E5F4D4943524F534D47227D2C7B22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32392C226C6162656C223A22467573696C20C3A020706F6D7065222C226E616D65223A22574541504F4E5F50554D5053484F5447554E227D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A33322C226C6162656C223A22467573696C206427617373617574222C226E616D65223A22574541504F4E5F41535341554C545249464C45227D2C7B22636F6D706F6E656E7473223A5B22636C69705F64656661756C74225D2C22616D6D6F223A33322C226C6162656C223A224361726162696E65207370C3A96369616C65222C226E616D65223A22574541504F4E5F5350454349414C43415242494E45227D2C7B22636F6D706F6E656E7473223A5B2273636F7065225D2C22616D6D6F223A34302C226C6162656C223A22467573696C20646520736E69706572222C226E616D65223A22574541504F4E5F534E495045525249464C45227D2C7B22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A32352C226C6162656C223A224772656E616465222C226E616D65223A22574541504F4E5F4752454E414445227D2C7B22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A302C226C6162656C223A22457874696E6374657572222C226E616D65223A22574541504F4E5F46495245455854494E47554953484552227D2C7B22636F6D706F6E656E7473223A5B5D2C22616D6D6F223A34322C226C6162656C223A2254617A6572222C226E616D65223A22574541504F4E5F5354554E47554E227D5D, '{\"z\":31.3,\"x\":-318.7,\"y\":6074.6}', '998520451', '0', 'user', '0', 0x5B7B2276616C223A3439393430302C2270657263656E74223A34392E39342C226E616D65223A2268756E676572227D2C7B2276616C223A3439393535302C2270657263656E74223A34392E3935352C226E616D65223A22746869727374227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A2264727567227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D5D, 'Marek', 'Lapite', '', '', '', null, '65461', 'Required', '{}', '0', null, '1');
+INSERT INTO `users` VALUES ('steam:11000011451b0d5', 'license:4e1816f81b45a624eea855e17cbcfc4bd22e6acb', '100', 'Anthony F.', null, 'unemployed', '0', 0x5B5D, '{\"z\":71.1,\"x\":-825.5,\"y\":176.8}', '10000', '0', 'user', '0', 0x5B7B2276616C223A3939373030302C2270657263656E74223A39392E372C226E616D65223A2268756E676572227D2C7B2276616C223A3939373735302C2270657263656E74223A39392E3737352C226E616D65223A22746869727374227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A2264727567227D2C7B2276616C223A302C2270657263656E74223A302E302C226E616D65223A226472756E6B227D5D, '', '', '', '', '', null, '49563', 'Required', '{}', null, null, '1');
+
 -- ----------------------------
 -- Table structure for `user_accounts`
 -- ----------------------------
@@ -1778,6 +1926,16 @@ CREATE TABLE `user_accounts` (
 -- ----------------------------
 -- Records of user_accounts
 -- ----------------------------
+INSERT INTO `user_accounts` VALUES ('38', 'steam:1100001081ca641', 'black_money', '7704994');
+INSERT INTO `user_accounts` VALUES ('39', 'steam:11000011c2a2452', 'black_money', '0');
+INSERT INTO `user_accounts` VALUES ('40', 'steam:110000131ed4e6e', 'black_money', '0');
+INSERT INTO `user_accounts` VALUES ('41', 'steam:11000011b6e7ebf', 'black_money', '0');
+INSERT INTO `user_accounts` VALUES ('42', 'steam:110000113554092', 'black_money', '0');
+INSERT INTO `user_accounts` VALUES ('43', 'steam:11000013637a0fc', 'black_money', '0');
+INSERT INTO `user_accounts` VALUES ('44', 'steam:1100001348f3450', 'black_money', '0');
+INSERT INTO `user_accounts` VALUES ('45', 'steam:1100001097c1dc7', 'black_money', '0');
+INSERT INTO `user_accounts` VALUES ('46', 'steam:11000011451b0d5', 'black_money', '0');
+
 -- ----------------------------
 -- Table structure for `user_contacts`
 -- ----------------------------
@@ -1820,7 +1978,478 @@ CREATE TABLE `user_inventory` (
   `item` varchar(255) NOT NULL,
   `count` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6880 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7032 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_inventory
+-- ----------------------------
+INSERT INTO `user_inventory` VALUES ('6565', 'steam:1100001097c1dc7', 'farine_blé_premium', '0');
+INSERT INTO `user_inventory` VALUES ('6566', 'steam:1100001097c1dc7', 'thon', '0');
+INSERT INTO `user_inventory` VALUES ('6567', 'steam:1100001097c1dc7', 'gazbottle', '0');
+INSERT INTO `user_inventory` VALUES ('6568', 'steam:1100001097c1dc7', 'jagercerbere', '0');
+INSERT INTO `user_inventory` VALUES ('6569', 'steam:1100001097c1dc7', 'stone', '0');
+INSERT INTO `user_inventory` VALUES ('6570', 'steam:1100001097c1dc7', 'sandwich', '0');
+INSERT INTO `user_inventory` VALUES ('6571', 'steam:1100001097c1dc7', 'alarm2', '0');
+INSERT INTO `user_inventory` VALUES ('6572', 'steam:1100001097c1dc7', 'poisson_préparé', '0');
+INSERT INTO `user_inventory` VALUES ('6573', 'steam:1100001097c1dc7', 'diamon', '0');
+INSERT INTO `user_inventory` VALUES ('6574', 'steam:1100001097c1dc7', 'bolchips', '0');
+INSERT INTO `user_inventory` VALUES ('6575', 'steam:1100001097c1dc7', 'alarm3', '0');
+INSERT INTO `user_inventory` VALUES ('6576', 'steam:1100001097c1dc7', 'silvermedal', '0');
+INSERT INTO `user_inventory` VALUES ('6577', 'steam:1100001097c1dc7', 'bolcacahuetes', '0');
+INSERT INTO `user_inventory` VALUES ('6578', 'steam:1100001097c1dc7', 'copper', '0');
+INSERT INTO `user_inventory` VALUES ('6579', 'steam:1100001097c1dc7', 'lighter', '0');
+INSERT INTO `user_inventory` VALUES ('6580', 'steam:1100001097c1dc7', 'samoussa_crevette', '0');
+INSERT INTO `user_inventory` VALUES ('6581', 'steam:1100001097c1dc7', 'vodkafruit', '0');
+INSERT INTO `user_inventory` VALUES ('6582', 'steam:1100001097c1dc7', 'blowpipe', '0');
+INSERT INTO `user_inventory` VALUES ('6583', 'steam:1100001097c1dc7', 'colis', '0');
+INSERT INTO `user_inventory` VALUES ('6584', 'steam:1100001097c1dc7', 'water', '0');
+INSERT INTO `user_inventory` VALUES ('6585', 'steam:1100001097c1dc7', 'fabric', '0');
+INSERT INTO `user_inventory` VALUES ('6586', 'steam:1100001097c1dc7', 'carokit', '0');
+INSERT INTO `user_inventory` VALUES ('6587', 'steam:1100001097c1dc7', 'blé', '0');
+INSERT INTO `user_inventory` VALUES ('6588', 'steam:1100001097c1dc7', 'lingot', '0');
+INSERT INTO `user_inventory` VALUES ('6589', 'steam:1100001097c1dc7', 'boite_thon', '0');
+INSERT INTO `user_inventory` VALUES ('6590', 'steam:1100001097c1dc7', 'beer', '0');
+INSERT INTO `user_inventory` VALUES ('6591', 'steam:1100001097c1dc7', 'firstaidkit', '0');
+INSERT INTO `user_inventory` VALUES ('6592', 'steam:1100001097c1dc7', 'poisson_lave', '0');
+INSERT INTO `user_inventory` VALUES ('6593', 'steam:1100001097c1dc7', 'feuilletab', '0');
+INSERT INTO `user_inventory` VALUES ('6594', 'steam:1100001097c1dc7', 'grapperaisin', '0');
+INSERT INTO `user_inventory` VALUES ('6595', 'steam:1100001097c1dc7', 'cigarett', '0');
+INSERT INTO `user_inventory` VALUES ('6596', 'steam:1100001097c1dc7', 'xanax', '0');
+INSERT INTO `user_inventory` VALUES ('6597', 'steam:1100001097c1dc7', 'cola', '0');
+INSERT INTO `user_inventory` VALUES ('6598', 'steam:1100001097c1dc7', 'icetea', '0');
+INSERT INTO `user_inventory` VALUES ('6599', 'steam:1100001097c1dc7', 'metreshooter', '0');
+INSERT INTO `user_inventory` VALUES ('6600', 'steam:1100001097c1dc7', 'clothe', '0');
+INSERT INTO `user_inventory` VALUES ('6601', 'steam:1100001097c1dc7', 'poubelle', '0');
+INSERT INTO `user_inventory` VALUES ('6602', 'steam:1100001097c1dc7', 'alarminterface', '0');
+INSERT INTO `user_inventory` VALUES ('6603', 'steam:1100001097c1dc7', 'opium', '0');
+INSERT INTO `user_inventory` VALUES ('6604', 'steam:1100001097c1dc7', 'iron', '0');
+INSERT INTO `user_inventory` VALUES ('6605', 'steam:1100001097c1dc7', 'marijuana', '0');
+INSERT INTO `user_inventory` VALUES ('6606', 'steam:1100001097c1dc7', 'soda', '0');
+INSERT INTO `user_inventory` VALUES ('6607', 'steam:1100001097c1dc7', 'permis', '0');
+INSERT INTO `user_inventory` VALUES ('6608', 'steam:1100001097c1dc7', 'mojito', '0');
+INSERT INTO `user_inventory` VALUES ('6609', 'steam:1100001097c1dc7', 'packaged_chicken', '0');
+INSERT INTO `user_inventory` VALUES ('6610', 'steam:1100001097c1dc7', 'hammerwirecutter', '10');
+INSERT INTO `user_inventory` VALUES ('6611', 'steam:1100001097c1dc7', 'bandage', '0');
+INSERT INTO `user_inventory` VALUES ('6612', 'steam:1100001097c1dc7', 'sacbillets', '0');
+INSERT INTO `user_inventory` VALUES ('6613', 'steam:1100001097c1dc7', 'vodkaenergy', '0');
+INSERT INTO `user_inventory` VALUES ('6614', 'steam:1100001097c1dc7', 'pierreb', '0');
+INSERT INTO `user_inventory` VALUES ('6615', 'steam:1100001097c1dc7', 'meat', '0');
+INSERT INTO `user_inventory` VALUES ('6616', 'steam:1100001097c1dc7', 'argent_sale', '0');
+INSERT INTO `user_inventory` VALUES ('6617', 'steam:1100001097c1dc7', 'tacos', '0');
+INSERT INTO `user_inventory` VALUES ('6618', 'steam:1100001097c1dc7', 'coke', '0');
+INSERT INTO `user_inventory` VALUES ('6619', 'steam:1100001097c1dc7', 'rhumcoca', '0');
+INSERT INTO `user_inventory` VALUES ('6620', 'steam:1100001097c1dc7', 'bolnoixcajou', '0');
+INSERT INTO `user_inventory` VALUES ('6621', 'steam:1100001097c1dc7', 'essence', '0');
+INSERT INTO `user_inventory` VALUES ('6622', 'steam:1100001097c1dc7', 'crevette', '0');
+INSERT INTO `user_inventory` VALUES ('6623', 'steam:1100001097c1dc7', 'croquettes', '0');
+INSERT INTO `user_inventory` VALUES ('6624', 'steam:1100001097c1dc7', 'fixkit', '0');
+INSERT INTO `user_inventory` VALUES ('6625', 'steam:1100001097c1dc7', 'phone', '0');
+INSERT INTO `user_inventory` VALUES ('6626', 'steam:1100001097c1dc7', 'mixapero', '0');
+INSERT INTO `user_inventory` VALUES ('6627', 'steam:1100001097c1dc7', 'drpepper', '0');
+INSERT INTO `user_inventory` VALUES ('6628', 'steam:1100001097c1dc7', 'whiskycoca', '0');
+INSERT INTO `user_inventory` VALUES ('6629', 'steam:1100001097c1dc7', 'weed', '0');
+INSERT INTO `user_inventory` VALUES ('6630', 'steam:1100001097c1dc7', 'saumon', '0');
+INSERT INTO `user_inventory` VALUES ('6631', 'steam:1100001097c1dc7', 'golem', '0');
+INSERT INTO `user_inventory` VALUES ('6632', 'steam:1100001097c1dc7', 'vodka', '0');
+INSERT INTO `user_inventory` VALUES ('6633', 'steam:1100001097c1dc7', 'jager', '0');
+INSERT INTO `user_inventory` VALUES ('6634', 'steam:1100001097c1dc7', 'journal', '0');
+INSERT INTO `user_inventory` VALUES ('6635', 'steam:1100001097c1dc7', 'wine', '0');
+INSERT INTO `user_inventory` VALUES ('6636', 'steam:1100001097c1dc7', 'vine', '0');
+INSERT INTO `user_inventory` VALUES ('6637', 'steam:1100001097c1dc7', 'tequila', '0');
+INSERT INTO `user_inventory` VALUES ('6638', 'steam:1100001097c1dc7', 'whisky', '0');
+INSERT INTO `user_inventory` VALUES ('6639', 'steam:1100001097c1dc7', 'weed_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6640', 'steam:1100001097c1dc7', 'defibrillateur', '0');
+INSERT INTO `user_inventory` VALUES ('6641', 'steam:1100001097c1dc7', 'grand_cru', '0');
+INSERT INTO `user_inventory` VALUES ('6642', 'steam:1100001097c1dc7', 'saumon_fume', '0');
+INSERT INTO `user_inventory` VALUES ('6643', 'steam:1100001097c1dc7', 'pince', '0');
+INSERT INTO `user_inventory` VALUES ('6644', 'steam:1100001097c1dc7', 'plancheHD', '0');
+INSERT INTO `user_inventory` VALUES ('6645', 'steam:1100001097c1dc7', 'trash', '0');
+INSERT INTO `user_inventory` VALUES ('6646', 'steam:1100001097c1dc7', 'cupcake', '0');
+INSERT INTO `user_inventory` VALUES ('6647', 'steam:1100001097c1dc7', 'redbull', '0');
+INSERT INTO `user_inventory` VALUES ('6648', 'steam:1100001097c1dc7', 'canabis', '0');
+INSERT INTO `user_inventory` VALUES ('6649', 'steam:1100001097c1dc7', 'alarm1', '0');
+INSERT INTO `user_inventory` VALUES ('6650', 'steam:1100001097c1dc7', 'menthe', '0');
+INSERT INTO `user_inventory` VALUES ('6651', 'steam:1100001097c1dc7', 'cerflex', '0');
+INSERT INTO `user_inventory` VALUES ('6652', 'steam:1100001097c1dc7', 'coke_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6653', 'steam:1100001097c1dc7', 'burger', '0');
+INSERT INTO `user_inventory` VALUES ('6654', 'steam:1100001097c1dc7', 'jammer', '10');
+INSERT INTO `user_inventory` VALUES ('6655', 'steam:1100001097c1dc7', 'hamburger', '0');
+INSERT INTO `user_inventory` VALUES ('6656', 'steam:1100001097c1dc7', 'teqpaf', '0');
+INSERT INTO `user_inventory` VALUES ('6657', 'steam:1100001097c1dc7', 'whool', '0');
+INSERT INTO `user_inventory` VALUES ('6658', 'steam:1100001097c1dc7', 'alive_chicken', '0');
+INSERT INTO `user_inventory` VALUES ('6659', 'steam:1100001097c1dc7', 'opium_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6660', 'steam:1100001097c1dc7', 'sac_argent', '0');
+INSERT INTO `user_inventory` VALUES ('6661', 'steam:1100001097c1dc7', 'rhum', '0');
+INSERT INTO `user_inventory` VALUES ('6662', 'steam:1100001097c1dc7', 'bolpistache', '0');
+INSERT INTO `user_inventory` VALUES ('6663', 'steam:1100001097c1dc7', 'unlockingtool', '10');
+INSERT INTO `user_inventory` VALUES ('6664', 'steam:1100001097c1dc7', 'goldmedal', '0');
+INSERT INTO `user_inventory` VALUES ('6665', 'steam:1100001097c1dc7', 'packaged_plank', '0');
+INSERT INTO `user_inventory` VALUES ('6666', 'steam:1100001097c1dc7', 'tabacsec', '0');
+INSERT INTO `user_inventory` VALUES ('6667', 'steam:1100001097c1dc7', 'slaughtered_chicken', '0');
+INSERT INTO `user_inventory` VALUES ('6668', 'steam:1100001097c1dc7', 'wood', '0');
+INSERT INTO `user_inventory` VALUES ('6669', 'steam:1100001097c1dc7', 'vegetables', '0');
+INSERT INTO `user_inventory` VALUES ('6670', 'steam:1100001097c1dc7', 'gps', '1');
+INSERT INTO `user_inventory` VALUES ('6671', 'steam:1100001097c1dc7', 'petrol_raffin', '0');
+INSERT INTO `user_inventory` VALUES ('6672', 'steam:1100001097c1dc7', 'petrol', '0');
+INSERT INTO `user_inventory` VALUES ('6673', 'steam:1100001097c1dc7', 'carotool', '0');
+INSERT INTO `user_inventory` VALUES ('6674', 'steam:1100001097c1dc7', 'journaux', '0');
+INSERT INTO `user_inventory` VALUES ('6675', 'steam:1100001097c1dc7', 'medikit', '0');
+INSERT INTO `user_inventory` VALUES ('6676', 'steam:1100001097c1dc7', 'bread', '0');
+INSERT INTO `user_inventory` VALUES ('6677', 'steam:1100001097c1dc7', 'solo_key', '0');
+INSERT INTO `user_inventory` VALUES ('6678', 'steam:1100001097c1dc7', 'plongee2', '0');
+INSERT INTO `user_inventory` VALUES ('6679', 'steam:1100001097c1dc7', 'martini', '0');
+INSERT INTO `user_inventory` VALUES ('6680', 'steam:1100001097c1dc7', 'tracker', '0');
+INSERT INTO `user_inventory` VALUES ('6681', 'steam:1100001097c1dc7', 'blackberry ', '0');
+INSERT INTO `user_inventory` VALUES ('6682', 'steam:1100001097c1dc7', 'argent', '0');
+INSERT INTO `user_inventory` VALUES ('6683', 'steam:1100001097c1dc7', 'jus_raisin', '0');
+INSERT INTO `user_inventory` VALUES ('6684', 'steam:1100001097c1dc7', 'limonade', '0');
+INSERT INTO `user_inventory` VALUES ('6685', 'steam:1100001097c1dc7', 'plongee1', '0');
+INSERT INTO `user_inventory` VALUES ('6686', 'steam:1100001097c1dc7', 'cutted_wood', '0');
+INSERT INTO `user_inventory` VALUES ('6687', 'steam:1100001097c1dc7', 'meth', '0');
+INSERT INTO `user_inventory` VALUES ('6688', 'steam:1100001097c1dc7', 'bronzemedal', '0');
+INSERT INTO `user_inventory` VALUES ('6689', 'steam:1100001097c1dc7', 'rhumfruit', '0');
+INSERT INTO `user_inventory` VALUES ('6690', 'steam:1100001097c1dc7', 'poisson_vente', '0');
+INSERT INTO `user_inventory` VALUES ('6691', 'steam:1100001097c1dc7', 'saucisson', '0');
+INSERT INTO `user_inventory` VALUES ('6692', 'steam:1100001097c1dc7', 'jagerbomb', '0');
+INSERT INTO `user_inventory` VALUES ('6693', 'steam:1100001097c1dc7', 'ice', '0');
+INSERT INTO `user_inventory` VALUES ('6694', 'steam:1100001097c1dc7', 'gold', '0');
+INSERT INTO `user_inventory` VALUES ('6695', 'steam:1100001097c1dc7', 'coffee', '0');
+INSERT INTO `user_inventory` VALUES ('6696', 'steam:1100001097c1dc7', 'energy', '0');
+INSERT INTO `user_inventory` VALUES ('6697', 'steam:1100001097c1dc7', 'fish', '0');
+INSERT INTO `user_inventory` VALUES ('6698', 'steam:1100001097c1dc7', 'fixtool', '0');
+INSERT INTO `user_inventory` VALUES ('6699', 'steam:1100001097c1dc7', 'jusfruit', '0');
+INSERT INTO `user_inventory` VALUES ('6700', 'steam:1100001097c1dc7', 'drill', '0');
+INSERT INTO `user_inventory` VALUES ('6701', 'steam:1100001097c1dc7', 'chocolate', '0');
+INSERT INTO `user_inventory` VALUES ('6702', 'steam:11000011451b0d5', 'multi_key', '0');
+INSERT INTO `user_inventory` VALUES ('6703', 'steam:11000011451b0d5', 'meth_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6704', 'steam:11000011451b0d5', 'farine_blé', '0');
+INSERT INTO `user_inventory` VALUES ('6705', 'steam:11000011451b0d5', 'coyotte', '0');
+INSERT INTO `user_inventory` VALUES ('6706', 'steam:11000011451b0d5', 'or', '0');
+INSERT INTO `user_inventory` VALUES ('6707', 'steam:11000011451b0d5', 'raisin', '0');
+INSERT INTO `user_inventory` VALUES ('6708', 'steam:11000011451b0d5', 'farine_blé_premium', '0');
+INSERT INTO `user_inventory` VALUES ('6709', 'steam:11000011451b0d5', 'thon', '0');
+INSERT INTO `user_inventory` VALUES ('6710', 'steam:11000011451b0d5', 'gazbottle', '0');
+INSERT INTO `user_inventory` VALUES ('6711', 'steam:11000011451b0d5', 'jagercerbere', '0');
+INSERT INTO `user_inventory` VALUES ('6712', 'steam:11000011451b0d5', 'stone', '0');
+INSERT INTO `user_inventory` VALUES ('6713', 'steam:11000011451b0d5', 'sandwich', '0');
+INSERT INTO `user_inventory` VALUES ('6714', 'steam:11000011451b0d5', 'alarm2', '0');
+INSERT INTO `user_inventory` VALUES ('6715', 'steam:11000011451b0d5', 'poisson_préparé', '0');
+INSERT INTO `user_inventory` VALUES ('6716', 'steam:11000011451b0d5', 'diamon', '0');
+INSERT INTO `user_inventory` VALUES ('6717', 'steam:11000011451b0d5', 'bolchips', '0');
+INSERT INTO `user_inventory` VALUES ('6718', 'steam:11000011451b0d5', 'alarm3', '0');
+INSERT INTO `user_inventory` VALUES ('6719', 'steam:11000011451b0d5', 'silvermedal', '0');
+INSERT INTO `user_inventory` VALUES ('6720', 'steam:11000011451b0d5', 'bolcacahuetes', '0');
+INSERT INTO `user_inventory` VALUES ('6721', 'steam:11000011451b0d5', 'copper', '0');
+INSERT INTO `user_inventory` VALUES ('6722', 'steam:11000011451b0d5', 'lighter', '0');
+INSERT INTO `user_inventory` VALUES ('6723', 'steam:11000011451b0d5', 'samoussa_crevette', '0');
+INSERT INTO `user_inventory` VALUES ('6724', 'steam:11000011451b0d5', 'vodkafruit', '0');
+INSERT INTO `user_inventory` VALUES ('6725', 'steam:11000011451b0d5', 'blowpipe', '0');
+INSERT INTO `user_inventory` VALUES ('6726', 'steam:11000011451b0d5', 'colis', '0');
+INSERT INTO `user_inventory` VALUES ('6727', 'steam:11000011451b0d5', 'water', '0');
+INSERT INTO `user_inventory` VALUES ('6728', 'steam:11000011451b0d5', 'fabric', '0');
+INSERT INTO `user_inventory` VALUES ('6729', 'steam:11000011451b0d5', 'carokit', '0');
+INSERT INTO `user_inventory` VALUES ('6730', 'steam:11000011451b0d5', 'blé', '0');
+INSERT INTO `user_inventory` VALUES ('6731', 'steam:11000011451b0d5', 'lingot', '0');
+INSERT INTO `user_inventory` VALUES ('6732', 'steam:11000011451b0d5', 'boite_thon', '0');
+INSERT INTO `user_inventory` VALUES ('6733', 'steam:11000011451b0d5', 'beer', '0');
+INSERT INTO `user_inventory` VALUES ('6734', 'steam:11000011451b0d5', 'firstaidkit', '0');
+INSERT INTO `user_inventory` VALUES ('6735', 'steam:11000011451b0d5', 'poisson_lave', '0');
+INSERT INTO `user_inventory` VALUES ('6736', 'steam:11000011451b0d5', 'feuilletab', '0');
+INSERT INTO `user_inventory` VALUES ('6737', 'steam:11000011451b0d5', 'grapperaisin', '0');
+INSERT INTO `user_inventory` VALUES ('6738', 'steam:11000011451b0d5', 'cigarett', '0');
+INSERT INTO `user_inventory` VALUES ('6739', 'steam:11000011451b0d5', 'xanax', '0');
+INSERT INTO `user_inventory` VALUES ('6740', 'steam:11000011451b0d5', 'cola', '0');
+INSERT INTO `user_inventory` VALUES ('6741', 'steam:11000011451b0d5', 'icetea', '0');
+INSERT INTO `user_inventory` VALUES ('6742', 'steam:11000011451b0d5', 'metreshooter', '0');
+INSERT INTO `user_inventory` VALUES ('6743', 'steam:11000011451b0d5', 'clothe', '0');
+INSERT INTO `user_inventory` VALUES ('6744', 'steam:11000011451b0d5', 'poubelle', '0');
+INSERT INTO `user_inventory` VALUES ('6745', 'steam:11000011451b0d5', 'alarminterface', '0');
+INSERT INTO `user_inventory` VALUES ('6746', 'steam:11000011451b0d5', 'opium', '0');
+INSERT INTO `user_inventory` VALUES ('6747', 'steam:11000011451b0d5', 'iron', '0');
+INSERT INTO `user_inventory` VALUES ('6748', 'steam:11000011451b0d5', 'marijuana', '0');
+INSERT INTO `user_inventory` VALUES ('6749', 'steam:11000011451b0d5', 'soda', '0');
+INSERT INTO `user_inventory` VALUES ('6750', 'steam:11000011451b0d5', 'permis', '0');
+INSERT INTO `user_inventory` VALUES ('6751', 'steam:11000011451b0d5', 'mojito', '0');
+INSERT INTO `user_inventory` VALUES ('6752', 'steam:11000011451b0d5', 'packaged_chicken', '0');
+INSERT INTO `user_inventory` VALUES ('6753', 'steam:11000011451b0d5', 'hammerwirecutter', '0');
+INSERT INTO `user_inventory` VALUES ('6754', 'steam:11000011451b0d5', 'bandage', '0');
+INSERT INTO `user_inventory` VALUES ('6755', 'steam:11000011451b0d5', 'sacbillets', '0');
+INSERT INTO `user_inventory` VALUES ('6756', 'steam:11000011451b0d5', 'vodkaenergy', '0');
+INSERT INTO `user_inventory` VALUES ('6757', 'steam:11000011451b0d5', 'pierreb', '0');
+INSERT INTO `user_inventory` VALUES ('6758', 'steam:11000011451b0d5', 'meat', '0');
+INSERT INTO `user_inventory` VALUES ('6759', 'steam:11000011451b0d5', 'argent_sale', '0');
+INSERT INTO `user_inventory` VALUES ('6760', 'steam:11000011451b0d5', 'tacos', '0');
+INSERT INTO `user_inventory` VALUES ('6761', 'steam:11000011451b0d5', 'coke', '0');
+INSERT INTO `user_inventory` VALUES ('6762', 'steam:11000011451b0d5', 'rhumcoca', '0');
+INSERT INTO `user_inventory` VALUES ('6763', 'steam:11000011451b0d5', 'bolnoixcajou', '0');
+INSERT INTO `user_inventory` VALUES ('6764', 'steam:11000011451b0d5', 'essence', '0');
+INSERT INTO `user_inventory` VALUES ('6765', 'steam:11000011451b0d5', 'crevette', '0');
+INSERT INTO `user_inventory` VALUES ('6766', 'steam:11000011451b0d5', 'croquettes', '0');
+INSERT INTO `user_inventory` VALUES ('6767', 'steam:11000011451b0d5', 'fixkit', '0');
+INSERT INTO `user_inventory` VALUES ('6768', 'steam:11000011451b0d5', 'phone', '0');
+INSERT INTO `user_inventory` VALUES ('6769', 'steam:11000011451b0d5', 'mixapero', '0');
+INSERT INTO `user_inventory` VALUES ('6770', 'steam:11000011451b0d5', 'drpepper', '0');
+INSERT INTO `user_inventory` VALUES ('6771', 'steam:11000011451b0d5', 'whiskycoca', '0');
+INSERT INTO `user_inventory` VALUES ('6772', 'steam:11000011451b0d5', 'weed', '100');
+INSERT INTO `user_inventory` VALUES ('6773', 'steam:11000011451b0d5', 'saumon', '0');
+INSERT INTO `user_inventory` VALUES ('6774', 'steam:11000011451b0d5', 'golem', '0');
+INSERT INTO `user_inventory` VALUES ('6775', 'steam:11000011451b0d5', 'vodka', '0');
+INSERT INTO `user_inventory` VALUES ('6776', 'steam:11000011451b0d5', 'jager', '0');
+INSERT INTO `user_inventory` VALUES ('6777', 'steam:11000011451b0d5', 'journal', '0');
+INSERT INTO `user_inventory` VALUES ('6778', 'steam:11000011451b0d5', 'wine', '0');
+INSERT INTO `user_inventory` VALUES ('6779', 'steam:11000011451b0d5', 'vine', '0');
+INSERT INTO `user_inventory` VALUES ('6780', 'steam:11000011451b0d5', 'tequila', '0');
+INSERT INTO `user_inventory` VALUES ('6781', 'steam:11000011451b0d5', 'whisky', '0');
+INSERT INTO `user_inventory` VALUES ('6782', 'steam:11000011451b0d5', 'weed_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6783', 'steam:11000011451b0d5', 'defibrillateur', '0');
+INSERT INTO `user_inventory` VALUES ('6784', 'steam:11000011451b0d5', 'grand_cru', '0');
+INSERT INTO `user_inventory` VALUES ('6785', 'steam:11000011451b0d5', 'saumon_fume', '0');
+INSERT INTO `user_inventory` VALUES ('6786', 'steam:11000011451b0d5', 'pince', '0');
+INSERT INTO `user_inventory` VALUES ('6787', 'steam:11000011451b0d5', 'plancheHD', '0');
+INSERT INTO `user_inventory` VALUES ('6788', 'steam:11000011451b0d5', 'trash', '0');
+INSERT INTO `user_inventory` VALUES ('6789', 'steam:11000011451b0d5', 'cupcake', '0');
+INSERT INTO `user_inventory` VALUES ('6790', 'steam:11000011451b0d5', 'redbull', '0');
+INSERT INTO `user_inventory` VALUES ('6791', 'steam:11000011451b0d5', 'canabis', '0');
+INSERT INTO `user_inventory` VALUES ('6792', 'steam:11000011451b0d5', 'alarm1', '0');
+INSERT INTO `user_inventory` VALUES ('6793', 'steam:11000011451b0d5', 'menthe', '0');
+INSERT INTO `user_inventory` VALUES ('6794', 'steam:11000011451b0d5', 'cerflex', '0');
+INSERT INTO `user_inventory` VALUES ('6795', 'steam:11000011451b0d5', 'coke_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6796', 'steam:11000011451b0d5', 'burger', '0');
+INSERT INTO `user_inventory` VALUES ('6797', 'steam:11000011451b0d5', 'jammer', '0');
+INSERT INTO `user_inventory` VALUES ('6798', 'steam:11000011451b0d5', 'hamburger', '0');
+INSERT INTO `user_inventory` VALUES ('6799', 'steam:11000011451b0d5', 'teqpaf', '0');
+INSERT INTO `user_inventory` VALUES ('6800', 'steam:11000011451b0d5', 'whool', '0');
+INSERT INTO `user_inventory` VALUES ('6801', 'steam:11000011451b0d5', 'alive_chicken', '0');
+INSERT INTO `user_inventory` VALUES ('6802', 'steam:11000011451b0d5', 'opium_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6803', 'steam:11000011451b0d5', 'sac_argent', '0');
+INSERT INTO `user_inventory` VALUES ('6804', 'steam:11000011451b0d5', 'rhum', '0');
+INSERT INTO `user_inventory` VALUES ('6805', 'steam:11000011451b0d5', 'bolpistache', '0');
+INSERT INTO `user_inventory` VALUES ('6806', 'steam:11000011451b0d5', 'unlockingtool', '0');
+INSERT INTO `user_inventory` VALUES ('6807', 'steam:11000011451b0d5', 'goldmedal', '0');
+INSERT INTO `user_inventory` VALUES ('6808', 'steam:11000011451b0d5', 'packaged_plank', '0');
+INSERT INTO `user_inventory` VALUES ('6809', 'steam:11000011451b0d5', 'tabacsec', '0');
+INSERT INTO `user_inventory` VALUES ('6810', 'steam:11000011451b0d5', 'slaughtered_chicken', '0');
+INSERT INTO `user_inventory` VALUES ('6811', 'steam:11000011451b0d5', 'wood', '0');
+INSERT INTO `user_inventory` VALUES ('6812', 'steam:11000011451b0d5', 'vegetables', '0');
+INSERT INTO `user_inventory` VALUES ('6813', 'steam:11000011451b0d5', 'gps', '0');
+INSERT INTO `user_inventory` VALUES ('6814', 'steam:11000011451b0d5', 'petrol_raffin', '0');
+INSERT INTO `user_inventory` VALUES ('6815', 'steam:11000011451b0d5', 'petrol', '0');
+INSERT INTO `user_inventory` VALUES ('6816', 'steam:11000011451b0d5', 'carotool', '0');
+INSERT INTO `user_inventory` VALUES ('6817', 'steam:11000011451b0d5', 'journaux', '0');
+INSERT INTO `user_inventory` VALUES ('6818', 'steam:11000011451b0d5', 'medikit', '0');
+INSERT INTO `user_inventory` VALUES ('6819', 'steam:11000011451b0d5', 'bread', '0');
+INSERT INTO `user_inventory` VALUES ('6820', 'steam:11000011451b0d5', 'solo_key', '0');
+INSERT INTO `user_inventory` VALUES ('6821', 'steam:11000011451b0d5', 'plongee2', '0');
+INSERT INTO `user_inventory` VALUES ('6822', 'steam:11000011451b0d5', 'martini', '0');
+INSERT INTO `user_inventory` VALUES ('6823', 'steam:11000011451b0d5', 'tracker', '0');
+INSERT INTO `user_inventory` VALUES ('6824', 'steam:11000011451b0d5', 'blackberry ', '0');
+INSERT INTO `user_inventory` VALUES ('6825', 'steam:11000011451b0d5', 'argent', '0');
+INSERT INTO `user_inventory` VALUES ('6826', 'steam:11000011451b0d5', 'jus_raisin', '0');
+INSERT INTO `user_inventory` VALUES ('6827', 'steam:11000011451b0d5', 'limonade', '0');
+INSERT INTO `user_inventory` VALUES ('6828', 'steam:11000011451b0d5', 'plongee1', '0');
+INSERT INTO `user_inventory` VALUES ('6829', 'steam:11000011451b0d5', 'cutted_wood', '0');
+INSERT INTO `user_inventory` VALUES ('6830', 'steam:11000011451b0d5', 'meth', '0');
+INSERT INTO `user_inventory` VALUES ('6831', 'steam:11000011451b0d5', 'bronzemedal', '0');
+INSERT INTO `user_inventory` VALUES ('6832', 'steam:11000011451b0d5', 'rhumfruit', '0');
+INSERT INTO `user_inventory` VALUES ('6833', 'steam:11000011451b0d5', 'poisson_vente', '0');
+INSERT INTO `user_inventory` VALUES ('6834', 'steam:11000011451b0d5', 'saucisson', '0');
+INSERT INTO `user_inventory` VALUES ('6835', 'steam:11000011451b0d5', 'jagerbomb', '0');
+INSERT INTO `user_inventory` VALUES ('6836', 'steam:11000011451b0d5', 'ice', '0');
+INSERT INTO `user_inventory` VALUES ('6837', 'steam:11000011451b0d5', 'gold', '0');
+INSERT INTO `user_inventory` VALUES ('6838', 'steam:11000011451b0d5', 'coffee', '0');
+INSERT INTO `user_inventory` VALUES ('6839', 'steam:11000011451b0d5', 'energy', '0');
+INSERT INTO `user_inventory` VALUES ('6840', 'steam:11000011451b0d5', 'fish', '0');
+INSERT INTO `user_inventory` VALUES ('6841', 'steam:11000011451b0d5', 'fixtool', '0');
+INSERT INTO `user_inventory` VALUES ('6842', 'steam:11000011451b0d5', 'jusfruit', '0');
+INSERT INTO `user_inventory` VALUES ('6843', 'steam:11000011451b0d5', 'drill', '0');
+INSERT INTO `user_inventory` VALUES ('6844', 'steam:11000011451b0d5', 'chocolate', '0');
+INSERT INTO `user_inventory` VALUES ('6845', 'steam:1100001081ca641', 'café', '0');
+INSERT INTO `user_inventory` VALUES ('6846', 'steam:1100001081ca641', 'coca', '0');
+INSERT INTO `user_inventory` VALUES ('6847', 'steam:1100001081ca641', 'flour', '0');
+INSERT INTO `user_inventory` VALUES ('6848', 'steam:1100001081ca641', 'fromage', '0');
+INSERT INTO `user_inventory` VALUES ('6849', 'steam:1100001081ca641', 'chocolachaud', '0');
+INSERT INTO `user_inventory` VALUES ('6850', 'steam:1100001081ca641', 'orangina', '0');
+INSERT INTO `user_inventory` VALUES ('6851', 'steam:1100001081ca641', 'pepsi', '0');
+INSERT INTO `user_inventory` VALUES ('6852', 'steam:1100001081ca641', 'saucetomate', '0');
+INSERT INTO `user_inventory` VALUES ('6853', 'steam:1100001081ca641', 'thé', '0');
+INSERT INTO `user_inventory` VALUES ('6854', 'steam:1100001081ca641', 'monster', '0');
+INSERT INTO `user_inventory` VALUES ('6855', 'steam:1100001081ca641', 'minute_maid', '0');
+INSERT INTO `user_inventory` VALUES ('6856', 'steam:1100001081ca641', '7up', '0');
+INSERT INTO `user_inventory` VALUES ('6857', 'steam:1100001081ca641', 'oasis', '0');
+INSERT INTO `user_inventory` VALUES ('6858', 'steam:1100001081ca641', 'sprite', '0');
+INSERT INTO `user_inventory` VALUES ('6859', 'steam:1100001081ca641', 'yaourt', '0');
+INSERT INTO `user_inventory` VALUES ('6860', 'steam:1100001081ca641', 'vinaigrette', '0');
+INSERT INTO `user_inventory` VALUES ('6861', 'steam:1100001081ca641', 'saucebarbecue', '0');
+INSERT INTO `user_inventory` VALUES ('6862', 'steam:1100001081ca641', 'tomate', '0');
+INSERT INTO `user_inventory` VALUES ('6863', 'steam:1100001081ca641', 'ananas', '0');
+INSERT INTO `user_inventory` VALUES ('6864', 'steam:1100001081ca641', 'tropico', '0');
+INSERT INTO `user_inventory` VALUES ('6865', 'steam:1100001081ca641', 'viandehache', '0');
+INSERT INTO `user_inventory` VALUES ('6866', 'steam:1100001081ca641', 'merguez', '0');
+INSERT INTO `user_inventory` VALUES ('6867', 'steam:1100001081ca641', 'lardon', '0');
+INSERT INTO `user_inventory` VALUES ('6868', 'steam:1100001081ca641', 'chorizo', '0');
+INSERT INTO `user_inventory` VALUES ('6869', 'steam:1100001081ca641', 'levure', '0');
+INSERT INTO `user_inventory` VALUES ('6870', 'steam:1100001081ca641', 'fanta', '0');
+INSERT INTO `user_inventory` VALUES ('6871', 'steam:1100001081ca641', 'jambon', '0');
+INSERT INTO `user_inventory` VALUES ('6872', 'steam:1100001081ca641', 'cremefraiche', '0');
+INSERT INTO `user_inventory` VALUES ('6873', 'steam:1100001081ca641', 'mozzarella', '0');
+INSERT INTO `user_inventory` VALUES ('6874', 'steam:1100001081ca641', 'origan', '0');
+INSERT INTO `user_inventory` VALUES ('6875', 'steam:1100001081ca641', 'glace', '0');
+INSERT INTO `user_inventory` VALUES ('6876', 'steam:1100001081ca641', 'beignet', '0');
+INSERT INTO `user_inventory` VALUES ('6877', 'steam:1100001081ca641', 'salade', '0');
+INSERT INTO `user_inventory` VALUES ('6878', 'steam:1100001081ca641', 'olive', '0');
+INSERT INTO `user_inventory` VALUES ('6879', 'steam:1100001081ca641', 'tiramisu', '0');
+INSERT INTO `user_inventory` VALUES ('6880', 'steam:1100001081ca641', 'feuilletab', '0');
+INSERT INTO `user_inventory` VALUES ('6881', 'steam:1100001081ca641', 'silvermedal', '0');
+INSERT INTO `user_inventory` VALUES ('6882', 'steam:1100001081ca641', 'fabric', '0');
+INSERT INTO `user_inventory` VALUES ('6883', 'steam:1100001081ca641', 'pince', '0');
+INSERT INTO `user_inventory` VALUES ('6884', 'steam:1100001081ca641', 'carokit', '0');
+INSERT INTO `user_inventory` VALUES ('6885', 'steam:1100001081ca641', 'permis', '0');
+INSERT INTO `user_inventory` VALUES ('6886', 'steam:1100001081ca641', 'fish', '0');
+INSERT INTO `user_inventory` VALUES ('6887', 'steam:1100001081ca641', 'plongee1', '0');
+INSERT INTO `user_inventory` VALUES ('6888', 'steam:1100001081ca641', 'solo_key', '0');
+INSERT INTO `user_inventory` VALUES ('6889', 'steam:1100001081ca641', 'raisin', '0');
+INSERT INTO `user_inventory` VALUES ('6890', 'steam:1100001081ca641', 'hammerwirecutter', '0');
+INSERT INTO `user_inventory` VALUES ('6891', 'steam:1100001081ca641', 'jager', '0');
+INSERT INTO `user_inventory` VALUES ('6892', 'steam:1100001081ca641', 'journal', '0');
+INSERT INTO `user_inventory` VALUES ('6893', 'steam:1100001081ca641', 'blackberry ', '0');
+INSERT INTO `user_inventory` VALUES ('6894', 'steam:1100001081ca641', 'vodkaenergy', '0');
+INSERT INTO `user_inventory` VALUES ('6895', 'steam:1100001081ca641', 'or', '0');
+INSERT INTO `user_inventory` VALUES ('6896', 'steam:1100001081ca641', 'sac_argent', '0');
+INSERT INTO `user_inventory` VALUES ('6897', 'steam:1100001081ca641', 'crevette', '0');
+INSERT INTO `user_inventory` VALUES ('6898', 'steam:1100001081ca641', 'meat', '0');
+INSERT INTO `user_inventory` VALUES ('6899', 'steam:1100001081ca641', 'stone', '0');
+INSERT INTO `user_inventory` VALUES ('6900', 'steam:1100001081ca641', 'blowpipe', '0');
+INSERT INTO `user_inventory` VALUES ('6901', 'steam:1100001081ca641', 'coffee', '0');
+INSERT INTO `user_inventory` VALUES ('6902', 'steam:1100001081ca641', 'poisson_lave', '0');
+INSERT INTO `user_inventory` VALUES ('6903', 'steam:1100001081ca641', 'slaughtered_chicken', '0');
+INSERT INTO `user_inventory` VALUES ('6904', 'steam:1100001081ca641', 'teqpaf', '0');
+INSERT INTO `user_inventory` VALUES ('6905', 'steam:1100001081ca641', 'chocolate', '0');
+INSERT INTO `user_inventory` VALUES ('6906', 'steam:1100001081ca641', 'whiskycoca', '0');
+INSERT INTO `user_inventory` VALUES ('6907', 'steam:1100001081ca641', 'farine_blé', '0');
+INSERT INTO `user_inventory` VALUES ('6908', 'steam:1100001081ca641', 'fixtool', '0');
+INSERT INTO `user_inventory` VALUES ('6909', 'steam:1100001081ca641', 'marijuana', '0');
+INSERT INTO `user_inventory` VALUES ('6910', 'steam:1100001081ca641', 'water', '44');
+INSERT INTO `user_inventory` VALUES ('6911', 'steam:1100001081ca641', 'jammer', '0');
+INSERT INTO `user_inventory` VALUES ('6912', 'steam:1100001081ca641', 'grapperaisin', '0');
+INSERT INTO `user_inventory` VALUES ('6913', 'steam:1100001081ca641', 'alarm3', '0');
+INSERT INTO `user_inventory` VALUES ('6914', 'steam:1100001081ca641', 'jagerbomb', '0');
+INSERT INTO `user_inventory` VALUES ('6915', 'steam:1100001081ca641', 'argent', '0');
+INSERT INTO `user_inventory` VALUES ('6916', 'steam:1100001081ca641', 'drpepper', '0');
+INSERT INTO `user_inventory` VALUES ('6917', 'steam:1100001081ca641', 'saumon_fume', '0');
+INSERT INTO `user_inventory` VALUES ('6918', 'steam:1100001081ca641', 'packaged_plank', '0');
+INSERT INTO `user_inventory` VALUES ('6919', 'steam:1100001081ca641', 'gazbottle', '0');
+INSERT INTO `user_inventory` VALUES ('6920', 'steam:1100001081ca641', 'carotool', '0');
+INSERT INTO `user_inventory` VALUES ('6921', 'steam:1100001081ca641', 'essence', '87');
+INSERT INTO `user_inventory` VALUES ('6922', 'steam:1100001081ca641', 'argent_sale', '0');
+INSERT INTO `user_inventory` VALUES ('6923', 'steam:1100001081ca641', 'cola', '0');
+INSERT INTO `user_inventory` VALUES ('6924', 'steam:1100001081ca641', 'iron', '0');
+INSERT INTO `user_inventory` VALUES ('6925', 'steam:1100001081ca641', 'bolnoixcajou', '0');
+INSERT INTO `user_inventory` VALUES ('6926', 'steam:1100001081ca641', 'bolpistache', '0');
+INSERT INTO `user_inventory` VALUES ('6927', 'steam:1100001081ca641', 'tacos', '0');
+INSERT INTO `user_inventory` VALUES ('6928', 'steam:1100001081ca641', 'whool', '0');
+INSERT INTO `user_inventory` VALUES ('6929', 'steam:1100001081ca641', 'vodkafruit', '0');
+INSERT INTO `user_inventory` VALUES ('6930', 'steam:1100001081ca641', 'lingot', '0');
+INSERT INTO `user_inventory` VALUES ('6931', 'steam:1100001081ca641', 'vine', '0');
+INSERT INTO `user_inventory` VALUES ('6932', 'steam:1100001081ca641', 'drill', '0');
+INSERT INTO `user_inventory` VALUES ('6933', 'steam:1100001081ca641', 'trash', '0');
+INSERT INTO `user_inventory` VALUES ('6934', 'steam:1100001081ca641', 'soda', '0');
+INSERT INTO `user_inventory` VALUES ('6935', 'steam:1100001081ca641', 'croquettes', '0');
+INSERT INTO `user_inventory` VALUES ('6936', 'steam:1100001081ca641', 'blé', '0');
+INSERT INTO `user_inventory` VALUES ('6937', 'steam:1100001081ca641', 'metreshooter', '0');
+INSERT INTO `user_inventory` VALUES ('6938', 'steam:1100001081ca641', 'petrol_raffin', '0');
+INSERT INTO `user_inventory` VALUES ('6939', 'steam:1100001081ca641', 'jusfruit', '0');
+INSERT INTO `user_inventory` VALUES ('6940', 'steam:1100001081ca641', 'petrole', '0');
+INSERT INTO `user_inventory` VALUES ('6941', 'steam:1100001081ca641', 'ice', '0');
+INSERT INTO `user_inventory` VALUES ('6942', 'steam:1100001081ca641', 'opium_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6943', 'steam:1100001081ca641', 'jagercerbere', '0');
+INSERT INTO `user_inventory` VALUES ('6944', 'steam:1100001081ca641', 'jus_raisin', '0');
+INSERT INTO `user_inventory` VALUES ('6945', 'steam:1100001081ca641', 'saucisson', '4');
+INSERT INTO `user_inventory` VALUES ('6946', 'steam:1100001081ca641', 'rhumcoca', '0');
+INSERT INTO `user_inventory` VALUES ('6947', 'steam:1100001081ca641', 'coyotte', '0');
+INSERT INTO `user_inventory` VALUES ('6948', 'steam:1100001081ca641', 'tracker', '0');
+INSERT INTO `user_inventory` VALUES ('6949', 'steam:1100001081ca641', 'mixapero', '0');
+INSERT INTO `user_inventory` VALUES ('6950', 'steam:1100001081ca641', 'phone', '0');
+INSERT INTO `user_inventory` VALUES ('6951', 'steam:1100001081ca641', 'alarminterface', '0');
+INSERT INTO `user_inventory` VALUES ('6952', 'steam:1100001081ca641', 'defibrillateur', '0');
+INSERT INTO `user_inventory` VALUES ('6953', 'steam:1100001081ca641', 'farine_blé_premium', '0');
+INSERT INTO `user_inventory` VALUES ('6954', 'steam:1100001081ca641', 'tabacsec', '0');
+INSERT INTO `user_inventory` VALUES ('6955', 'steam:1100001081ca641', 'xanax', '0');
+INSERT INTO `user_inventory` VALUES ('6956', 'steam:1100001081ca641', 'goldmedal', '0');
+INSERT INTO `user_inventory` VALUES ('6957', 'steam:1100001081ca641', 'fixkit', '0');
+INSERT INTO `user_inventory` VALUES ('6958', 'steam:1100001081ca641', 'beer', '0');
+INSERT INTO `user_inventory` VALUES ('6959', 'steam:1100001081ca641', 'alarm1', '0');
+INSERT INTO `user_inventory` VALUES ('6960', 'steam:1100001081ca641', 'thon', '0');
+INSERT INTO `user_inventory` VALUES ('6961', 'steam:1100001081ca641', 'canabis', '0');
+INSERT INTO `user_inventory` VALUES ('6962', 'steam:1100001081ca641', 'poisson_préparé', '0');
+INSERT INTO `user_inventory` VALUES ('6963', 'steam:1100001081ca641', 'meth_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6964', 'steam:1100001081ca641', 'plancheHD', '0');
+INSERT INTO `user_inventory` VALUES ('6965', 'steam:1100001081ca641', 'weed', '100');
+INSERT INTO `user_inventory` VALUES ('6966', 'steam:1100001081ca641', 'alive_chicken', '0');
+INSERT INTO `user_inventory` VALUES ('6967', 'steam:1100001081ca641', 'vegetables', '0');
+INSERT INTO `user_inventory` VALUES ('6968', 'steam:1100001081ca641', 'sandwich', '1');
+INSERT INTO `user_inventory` VALUES ('6969', 'steam:1100001081ca641', 'copper', '0');
+INSERT INTO `user_inventory` VALUES ('6970', 'steam:1100001081ca641', 'samoussa_crevette', '0');
+INSERT INTO `user_inventory` VALUES ('6971', 'steam:1100001081ca641', 'cigarett', '0');
+INSERT INTO `user_inventory` VALUES ('6972', 'steam:1100001081ca641', 'tequila', '0');
+INSERT INTO `user_inventory` VALUES ('6973', 'steam:1100001081ca641', 'golem', '0');
+INSERT INTO `user_inventory` VALUES ('6974', 'steam:1100001081ca641', 'multi_key', '0');
+INSERT INTO `user_inventory` VALUES ('6975', 'steam:1100001081ca641', 'boite_thon', '0');
+INSERT INTO `user_inventory` VALUES ('6976', 'steam:1100001081ca641', 'saumon', '0');
+INSERT INTO `user_inventory` VALUES ('6977', 'steam:1100001081ca641', 'grand_cru', '0');
+INSERT INTO `user_inventory` VALUES ('6978', 'steam:1100001081ca641', 'pierreb', '0');
+INSERT INTO `user_inventory` VALUES ('6979', 'steam:1100001081ca641', 'colis', '0');
+INSERT INTO `user_inventory` VALUES ('6980', 'steam:1100001081ca641', 'alarm2', '0');
+INSERT INTO `user_inventory` VALUES ('6981', 'steam:1100001081ca641', 'plongee2', '0');
+INSERT INTO `user_inventory` VALUES ('6982', 'steam:1100001081ca641', 'gold', '0');
+INSERT INTO `user_inventory` VALUES ('6983', 'steam:1100001081ca641', 'journaux', '0');
+INSERT INTO `user_inventory` VALUES ('6984', 'steam:1100001081ca641', 'opium', '0');
+INSERT INTO `user_inventory` VALUES ('6985', 'steam:1100001081ca641', 'unlockingtool', '0');
+INSERT INTO `user_inventory` VALUES ('6986', 'steam:1100001081ca641', 'cutted_wood', '0');
+INSERT INTO `user_inventory` VALUES ('6987', 'steam:1100001081ca641', 'bandage', '0');
+INSERT INTO `user_inventory` VALUES ('6988', 'steam:1100001081ca641', 'burger', '0');
+INSERT INTO `user_inventory` VALUES ('6989', 'steam:1100001081ca641', 'rhumfruit', '0');
+INSERT INTO `user_inventory` VALUES ('6990', 'steam:1100001081ca641', 'bolchips', '0');
+INSERT INTO `user_inventory` VALUES ('6991', 'steam:1100001081ca641', 'wood', '0');
+INSERT INTO `user_inventory` VALUES ('6992', 'steam:1100001081ca641', 'cerflex', '0');
+INSERT INTO `user_inventory` VALUES ('6993', 'steam:1100001081ca641', 'limonade', '0');
+INSERT INTO `user_inventory` VALUES ('6994', 'steam:1100001081ca641', 'cupcake', '0');
+INSERT INTO `user_inventory` VALUES ('6995', 'steam:1100001081ca641', 'bolcacahuetes', '0');
+INSERT INTO `user_inventory` VALUES ('6996', 'steam:1100001081ca641', 'rhum', '0');
+INSERT INTO `user_inventory` VALUES ('6997', 'steam:1100001081ca641', 'hamburger', '0');
+INSERT INTO `user_inventory` VALUES ('6998', 'steam:1100001081ca641', 'weed_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('6999', 'steam:1100001081ca641', 'energy', '0');
+INSERT INTO `user_inventory` VALUES ('7000', 'steam:1100001081ca641', 'firstaidkit', '0');
+INSERT INTO `user_inventory` VALUES ('7001', 'steam:1100001081ca641', 'poubelle', '0');
+INSERT INTO `user_inventory` VALUES ('7002', 'steam:1100001081ca641', 'meth', '0');
+INSERT INTO `user_inventory` VALUES ('7003', 'steam:1100001081ca641', 'coke_pooch', '0');
+INSERT INTO `user_inventory` VALUES ('7004', 'steam:1100001081ca641', 'sacbillets', '0');
+INSERT INTO `user_inventory` VALUES ('7005', 'steam:1100001081ca641', 'redbull', '0');
+INSERT INTO `user_inventory` VALUES ('7006', 'steam:1100001081ca641', 'packaged_chicken', '0');
+INSERT INTO `user_inventory` VALUES ('7007', 'steam:1100001081ca641', 'icetea', '0');
+INSERT INTO `user_inventory` VALUES ('7008', 'steam:1100001081ca641', 'vodka', '0');
+INSERT INTO `user_inventory` VALUES ('7009', 'steam:1100001081ca641', 'bread', '0');
+INSERT INTO `user_inventory` VALUES ('7010', 'steam:1100001081ca641', 'bronzemedal', '0');
+INSERT INTO `user_inventory` VALUES ('7011', 'steam:1100001081ca641', 'lighter', '0');
+INSERT INTO `user_inventory` VALUES ('7012', 'steam:1100001081ca641', 'clothe', '0');
+INSERT INTO `user_inventory` VALUES ('7013', 'steam:1100001081ca641', 'mojito', '0');
+INSERT INTO `user_inventory` VALUES ('7014', 'steam:1100001081ca641', 'menthe', '0');
+INSERT INTO `user_inventory` VALUES ('7015', 'steam:1100001081ca641', 'coke', '0');
+INSERT INTO `user_inventory` VALUES ('7016', 'steam:1100001081ca641', 'medikit', '0');
+INSERT INTO `user_inventory` VALUES ('7017', 'steam:1100001081ca641', 'diamon', '0');
+INSERT INTO `user_inventory` VALUES ('7018', 'steam:1100001081ca641', 'wine', '0');
+INSERT INTO `user_inventory` VALUES ('7019', 'steam:1100001081ca641', 'whisky', '0');
+INSERT INTO `user_inventory` VALUES ('7020', 'steam:1100001081ca641', 'poisson_vente', '0');
+INSERT INTO `user_inventory` VALUES ('7021', 'steam:1100001081ca641', 'martini', '0');
+INSERT INTO `user_inventory` VALUES ('7022', 'steam:1100001081ca641', 'virus', '4');
+INSERT INTO `user_inventory` VALUES ('7023', 'steam:1100001081ca641', 'anti', '21');
+INSERT INTO `user_inventory` VALUES ('7024', 'steam:1100001081ca641', 'shark', '0');
+INSERT INTO `user_inventory` VALUES ('7025', 'steam:1100001081ca641', 'fishingrod', '50');
+INSERT INTO `user_inventory` VALUES ('7026', 'steam:1100001081ca641', 'turtlebait', '0');
+INSERT INTO `user_inventory` VALUES ('7027', 'steam:1100001081ca641', 'fishbait', '0');
+INSERT INTO `user_inventory` VALUES ('7028', 'steam:1100001081ca641', 'turtle', '0');
+INSERT INTO `user_inventory` VALUES ('7029', 'steam:1100001081ca641', 'bottle', '14');
+INSERT INTO `user_inventory` VALUES ('7030', 'steam:1100001081ca641', 'cannabis', '19');
+INSERT INTO `user_inventory` VALUES ('7031', 'steam:1100001081ca641', 'seed_weed', '98');
 
 -- ----------------------------
 -- Table structure for `user_licenses`
@@ -1831,11 +2460,17 @@ CREATE TABLE `user_licenses` (
   `type` varchar(255) NOT NULL,
   `owner` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_licenses
 -- ----------------------------
+INSERT INTO `user_licenses` VALUES ('24', 'boating', 'steam:1100001081ca641');
+INSERT INTO `user_licenses` VALUES ('25', 'boating', 'steam:1100001081ca641');
+INSERT INTO `user_licenses` VALUES ('26', 'weapon', 'steam:1100001081ca641');
+INSERT INTO `user_licenses` VALUES ('27', 'boat', 'steam:1100001081ca641');
+INSERT INTO `user_licenses` VALUES ('28', 'dmv', 'steam:1100001081ca641');
+INSERT INTO `user_licenses` VALUES ('29', 'drive_truck', 'steam:1100001081ca641');
 
 -- ----------------------------
 -- Table structure for `user_parkings`
@@ -1848,7 +2483,7 @@ CREATE TABLE `user_parkings` (
   `zone` int(11) NOT NULL,
   `vehicle` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user_parkings
@@ -1867,6 +2502,7 @@ CREATE TABLE `user_races` (
 -- ----------------------------
 -- Records of user_races
 -- ----------------------------
+INSERT INTO `user_races` VALUES ('Mike Mika', '83.27', 'MX-Race');
 
 -- ----------------------------
 -- Table structure for `vehicles`
@@ -1878,7 +2514,7 @@ CREATE TABLE `vehicles` (
   `price` int(11) NOT NULL,
   `category` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`model`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of vehicles
@@ -2148,7 +2784,7 @@ CREATE TABLE `vehicle_categories` (
   `name` varchar(60) NOT NULL,
   `label` varchar(60) NOT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of vehicle_categories
@@ -2176,7 +2812,7 @@ CREATE TABLE `vehicle_sold` (
   `soldby` varchar(50) NOT NULL,
   `date` varchar(50) NOT NULL,
   PRIMARY KEY (`plate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of vehicle_sold
@@ -2192,7 +2828,7 @@ CREATE TABLE `weashops` (
   `item` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of weashops
@@ -2273,12 +2909,12 @@ CREATE TABLE `weekly_run` (
   `sell` int(11) NOT NULL,
   `malus` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of weekly_run
 -- ----------------------------
-INSERT INTO `weekly_run` VALUES ('1', 'brinks', '1551654012', '0', '0', '0');
+INSERT INTO `weekly_run` VALUES ('1', 'brinks', '1552863647', '0', '26', '0');
 
 -- ----------------------------
 -- Table structure for `whitelist`
@@ -2296,3 +2932,4 @@ CREATE TABLE `whitelist` (
 -- ----------------------------
 -- Records of whitelist
 -- ----------------------------
+
