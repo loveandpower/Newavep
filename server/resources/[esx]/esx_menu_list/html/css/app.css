@@ -8,7 +8,7 @@
   src: url('../fonts/pdown.ttf');
 }
 
-.menu {
+.menu { 
   font-family: bankgothic;
   position   : absolute;
   left       : 50%;

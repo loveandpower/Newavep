@@ -33,39 +33,26 @@ Config.Zones = {
 			{ weapon = 'WEAPON_ADVANCEDRIFLE', components = { 0, 0, 1000, 4000, nil }, price = 10000, ammoPrice = 20, AmmoToGive = 100 },
 			{ weapon = 'WEAPON_MG', components = { 0, 0, 1000, 4000, nil }, price = 10000, ammoPrice = 20, AmmoToGive = 100 },
 			{ weapon = 'WEAPON_COMBATMG', components = { 0, 0, 1000, 4000, nil }, price = 10000, ammoPrice = 20, AmmoToGive = 100 },
-			--[[{ weapon = 'WEAPON_PUMPSHOTGUN', price = 500},
-			{ weapon = 'WEAPON_SAWNOFFSHOTGUN', price = 500},
-			{ weapon = 'WEAPON_ASSAULTSHOTGUN', price = 500},
-			{ weapon = 'WEAPON_BULLPUPSHOTGUN', price = 500},
-			--{ weapon = 'WEAPON_STUNGUN', price = 500},
-			{ weapon = 'WEAPON_SNIPERRIFLE', price = 500},
-			{ weapon = 'WEAPON_HEAVYSNIPER', price = 500},
-			{ weapon = 'WEAPON_REMOTESNIPER', price = 500},
-			{ weapon = 'WEAPON_GRENADELAUNCHER', price = 500},
-			{ weapon = 'WEAPON_GRENADELAUNCHER_SMOKE', price = 500},
+			{ weapon = 'WEAPON_FLASHLIGHT', price = 80},
+			{ weapon = 'WEAPON_FLARE', price = 55},
+			{ weapon = 'WEAPON_BALL', price = 5}
+		
+		--[[	{ weapon = 'WEAPON_REMOTESNIPER', price = 500},
+			
 			{ weapon = 'WEAPON_RPG', price = 500},
 			{ weapon = 'WEAPON_PASSENGER_ROCKET', price = 500},
 			{ weapon = 'WEAPON_AIRSTRIKE_ROCKET', price = 500},
-			{ weapon = 'WEAPON_STINGER', price = 500},
 			{ weapon = 'WEAPON_MINIGUN', price = 500},
-			{ weapon = 'WEAPON_GRENADE', price = 500},
 			{ weapon = 'WEAPON_STICKYBOMB', price = 500},
-			{ weapon = 'WEAPON_BZGAS', price = 500},
-			{ weapon = 'WEAPON_MOLOTOV', price = 500},
 			{ weapon = 'WEAPON_FIREEXTINGUISHER', price = 500},
-			{ weapon = 'WEAPON_PETROLCAN', price = 500},
 			{ weapon = 'WEAPON_BRIEFCASE', price = 500},
 			{ weapon = 'WEAPON_BRIEFCASE_02', price = 500},
-			{ weapon = 'WEAPON_BALL', price = 500},
-			{ weapon = 'WEAPON_FLARE', price = 500},
 			{ weapon = 'WEAPON_VEHICLE_ROCKET', price = 500},
 			{ weapon = 'WEAPON_BARBED_WIRE', price = 500},
 			{ weapon = 'WEAPON_DROWNING', price = 500},
 			{ weapon = 'WEAPON_DROWNING_IN_VEHICLE', price = 500},
 			{ weapon = 'WEAPON_BLEEDING', price = 500},
-			{ weapon = 'WEAPON_NIGHTSTICK', price = 500},
 			{ weapon = 'WEAPON_STUNGUN', price = 1500},
-			{ weapon = 'WEAPON_FLASHLIGHT', price = 80}
 			]]
 		},
 		Locations = {
@@ -84,7 +71,25 @@ Config.Zones = {
 	BlackWeashop = {
 		Legal = false,
 		Items = {
-			{ weapon = 'WEAPON_ADVANCEDRIFLE', components = { 0, 6000, 1000, 4000, 8000, nil }, price = 50000, ammoPrice = 20, AmmoToGive = 20 }
+			{ weapon = 'WEAPON_ADVANCEDRIFLE', components = { 0, 6000, 1000, 4000, 8000, nil }, price = 50000, ammoPrice = 20, AmmoToGive = 20 },
+			{ weapon = 'WEAPON_STINGER', price = 500},
+			{ weapon = 'WEAPON_SNIPERRIFLE', price = 500},
+			{ weapon = 'WEAPON_HEAVYSNIPER', price = 500},
+			{ weapon = 'WEAPON_PETROLCAN', price = 500},
+			{ weapon = 'WEAPON_NIGHTSTICK', price = 500},
+			{ weapon = 'WEAPON_GRENADE', price = 500},
+			{ weapon = 'WEAPON_MOLOTOV', price = 500},
+			{ weapon = 'WEAPON_BZGAS', price = 500},
+			{ weapon = 'WEAPON_GRENADELAUNCHER_SMOKE', price = 500},
+			{ weapon = 'WEAPON_GRENADELAUNCHER', price = 500, ammoPrice = 20, AmmoToGive = 100 },
+			{ weapon = 'WEAPON_PUMPSHOTGUN', price = 500},
+			{ weapon = 'WEAPON_SAWNOFFSHOTGUN', price = 500},
+			{ weapon = 'WEAPON_ASSAULTSHOTGUN', price = 500},
+			{ weapon = 'WEAPON_BULLPUPSHOTGUN', price = 500},
+			{ weapon = 'WEAPON_STUNGUN', price = 500},
+			{ weapon = 'WEAPON_SNIPERRIFLE', price = 500},
+			{ weapon = 'WEAPON_HEAVYSNIPER', price = 500}
+		
 		},
 		Locations = {
 			vector3(-1306.2, -394.0, 35.6)

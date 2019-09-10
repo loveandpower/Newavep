@@ -126,7 +126,6 @@ AddEventHandler('esx_society:washMoney', function(society, amount)
 			['@amount']     = amount
 		}, function(rowsChanged)
 			TriggerClientEvent('esx:showNotification', xPlayer.source, _U('you_have', ESX.Math.GroupDigits(amount)))
-			TriggerEvent("esx:washingmoneyalert",xPlayer.name,amount)
 		end)
 	else
 		TriggerClientEvent('esx:showNotification', xPlayer.source, _U('invalid_amount'))

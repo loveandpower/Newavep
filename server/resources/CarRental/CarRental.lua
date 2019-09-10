@@ -202,7 +202,7 @@ Citizen.CreateThread(function()
       			SetBlipColour(pickupBlip, 2)
       			SetBlipAsShortRange(pickupBlip, true)
 	  			BeginTextCommandSetBlipName("STRING")
-      			AddTextComponentString("Car Rental")
+      			AddTextComponentString("Location - Véhicules")
       			EndTextCommandSetBlipName(pickupBlip)
 			end
 			for _, v in pairs(dropoffStation) do
@@ -213,7 +213,7 @@ Citizen.CreateThread(function()
       			SetBlipColour(pickupBlip, 1)
       			SetBlipAsShortRange(pickupBlip, true)
 	  			BeginTextCommandSetBlipName("STRING")
-      			AddTextComponentString("Car Dropoff")
+      			AddTextComponentString("Depot - Location")
       			EndTextCommandSetBlipName(pickupBlip)
 			end
 			isBlipCreated = true

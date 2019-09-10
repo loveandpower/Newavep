@@ -544,7 +544,7 @@ end
 
 -- Create Blips
 function blips()
-	if publicBlip == false then
+	if publicBlip == true then
 		--local blip = AddBlipForCoord(Config.Zones.mineurActions.Pos.x, Config.Zones.mineurActions.Pos.y, Config.Zones.mineurActions.Pos.z)
 		local blip = AddBlipForCoord(837.47534179688, -1955.1430664063, 30.365808486938)
 		SetBlipSprite (blip, 318)

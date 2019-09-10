@@ -16,7 +16,7 @@ end)
 
 local loaded = false
 local oldPos
-local pvpEnabled = true
+local pvpEnabled = false
 
 Citizen.CreateThread(function()
 	while true do

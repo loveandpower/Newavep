@@ -78,7 +78,15 @@ plane_model = {
 	"TITAN",
 	"VELUM",
 	"VELUM2",
-	"VESTRA"
+	"VESTRA",
+	"ALPHAZ1",
+	"HAVOC",
+	"TULA",
+	"MICROLIGHT",
+	"ROGUE",
+	"HOWARD",
+	"VOLATOL",
+	"PYRO"
 }
 
 
@@ -101,5 +109,13 @@ heli_model = {
 	"SWIFT2",
 	"VALKYRIE",
 	"VALKYRIE2",
-	"VOLATUS"
+	"VOLATUS",
+	"HUNTER",
+	"BOMBUSHKA",
+	"AKULA",
+	"AVENGER",
+	"THRUSTER",
+	"SEASPARROW"
+	
+
 }

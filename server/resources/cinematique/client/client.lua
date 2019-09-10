@@ -13,6 +13,8 @@ local Keys = {
 ESX = nil
 
 local hasCinematic = false
+local IsPaused      = false
+
 
 Citizen.CreateThread(function()
   while ESX == nil do
@@ -53,3 +55,50 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(1500)
+	--	if IsControlJustPressed(0, Keys["F10"]) then
+		--	hasCinematic = not hasCinematic
+		--	if hasCinematic == true then
+		--		SendNUIMessage({openCinema = true})
+		--		ESX.UI.HUD.SetDisplay(0.0)
+		--		TriggerEvent('es:setMoneyDisplay', 0.0)
+		--		TriggerEvent('esx_status:setDisplay', 0.0)
+		--		DisplayRadar(false)
+		--	else
+		--		SendNUIMessage({openCinema = false})
+		--		ESX.UI.HUD.SetDisplay(1.0)
+		--		TriggerEvent('es:setMoneyDisplay', 1.0)
+		--		TriggerEvent('esx_status:setDisplay', 1.0)
+		--		DisplayRadar(true)
+		--	end
+		--end
+	end
+end)
+
+
+
+
+
+Citizen.CreateThread(function()
+		while true do
+			Citizen.Wait(100)
+
+			if IsPauseMenuActive() and not IsPaused then
+				IsPaused = true
+				ESX.UI.HUD.SetDisplay(1.0)
+				TriggerEvent('es:setMoneyDisplay', 0.0)
+				ESX.UI.HUD.SetDisplay(1.0)
+			elseif not IsPauseMenuActive() and IsPaused then
+
+				IsPaused = false
+				ESX.UI.HUD.SetDisplay(1.0)
+				TriggerEvent('es:setMoneyDisplay', 1.0)
+				ESX.UI.HUD.SetDisplay(1.0)
+			end
+		end
+	end)

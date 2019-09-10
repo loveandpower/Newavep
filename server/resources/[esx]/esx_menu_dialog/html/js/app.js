@@ -3,6 +3,7 @@
 	let MenuTpl =
 		'<div id="menu_{{_namespace}}_{{_name}}" class="dialog {{#isBig}}big{{/isBig}}">' +
 			'<div class="head"><span>{{title}}</span></div>' +
+			'<div class="text"><span>{{title}}</span></div>' +			
 				'{{#isDefault}}<input type="text" name="value" id="inputText"/>{{/isDefault}}' +
 				'{{#isBig}}<textarea name="value"/>{{/isBig}}' +
 				'<button type="button" name="submit">Envoyer</button>' +

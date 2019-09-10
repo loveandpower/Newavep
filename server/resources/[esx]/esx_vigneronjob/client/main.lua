@@ -24,7 +24,7 @@ local CurrentAction             = nil
 local CurrentActionMsg          = ''
 local CurrentActionData         = {}
 local JobBlips                = {}
-local publicBlip = false
+local publicBlip = true
 ESX                             = nil
 GUI.Time                        = 0
 
@@ -603,7 +603,7 @@ function blips()
 		BeginTextCommandSetBlipName("STRING")
 		AddTextComponentString("Vignerons")
 		EndTextCommandSetBlipName(blip)
-		publicBlip = true
+		publicBlip = false
 	end
 	
     if PlayerData.job ~= nil and PlayerData.job.name == 'vigne' then

@@ -11,9 +11,9 @@ local Keys = {
 	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
 
-local GUI                       = {}
-GUI.Time                        = 0
-local carInstance 				= {}
+local carInstance = {}
+
+
 
 -- Fin Local
 
@@ -22,15 +22,15 @@ ESX = nil
 
 Citizen.CreateThread(function()
 	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) 
-		ESX = obj 
+		TriggerEvent('esx:getSharedObject', function(obj)
+		ESX = obj
 		end)
 	end
 end)
 
 --Fonction Menu
 
-function OpenMenuGarage(garage, KindOfVehicle)
+function OpenMenuGarage(garage, KindOfVehicle, garage_name, vehicle_type)
 	ESX.UI.Menu.CloseAll()
 
 	local elements = {
@@ -49,41 +49,50 @@ function OpenMenuGarage(garage, KindOfVehicle)
 
 			menu.close()
 			if(data.current.value == 'return_vehicle') then
-				ReturnVehicleMenu(garage, KindOfVehicle)
+				ReturnVehicleMenu(garage, KindOfVehicle, garage_name, vehicle_type)
 			end
 		end,
 		function(data, menu)
 			menu.close()
 		end
-	)	
+	)
 end
 -- Afficher les listes des vehicules
-function ListVehiclesMenu(garage, KindOfVehicle)
-	local elements = {}
-	local vehicleName = ""
+function ListVehiclesMenu(garage, KindOfVehicle, garage_name, vehicle_type)
+	local elements, vehiclePropsList = {}, {}
 	ESX.TriggerServerCallback('eden_garage:getVehicles', function(vehicles)
 		if not table.empty(vehicles) then
 			for _,v in pairs(vehicles) do
-				v.vehicle = json.decode(v.vehicle)
-				local hashVehicule = v.vehicle.model		
+				local vehicleProps = json.decode(v.vehicle)
+				vehiclePropsList[vehicleProps.plate] = vehicleProps
+				local vehicleHash = vehicleProps.model
+				local vehicleName, vehicleLabel
+								
 				if v.vehiclename == 'voiture' then
-					vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+					vehicleName = GetDisplayNameFromVehicleModel(vehicleHash)
 				else
 					vehicleName = v.vehiclename
 				end
-				local labelvehicle
-				if(v.fourrieremecano)then
-					labelvehicle = vehicleName..': Fourrière externe'
-				elseif (v.state)  then
-					labelvehicle = vehicleName..': Rentré'
+
+				if v.fourrieremecano then
+					vehicleLabel = vehicleName..': Fourrière externe'
+				elseif v.state then
+					vehicleLabel = vehicleName..': Rentré'.." ("..v.garage_name..")"
 				else
-					labelvehicle = vehicleName..': Sortie'
-				end	
-				table.insert(elements, {label =labelvehicle , value = v})
+					vehicleLabel = vehicleName..': Sortie'.." ("..v.garage_name..")"
+				end
+				table.insert(elements, {
+					label = vehicleLabel,
+					vehicleName = vehicleName,
+					state = v.state,
+					plate = vehicleProps.plate,
+					fourrieremecano = v.fourrieremecano,
+					garage_name = v.garage_name
+				})
 				
 			end
 		else
-			table.insert(elements, {label ="Pas de voitures dans le garage" , value = nil})
+			table.insert(elements, {label = "Pas de voitures dans le garage"})
 		end
 		ESX.UI.Menu.Open(
 		'default', GetCurrentResourceName(), 'spawn_vehicle',
@@ -93,43 +102,74 @@ function ListVehiclesMenu(garage, KindOfVehicle)
 			elements = elements,
 		},
 		function(data, menu)
-			local elem = {}
-			table.insert(elem, {label ="Sortir la voiture" , value = 'get_vehicle_out'})
-			table.insert(elem, {label ="Renommer la voiture" , value = 'rename_vehicle'})
-			if data.current.value.vehiclename == 'voiture' then
-				vehicleName = GetDisplayNameFromVehicleModel(data.current.value.vehicle.model)
-			else
-				vehicleName = data.current.value.vehiclename
-			end
-			ESX.UI.Menu.Open(
-				'default', GetCurrentResourceName(), 'vehicle_menu',
-				{
-					title    =  vehicleName,
-					align    = 'top-left',
-					elements = elem,
-				},
-				function(data2, menu2)
+			local vehicleProps = vehiclePropsList[data.current.plate]
+
+			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_menu', {
+				title    =  data.current.vehicleName,
+				align    = 'top-left',
+				elements = {
+					{label ="Sortir la voiture" , value = 'get_vehicle_out'},
+					{label ="Renommer la voiture" , value = 'rename_vehicle'}
+			}}, function(data2, menu2)
 					if data2.current.value == "get_vehicle_out" then
-                        if (data.current.value.fourrieremecano) then
+                        if (data.current.fourrieremecano) then
                             TriggerEvent('esx:showNotification', 'Votre véhicule est dans la fourrieremecano')
-                        elseif (data.current.value.state) then
+                        elseif garage_name ~= data.current.garage_name then
+							local elem = {}
+							table.insert(elem, {label ="oui $"..tostring(Config.SwitchGaragePrice) , value = 'transfer_yes'})
+							table.insert(elem, {label ="non" , value = 'transfer_no'})
+							ESX.UI.Menu.Open(
+								'default', GetCurrentResourceName(), 'transfer_menu',
+								{
+									title    =  "Voulez vous transférer: "..data.current.vehicleName.." a votre garage?",
+									align    = 'top-left',
+									elements = elem,
+								},
+								function(data3, menu3)
+									if data3.current.value == "transfer_yes" then 
+										ESX.TriggerServerCallback('eden_garage:checkMoney', function(hasEnoughMoney)
+											if hasEnoughMoney then
+												TriggerServerEvent("esx_eden_garage:MoveGarage",data.current.plate, garage_name)
+												SpawnVehicle(vehicleProps, garage, KindOfVehicle)
+												menu2.close()
+												menu3.close()
+											else
+												ESX.ShowNotification("Vous n'avez pas assez d'argent")
+											end
+										end, Config.SwitchGaragePrice)
+									else
+										menu2.close()
+										menu3.close()
+									end
+								end,
+								function(data3, menu3)
+									menu3.close()
+								end
+							)
+						elseif (data.current.state) then
                             menu.close()
                             menu2.close()
-                            SpawnVehicle(data.current.value.vehicle, garage, KindOfVehicle)
+                            SpawnVehicle(vehicleProps, garage, KindOfVehicle)
                         else
                             TriggerEvent('esx:showNotification', 'Votre véhicule est déjà sorti')
                         end
 					elseif data2.current.value == "rename_vehicle" then
-						AddTextEntry('FMMC_KEY_TIP8', "Nom du véhicule souhaité")
-						DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", 64)
-						while (UpdateOnscreenKeyboard() == 0) do
-								DisableAllControlActions(0);
-								Wait(0);
-						end
-						if (GetOnscreenKeyboardResult()) then
-							local name = GetOnscreenKeyboardResult()
-							TriggerServerEvent('eden_garage:renamevehicle', data.current.value.plate, name)
-						end
+						ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'rename_vehicle', {
+							title = 'Nom du véhicule souhaité'
+						}, function(data3, menu3)
+							if string.len(data3.value) >= 1 then
+								TriggerServerEvent('eden_garage:renamevehicle', data.current.plate, data3.value)
+								menu3.close()
+								ESX.UI.Menu.CloseAll()
+								ListVehiclesMenu(garage, KindOfVehicle, garage_name, vehicle_type)
+							else
+								ESX.ShowNotification("Le nom du véhicule ne peut pas être vide")
+								menu3.close()
+							end
+
+						end, function(data3, menu3)
+							menu3.close()
+						end)
 					end
 				end,
 				function(data2, menu2)
@@ -141,49 +181,49 @@ function ListVehiclesMenu(garage, KindOfVehicle)
 			menu.close()
 		end
 	)
-	end, KindOfVehicle)
+	end, KindOfVehicle, garage_name, vehicle_type)
 end
 -- Fin Afficher les listes des vehicules
 
 -- Afficher les listes des vehicules de fourriere
 function ListVehiclesFourriereMenu(garage)
-	local elements = {}
+	local elements, vehiclePropsList = {}, {}
 
 	ESX.TriggerServerCallback('eden_garage:getVehiclesMecano', function(vehicles)
 
-		for _,v in pairs(vehicles) do
-			v.vehicle = json.decode(v.vehicle)
-			local hashVehicule = v.vehicle.model
-    		local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+		for k,v in ipairs(vehicles) do
+			local vehicleProps = json.decode(v.vehicle)
+			vehiclePropsList[vehicleProps.plate] = vehicleProps
+			local vehicleHash = vehicleProps.model
+			local vehicleName = GetDisplayNameFromVehicleModel(vehicleHash)
 
-			table.insert(elements, {label =vehicleName.." | "..v.firstname.." "..v.lastname , value = v})
-			
+			table.insert(elements, {
+				label = ('%s | %s %s'):format(vehicleName, v.firstname, v.lastname),
+				plate = vehicleProps.plate
+			})
 		end
 
-		ESX.UI.Menu.Open(
-		'default', GetCurrentResourceName(), 'spawn_vehicle_mecano',
-		{
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'spawn_vehicle_mecano', {
 			title    = 'Garage',
 			align    = 'top-left',
 			elements = elements,
-		},
-		function(data, menu)
+		}, function(data, menu)
+			local vehicleProps = vehiclePropsList[data.current.plate]
 			menu.close()
-			SpawnVehicleMecano(data.current.value.vehicle, garage)
-			TriggerServerEvent('eden_garage:ChangeStateFromFourriereMecano', data.current.value.vehicle, false)
-		end,
-		function(data, menu)
+			SpawnVehicleMecano(vehicleProps, garage)
+			TriggerServerEvent('eden_garage:ChangeStateFromFourriereMecano', vehicleProps, false)
+		end, function(data, menu)
 			menu.close()
-		end
-	)	
+		end)
+
 	end)
 end
 -- Fin Afficher les listes des vehicules de fourriere
 
 
 -- Fonction qui permet de rentrer un vehicule
-function StockVehicleMenu(KindOfVehicle)
-	local playerPed  = GetPlayerPed(-1)
+function StockVehicleMenu(KindOfVehicle, garage, vehicle_type)
+	local playerPed  = PlayerPedId()
 	if IsPedInAnyVehicle(playerPed,  false) then
 		local vehicle =GetVehiclePedIsIn(playerPed,false)
 		if GetPedInVehicleSeat(vehicle, -1) == playerPed then
@@ -193,7 +233,7 @@ function StockVehicleMenu(KindOfVehicle)
 				ESX.TriggerServerCallback('eden_garage:stockv',function(valid)
 					if(valid) then
 						for k,v in pairs (carInstance) do
-							if v.plate == trailerplate then
+							if ESX.Math.Trim(v.plate) == ESX.Math.Trim(trailerProps.plate) then
 								table.remove(carInstance, k)
 							end
 						end
@@ -203,13 +243,13 @@ function StockVehicleMenu(KindOfVehicle)
 					else
 						TriggerEvent('esx:showNotification', 'Vous ne pouvez pas stocker ce véhicule')
 					end
-				end,trailerProps, KindOfVehicle)
+				end,trailerProps, KindOfVehicle, garage, vehicle_type)
 			else
 				local vehicleProps  = ESX.Game.GetVehicleProperties(vehicle)
 				ESX.TriggerServerCallback('eden_garage:stockv',function(valid)
 					if(valid) then
 						for k,v in pairs (carInstance) do
-							if v.plate == vehicleplate then
+							if ESX.Math.Trim(v.plate) == ESX.Math.Trim(vehicleProps.plate) then
 								table.remove(carInstance, k)
 							end
 						end
@@ -219,7 +259,7 @@ function StockVehicleMenu(KindOfVehicle)
 					else
 						TriggerEvent('esx:showNotification', 'Vous ne pouvez pas stocker ce véhicule')
 					end
-				end,vehicleProps, KindOfVehicle)
+				end,vehicleProps, KindOfVehicle, garage, vehicle_type)
 			end
 		else
 			TriggerEvent('esx:showNotification', 'Vous etes pas conducteur du vehicule')
@@ -232,7 +272,7 @@ end
 
 -- Fonction qui permet de rentrer un vehicule dans fourriere
 function StockVehicleFourriereMenu()
-	local playerPed  = GetPlayerPed(-1)
+	local playerPed  = PlayerPedId()
 	if IsPedInAnyVehicle(playerPed,  false) then
 		local vehicle =GetVehiclePedIsIn(playerPed,false)
 		if GetPedInVehicleSeat(vehicle, -1) == playerPed then
@@ -279,10 +319,10 @@ function SpawnVehicle(vehicle, garage, KindOfVehicle)
 		z = garage.SpawnPoint.Pos.z + 1											
 		},garage.SpawnPoint.Heading, function(callback_vehicle)
 			ESX.Game.SetVehicleProperties(callback_vehicle, vehicle)
-			TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
+			TaskWarpPedIntoVehicle(PlayerPedId(), callback_vehicle, -1)
 			local carplate = GetVehicleNumberPlateText(callback_vehicle)
 			table.insert(carInstance, {vehicleentity = callback_vehicle, plate = carplate})
-			if KindOfVehicle == 'brewer' or KindOfVehicle == 'joaillerie' or KindOfVehicle == 'fermier' or KindOfVehicle == 'fisherman' or KindOfVehicle == 'fuel' or KindOfVehicle == 'johnson' or KindOfVehicle == 'miner' or KindOfVehicle == 'reporter' or KindOfVehicle == 'vignerons' or KindOfVehicle == 'tabac' then
+			if KindOfVehicle == 'brewer' or KindOfVehicle == 'biker' or KindOfVehicle == 'joaillerie' or KindOfVehicle == 'fermier' or KindOfVehicle == 'fisherman' or KindOfVehicle == 'fuel' or KindOfVehicle == 'johnson' or KindOfVehicle == 'miner' or KindOfVehicle == 'reporter' or KindOfVehicle == 'vignerons' or KindOfVehicle == 'tabac' then
 				TriggerEvent('esx_jobs1:addplate', carplate)
 				TriggerEvent('esx_jobs2:addplate', carplate)
 			end	
@@ -299,38 +339,43 @@ function SpawnVehicleMecano(vehicle, garage)
 		z = garage.SpawnPoint.Pos.z + 1											
 		},garage.SpawnPoint.Heading, function(callback_vehicle)
 			ESX.Game.SetVehicleProperties(callback_vehicle, vehicle)
-			TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
+			TaskWarpPedIntoVehicle(PlayerPedId(), callback_vehicle, -1)
 		end)
 	TriggerServerEvent('eden_garage:ChangeStateFromFourriereMecano', vehicle, false)
 end
 --Fin fonction pour spawn vehicule fourriere mecano
 
-function ReturnVehicleMenu(garage, KindOfVehicle)
+function ReturnVehicleMenu(garage, KindOfVehicle, garage_name, vehicle_type)
 
 	ESX.TriggerServerCallback('eden_garage:getOutVehicles', function(vehicles)
-		local elements = {}
+		local elements, vehiclePropsList = {}, {}
 		if not table.empty(vehicles) then
 			for _,v in pairs(vehicles) do
-				v.vehicle = json.decode(v.vehicle)
-				local hashVehicule = v.vehicle.model
-				local vehicleName
-				local labelvehicle		
+				local vehicleProps = json.decode(v.vehicle)
+				vehiclePropsList[vehicleProps.plate] = vehicleProps
+				local vehicleHash = vehicleProps.model
+				local vehicleName, vehicleLabel
+
 				if v.vehiclename == 'voiture' then
-					vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+					vehicleName = GetDisplayNameFromVehicleModel(vehicleHash)
 				else
 					vehicleName = v.vehiclename
 				end
-				
+
 				if v.fourrieremecano then
-					labelvehicle = vehicleName..': Fourrière externe'
-					table.insert(elements, {label =labelvehicle , value = 'fourrieremecano'})
+					vehicleLabel = vehicleName..': Fourrière externe'
+					table.insert(elements, {label = vehicleLabel, action = 'fourrieremecano'})
 				else
-					labelvehicle = vehicleName..': Sortie'
-					table.insert(elements, {label =labelvehicle , value = v.vehicle})
+					vehicleLabel = vehicleName..': Sortie'
+					table.insert(elements, {
+						label = vehicleLabel,
+						plate = vehicleProps.plate,
+						action = 'store'
+					})
 				end
 			end
 		else
-			table.insert(elements, {label ="Pas de véhicule a sortir" , value = nil})
+			table.insert(elements, {label = "Pas de véhicule a sortir", action = 'nothing'})
 		end
 
 		ESX.UI.Menu.Open(
@@ -341,29 +386,30 @@ function ReturnVehicleMenu(garage, KindOfVehicle)
 			elements = elements,
 		},
 		function(data, menu)
-			if data.current.value == 'fourrieremecano' then
+			local vehicleProps = vehiclePropsList[data.current.plate]
+			if data.current.action == 'fourrieremecano' then
 				ESX.ShowNotification("Va voir la police ou mecano pour savoir comment recuperer ton véhicule.")
-			elseif data.current.value ~= nil then
-				local iscaronearth = false
+			elseif data.current.action ~= nil then
+				local doesVehicleExist = false
 				for k,v in pairs (carInstance) do
-					if v.plate == data.current.value.plate then
+					if ESX.Math.Trim(v.plate) == ESX.Math.Trim(data.current.plate) then
 						if DoesEntityExist(v.vehicleentity) then
-							iscaronearth = true
+							doesVehicleExist = true
 						else
 							table.remove(carInstance, k)
-							iscaronearth = false
+							doesVehicleExist = false
 						end
 					end
 				end
-				if not iscaronearth then
+				if not doesVehicleExist then
 					ESX.TriggerServerCallback('eden_garage:checkMoney', function(hasEnoughMoney)
 						if hasEnoughMoney then
 							menu.close()
-							SpawnVehicle(data.current.value, garage, KindOfVehicle)
+							SpawnVehicle(vehicleProps, garage, KindOfVehicle)
 						else
 							ESX.ShowNotification('Vous n\'avez pas assez d\'argent')						
 						end
-					end)
+					end, Config.Price)
 				else
 					ESX.ShowNotification("Vous ne pouvez pas sortir ce véhicule. Allez la chercher!")
 				end				
@@ -373,7 +419,7 @@ function ReturnVehicleMenu(garage, KindOfVehicle)
 			menu.close()
 		end
 		)
-	end, KindOfVehicle)
+	end, KindOfVehicle, garage_name, vehicle_type)
 end
 
 function exitmarker()
@@ -383,57 +429,22 @@ end
 RegisterNetEvent("ft_libs:OnClientReady")
 AddEventHandler('ft_libs:OnClientReady', function()
 	for k,v in pairs (Config.Garages) do
-		this_Garage = v
-	
-	--	exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage", {
-	--		marker = {
-	--			weight = v.Marker.w,
-	--			height = v.Marker.h,
-	---			red = v.Marker.r,
-	--			green = v.Marker.g,
-	--			blue = v.Marker.b,
-	--		},
-	--		trigger = {
-	--			weight = v.Marker.w,
-	--			active = {
-	--				callback = function()
-	--					exports.ft_libs:HelpPromt(v.HelpPrompt)
-	--					if IsControlJustPressed(1, 38) and GetLastInputMethod(2) and (GetGameTimer() - GUI.Time) > 150 then
-	--						v.Functionmenu(v, "personal")
-	--						GUI.Time = GetGameTimer()
-	--					end
-	--				end,
-	--			},
-	--			exit = {
-	--				callback = exitmarker
-	--			},
-	--		},
-	--		blip = {
-	--			text = v.Name,
-	--			colorId = Config.Blip.color,
-	--			imageId = Config.Blip.sprite,
-	--		},
-	--		locations = {
-	--			v.Pos				
-	--		},
-	--	})
-	
-		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_spawnpoint", {
+		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage", {
 			marker = {
-				weight = v.SpawnPoint.Marker.w,
-				height = v.SpawnPoint.Marker.h,
-				red = v.SpawnPoint.Marker.r,
-				green = v.SpawnPoint.Marker.g,
-				blue = v.SpawnPoint.Marker.b,
+				weight = v.Marker.w,
+				height = v.Marker.h,
+				red = v.Marker.r,
+				green = v.Marker.g,
+				blue = v.Marker.b,
+				type = 27,
 			},
 			trigger = {
-				weight = v.SpawnPoint.Marker.w,
+				weight = v.Marker.w,
 				active = {
 					callback = function()
-						exports.ft_libs:HelpPromt(v.SpawnPoint.HelpPrompt)
-						if IsControlJustPressed(1, 38) and GetLastInputMethod(2) and (GetGameTimer() - GUI.Time) > 150 then
-							v.SpawnPoint.Functionmenu(v, "personal")
-							GUI.Time = GetGameTimer()
+						exports.ft_libs:HelpPromt(v.HelpPrompt)
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+							OpenMenuGarage(v, "personal", k, "car")
 						end
 					end,
 				},
@@ -445,6 +456,33 @@ AddEventHandler('ft_libs:OnClientReady', function()
 				text = v.Name,
 				colorId = Config.Blip.color,
 				imageId = Config.Blip.sprite,
+			},
+			locations = {
+				v.Pos				
+			},
+		})
+		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_spawnpoint", {
+			marker = {
+				weight = v.SpawnPoint.Marker.w,
+				height = v.SpawnPoint.Marker.h,
+				red = v.SpawnPoint.Marker.r,
+				green = v.SpawnPoint.Marker.g,
+				blue = v.SpawnPoint.Marker.b,
+				type = 27,
+			},
+			trigger = {
+				weight = v.SpawnPoint.Marker.w,
+				active = {
+					callback = function()
+						exports.ft_libs:HelpPromt(v.SpawnPoint.HelpPrompt)
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+							ListVehiclesMenu(v, "personal", k, "car")
+						end
+					end,
+				},
+				exit = {
+					callback = exitmarker
+				},
 			},
 			locations = {
 				{
@@ -461,15 +499,15 @@ AddEventHandler('ft_libs:OnClientReady', function()
 				red = v.DeletePoint.Marker.r,
 				green = v.DeletePoint.Marker.g,
 				blue = v.DeletePoint.Marker.b,
+				type = 27,
 			},
 			trigger = {
 				weight = v.DeletePoint.Marker.w,
 				active = {
 					callback = function()
 						exports.ft_libs:HelpPromt(v.DeletePoint.HelpPrompt)
-						if IsControlJustPressed(1, 38) and GetLastInputMethod(2) and (GetGameTimer() - GUI.Time) > 150 then
-							v.DeletePoint.Functionmenu("personal")
-							GUI.Time = GetGameTimer()
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) then
+							StockVehicleMenu("personal", k, "car")
 						end
 					end,
 				},
@@ -496,15 +534,15 @@ AddEventHandler('ft_libs:OnClientReady', function()
 				red = v.SpawnPoint.Marker.r,
 				green = v.SpawnPoint.Marker.g,
 				blue = v.SpawnPoint.Marker.b,
+				type = 27,
 			},
 			trigger = {
 				weight = v.SpawnPoint.Marker.w,
 				active = {
 					callback = function()
 						exports.ft_libs:HelpPromt(v.SpawnPoint.HelpPrompt)
-						if IsControlJustPressed(1, 38) and GetLastInputMethod(2) and (GetGameTimer() - GUI.Time) > 150 then
-							v.SpawnPoint.Functionmenu(v)
-							GUI.Time = GetGameTimer()
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+							ListVehiclesFourriereMenu(v)
 						end
 					end,
 				},
@@ -533,15 +571,210 @@ AddEventHandler('ft_libs:OnClientReady', function()
 				red = v.DeletePoint.Marker.r,
 				green = v.DeletePoint.Marker.g,
 				blue = v.DeletePoint.Marker.b,
+				type = 27,
 			},
 			trigger = {
 				weight = v.DeletePoint.Marker.w,
 				active = {
 					callback = function()
 						exports.ft_libs:HelpPromt(v.DeletePoint.HelpPrompt)
-						if IsControlJustPressed(1, 38) and GetLastInputMethod(2) and (GetGameTimer() - GUI.Time) > 150 then
-							v.DeletePoint.Functionmenu()
-							GUI.Time = GetGameTimer()
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) then
+							StockVehicleFourriereMenu()
+						end
+					end,
+				},
+				exit = {
+					callback = exitmarker
+				},
+			},
+			locations = {
+				{
+					x = v.DeletePoint.Pos.x,
+					y = v.DeletePoint.Pos.y,
+					z = v.DeletePoint.Pos.z,
+				},
+			},
+		})
+	end
+	
+	for k,v in pairs (Config.BoatGarages) do
+		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage_BoatGarages", {
+			marker = {
+				weight = v.Marker.w,
+				height = v.Marker.h,
+				red = v.Marker.r,
+				green = v.Marker.g,
+				blue = v.Marker.b,
+				type = 1,
+			},
+			trigger = {
+				weight = v.Marker.w,
+				active = {
+					callback = function()
+						exports.ft_libs:HelpPromt(v.HelpPrompt)
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+							OpenMenuGarage(v, "personal", k, "boat")
+						end
+					end,
+				},
+				exit = {
+					callback = exitmarker
+				},
+			},
+			blip = {
+				text = v.Name,
+				colorId = Config.BoatBlip.color,
+				imageId = Config.BoatBlip.sprite,
+			},
+			locations = {
+				v.Pos				
+			},
+		})
+		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_spawnpoint_BoatGarages", {
+			marker = {
+				weight = v.SpawnPoint.Marker.w,
+				height = v.SpawnPoint.Marker.h,
+				red = v.SpawnPoint.Marker.r,
+				green = v.SpawnPoint.Marker.g,
+				blue = v.SpawnPoint.Marker.b,
+				type = 1,
+			},
+			trigger = {
+				weight = v.SpawnPoint.Marker.w,
+				active = {
+					callback = function()
+						exports.ft_libs:HelpPromt(v.SpawnPoint.HelpPrompt)
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+							ListVehiclesMenu(v, "personal", k, "boat")
+						end
+					end,
+				},
+				exit = {
+					callback = exitmarker
+				},
+			},
+			locations = {
+				{
+					x = v.SpawnPoint.Pos.x,
+					y = v.SpawnPoint.Pos.y,
+					z = v.SpawnPoint.Pos.z,
+				},
+			},
+		})
+		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_deletepoint_BoatGarages", {
+			marker = {
+				weight = v.DeletePoint.Marker.w,
+				height = v.DeletePoint.Marker.h,
+				red = v.DeletePoint.Marker.r,
+				green = v.DeletePoint.Marker.g,
+				blue = v.DeletePoint.Marker.b,
+				type = 1,
+			},
+			trigger = {
+				weight = v.DeletePoint.Marker.w,
+				active = {
+					callback = function()
+						exports.ft_libs:HelpPromt(v.DeletePoint.HelpPrompt)
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) then
+							StockVehicleMenu("personal", k, "boat")
+						end
+					end,
+				},
+				exit = {
+					callback = exitmarker
+				},
+			},
+			locations = {
+				{
+					x = v.DeletePoint.Pos.x,
+					y = v.DeletePoint.Pos.y,
+					z = v.DeletePoint.Pos.z,
+				},
+			},
+		})
+	end
+	
+	
+	for k,v in pairs (Config.AirplaneGarages) do
+		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage_AirplaneGarages", {
+			marker = {
+				weight = v.Marker.w,
+				height = v.Marker.h,
+				red = v.Marker.r,
+				green = v.Marker.g,
+				blue = v.Marker.b,
+				type = 27,
+			},
+			trigger = {
+				weight = v.Marker.w,
+				active = {
+					callback = function()
+						exports.ft_libs:HelpPromt(v.HelpPrompt)
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+							OpenMenuGarage(v, "personal", k, "airplane")
+						end
+					end,
+				},
+				exit = {
+					callback = exitmarker
+				},
+			},
+			blip = {
+				text = v.Name,
+				colorId = Config.AirplaneBlip.color,
+				imageId = Config.AirplaneBlip.sprite,
+			},
+			locations = {
+				v.Pos				
+			},
+		})
+		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_spawnpoint_AirplaneGarages", {
+			marker = {
+				weight = v.SpawnPoint.Marker.w,
+				height = v.SpawnPoint.Marker.h,
+				red = v.SpawnPoint.Marker.r,
+				green = v.SpawnPoint.Marker.g,
+				blue = v.SpawnPoint.Marker.b,
+				type = 27,
+			},
+			trigger = {
+				weight = v.SpawnPoint.Marker.w,
+				active = {
+					callback = function()
+						exports.ft_libs:HelpPromt(v.SpawnPoint.HelpPrompt)
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+							ListVehiclesMenu(v, "personal", k, "airplane")
+						end
+					end,
+				},
+				exit = {
+					callback = exitmarker
+				},
+			},
+			locations = {
+				{
+					x = v.SpawnPoint.Pos.x,
+					y = v.SpawnPoint.Pos.y,
+					z = v.SpawnPoint.Pos.z,
+				},
+			},
+		})
+		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_deletepoint_AirplaneGarages", {
+			marker = {
+				weight = v.DeletePoint.Marker.w,
+				height = v.DeletePoint.Marker.h,
+				red = v.DeletePoint.Marker.r,
+				green = v.DeletePoint.Marker.g,
+				blue = v.DeletePoint.Marker.b,
+				type = 27,
+			},
+			trigger = {
+				weight = v.DeletePoint.Marker.w,
+				active = {
+					callback = function()
+						exports.ft_libs:HelpPromt(v.DeletePoint.HelpPrompt)
+						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) then
+							StockVehicleMenu("personal", k, "airplane")
 						end
 					end,
 				},
@@ -597,16 +830,20 @@ end
 --- garage societe
 
 RegisterNetEvent('esx_eden_garage:ListVehiclesMenu')
-AddEventHandler('esx_eden_garage:ListVehiclesMenu', function(garage, society)
-	ListVehiclesMenu(garage, society)
+AddEventHandler('esx_eden_garage:ListVehiclesMenu', function(garage, society, societygarage)
+	if not IsPedInAnyVehicle(PlayerPedId()) then
+		ListVehiclesMenu(garage, society, societygarage, "car")
+	end
 end)
 
 RegisterNetEvent('esx_eden_garage:OpenMenuGarage')
-AddEventHandler('esx_eden_garage:OpenMenuGarage', function(garage, society)
-	OpenMenuGarage(garage, society)
+AddEventHandler('esx_eden_garage:OpenMenuGarage', function(garage, society, societygarage)
+	if not IsPedInAnyVehicle(PlayerPedId()) then
+		OpenMenuGarage(garage, society, societygarage, "car")
+	end
 end)
 
 RegisterNetEvent('esx_eden_garage:StockVehicleMenu')
-AddEventHandler('esx_eden_garage:StockVehicleMenu', function(society)
-	StockVehicleMenu(society)
+AddEventHandler('esx_eden_garage:StockVehicleMenu', function(society, societygarage)
+	StockVehicleMenu(society, societygarage, "car")
 end)

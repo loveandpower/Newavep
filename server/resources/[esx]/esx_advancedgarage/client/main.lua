@@ -10,10 +10,10 @@ Keys = {
 	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
 
-ESX    = nil
+ESX = nil
 
-local PlayerData = {}
-local JobBlips = {}
+local PlayerData              = {}
+local JobBlips                = {}
 local HasAlreadyEnteredMarker = false
 local LastZone                = nil
 local CurrentAction           = nil
@@ -60,7 +60,7 @@ end)
 local function has_value (tab, val)
 	for index, value in ipairs(tab) do
 		if value == val then
-				return true
+			return true
 		end
 	end
 	return false
@@ -127,53 +127,72 @@ function OpenMenuGarage(PointType)
 		elseif action == 'return_owned_ambulance' then
 			ReturnOwnedAmbulanceMenu()
 		end
-		
-		--local playerPed = GetPlayerPed(-1)
-		--SpawnVehicle(data.current.value)
-		
-	end, function (data, menu)
+	end, function(data, menu)
 		menu.close()
 	end)
 end
 
-----------------------------------------------------------------------------------------------------
-
 -- List Owned Cars Menu
 function ListOwnedCarsMenu()
-	local elements = {
-		{label = _U('spacer3')},
-		{label = _U('spacer1')}
-	}
+	local elements = {}
+	
+	if Config.ShowGarageSpacer1 then
+		table.insert(elements, {label = _U('spacer1')})
+	end
+	
+	if Config.ShowGarageSpacer2 then
+		table.insert(elements, {label = _U('spacer2')})
+	end
+	
+	if Config.ShowGarageSpacer3 then
+		table.insert(elements, {label = _U('spacer3')})
+	end
 	
 	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedCars', function(ownedCars)
 		if #ownedCars == 0 then
 			ESX.ShowNotification(_U('garage_nocars'))
 		else
 			for _,v in pairs(ownedCars) do
-				if Config.UseVehicleNamesLua == true then
+				if Config.UseVehicleNamesLua then
 					local hashVehicule = v.vehicle.model
 					local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
 					local vehicleName  = GetLabelText(aheadVehName)
+					local plate        = v.plate
 					local labelvehicle
-					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
 				else
 					local hashVehicule = v.vehicle.model
-					local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+					local vehicleName  = GetDisplayNameFromVehicleModel(hashVehicule)
+					local plate        = v.plate
 					local labelvehicle
-					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
@@ -200,40 +219,65 @@ end
 
 -- List Owned Boats Menu
 function ListOwnedBoatsMenu()
-	local elements = {
-		{label = _U('spacer3')},
-		{label = _U('spacer1')}
-	}
+	local elements = {}
+	
+	if Config.ShowGarageSpacer1 then
+		table.insert(elements, {label = _U('spacer1')})
+	end
+	
+	if Config.ShowGarageSpacer2 then
+		table.insert(elements, {label = _U('spacer2')})
+	end
+	
+	if Config.ShowGarageSpacer3 then
+		table.insert(elements, {label = _U('spacer3')})
+	end
 	
 	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedBoats', function(ownedBoats)
 		if #ownedBoats == 0 then
 			ESX.ShowNotification(_U('garage_noboats'))
 		else
 			for _,v in pairs(ownedBoats) do
-				if Config.UseVehicleNamesLua == true then
+				if Config.UseVehicleNamesLua then
 					local hashVehicule = v.vehicle.model
 					local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
 					local vehicleName  = GetLabelText(aheadVehName)
+					local plate        = v.plate
 					local labelvehicle
-					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
 				else
 					local hashVehicule = v.vehicle.model
-					local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+					local vehicleName  = GetDisplayNameFromVehicleModel(hashVehicule)
+					local plate        = v.plate
 					local labelvehicle
-					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
@@ -260,40 +304,65 @@ end
 
 -- List Owned Aircrafts Menu
 function ListOwnedAircraftsMenu()
-	local elements = {
-		{label = _U('spacer3')},
-		{label = _U('spacer1')}
-	}
+	local elements = {}
+	
+	if Config.ShowGarageSpacer1 then
+		table.insert(elements, {label = _U('spacer1')})
+	end
+	
+	if Config.ShowGarageSpacer2 then
+		table.insert(elements, {label = _U('spacer2')})
+	end
+	
+	if Config.ShowGarageSpacer3 then
+		table.insert(elements, {label = _U('spacer3')})
+	end
 	
 	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedAircrafts', function(ownedAircrafts)
 		if #ownedAircrafts == 0 then
 			ESX.ShowNotification(_U('garage_noaircrafts'))
 		else
 			for _,v in pairs(ownedAircrafts) do
-				if Config.UseVehicleNamesLua == true then
+				if Config.UseVehicleNamesLua then
 					local hashVehicule = v.vehicle.model
 					local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
 					local vehicleName  = GetLabelText(aheadVehName)
+					local plate        = v.plate
 					local labelvehicle
-					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
 				else
 					local hashVehicule = v.vehicle.model
-					local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+					local vehicleName  = GetDisplayNameFromVehicleModel(hashVehicule)
+					local plate        = v.plate
 					local labelvehicle
-					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
@@ -318,24 +387,22 @@ function ListOwnedAircraftsMenu()
 	end)
 end
 
-----------------------------------------------------------------------------------------------------
-
 -- Store Owned Cars Menu
 function StoreOwnedCarsMenu()
 	local playerPed  = GetPlayerPed(-1)
 	if IsPedInAnyVehicle(playerPed,  false) then
-		local playerPed     = GetPlayerPed(-1)
-		local coords        = GetEntityCoords(playerPed)
-		local vehicle       = GetVehiclePedIsIn(playerPed, false)
-		local vehicleProps  = ESX.Game.GetVehicleProperties(vehicle)
-		local current 	    = GetPlayersLastVehicle(GetPlayerPed(-1), true)
-		local engineHealth  = GetVehicleEngineHealth(current)
-		local plate = vehicleProps.plate
+		local playerPed    = GetPlayerPed(-1)
+		local coords       = GetEntityCoords(playerPed)
+		local vehicle      = GetVehiclePedIsIn(playerPed, false)
+		local vehicleProps = ESX.Game.GetVehicleProperties(vehicle)
+		local current 	   = GetPlayersLastVehicle(GetPlayerPed(-1), true)
+		local engineHealth = GetVehicleEngineHealth(current)
+		local plate        = vehicleProps.plate
 		
 		ESX.TriggerServerCallback('esx_advancedgarage:storeVehicle', function(valid)
 			if valid then
 				if engineHealth < 990 then
-					if Config.UseDamageMult == true then
+					if Config.UseDamageMult then
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.CarPoundPrice*Config.DamageMult)
 						reparation(apprasial, vehicle, vehicleProps)
 					else
@@ -364,13 +431,18 @@ function StoreOwnedBoatsMenu()
 		local vehicleProps  = ESX.Game.GetVehicleProperties(vehicle)
 		local current 	    = GetPlayersLastVehicle(GetPlayerPed(-1), true)
 		local engineHealth  = GetVehicleEngineHealth(current)
-		local plate = vehicleProps.plate
+		local plate         = vehicleProps.plate
 		
 		ESX.TriggerServerCallback('esx_advancedgarage:storeVehicle', function(valid)
 			if valid then
 				if engineHealth < 990 then
-					local apprasial = math.floor((1000 - engineHealth)/1000*Config.BoatPoundPrice) -- *Config.DamageMultiplier
-					reparation(apprasial, vehicle, vehicleProps)
+					if Config.UseDamageMult then
+						local apprasial = math.floor((1000 - engineHealth)/1000*Config.BoatPoundPrice*Config.DamageMult)
+						reparation(apprasial, vehicle, vehicleProps)
+					else
+						local apprasial = math.floor((1000 - engineHealth)/1000*Config.BoatPoundPrice)
+						reparation(apprasial, vehicle, vehicleProps)
+					end
 				else
 					putaway(vehicle, vehicleProps)
 				end	
@@ -393,13 +465,18 @@ function StoreOwnedAircraftsMenu()
 		local vehicleProps  = ESX.Game.GetVehicleProperties(vehicle)
 		local current 	    = GetPlayersLastVehicle(GetPlayerPed(-1), true)
 		local engineHealth  = GetVehicleEngineHealth(current)
-		local plate = vehicleProps.plate
+		local plate         = vehicleProps.plate
 		
 		ESX.TriggerServerCallback('esx_advancedgarage:storeVehicle', function(valid)
 			if valid then
 				if engineHealth < 990 then
-					local apprasial = math.floor((1000 - engineHealth)/1000*Config.AircraftPoundPrice) -- *Config.DamageMultiplier
-					reparation(apprasial, vehicle, vehicleProps)
+					if Config.UseDamageMult then
+						local apprasial = math.floor((1000 - engineHealth)/1000*Config.AircraftPoundPrice*Config.DamageMult)
+						reparation(apprasial, vehicle, vehicleProps)
+					else
+						local apprasial = math.floor((1000 - engineHealth)/1000*Config.AircraftPoundPrice)
+						reparation(apprasial, vehicle, vehicleProps)
+					end
 				else
 					putaway(vehicle, vehicleProps)
 				end	
@@ -412,31 +489,35 @@ function StoreOwnedAircraftsMenu()
 	end
 end
 
-----------------------------------------------------------------------------------------------------
-
 -- Pound Owned Cars Menu
 function ReturnOwnedCarsMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedCars', function(ownedCars)
-		local elements = {
-			--{label = _U('spacer2'), value = 'spacer'}
-		}
+		local elements = {}
+		
+		if Config.ShowPoundSpacer2 then
+			table.insert(elements, {label = _U('spacer2')})
+		end
+		
+		if Config.ShowPoundSpacer3 then
+			table.insert(elements, {label = _U('spacer3')})
+		end
 		
 		for _,v in pairs(ownedCars) do
-			if Config.UseVehicleNamesLua == true then
+			if Config.UseVehicleNamesLua then
 				local hashVehicule = v.model
 				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local vehicleName  = GetLabelText(aheadVehName)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
 				table.insert(elements, {label = labelvehicle, value = v})
 			else
 				local hashVehicule = v.model
-				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local vehicleName  = GetDisplayNameFromVehicleModel(hashVehicule)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
@@ -466,26 +547,32 @@ end
 -- Pound Owned Boats Menu
 function ReturnOwnedBoatsMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedBoats', function(ownedBoats)
-		local elements = {
-			--{label = _U('spacer2'), value = 'spacer'}
-		}
+		local elements = {}
+		
+		if Config.ShowPoundSpacer2 then
+			table.insert(elements, {label = _U('spacer2')})
+		end
+		
+		if Config.ShowPoundSpacer3 then
+			table.insert(elements, {label = _U('spacer3')})
+		end
 		
 		for _,v in pairs(ownedBoats) do
-			if Config.UseVehicleNamesLua == true then
+			if Config.UseVehicleNamesLua then
 				local hashVehicule = v.model
 				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local vehicleName  = GetLabelText(aheadVehName)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
 				table.insert(elements, {label = labelvehicle, value = v})
 			else
 				local hashVehicule = v.model
-				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local vehicleName  = GetDisplayNameFromVehicleModel(hashVehicule)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
@@ -515,26 +602,32 @@ end
 -- Pound Owned Aircrafts Menu
 function ReturnOwnedAircraftsMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedAircrafts', function(ownedAircrafts)
-		local elements = {
-			--{label = _U('spacer2'), value = 'spacer'}
-		}
+		local elements = {}
+		
+		if Config.ShowPoundSpacer2 then
+			table.insert(elements, {label = _U('spacer2')})
+		end
+		
+		if Config.ShowPoundSpacer3 then
+			table.insert(elements, {label = _U('spacer3')})
+		end
 		
 		for _,v in pairs(ownedAircrafts) do
-			if Config.UseVehicleNamesLua == true then
+			if Config.UseVehicleNamesLua then
 				local hashVehicule = v.model
 				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local vehicleName  = GetLabelText(aheadVehName)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
 				table.insert(elements, {label = labelvehicle, value = v})
 			else
 				local hashVehicule = v.model
-				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local vehicleName  = GetDisplayNameFromVehicleModel(hashVehicule)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
@@ -564,26 +657,32 @@ end
 -- Pound Owned Policing Menu
 function ReturnOwnedPolicingMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedPolicingCars', function(ownedPolicingCars)
-		local elements = {
-			--{label = _U('spacer2'), value = 'spacer'}
-		}
+		local elements = {}
+		
+		if Config.ShowPoundSpacer2 then
+			table.insert(elements, {label = _U('spacer2')})
+		end
+		
+		if Config.ShowPoundSpacer3 then
+			table.insert(elements, {label = _U('spacer3')})
+		end
 		
 		for _,v in pairs(ownedPolicingCars) do
-			if Config.UseVehicleNamesLua == true then
+			if Config.UseVehicleNamesLua then
 				local hashVehicule = v.model
 				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local vehicleName  = GetLabelText(aheadVehName)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
 				table.insert(elements, {label = labelvehicle, value = v})
 			else
 				local hashVehicule = v.model
-				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local vehicleName  = GetDisplayNameFromVehicleModel(hashVehicule)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
@@ -613,26 +712,32 @@ end
 -- Pound Owned Ambulance Menu
 function ReturnOwnedAmbulanceMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedAmbulanceCars', function(ownedAmbulanceCars)
-		local elements = {
-			--{label = _U('spacer2'), value = 'spacer'}
-		}
+		local elements = {}
+		
+		if Config.ShowPoundSpacer2 then
+			table.insert(elements, {label = _U('spacer2')})
+		end
+		
+		if Config.ShowPoundSpacer3 then
+			table.insert(elements, {label = _U('spacer3')})
+		end
 		
 		for _,v in pairs(ownedAmbulanceCars) do
-			if Config.UseVehicleNamesLua == true then
+			if Config.UseVehicleNamesLua then
 				local hashVehicule = v.model
 				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local vehicleName  = GetLabelText(aheadVehName)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
 				table.insert(elements, {label = labelvehicle, value = v})
 			else
 				local hashVehicule = v.model
-				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local vehicleName  = GetDisplayNameFromVehicleModel(hashVehicule)
+				local plate        = v.plate
 				local labelvehicle
-				local plate = v.plate
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
 				
@@ -658,8 +763,6 @@ function ReturnOwnedAmbulanceMenu()
 		end)
 	end)
 end
-
-----------------------------------------------------------------------------------------------------
 
 -- Repair Vehicles
 function reparation(apprasial, vehicle, vehicleProps)
@@ -721,6 +824,8 @@ function SpawnPoundedVehicle(vehicle, plate)
 		SetVehRadioStation(callback_vehicle, "OFF")
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
 	end)
+	
+	TriggerServerEvent('esx_advancedgarage:setVehicleState', plate, false)
 end
 
 -- Entered Marker
@@ -785,63 +890,64 @@ Citizen.CreateThread(function()
 		
 		local playerPed = PlayerPedId()
 		local coords    = GetEntityCoords(playerPed)
+		local canSleep  = true
 		
-		if Config.UseCarGarages == true then
-			-- Car Garages
+		if Config.UseCarGarages then
 			for k,v in pairs(Config.CarGarages) do
 				if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.DrawDistance) then
+					canSleep = false
 					DrawMarker(Config.MarkerType, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PointMarker.x, Config.PointMarker.y, Config.PointMarker.z, Config.PointMarker.r, Config.PointMarker.g, Config.PointMarker.b, 100, false, true, 2, false, false, false, false)	
 					DrawMarker(Config.MarkerType, v.DeletePoint.x, v.DeletePoint.y, v.DeletePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.DeleteMarker.x, Config.DeleteMarker.y, Config.DeleteMarker.z, Config.DeleteMarker.r, Config.DeleteMarker.g, Config.DeleteMarker.b, 100, false, true, 2, false, false, false, false)	
 				end
 			end
 			
-			-- Car Pounds
 			for k,v in pairs(Config.CarPounds) do
 				if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.DrawDistance) then
+					canSleep = false
 					DrawMarker(Config.MarkerType, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PoundMarker.x, Config.PoundMarker.y, Config.PoundMarker.z, Config.PoundMarker.r, Config.PoundMarker.g, Config.PoundMarker.b, 100, false, true, 2, false, false, false, false)
 				end
 			end
 		end
 		
-		if Config.UseBoatGarages == true then
-			-- Boat Garages
+		if Config.UseBoatGarages then
 			for k,v in pairs(Config.BoatGarages) do
 				if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.DrawDistance) then
+					canSleep = false
 					DrawMarker(Config.MarkerType, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PointMarker.x, Config.PointMarker.y, Config.PointMarker.z, Config.PointMarker.r, Config.PointMarker.g, Config.PointMarker.b, 100, false, true, 2, false, false, false, false)	
 					DrawMarker(Config.MarkerType, v.DeletePoint.x, v.DeletePoint.y, v.DeletePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.DeleteMarker.x, Config.DeleteMarker.y, Config.DeleteMarker.z, Config.DeleteMarker.r, Config.DeleteMarker.g, Config.DeleteMarker.b, 100, false, true, 2, false, false, false, false)	
 				end
 			end
 			
-			-- Boat Pounds
 			for k,v in pairs(Config.BoatPounds) do
 				if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.DrawDistance) then
+					canSleep = false
 					DrawMarker(Config.MarkerType, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PoundMarker.x, Config.PoundMarker.y, Config.PoundMarker.z, Config.PoundMarker.r, Config.PoundMarker.g, Config.PoundMarker.b, 100, false, true, 2, false, false, false, false)
 				end
 			end
 		end
 		
-		if Config.UseAircraftGarages == true then
-			-- Aircraft Garages
+		if Config.UseAircraftGarages then
 			for k,v in pairs(Config.AircraftGarages) do
 				if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.DrawDistance) then
+					canSleep = false
 					DrawMarker(Config.MarkerType, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PointMarker.x, Config.PointMarker.y, Config.PointMarker.z, Config.PointMarker.r, Config.PointMarker.g, Config.PointMarker.b, 100, false, true, 2, false, false, false, false)	
 					DrawMarker(Config.MarkerType, v.DeletePoint.x, v.DeletePoint.y, v.DeletePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.DeleteMarker.x, Config.DeleteMarker.y, Config.DeleteMarker.z, Config.DeleteMarker.r, Config.DeleteMarker.g, Config.DeleteMarker.b, 100, false, true, 2, false, false, false, false)	
 				end
 			end
 			
-			-- Aircraft Pounds
 			for k,v in pairs(Config.AircraftPounds) do
 				if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.DrawDistance) then
+					canSleep = false
 					DrawMarker(Config.MarkerType, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PoundMarker.x, Config.PoundMarker.y, Config.PoundMarker.z, Config.PoundMarker.r, Config.PoundMarker.g, Config.PoundMarker.b, 100, false, true, 2, false, false, false, false)
 				end
 			end
 		end
 		
-		if Config.UsePrivateCarGarages == true then
-			-- Private Garages
+		if Config.UsePrivateCarGarages then
 			for k,v in pairs(Config.PrivateCarGarages) do
 				if not v.Private or has_value(userProperties, v.Private) then
 					if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.DrawDistance) then
+						canSleep = false
 						DrawMarker(Config.MarkerType, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PointMarker.x, Config.PointMarker.y, Config.PointMarker.z, Config.PointMarker.r, Config.PointMarker.g, Config.PointMarker.b, 100, false, true, 2, false, false, false, false)	
 						DrawMarker(Config.MarkerType, v.DeletePoint.x, v.DeletePoint.y, v.DeletePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.DeleteMarker.x, Config.DeleteMarker.y, Config.DeleteMarker.z, Config.DeleteMarker.r, Config.DeleteMarker.g, Config.DeleteMarker.b, 100, false, true, 2, false, false, false, false)	
 					end
@@ -849,24 +955,28 @@ Citizen.CreateThread(function()
 			end
 		end
 		
-		if Config.UseJobCarGarages == true then
-			-- esx_policejob
+		if Config.UseJobCarGarages then
 			if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'police' then
 				for k,v in pairs(Config.PolicePounds) do
 					if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.DrawDistance) then
+						canSleep = false
 						DrawMarker(Config.MarkerType, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.JobPoundMarker.x, Config.JobPoundMarker.y, Config.JobPoundMarker.z, Config.JobPoundMarker.r, Config.JobPoundMarker.g, Config.JobPoundMarker.b, 100, false, true, 2, false, false, false, false)
 					end
 				end
 			end
 			
-			-- esx_ambulancejob
 			if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'ambulance' then
 				for k,v in pairs(Config.AmbulancePounds) do
 					if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.DrawDistance) then
+						canSleep = false
 						DrawMarker(Config.MarkerType, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.JobPoundMarker.x, Config.JobPoundMarker.y, Config.JobPoundMarker.z, Config.JobPoundMarker.r, Config.JobPoundMarker.g, Config.JobPoundMarker.b, 100, false, true, 2, false, false, false, false)
 					end
 				end
 			end
+		end
+		
+		if canSleep then
+			Citizen.Wait(500)
 		end
 	end
 end)
@@ -881,8 +991,7 @@ Citizen.CreateThread(function()
 		local coords     = GetEntityCoords(playerPed)
 		local isInMarker = false
 		
-		if Config.UseCarGarages == true then
-			-- Car Garages
+		if Config.UseCarGarages then
 			for k,v in pairs(Config.CarGarages) do
 				if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.PointMarker.x) then
 					isInMarker  = true
@@ -897,7 +1006,6 @@ Citizen.CreateThread(function()
 				end
 			end
 			
-			-- Car Pounds
 			for k,v in pairs(Config.CarPounds) do
 				if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.PoundMarker.x) then
 					isInMarker  = true
@@ -907,8 +1015,7 @@ Citizen.CreateThread(function()
 			end
 		end
 		
-		if Config.UseBoatGarages == true then
-			-- Boat Garages
+		if Config.UseBoatGarages then
 			for k,v in pairs(Config.BoatGarages) do
 				if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.PointMarker.x) then
 					isInMarker  = true
@@ -923,7 +1030,6 @@ Citizen.CreateThread(function()
 				end
 			end
 			
-			-- Boat Pounds
 			for k,v in pairs(Config.BoatPounds) do
 				if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.PoundMarker.x) then
 					isInMarker  = true
@@ -933,8 +1039,7 @@ Citizen.CreateThread(function()
 			end
 		end
 		
-		if Config.UseAircraftGarages == true then
-			-- Aircraft Garages
+		if Config.UseAircraftGarages then
 			for k,v in pairs(Config.AircraftGarages) do
 				if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.PointMarker.x) then
 					isInMarker  = true
@@ -949,7 +1054,6 @@ Citizen.CreateThread(function()
 				end
 			end
 			
-			-- Aircraft Pounds
 			for k,v in pairs(Config.AircraftPounds) do
 				if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.PoundMarker.x) then
 					isInMarker  = true
@@ -959,8 +1063,7 @@ Citizen.CreateThread(function()
 			end
 		end
 		
-		if Config.UsePrivateCarGarages == true then
-			-- Private Garages
+		if Config.UsePrivateCarGarages then
 			for _,v in pairs(Config.PrivateCarGarages) do
 				if not v.Private or has_value(userProperties, v.Private) then
 					if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.PointMarker.x) then
@@ -978,8 +1081,7 @@ Citizen.CreateThread(function()
 			end
 		end
 		
-		if Config.UseJobCarGarages == true then
-			-- esx_policejob
+		if Config.UseJobCarGarages then
 			if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'police' then
 				for k,v in pairs(Config.PolicePounds) do
 					if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.JobPoundMarker.x) then
@@ -990,7 +1092,6 @@ Citizen.CreateThread(function()
 				end
 			end
 			
-			-- esx_ambulancejob
 			if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'ambulance' then
 				for k,v in pairs(Config.AmbulancePounds) do
 					if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.JobPoundMarker.x) then
@@ -1011,6 +1112,10 @@ Citizen.CreateThread(function()
 		if not isInMarker and hasAlreadyEnteredMarker then
 			hasAlreadyEnteredMarker = false
 			TriggerEvent('esx_advancedgarage:hasExitedMarker', LastZone)
+		end
+		
+		if not isInMarker then
+			Citizen.Wait(500)
 		end
 	end
 end)
@@ -1056,7 +1161,7 @@ Citizen.CreateThread(function()
 	end
 end)
 
--- Private Blips
+-- Create Blips
 function PrivateGarageBlips()
 	for _,blip in pairs(privateBlips) do
 		RemoveBlip(blip)
@@ -1079,7 +1184,6 @@ function PrivateGarageBlips()
 	end
 end
 
--- Blips
 function deleteBlips()
 	if JobBlips[1] ~= nil then
 		for i=1, #JobBlips, 1 do
@@ -1089,13 +1193,11 @@ function deleteBlips()
 	end
 end
 
---Citizen.CreateThread(function()
 function refreshBlips()
 	local blipList = {}
 	local JobBlips = {}
 
-	if Config.UseCarGarages == true then
-		-- Car Garages
+	if Config.UseCarGarages then
 		for k,v in pairs(Config.CarGarages) do
 			table.insert(blipList, {
 				coords = { v.GaragePoint.x, v.GaragePoint.y },
@@ -1106,7 +1208,6 @@ function refreshBlips()
 			})
 		end
 		
-		-- Car Pounds
 		for k,v in pairs(Config.CarPounds) do
 			table.insert(blipList, {
 				coords = { v.PoundPoint.x, v.PoundPoint.y },
@@ -1118,8 +1219,7 @@ function refreshBlips()
 		end
 	end
 	
-	if Config.UseBoatGarages == true then
-		-- Boat Garages
+	if Config.UseBoatGarages then
 		for k,v in pairs(Config.BoatGarages) do
 			table.insert(blipList, {
 				coords = { v.GaragePoint.x, v.GaragePoint.y },
@@ -1130,7 +1230,6 @@ function refreshBlips()
 			})
 		end
 		
-		-- Boat Pounds
 		for k,v in pairs(Config.BoatPounds) do
 			table.insert(blipList, {
 				coords = { v.PoundPoint.x, v.PoundPoint.y },
@@ -1142,8 +1241,7 @@ function refreshBlips()
 		end
 	end
 	
-	if Config.UseAircraftGarages == true then
-		-- Aircraft Garages
+	if Config.UseAircraftGarages then
 		for k,v in pairs(Config.AircraftGarages) do
 			table.insert(blipList, {
 				coords = { v.GaragePoint.x, v.GaragePoint.y },
@@ -1154,7 +1252,6 @@ function refreshBlips()
 			})
 		end
 		
-		-- Aircraft Pounds
 		for k,v in pairs(Config.AircraftPounds) do
 			table.insert(blipList, {
 				coords = { v.PoundPoint.x, v.PoundPoint.y },
@@ -1166,8 +1263,7 @@ function refreshBlips()
 		end
 	end
 	
-	if Config.UseJobCarGarages == true then
-		-- esx_policejob
+	if Config.UseJobCarGarages then
 		if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'police' then
 			for k,v in pairs(Config.PolicePounds) do
 				table.insert(JobBlips, {
@@ -1180,7 +1276,6 @@ function refreshBlips()
 			end
 		end
 		
-		-- esx_ambulancejob
 		if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'ambulance' then
 			for k,v in pairs(Config.AmbulancePounds) do
 				table.insert(JobBlips, {
@@ -1201,19 +1296,16 @@ function refreshBlips()
 	for i=1, #JobBlips, 1 do
 		CreateBlip(JobBlips[i].coords, JobBlips[i].text, JobBlips[i].sprite, JobBlips[i].color, JobBlips[i].scale)
 	end
-
 end
---)
 
 function CreateBlip(coords, text, sprite, color, scale)
-	local blip = AddBlipForCoord( table.unpack(coords) )
-
+	local blip = AddBlipForCoord(table.unpack(coords))
+	
 	SetBlipSprite(blip, sprite)
 	SetBlipScale(blip, scale)
 	SetBlipColour(blip, color)
-
 	SetBlipAsShortRange(blip, true)
-
+	
 	BeginTextCommandSetBlipName('STRING')
 	AddTextComponentSubstringPlayerName(text)
 	EndTextCommandSetBlipName(blip)

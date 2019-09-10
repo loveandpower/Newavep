@@ -19,7 +19,7 @@ local currentRun        = {}
 function TeleportFadeEffect(coords)
   Citizen.CreateThread(function()
     DoScreenFadeOut(800)
-    while not IsScreenFadedOut() do Citizen.Wait(0) end
+    while not IsScreenFadedOut() do Citizen.Wait(1000) end
     SetEntityCoords(GetPlayerPed(-1), coords.x, coords.y, coords.z)
     DoScreenFadeIn(800)
   end)
@@ -34,21 +34,21 @@ end
 Citizen.CreateThread(function()
   local startLoad = GetGameTimer()
   while ESX == nil do
-    Citizen.Wait(0)
+    Citizen.Wait(1000)
     TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
   end
   -- load player
   local playerData = ESX.GetPlayerData()
   while playerData == nil do
-    Citizen.Wait(10)
+    Citizen.Wait(1000)
     playerData = ESX.GetPlayerData()
   end
   while playerData.job == nil do
-    Citizen.Wait(10)
+    Citizen.Wait(1000)
     playerData = ESX.GetPlayerData()
   end
   while playerData.job.name == nil do
-    Citizen.Wait(10)
+    Citizen.Wait(1000)
     playerData = ESX.GetPlayerData()
   end
   -- load zone
@@ -129,12 +129,12 @@ end)
 
 
 Citizen.CreateThread(function()
-  while isLoading do Citizen.Wait(1000) end
+  while isLoading do Citizen.Wait(5000) end
   local playerData = ESX.GetPlayerData()
   local lastJob = playerData.job.name
   local lastGrade = playerData.job.grade
   while true do
-    Citizen.Wait(10)
+    Citizen.Wait(10000)
     playerData = ESX.GetPlayerData()
     if playerData.job.name == 'journalist' then
       -- update on grade change
@@ -177,7 +177,7 @@ end
 
 
 Citizen.CreateThread(function()
-  while isLoading do Citizen.Wait(10) end
+  while isLoading do Citizen.Wait(1000) end
   while true do
     Citizen.Wait(1000)
     local playerData = ESX.GetPlayerData()
@@ -195,10 +195,10 @@ Citizen.CreateThread(function()
     else
       for i=1, #zoneList, 1 do
         -- remove all blip except cloackroom
-        if zoneList[i].name ~= 'cloakRoom' and DoesBlipExist(zoneList[i].blip) then
+      --  if zoneList[i].name ~= 'cloakRoom' and DoesBlipExist(zoneList[i].blip) then
           RemoveBlip(zoneList[i].blip)
           zoneList[i].blip = nil
-        end
+      --  end
       end
     end
   end
@@ -222,7 +222,7 @@ Citizen.CreateThread(function()
   local playerData = nil
   local coords = nil
   while true do
-    Citizen.Wait(0)
+    Citizen.Wait(10)
     playerData = ESX.GetPlayerData()
     if playerData.job.name == 'journalist' then
       coords = GetEntityCoords(GetPlayerPed(-1))
@@ -315,9 +315,9 @@ end)
 
 
 Citizen.CreateThread(function()
-  while isLoading do Citizen.Wait(10) end
+  while isLoading do Citizen.Wait(2000) end
   while true do
-    Citizen.Wait(0)
+    Citizen.Wait(1000)
     local playerData = ESX.GetPlayerData()
     if playerData.job.name == 'journalist' then
       local isInMarker  = false
@@ -434,7 +434,7 @@ function takeService(work, value)
         RequestModel(model)
         while not HasModelLoaded(model) do
           RequestModel(model)
-          Citizen.Wait(1)
+          Citizen.Wait(100)
         end
         SetPlayerModel(PlayerId(), model)
         SetModelAsNoLongerNeeded(model)
@@ -478,7 +478,7 @@ function takeService(work, value)
       RequestModel(model)
       while not HasModelLoaded(model) do
         RequestModel(model)
-        Citizen.Wait(1)
+        Citizen.Wait(1000)
       end
       SetPlayerModel(PlayerId(), model)
       SetModelAsNoLongerNeeded(model)
@@ -910,6 +910,7 @@ function openWeazelMobileTools()
         {label = _U('mobile_cam') , value = 'cam' },
         {label = _U('mobile_mic') , value = 'mic' },
         {label = _U('mobile_bmic'), value = 'bmic'},
+        
       },
     },
     function(data, menu)
@@ -919,6 +920,17 @@ function openWeazelMobileTools()
         TriggerEvent('Mic:ToggleMic')
       elseif data.current.value == 'bmic' then
         TriggerEvent('Mic:ToggleBMic')
+      elseif data.current.value == 'startnpcjob' then
+
+       if #currentRun == 0 then genRunList() end      
+        if isRunning then
+          stopNativeJob()
+          isRunning = false
+        else
+          startNativeRun()
+          isRunning = true
+        end
+
       end
       menu.close()
     end,
@@ -939,7 +951,8 @@ function openMobileweazelMenu()
       elements = {
         {label = _U('billing'),   value = 'billing'},
         {label = _U('tools'),   value = 'tools'},
-        {label = _U('mobile_tools'),   value = 'mobile_tools'}
+        {label = _U('mobile_tools'),   value = 'mobile_tools'},
+        {label = 'start/stop NPC JOB', value = 'startnpcjob'}
       }
     },
     function(data, menu)
@@ -952,6 +965,17 @@ function openMobileweazelMenu()
       elseif data.current.value == 'mobile_tools' then
         menu.close()
         openWeazelMobileTools()
+    elseif data.current.value == 'startnpcjob' then
+
+       if #currentRun == 0 then genRunList() end      
+        if isRunning then
+          stopNativeJob()
+          isRunning = false
+        else
+          startNativeRun()
+          isRunning = true
+        end
+
       end
     end,
     function(data, menu)
@@ -1063,7 +1087,7 @@ end
 Citizen.CreateThread(function()
   while isLoading do Citizen.Wait(10) end
   while true do
-    Citizen.Wait(0)
+    Citizen.Wait(2500)
     local playerData = ESX.GetPlayerData()
     if playerData.job.name == 'journalist' then
       if IsControlJustReleased(1, Keys["DELETE"]) and isWorking then

@@ -21,7 +21,7 @@ Config.StoreMarker = {
 Config.Zones = {
 
 	Garages = {
-
+--[[
 		{ -- Shank St, nearby campaign boat garage
 			GaragePos  = vector3(-772.4, -1430.9, 0.5),
 			SpawnPoint = vector4(-785.39, -1426.3, 0.0, 146.0),
@@ -63,7 +63,7 @@ Config.Zones = {
 			StorePos   = vector3(-3436.5, 946.6, 0.3),
 			StoreTP    = vector4(-3427.0, 952.6, 8.3, 0.0)
 		},
-
+]]
 	},
 
 	BoatShops = {

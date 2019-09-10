@@ -538,7 +538,7 @@ Citizen.CreateThread(function()
 
 	SetBlipSprite (blip, 198)
 	SetBlipDisplay(blip, 4)
-	SetBlipScale  (blip, 1.0)
+	SetBlipScale  (blip, 0.5)
 	SetBlipColour (blip, 5)
 	SetBlipAsShortRange(blip, true)
 
@@ -592,7 +592,7 @@ Citizen.CreateThread(function()
 
 		if OnJob then
 			if CurrentCustomer == nil then
-				DrawSub(_U('drive_search_pass'), 5000)
+				DrawSub(_U('drive_search_pass'), 15000)
 
 				if IsPedInAnyVehicle(playerPed, false) and GetEntitySpeed(playerPed) > 0 then
 					local waitUntil = GetGameTimer() + GetRandomIntInRange(30000, 45000)

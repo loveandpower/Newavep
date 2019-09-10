@@ -54,7 +54,9 @@ Citizen.CreateThread(function()
                     if not cachedBins[entity] then
                         openBin(entity)
                     else
-                        sendNotification('La poubelle est vide !', 'error', 2000)
+                    notification()
+                     --   TriggerClientEvent('esx:showAdvancedNotification', source, 'Poubelle', 'La Poubelle est Vide !', 'CHAR_AMMUNATION', 3)
+                        --sendNotification('La poubelle est vide !', 'error', 2000)
                     end
                 end
                 break
@@ -104,3 +106,15 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+
+
+function notification(msg)
+
+  local mugshot, mugshotStr = ESX.Game.GetPedMugshot(GetPlayerPed(-1))
+
+  ESX.ShowAdvancedNotification('Poubelle', '', 'La Poubelle est Vide', mugshotStr, 1)
+
+  UnregisterPedheadshot(mugshot)
+
+end

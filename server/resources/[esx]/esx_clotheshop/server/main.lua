@@ -2,11 +2,9 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
---[[
 RegisterServerEvent('esx_clotheshop:saveOutfit')
 AddEventHandler('esx_clotheshop:saveOutfit', function(label, skin)
-	local _source = source
-	local xPlayer = ESX.GetPlayerFromId(_source)
+	local xPlayer = ESX.GetPlayerFromId(source)
 
 	TriggerEvent('esx_datastore:getDataStore', 'property', xPlayer.identifier, function(store)
 		local dressing = store.get('dressing')
@@ -21,10 +19,9 @@ AddEventHandler('esx_clotheshop:saveOutfit', function(label, skin)
 		})
 
 		store.set('dressing', dressing)
-		store.save()
 	end)
 end)
-]]
+
 ESX.RegisterServerCallback('esx_clotheshop:buyClothes', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
@@ -36,7 +33,7 @@ ESX.RegisterServerCallback('esx_clotheshop:buyClothes', function(source, cb)
 		cb(false)
 	end
 end)
---[[
+
 ESX.RegisterServerCallback('esx_clotheshop:checkPropertyDataStore', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local foundStore = false
@@ -47,5 +44,3 @@ ESX.RegisterServerCallback('esx_clotheshop:checkPropertyDataStore', function(sou
 
 	cb(foundStore)
 end)
-
-]]

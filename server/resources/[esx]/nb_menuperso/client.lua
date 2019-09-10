@@ -82,8 +82,8 @@ function OpenPersonnelMenu()
 		ESX.UI.Menu.Open(
 			'default', GetCurrentResourceName(), 'menu_perso',
 			{
-				--css 	 = 'meconcernant',
-				title    = 'Menu Personnel',
+				css 	 = 'meconcernant',
+				--title    = 'Menu Personnel',
 				align    = 'top-left',
 				elements = elements
 			},
@@ -161,7 +161,8 @@ function OpenPersonnelMenu()
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_modo',
 						{
-							title    = 'Modération',
+							css 	 = 'Modo',
+							--title    = 'Modération',
 							align    = 'top-left',
 							elements = elements
 						},
@@ -259,7 +260,7 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'Mes factures',			value = 'menuperso_moi_factures'})
 					table.insert(elements, {label = 'Carte d\'identité',	value = 'menuperso_moi_idcard'})
 					table.insert(elements, {label = 'Vetements',			value = 'menuperso_moi_vetements'})
---					table.insert(elements, {label = 'tete',					value = "menuperso_moi_tete"})
+					table.insert(elements, {label = 'tete',					value = "menuperso_moi_tete"})
 
 					ESX.UI.Menu.Open(
 						
@@ -294,6 +295,14 @@ function OpenPersonnelMenu()
 
 							if data2.current.value == 'menuperso_moi_tete' then
 								--TriggerServerEvent('esx_accessories:OpenMenu')
+								if ESX.PlayerLoaded and isPlayerSpawned then
+									local playerPed = PlayerPedId()
+									local coords    = GetEntityCoords(playerPed)
+
+									if not IsEntityDead(playerPed) then
+										ESX.PlayerData.lastPosition = {x = coords.x, y = coords.y, z = coords.z}
+									end
+								end
 							end
 
 						end,

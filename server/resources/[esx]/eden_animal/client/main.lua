@@ -474,7 +474,7 @@ function OpenPetShop()
 			{label = _U('retriever') .. ' - <span style="color:green;">$10000</span>', value = "retriever", price = 10000},
 			{label = _U('asatian') .. ' - <span style="color:green;">$55000</span>', value = "berger", price = 55000},
 			{label = _U('westie') .. ' - <span style="color:green;">$50000</span>', value = "westie", price = 50000},
-			{label = _U('chop') .. '- <span style="color:green;">$12000</span>', value = "chop", price = 12000}
+			--{label = _U('rottweiler') .. '- <span style="color:green;">$12000</span>', value = "chop", price = 12000} 
 		}
 	}, function(data, menu)
 		ESX.TriggerServerCallback('eden_animal:buyPet', function(boughtPed)

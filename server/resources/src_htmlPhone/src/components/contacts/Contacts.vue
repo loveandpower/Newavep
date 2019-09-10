@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <list :list='lcontacts' :disable="disableList" title="Contacts" @select='onSelect' @option='onOption'></list>
+    <list :list='lcontacts' :disable="disableList" :title="IntlString('APP_CONTACT_TITLE')" @back="back" @select='onSelect' @option='onOption'></list>
   </div>
 </template>
 
@@ -20,29 +20,29 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['contacts']),
-    lcontacts: function () {
-      let addContact = {display: 'Ajouter un contact', letter: '+', num: '', id: -1}
+    ...mapGetters(['IntlString', 'contacts', 'useMouse']),
+    lcontacts () {
+      let addContact = {display: this.IntlString('APP_CONTACT_NEW'), letter: '+', num: '', id: -1}
       return [addContact, ...this.contacts.map(e => {
-        e.backgroundColor = generateColorForStr(e.number)
+        e.backgroundColor = e.backgroundColor || generateColorForStr(e.number)
         return e
       })]
     }
   },
   methods: {
-    onSelect: function (contact) {
+    onSelect (contact) {
       if (contact.id === -1) {
         this.$router.push({ name: 'contacts.view', params: { id: contact.id } })
       } else {
         this.$router.push({ name: 'messages.view', params: { number: contact.number, display: contact.display } })
       }
     },
-    onOption: function (contact) {
-      if (contact.id === -1) return
+    onOption (contact) {
+      if (contact.id === -1 || contact.id === undefined) return
       this.disableList = true
       Modal.CreateModal({
         choix: [
-          {id: 1, title: 'Modifier le contact', icons: 'fa-circle-o', color: 'orange'},
+          {id: 1, title: this.IntlString('APP_CONTACT_EDIT'), icons: 'fa-circle-o', color: 'orange'},
           {id: 3, title: 'Annuler', icons: 'fa-undo'}
         ]
       }).then(rep => {
@@ -52,16 +52,18 @@ export default {
         this.disableList = false
       })
     },
-    back: function () {
+    back () {
       if (this.disableList === true) return
       this.$router.push({ name: 'home' })
     }
   },
-  created: function () {
-    this.$bus.$on('keyUpBackspace', this.back)
+  created () {
+    if (!this.useMouse) {
+      this.$bus.$on('keyUpBackspace', this.back)
+    }
   },
 
-  beforeDestroy: function () {
+  beforeDestroy () {
     this.$bus.$off('keyUpBackspace', this.back)
   }
 }

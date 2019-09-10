@@ -25,18 +25,23 @@ TriggerEvent('esx_society:registerSociety', Config.jobName, Config.companyName, 
 function nativeHarvest(source)
   printDebug('nativeHarvest')
   SetTimeout(Config.itemTime, function()
+    
     if playersNativeHarvestExit[source] then playersNativeHarvest[source] = false end
-    if playersNativeHarvest[source] == true then
-      local xPlayer = ESX.GetPlayerFromId(source)
-      local bag = xPlayer.getInventoryItem(Config.itemDb_name)
-      local quantity = bag.count
-      if quantity >= bag.limit then
+     if playersNativeHarvest[source] == true then
+      
+        local xPlayer = ESX.GetPlayerFromId(source)
+        local bag = xPlayer.getInventoryItem(Config.itemDb_name)
+        local quantity = bag.count
+      
+        if quantity >= bag.limit then
         TriggerClientEvent('esx:showNotification', source, _U('harvest_truck'))
-      else
+      
+        else
         xPlayer.addInventoryItem(Config.itemDb_name, Config.itemAdd)
         TriggerClientEvent('esx:showNotification', source, _U('harvest_ok'))
         TriggerClientEvent('esx_brinks:nextMarket', source)
       end
+
     else TriggerClientEvent('esx:showNotification', source, _U('harvest_fail')) end
     playersNativeHarvest[source] = false
   end)
@@ -45,6 +50,7 @@ end
 RegisterServerEvent('esx_brinks:startHarvestRun')
 AddEventHandler('esx_brinks:startHarvestRun', function()
   printDebug('startHarvestRun')
+  
   local _source = source
   if not playersNativeHarvest[_source] then
     TriggerClientEvent('esx:showNotification', _source, _U('harvest_start'))
@@ -52,6 +58,7 @@ AddEventHandler('esx_brinks:startHarvestRun', function()
     playersNativeHarvestExit[_source] = false
     nativeHarvest(_source)
   end
+  
   if playersNativeHarvestExit[_source] then
     TriggerClientEvent('esx:showNotification', _source, _U('dont_cheat'))
   end
@@ -61,18 +68,26 @@ end)
 RegisterServerEvent('esx_brinks:stopHarvestRun')
 AddEventHandler('esx_brinks:stopHarvestRun', function()
   printDebug('stopHarvestRun')
+  
   local _source = source
-  if playersNativeHarvest[_source] then playersNativeHarvestExit[_source] = true end
+  
+  if playersNativeHarvest[_source] then
+   playersNativeHarvestExit[_source] = true 
+  end
+
 end)
 
 -- nativeRun sell
 function nativeSell(source)
   printDebug('nativeSell')
   SetTimeout(Config.itemTime, function()
+
     if playersNativeSellExit[source] then playersNativeSell[source] = false end
     if playersNativeSell[source] == true then
+
       local xPlayer = ESX.GetPlayerFromId(source)
       local quantity = xPlayer.getInventoryItem(Config.itemDb_name).count
+
       if quantity < Config.itemRemove then
         TriggerClientEvent('esx:showNotification', source, _U('no_item_to_sell', Config.itemDb_name))
         playersNativeSell[source] = false
@@ -80,25 +95,25 @@ function nativeSell(source)
         local amount = Config.itemRemove
         local item = Config.itemDb_name
         xPlayer.removeInventoryItem(item, amount)
-        
         xPlayer.addMoney(Config.itemPrice)
         local companyPrice = math.floor(Config.itemPrice * Config.companyRate)
         local gouvTaxe = math.floor(companyPrice * Config.gouvRate)
         TriggerEvent('esx_addonaccount:getSharedAccount', 'society_brinks', function(account)account.addMoney(companyPrice)end )
         TriggerEvent('esx_addonaccount:getSharedAccount', 'society_taxe_brinks', function(account)account.addMoney(gouvTaxe)end )
-        
-        
-        
         TriggerClientEvent('esx:showNotification', source, _U('you_earned', Config.itemPrice))
         TriggerClientEvent('esx:showNotification', source, _U('your_comp_earned', companyPrice))
         quantity = xPlayer.getInventoryItem(Config.itemDb_name).count
-        if quantity >= Config.itemRemove then nativeSell(source)
+
+        if quantity >= Config.itemRemove then 
+          nativeSell(source)
         else 
           TriggerClientEvent('esx:showNotification', source, _U('sell_stop'))
           playersNativeSell[source] = false
         end
       end
-    else TriggerClientEvent('esx:showNotification', source, _U('sell_fail')) end
+    else 
+      TriggerClientEvent('esx:showNotification', source, _U('sell_fail'))
+    end
   end)
 end
 

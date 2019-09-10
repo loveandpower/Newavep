@@ -316,7 +316,7 @@ Citizen.CreateThread(function()
 				end
 				
 				if isInZone then
-				--	TriggerEvent('esx_drugs:freezePlayer', true)
+					TriggerEvent('esx_drugs:freezePlayer', true)
 				end
 				
 				CurrentAction = nil
@@ -327,5 +327,5 @@ end)
 
 RegisterNetEvent('esx_drugs:freezePlayer')
 AddEventHandler('esx_drugs:freezePlayer', function(freeze)
---	FreezeEntityPosition(GetPlayerPed(-1), freeze)
+	FreezeEntityPosition(GetPlayerPed(-1), freeze)
 end)

@@ -58,12 +58,12 @@ Config.menujob = {
 	manette2 = Keys["DOWN"],
 }
 -- TP sur le Marker
-Config.TPMarker = {
-	clavier1 = Keys["LEFTSHIFT"],
-	clavier2 = Keys["E"],
-	manette1 = Keys["LEFTSHIFT"],
-	manette2 = Keys["E"],
-}
+--Config.TPMarker = {
+--	clavier1 = Keys["LEFTSHIFT"],
+--	clavier2 = Keys["E"],
+--	manette1 = Keys["LEFTSHIFT"],
+--	manette2 = Keys["E"],
+--}
 -- Lever les mains
 --Config.handsUP = {
 --	clavier = Keys["~"],

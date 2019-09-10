@@ -69,7 +69,7 @@ Config.Zones = {
 		Size  = {x = 2.0, y = 2.0, z = 0.5},
 		Color = {r = 33, g = 184, b = 255},
 		Name  = "Point d'action",
-		Type  = 1
+		Type  = 25
 	 },
 	  
 	VehicleSpawner = {

@@ -140,7 +140,8 @@ Citizen.CreateThread(function()
       -- for civil
       else
         -- remove blip execpt cloakroom
-        if zoneList[i].name ~= 'cloakRoom' and DoesBlipExist(zoneList[i].blip) then 
+--        if zoneList[i].name ~= 'cloakRoom' and DoesBlipExist(zoneList[i].blip) then 
+        if DoesBlipExist(zoneList[i].blip) then 
           RemoveBlip(zoneList[i].blip)
           zoneList[i].blip = nil
           printDebug('remove Blip: '.. zoneList[i].name)

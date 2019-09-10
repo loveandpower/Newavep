@@ -200,10 +200,15 @@ function OpenMecanoActionsMenu()
 
 					---try
 				end
-					exports.ft_libs:DisableArea("esx_eden_garage_area_police_mecanodeletepoint")	
-					exports.ft_libs:DisableArea("esx_eden_garage_area_police_mecanospawnpoint")	  	
-					exports.ft_libs:DisableArea("esx_eden_garage_area_Bennys_mecanodeletepoint")	
-					exports.ft_libs:DisableArea("esx_eden_garage_area_Bennys_mecanospawnpoint")	
+exports.ft_libs:EnableArea("esx_eden_garage_area_police_mecanodeletepoint")		
+exports.ft_libs:EnableArea("esx_eden_garage_area_police_mecanospawnpoint")	  		
+exports.ft_libs:EnableArea("esx_eden_garage_area_Bennys_mecanodeletepoint")		
+exports.ft_libs:EnableArea("esx_eden_garage_area_Bennys_mecanospawnpoint")		
+
+				--	exports.ft_libs:DisableArea("esx_eden_garage_area_police_mecanodeletepoint")	
+				--	exports.ft_libs:DisableArea("esx_eden_garage_area_police_mecanospawnpoint")	  	
+				--	exports.ft_libs:DisableArea("esx_eden_garage_area_Bennys_mecanodeletepoint")	
+				--	exports.ft_libs:DisableArea("esx_eden_garage_area_Bennys_mecanospawnpoint")	
 			end)
 
 		elseif data.current.value == 'cloakroom2' then
@@ -212,10 +217,10 @@ function OpenMecanoActionsMenu()
 			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
 				TriggerEvent('skinchanger:loadSkin', skin)
 				--try
-				exports.ft_libs:EnableArea("esx_eden_garage_area_police_mecanodeletepoint")	
-				exports.ft_libs:EnableArea("esx_eden_garage_area_police_mecanospawnpoint")	  	
-				exports.ft_libs:EnableArea("esx_eden_garage_area_Bennys_mecanodeletepoint")	
-				exports.ft_libs:EnableArea("esx_eden_garage_area_Bennys_mecanospawnpoint")
+exports.ft_libs:DisableArea("esx_eden_garage_area_police_mecanodeletepoint")		
+exports.ft_libs:DisableArea("esx_eden_garage_area_police_mecanospawnpoint")	  		
+exports.ft_libs:DisableArea("esx_eden_garage_area_Bennys_mecanodeletepoint")		
+exports.ft_libs:DisableArea("esx_eden_garage_area_Bennys_mecanospawnpoint")	
 
 			end)
 
@@ -447,27 +452,42 @@ function OpenMobileMecanoActionsMenu()
 
 	elseif data.current.value == 'del_vehicle' then
 
-		local playerPed = PlayerPedId()
 
-		if IsPedSittingInAnyVehicle(playerPed) then
-			local vehicle = GetVehiclePedIsIn(playerPed, false)
-
-			if GetPedInVehicleSeat(vehicle, -1) == playerPed then
-				ESX.ShowNotification(_U('vehicle_impounded'))
-				ESX.Game.DeleteVehicle(vehicle)
+	local playerPed  = GetPlayerPed(-1)
+	if IsPedInAnyVehicle(playerPed,  false) then
+		local vehicle =GetVehiclePedIsIn(playerPed,false)
+		if GetPedInVehicleSeat(vehicle, -1) == playerPed then
+			local GotTrailer, TrailerHandle = GetVehicleTrailerVehicle(vehicle)
+			if GotTrailer then
+				local trailerProps  = ESX.Game.GetVehicleProperties(TrailerHandle)
+				ESX.TriggerServerCallback('eden_garage:stockvmecano',function(valid)
+					if(valid) then
+						DeleteVehicle(TrailerHandle)
+						TriggerServerEvent('eden_garage:ChangeStateFromFourriereMecano', trailerProps, true)
+						TriggerEvent('esx:showNotification', 'La remorque est rentré dans la fourrière')
+					else
+						TriggerEvent('esx:showNotification', 'Vous ne pouvez pas stocker cette remorque dans la fourrière')
+					end
+				end,trailerProps)
 			else
-				ESX.ShowNotification(_U('must_seat_driver'))
+				local vehicleProps  = ESX.Game.GetVehicleProperties(vehicle)
+				ESX.TriggerServerCallback('eden_garage:stockvmecano',function(valid)
+					if(valid) then
+						DeleteVehicle(vehicle)
+						TriggerServerEvent('eden_garage:ChangeStateFromFourriereMecano', vehicleProps, true)
+						TriggerEvent('esx:showNotification', 'Le véhicule est rentré dans la fourrière')
+					else
+						TriggerEvent('esx:showNotification', 'Vous ne pouvez pas stocker ce véhicule dans la fourrière')
+					end
+				end,vehicleProps)
 			end
 		else
-			local vehicle = ESX.Game.GetVehicleInDirection()
-
-			if DoesEntityExist(vehicle) then
-				ESX.ShowNotification(_U('vehicle_impounded'))
-				ESX.Game.DeleteVehicle(vehicle)
-			else
-				ESX.ShowNotification(_U('must_near'))
-			end
+			TriggerEvent('esx:showNotification', 'Vous etes pas conducteur du vehicule')
 		end
+	else
+		TriggerEvent('esx:showNotification', 'Il n\' y a pas de vehicule à rentrer')
+	end
+
 
 	elseif data.current.value == 'dep_vehicle' then
 
@@ -908,7 +928,7 @@ Citizen.CreateThread(function()
 
 	SetBlipSprite (blip, 446)
 	SetBlipDisplay(blip, 4)
-	SetBlipScale  (blip, 1.8)
+	SetBlipScale  (blip, 0.8)
 	SetBlipColour (blip, 5)
 	SetBlipAsShortRange(blip, true)
 
@@ -1054,9 +1074,9 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		--if IsControlJustReleased(0, Keys['F6']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
-		--	OpenMobileMecanoActionsMenu()
-		--end
+		if IsControlJustReleased(0, Keys['F6']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
+			OpenMobileMecanoActionsMenu()
+		end
 
 		if IsControlJustReleased(0, Keys['DELETE']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
 
@@ -1100,7 +1120,7 @@ end)
 --NB : gestion des menu
 ---------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent('NB:openMenuMecano')
-AddEventHandler('NB:openMenuMecano', function()
-	OpenMobileMecanoActionsMenu()
-end)
+--RegisterNetEvent('NB:openMenuMecano')
+--AddEventHandler('NB:openMenuMecano', function()
+--	OpenMobileMecanoActionsMenu()
+--end)

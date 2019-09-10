@@ -53,7 +53,7 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 		})
 
 	else
-		TriggerEvent('es:setMoneyDisplay', 0.0)
+--		TriggerEvent('es:setMoneyDisplay', 0.0)
 	end
 end)
 
@@ -359,24 +359,26 @@ AddEventHandler('esx:deleteVehicle', function()
 end)
 
 -- Pause menu disable HUD display
-if Config.EnableHud then
+--[[if Config.EnableHud then
 	Citizen.CreateThread(function()
 		while true do
-			Citizen.Wait(300)
+			Citizen.Wait(100)
 
 			if IsPauseMenuActive() and not IsPaused then
 				IsPaused = true
-				TriggerEvent('es:setMoneyDisplay', 0.0)
-				ESX.UI.HUD.SetDisplay(0.0)
+				ESX.UI.HUD.SetDisplay(1.0)
+				TriggerEvent('es:setMoneyDisplay', 1.0)
+				ESX.UI.HUD.SetDisplay(1.0)
 			elseif not IsPauseMenuActive() and IsPaused then
 				IsPaused = false
+				ESX.UI.HUD.SetDisplay(1.0)
 				TriggerEvent('es:setMoneyDisplay', 1.0)
 				ESX.UI.HUD.SetDisplay(1.0)
 			end
 		end
 	end)
 end
-
+]]
 -- Save loadout
 Citizen.CreateThread(function()
 	while true do

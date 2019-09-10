@@ -17,8 +17,8 @@ local LastZone                  = nil
 local CurrentAction             = nil
 local CurrentActionMsg          = ''
 local CurrentActionData         = {}
-local JobBlips                = {}
-local publicBlip = false
+local JobBlips                	= {}
+local publicBlip				= false
 ESX                             = nil
 GUI.Time                        = 0
 
@@ -529,20 +529,20 @@ end
 
 -- Create Blips
 function blips()
-	if publicBlip == false then
-		local blip = AddBlipForCoord(Config.Zones.bucheAction.Pos.x, Config.Zones.bucheAction.Pos.y, Config.Zones.bucheAction.Pos.z)
-		--local blip = AddBlipForCoord(-553.617370605469, 5348.8427734375, 73.7446212768555)
-		SetBlipSprite (blip, 237)
-		SetBlipDisplay(blip, 4)
-		SetBlipScale  (blip, 1.5)
-		SetBlipColour (blip, 10)
-		SetBlipAsShortRange(blip, true)
-
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString("Entreprise Bucherons")
-		EndTextCommandSetBlipName(blip)
-		publicBlip = true
-	end
+--	if publicBlip == false then
+--		local blip = AddBlipForCoord(Config.Zones.bucheAction.Pos.x, Config.Zones.bucheAction.Pos.y, Config.Zones.bucheAction.Pos.z)
+--		--local blip = AddBlipForCoord(-553.617370605469, 5348.8427734375, 73.7446212768555)
+--		SetBlipSprite (blip, 237)
+--		SetBlipDisplay(blip, 4)
+--		SetBlipScale  (blip, 1.5)
+--		SetBlipColour (blip, 10)
+--		SetBlipAsShortRange(blip, true)
+--
+--		BeginTextCommandSetBlipName("STRING")
+--		AddTextComponentString("Entreprise Bucherons")
+--		EndTextCommandSetBlipName(blip)
+--		publicBlip = true
+--	end
 	
     if PlayerData.job ~= nil and PlayerData.job.name == 'buche' then
 
@@ -561,6 +561,22 @@ function blips()
 				EndTextCommandSetBlipName(blip2)
 				table.insert(JobBlips, blip2)
 			end
+
+			if v.Type == 25 then
+				local blip2 = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
+
+				SetBlipSprite (blip2, 475)
+				SetBlipDisplay(blip2, 4)
+				SetBlipScale  (blip2, 1.0)
+				SetBlipColour (blip2, 10)
+				SetBlipAsShortRange(blip2, true)
+
+				BeginTextCommandSetBlipName("STRING")
+				AddTextComponentString("Entreprise Tabac")
+				EndTextCommandSetBlipName(blip2)
+				table.insert(JobBlips, blip2)
+			end
+
 		end
 	end
 end

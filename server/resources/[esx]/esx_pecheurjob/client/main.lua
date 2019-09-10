@@ -24,7 +24,7 @@ local CurrentAction             = nil
 local CurrentActionMsg          = ''
 local CurrentActionData         = {}
 local JobBlips                	= {}
-local publicBlip				= true
+local publicBlip				= false
 ESX                             = nil
 GUI.Time                        = 0
 
@@ -33,6 +33,13 @@ Citizen.CreateThread(function()
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 		Citizen.Wait(0)
 	end
+
+	while ESX.GetPlayerData().job == nil do
+		Citizen.Wait(10)
+	end
+
+	PlayerData = ESX.GetPlayerData()
+
 end)
 
 function TeleportFadeEffect(entity, coords)
@@ -81,10 +88,10 @@ function OpenCloakroomMenu()
 				TriggerServerEvent("player:serviceOn", "pecheur")
 					if skin.sex == 0 then
 						TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
-						blips()
+				--		blips()
 					else
 						TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
-						blips()
+				--		blips()
 					end
 					
 				end)
@@ -684,20 +691,20 @@ end
 
 -- Create Blips
 function blips()
-	if publicBlip == true then
-		local blip = AddBlipForCoord(Config.Zones.PecheurActions.Pos.x, Config.Zones.PecheurActions.Pos.y, Config.Zones.PecheurActions.Pos.z)
-		--local blip = AddBlipForCoord(2444.408, 4987.925, 46)
-		SetBlipSprite (blip, 68)
-		SetBlipDisplay(blip, 4)
-		SetBlipScale  (blip, 1.5)
-		SetBlipColour (blip, 38)
-		SetBlipAsShortRange(blip, true)
-
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString("Toky Toky Smile Fish")
-		EndTextCommandSetBlipName(blip)
-		publicBlip = true
-	end
+--	if publicBlip == true then
+--		local blip = AddBlipForCoord(Config.Zones.PecheurActions.Pos.x, Config.Zones.PecheurActions.Pos.y, Config.Zones.PecheurActions.Pos.z)
+--		--local blip = AddBlipForCoord(2444.408, 4987.925, 46)
+--		SetBlipSprite (blip, 68)
+--		SetBlipDisplay(blip, 4)
+--		SetBlipScale  (blip, 1.5)
+--		SetBlipColour (blip, 38)
+--		SetBlipAsShortRange(blip, true)
+--
+--		BeginTextCommandSetBlipName("STRING")
+--		AddTextComponentString("Toky Toky Smile Fish")
+--		EndTextCommandSetBlipName(blip)
+--		publicBlip = true
+--	end
 	
     if PlayerData.job ~= nil and PlayerData.job.name == 'pecheur' then
 
@@ -716,6 +723,22 @@ function blips()
 				EndTextCommandSetBlipName(blip2)
 				table.insert(JobBlips, blip2)
 			end
+
+			if v.Type == 25 then
+				local blip2 = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
+
+				SetBlipSprite (blip2, 475)
+				SetBlipDisplay(blip2, 4)
+				SetBlipScale  (blip2, 1.0)
+				SetBlipColour (blip2, 10)
+				SetBlipAsShortRange(blip2, true)
+
+				BeginTextCommandSetBlipName("STRING")
+				AddTextComponentString("Entreprise peche")
+				EndTextCommandSetBlipName(blip2)
+				table.insert(JobBlips, blip2)
+			end
+
 		end
 	end
 end

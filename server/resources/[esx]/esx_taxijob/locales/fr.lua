@@ -2,8 +2,8 @@ Locales['fr'] = {
   -- cloakroom
   ['cloakroom_menu'] = 'cloakroom',
   ['cloakroom_prompt'] = 'press ~INPUT_CONTEXT~ to open the ~y~cloakroom~s~.',
-  ['wear_citizen'] = 'citizen wear',
-  ['wear_work'] = 'taxi wear',
+  ['wear_citizen'] = 'Tenue de civil',
+  ['wear_work'] = 'Tenue de Taxi',
 
   -- garage
   ['spawner_prompt'] = 'press ~INPUT_CONTEXT~ to open the ~y~garage~s~.',

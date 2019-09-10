@@ -1,4 +1,4 @@
-petrolCanPrice = 10
+petrolCanPrice = 50
 
 --lang = "en"
 lang = "fr"
@@ -43,7 +43,7 @@ settings["fr"] = {
 }
 
 
-showBar = true
+showBar = false
 showText = false
 
 

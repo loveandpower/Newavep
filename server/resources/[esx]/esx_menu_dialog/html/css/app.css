@@ -9,9 +9,8 @@
 }
 
 #controls {
-  font-family   : pcdown;
+  font-family: pcdown;
   font-size     : 3em;
-  color         : #FFF;
   position      : absolute;
   bottom        : 40;
   right         : 40;
@@ -28,18 +27,18 @@
   display: none;
 }
 
-.dialog {
-
-  font-family     : bankgothic;  
-  background-color: #fff;
-  color           : #fff;
+.dialog { 
+  border-color: black;
+  border-style: solid;
+  border-radius: 20px;
+  font-family: bankgothic;  
   box-shadow      : 0px 0px 50px 0px #000;
   position        : absolute;
   overflow        : hidden;
   top             : 50%;
   left            : 50%;
-  width           : 600px;
-  height          : 104px;
+  width           : 360px;
+  height          : 175px;
   transform       : translate(-50%, -50%);
 }
 
@@ -48,9 +47,10 @@
 }
 
 .dialog .head {
-  background-color: #506be6;
+  font-size: 0%;  
+  background:url('https://image.noelshack.com/fichiers/2018/36/1/1535994527-cc.png');
   text-align      : center;
-  height          : 40px;
+  height          : 85px;
 }
 
 .dialog .head span:before {
@@ -60,22 +60,38 @@
   vertical-align: middle;
 }
 
+.dialog .text {
+  text-align      : center;  
+  font-family: bankgothic;
+  font-size: 100%;
+  display         : block;
+  background-color: #f1f1f1;
+  box-shadow      : inset 1px 0px 0px 1px #b8b8b8;
+  height          : 25px;
+  line-height     : 25px;
+  opacity: 0.7;  
+}
+
 .dialog input[type="text"] {
   width : 100%;
   height: 32px;
+  opacity: 0.7;  
 }
 
 .dialog textarea {
   width : 100%;
   height: 128px;
+  opacity: 0.7;  
 }
 
 .dialog button[name="submit"] {
-  width : 75%;
+  width : 65%;
   height: 32px;
+  opacity: 0.7;  
 }
 
 .dialog button[name="cancel"] {
-  width : 25%;
+  width : 35%;
   height: 32px;
+  opacity: 0.7;  
 }

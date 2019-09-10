@@ -43,22 +43,22 @@ Citizen.CreateThread(function()
 -- TP MARCKER
 --------------------------------------------------------------------------------------------
 		
-		if (IsControlPressed(1, Config.TPMarker.clavier1) and IsControlPressed(1, Config.TPMarker.clavier2) and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('NB:closeAllSubMenu')
-			TriggerEvent('NB:closeAllMenu')
-			TriggerEvent('NB:goTpMarcker')
-			GUI.Time  = GetGameTimer()
-		end
+	--	if (IsControlPressed(1, Config.TPMarker.clavier1) and IsControlPressed(1, Config.TPMarker.clavier2) and (GetGameTimer() - GUI.Time) > 150) then
+	--		TriggerEvent('NB:closeAllSubMenu')
+	--		TriggerEvent('NB:closeAllMenu')
+	--		TriggerEvent('NB:goTpMarcker')
+	--		GUI.Time  = GetGameTimer()
+	--	end
 		
 --------------------------------------- MANETTE
-		if Config.general.manettes then
-			if (IsControlPressed(2, Config.TPMarker.manette1) and IsControlPressed(2, Config.TPMarker.manette2) and (GetGameTimer() - GUI.Time) > 150) then
-				TriggerEvent('NB:closeAllSubMenu')
-				TriggerEvent('NB:closeAllMenu')
-				TriggerEvent('NB:goTpMarcker')
-				GUI.Time  = GetGameTimer()
-			end
-		end
+	--	if Config.general.manettes then
+	--		if (IsControlPressed(2, Config.TPMarker.manette1) and IsControlPressed(2, Config.TPMarker.manette2) and (GetGameTimer() - GUI.Time) > 150) then
+	--			TriggerEvent('NB:closeAllSubMenu')
+	--			TriggerEvent('NB:closeAllMenu')
+	--			TriggerEvent('NB:goTpMarcker')
+	--			GUI.Time  = GetGameTimer()
+	--		end
+	--	end
 --------------------------------------------------------------------------------------------
 -- Menu personnel -> nb_menuperso
 --------------------------------------------------------------------------------------------
@@ -329,8 +329,8 @@ Citizen.CreateThread(function()
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			NBMenuIsOpen = false
-			TriggerEvent('es:setMoneyDisplay', 0.0)
-			ESX.UI.HUD.SetDisplay(0.0)
+			TriggerEvent('es:setMoneyDisplay', 1.0)
+			ESX.UI.HUD.SetDisplay(1.0)
 		elseif not (IsPauseMenuActive() or IsControlPressed(1, Keys["TAB"])) and IsPaused then
 			IsPaused = false
 			NBMenuIsOpen = false

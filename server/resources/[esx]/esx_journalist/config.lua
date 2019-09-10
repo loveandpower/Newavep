@@ -9,7 +9,7 @@ Config.storageMinGrade    = 2
 Config.copterMinGrade     = 3
 Config.manageMinGrade     = 4
 
-Config.gouvRate = 0.00
+Config.gouvRate = 0.01
 
 -- interim run
 Config.iItemTime     = 1500
@@ -18,7 +18,7 @@ Config.iItemName     = "Journal"
 Config.iItemAdd      = 1
 Config.iItemRemove   = 1
 Config.iItemPrice    = 70
-Config.iCompanyRate  = 0.1
+Config.iCompanyRate  = 0.3
 
 
 Config.jItemTime     = 2500

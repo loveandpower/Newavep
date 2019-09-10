@@ -32,7 +32,7 @@ There is two types of accounts: shared and not shared.
 - None-shared accounts are created for every user in the server. They are created in db when player is loaded, Example: property black money
 
 ### `addon_account` database information
-You must create an account in the database
+An addon account must be configured in the database before using it. Don't forget to run a server restart afterwards (you can alternative restart the script and relog all clients)
 
 | `name`   | `label` | `shared` |
 | -------- | ------- | -------- |
@@ -52,7 +52,7 @@ end)
 ### License
 esx_addonaccount - addon account for ESX
 
-Copyright (C) 2015-2018 Jérémie N'gadi
+Copyright (C) 2015-2019 Jérémie N'gadi
 
 This program Is free software: you can redistribute it And/Or modify it under the terms Of the GNU General Public License As published by the Free Software Foundation, either version 3 Of the License, Or (at your option) any later version.
 

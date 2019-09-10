@@ -123,14 +123,14 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 
-		if IsControlJustReleased(0, Keys['F10']) and IsInputDisabled(0) then
+		if IsControlJustReleased(0, Keys['LEFTALT']) and IsInputDisabled(0) then
 			ToggleScoreBoard()
 			Citizen.Wait(200)
 
 		-- D-pad up on controllers works, too!
-		elseif IsControlJustReleased(0, 172) and not IsInputDisabled(0) then
-			ToggleScoreBoard()
-			Citizen.Wait(200)
+	--	elseif IsControlJustReleased(0, 172) and not IsInputDisabled(0) then
+	--		ToggleScoreBoard()
+	--		Citizen.Wait(200)
 		end
 	end
 end)

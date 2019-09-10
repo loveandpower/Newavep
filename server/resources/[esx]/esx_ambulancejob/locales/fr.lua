@@ -50,7 +50,7 @@ Locales['fr'] = {
   ['boss_actions'] = 'action Patron',
   -- Misc
   ['invalid_amount'] = '~r~montant invalide',
-  ['actions_prompt'] = 'press ~INPUT_CONTEXT~ access the ~y~Ambulance Actions~s~.',
+  ['actions_prompt'] = 'appyer sur ~INPUT_CONTEXT~ pour accéder ~y~au Vestiaire~s~.',
   ['deposit_amount'] = 'montant du dépôt',
   ['money_withdraw'] = 'montant du retrait',
   ['fast_travel'] = 'appuyez sur ~INPUT_CONTEXT~ pour vous déplacer rapidement.',

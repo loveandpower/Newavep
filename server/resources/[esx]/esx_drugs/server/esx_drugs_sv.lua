@@ -155,24 +155,28 @@ local function SellCoke(source)
 			if poochQuantity == 0 then
 				TriggerClientEvent('esx:showNotification', source, _U('no_pouches_sale'))
 			else
+				---Gestion prix vente coke
 				xPlayer.removeInventoryItem('coke_pooch', 1)
 				if CopsConnected == 0 then
-					xPlayer.addAccountMoney('black_money', 198)
+					xPlayer.addAccountMoney('black_money', 15)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_coke'))
 				elseif CopsConnected == 1 then
-					xPlayer.addAccountMoney('black_money', 258)
+					xPlayer.addAccountMoney('black_money', 20)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_coke'))
 				elseif CopsConnected == 2 then
-					xPlayer.addAccountMoney('black_money', 308)
+					xPlayer.addAccountMoney('black_money', 25)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_coke'))
 				elseif CopsConnected == 3 then
-					xPlayer.addAccountMoney('black_money', 358)
+					xPlayer.addAccountMoney('black_money', 30)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_coke'))
 				elseif CopsConnected == 4 then
-					xPlayer.addAccountMoney('black_money', 396)
+					xPlayer.addAccountMoney('black_money', 35)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_coke'))
 				elseif CopsConnected >= 5 then
-					xPlayer.addAccountMoney('black_money', 428)
+					xPlayer.addAccountMoney('black_money', 40)
+					TriggerClientEvent('esx:showNotification', source, _U('sold_one_coke'))
+				elseif CopsConnected >= 6 then
+					xPlayer.addAccountMoney('black_money', 45)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_coke'))
 				end
 				
@@ -328,27 +332,28 @@ local function SellMeth(source)
 			if poochQuantity == 0 then
 				TriggerClientEvent('esx:showNotification', _source, _U('no_pouches_sale'))
 			else
+				--Genstion vente Meth
 				xPlayer.removeInventoryItem('meth_pooch', 1)
 				if CopsConnected == 0 then
-					xPlayer.addAccountMoney('black_money', 276)
+					xPlayer.addAccountMoney('black_money', 18)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_meth'))
 				elseif CopsConnected == 1 then
-					xPlayer.addAccountMoney('black_money', 374)
+					xPlayer.addAccountMoney('black_money', 28)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_meth'))
 				elseif CopsConnected == 2 then
-					xPlayer.addAccountMoney('black_money', 474)
+					xPlayer.addAccountMoney('black_money', 32)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_meth'))
 				elseif CopsConnected == 3 then
-					xPlayer.addAccountMoney('black_money', 552)
+					xPlayer.addAccountMoney('black_money', 45)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_meth'))
 				elseif CopsConnected == 4 then
-					xPlayer.addAccountMoney('black_money', 616)
+					xPlayer.addAccountMoney('black_money', 50)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_meth'))
 				elseif CopsConnected == 5 then
-					xPlayer.addAccountMoney('black_money', 654)
+					xPlayer.addAccountMoney('black_money', 57)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_meth'))
 				elseif CopsConnected >= 6 then
-					xPlayer.addAccountMoney('black_money', 686)
+					xPlayer.addAccountMoney('black_money', 60)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_meth'))
 				end
 				
@@ -505,19 +510,19 @@ local function SellWeed(source)
 			else
 				xPlayer.removeInventoryItem('weed_pooch', 1)
 				if CopsConnected == 0 then
-					xPlayer.addAccountMoney('black_money', 108)
+					xPlayer.addAccountMoney('black_money', 12)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_weed'))
 				elseif CopsConnected == 1 then
-					xPlayer.addAccountMoney('black_money', 128)
+					xPlayer.addAccountMoney('black_money', 20)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_weed'))
 				elseif CopsConnected == 2 then
-					xPlayer.addAccountMoney('black_money', 152)
+					xPlayer.addAccountMoney('black_money', 31)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_weed'))
 				elseif CopsConnected == 3 then
-					xPlayer.addAccountMoney('black_money', 165)
+					xPlayer.addAccountMoney('black_money', 40)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_weed'))
 				elseif CopsConnected >= 4 then
-					xPlayer.addAccountMoney('black_money', 180)
+					xPlayer.addAccountMoney('black_money', 47)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_weed'))
 				end
 				
@@ -677,22 +682,22 @@ local function SellOpium(source)
 			else
 				xPlayer.removeInventoryItem('opium_pooch', 1)
 				if CopsConnected == 0 then
-					xPlayer.addAccountMoney('black_money', 300)
+					xPlayer.addAccountMoney('black_money', 20)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_opium'))
 				elseif CopsConnected == 1 then
-					xPlayer.addAccountMoney('black_money', 500)
+					xPlayer.addAccountMoney('black_money', 34)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_opium'))
 				elseif CopsConnected == 2 then
-					xPlayer.addAccountMoney('black_money', 700)
+					xPlayer.addAccountMoney('black_money', 47)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_opium'))
 				elseif CopsConnected == 3 then
-					xPlayer.addAccountMoney('black_money', 800)
+					xPlayer.addAccountMoney('black_money', 56)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_opium'))
 				elseif CopsConnected == 4 then
-					xPlayer.addAccountMoney('black_money', 900)
+					xPlayer.addAccountMoney('black_money', 67)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_opium'))
 				elseif CopsConnected >= 5 then
-					xPlayer.addAccountMoney('black_money', 1000)
+					xPlayer.addAccountMoney('black_money', 70)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_opium'))
 				end
 				

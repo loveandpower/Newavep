@@ -20,8 +20,8 @@ local LastZone                  = nil
 local CurrentAction             = nil
 local CurrentActionMsg          = ''
 local CurrentActionData         = {}
-local JobBlips                = {}
-local publicBlip = false
+local JobBlips                	= {}
+local publicBlip 				= false
 
 ESX                             = nil
 GUI.Time                        = 0
@@ -374,66 +374,49 @@ end
 
 
 function OpenPutStocksMenu()
-
-	ESX.TriggerServerCallback('esx_fermier:getPlayerInventory', function(inventory)
-
+ESX.TriggerServerCallback('esx_fermier:getStockItems', function(items)
 		local elements = {}
 
-		for i=1, #inventory.items, 1 do
-
-			local item = inventory.items[i]
-
-			if item.count > 0 then
-				table.insert(elements, {label = item.label .. ' x' .. item.count, type = 'item_standard', value = item.name})
-			end
-
+		for i=1, #items, 1 do
+			table.insert(elements, {
+				label = 'x' .. items[i].count .. ' ' .. items[i].label,
+				value = items[i].name
+			})
 		end
 
-		ESX.UI.Menu.Open(
-			'default', GetCurrentResourceName(), 'stocks_menu',
-			{
-				title    = _U('inventory'),
-				elements = elements
-			},
-			function(data, menu)
-				local itemName = data.current.value
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'stocks_menu',
+		{
+			title    = 'tabac Stock',
+			align    = 'top-left',
+			elements = elements
+		}, function(data, menu)
+			local itemName = data.current.value
 
-				ESX.UI.Menu.Open(
-					'dialog', GetCurrentResourceName(), 'stocks_menu_put_item_count',
-					{
-						title = _U('quantity')
-					},
-					function(data2, menu2)
+			ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'stocks_menu_get_item_count', {
+				title = _U('quantity')
+			}, function(data2, menu2)
 
-						local count = tonumber(data2.value)
+				local count = tonumber(data2.value)
 
-						if count == nil or count <= 0 then
-							ESX.ShowNotification(_U('quantity_invalid'))
-						else
-							menu2.close()
-							menu.close()
-							OpenPutStocksMenu()
+				if count == nil then
+					ESX.ShowNotification(_U('quantity_invalid'))
+				else
+					menu2.close()
+					menu.close()
 
-							TriggerServerEvent('esx_fermier:putStockItems', itemName, count)
-							----------------
-							Citizen.Wait(500)
-							OpenPutStocksMenu()
-						end
+					-- todo: refresh on callback
+					TriggerServerEvent('esx_fermier:getStockItem', itemName, count)
+					Citizen.Wait(1000)
+					OpenGetStocksMenu()
+				end
 
-					end,
-					function(data2, menu2)
-						menu2.close()
-					end
-				)
-
-			end,
-			function(data, menu)
-				menu.close()
-			end
-		)
-
+			end, function(data2, menu2)
+				menu2.close()
+			end)
+		end, function(data, menu)
+			menu.close()
+		end)
 	end)
-
 end
 
 
@@ -555,20 +538,20 @@ end
 
 -- Create Blips
 function blips()
-	if publicBlip == false then
-		local blip = AddBlipForCoord(Config.Zones.FermeActions.Pos.x, Config.Zones.FermeActions.Pos.y, Config.Zones.FermeActions.Pos.z)
+--	if publicBlip == true then
+--		local blip = AddBlipForCoord(Config.Zones.FermeActions.Pos.x, Config.Zones.FermeActions.Pos.y, Config.Zones.FermeActions.Pos.z)
 	--	local blip = AddBlipForCoord(2444.408, 4987.925, 46)
-		SetBlipSprite (blip, 181)
-		SetBlipDisplay(blip, 4)
-		SetBlipScale  (blip, 1.0)
-		SetBlipColour (blip, 28)
-		SetBlipAsShortRange(blip, true)
-
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString("Entreprise Ferme")
-		EndTextCommandSetBlipName(blip)
-		publicBlip = true
-	end
+--		SetBlipSprite (blip, 181)
+--		SetBlipDisplay(blip, 4)
+--		SetBlipScale  (blip, 1.0)
+--		SetBlipColour (blip, 28)
+--		SetBlipAsShortRange(blip, true)
+--
+--		BeginTextCommandSetBlipName("STRING")
+--		AddTextComponentString("Entreprise Ferme")
+--		EndTextCommandSetBlipName(blip)
+--		publicBlip = true
+--	end
 	
     if PlayerData.job ~= nil and PlayerData.job.name == 'ferme' then
 
@@ -587,6 +570,21 @@ function blips()
 				EndTextCommandSetBlipName(blip2)
 				table.insert(JobBlips, blip2)
 			end
+
+			if v.Type == 22 then
+				local blip = AddBlipForCoord(Config.Zones.FermeActions.Pos.x, Config.Zones.FermeActions.Pos.y, Config.Zones.FermeActions.Pos.z)
+			--	local blip = AddBlipForCoord(2444.408, 4987.925, 46)
+				SetBlipSprite (blip, 181)
+				SetBlipDisplay(blip, 4)
+				SetBlipScale  (blip, 1.0)
+				SetBlipColour (blip, 28)
+				SetBlipAsShortRange(blip, true)
+				BeginTextCommandSetBlipName("STRING")
+				AddTextComponentString("Entreprise Ferme")
+				EndTextCommandSetBlipName(blip)
+				table.insert(JobBlips, blip2)
+			end
+
 		end
 	end
 end
