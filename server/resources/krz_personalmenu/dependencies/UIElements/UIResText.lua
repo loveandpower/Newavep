@@ -103,8 +103,7 @@ end
 ---@param font number
 ---@param scale number
 function MeasureStringWidth(str, font, scale)
-    local W, H = GetResolution()
-    return MeasureStringWidthNoConvert(str, font, scale) * W
+    return MeasureStringWidthNoConvert(str, font, scale) * 1920
 end
 
 ---New

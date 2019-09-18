@@ -40,15 +40,6 @@ function UIMenuListItem.New(Text, Items, Index, Description)
     return setmetatable(_UIMenuListItem, UIMenuListItem)
 end
 
----UpdateItems
----@param Items table
----@public
-function UIMenuListItem:UpdateItems(Items)
-    if #Items > 0 then
-        self.Items = Items
-    end
-end
-
 ---SetParentMenu
 ---@param Menu table
 ---@return table
@@ -298,9 +289,13 @@ function UIMenuListItem:Draw()
     self.ItemText:Text(Text)
     self.LeftArrow:Position(378 - Offset + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, self.LeftArrow.Y)
 
-    self.LeftArrow:Draw()
-    self.RightArrow:Draw()
-    self.ItemText:Position(403 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, self.ItemText.Y)
+	if self:Selected() then
+		self.LeftArrow:Draw()
+		self.RightArrow:Draw()
+		self.ItemText:Position(403 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, self.ItemText.Y)
+	else
+		self.ItemText:Position(418 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, self.ItemText.Y)
+	end
 
     self.ItemText:Draw()
 end

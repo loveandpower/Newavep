@@ -10,19 +10,13 @@ ESX = nil
 
 _menuPool = nil
 local personalmenu = {}
-
 local invItem, wepItem, billItem, mainMenu, itemMenu, weaponItemMenu = {}, {}, {}, nil, nil, nil
-
 local isDead, inAnim = false, false
-
 local playerGroup, noclip, godmode, visible = nil, false, false, false
-
 local actualGPS, actualGPSIndex = _U('default_gps'), 1
 local actualDemarche, actualDemarcheIndex = _U('default_demarche'), 1
 local actualVoice, actualVoiceIndex = _U('default_voice'), 2
-
 local societymoney, societymoney2 = nil, nil
-
 local wepList = nil
 
 Citizen.CreateThread(function()
@@ -71,6 +65,10 @@ Citizen.CreateThread(function()
 	_menuPool:Add(weaponItemMenu)
 end)
 
+
+
+
+
 Citizen.CreateThread(function()
 	local fixingVoice = true
 
@@ -88,6 +86,9 @@ Citizen.CreateThread(function()
 		fixingVoice = false
 	end)
 end)
+
+
+
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)

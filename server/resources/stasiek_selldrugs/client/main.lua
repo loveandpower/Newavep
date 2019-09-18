@@ -61,7 +61,7 @@ Citizen.CreateThread(function()
 	 		local distance = GetDistanceBetweenCoords(pos.x, pos.y, pos.z, playerloc['x'], playerloc['y'], playerloc['z'], true)
 			local distanceFromCity = GetDistanceBetweenCoords(Config.CityPoint.x, Config.CityPoint.y, Config.CityPoint.z, playerloc['x'], playerloc['y'], playerloc['z'], true)
 			
-		if PlayerData.job ~= nil and PlayerData.job.name == 'mafia' then
+		--if PlayerData.job ~= nil and PlayerData.job.name == 'mafia' then
 		--	if IsPedInAnyVehicle(GetPlayerPed(-1)) == false then
 				if DoesEntityExist(ped)then
 					if IsPedDeadOrDying(ped) == false then
@@ -107,7 +107,7 @@ Citizen.CreateThread(function()
 					end
 				end
 			--end
-		end
+		--end
 		until not success
 
 		EndFindPed(handle)

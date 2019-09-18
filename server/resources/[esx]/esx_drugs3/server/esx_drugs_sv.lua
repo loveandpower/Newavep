@@ -323,12 +323,12 @@ local function SellMeth(source)
 			local _source = source
 			local xPlayer = ESX.GetPlayerFromId(_source)
 
-			local poochQuantity = xPlayer.getInventoryItem('meth_pooch').count
+			local poochQuantity = xPlayer.getInventoryItem('meth').count
 
 			if poochQuantity == 0 then
 				TriggerClientEvent('esx:showNotification', _source, _U('no_pouches_sale'))
 			else
-				xPlayer.removeInventoryItem('meth_pooch', 1)
+				xPlayer.removeInventoryItem('meth', 1)
 				if CopsConnected == 0 then
 					xPlayer.addAccountMoney('black_money', 276)
 					TriggerClientEvent('esx:showNotification', source, _U('sold_one_meth'))
