@@ -33,8 +33,8 @@ Citizen.CreateThread(function()
 			Citizen.Wait(0)
 		local playerPed = PlayerPedId()
 		local coords = GetEntityCoords(playerPed)
-		local _source = source
-		local xPlayer = ESX.GetPlayerFromId(_source)
+		--local _source = source
+		--local xPlayer = ESX.GetPlayerFromId(_source)
 
 		if GetDistanceBetweenCoords(coords, Config.CircleZones.DrugDealer.coords, true) < 1.50 then
 			if not menuOpen then
@@ -43,7 +43,7 @@ Citizen.CreateThread(function()
 				if IsControlJustReleased(0, Keys['E']) then
 					wasOpen = true
 		--			OpenDrugShop()
-					SellOpium(source)
+					SellOpium()
 
 				end
 			else
@@ -62,7 +62,7 @@ Citizen.CreateThread(function()
 end)
 
 
-local function SellOpium(source)
+local function SellOpium()
 
 --	if CopsConnected < Config.RequiredCopsOpium then
 	--	TriggerClientEvent('esx:showNotification', source, _U('act_imp_police', CopsConnected, Config.RequiredCopsOpium))
@@ -71,10 +71,10 @@ local function SellOpium(source)
 
 	SetTimeout(Config.TimeToSell, function()
 
-		if PlayersSellingOpium[source] == true then
+	--	if PlayersSellingOpium[source] == true then
 
-			local _source = source
-  			local xPlayer = ESX.GetPlayerFromId(_source)
+			--local _source = source
+  			local xPlayer = ESX.GetPlayerFromId(source)
 
 			local poochQuantity = xPlayer.getInventoryItem('opium_pooch').count
 
@@ -105,7 +105,7 @@ local function SellOpium(source)
 				SellOpium(source)
 			end
 
-		end
+		--end
 	end)
 end
 
